@@ -2445,11 +2445,15 @@ function redraw(){
     DATA.forEach(d => {
       const p = projection([d.lon, d.lat]);
       const dist = gcDist(center, [d.lon, d.lat]);
-      // v45.d — also require projected point within viewBox (with a small
-      // margin for label headroom). Fixes UK ARIA-style "ghost markers" at
-      // high zoom: marker projects outside 0..1000 / 0..560, becomes invisible
-      // AND unclickable, but used to still appear in the visible list.
-      const inFrame = p && p[0] > -40 && p[0] < 1040 && p[1] > -40 && p[1] < 600;
+      // v45.ak — wider inFrame margin (40 → 220 units, ≈86 CSS-px on a
+      // 390-wide mobile viewport). Old 40-unit margin culled pins whose
+      // CENTER had just crossed the viewBox edge, even though their halo
+      // (≈70 SVG units on touch after CSS-px-aware sizing) was still
+      // visually intersecting the viewport — pins "disappeared" before
+      // they actually left the visible area, and reappeared when the user
+      // panned them back toward centre. The widened margin renders any
+      // pin whose halo could plausibly overlap the visible region.
+      const inFrame = p && p[0] > -220 && p[0] < 1220 && p[1] > -220 && p[1] < 780;
       if (dist < 88 && inFrame) {
         // Start each frame with the original radial offset (initialised at marker create)
         d._renderOff = [d._off[0], d._off[1]];
