@@ -2310,6 +2310,16 @@ window.SDL_CATEGORIES = {
   }
 
 function redraw(){
+    // v45.aj — defensive sanity guard. If any code path corrupted view
+    // state into NaN (e.g. an iOS-Safari edge case in zoomAnchored), the
+    // whole projection returns NaN and every pin fails the inFrame check
+    // → entire map goes blank until "more gestures" reset it. Catch and
+    // recover here so the user never sees the blank state.
+    if (isNaN(view.rotate[0]) || isNaN(view.rotate[1]) || isNaN(view.scale)) {
+      view.rotate[0] = isFinite(view.rotate[0]) ? view.rotate[0] : 0;
+      view.rotate[1] = isFinite(view.rotate[1]) ? view.rotate[1] : 0;
+      view.scale     = isFinite(view.scale)     ? view.scale     : BASE_SCALE;
+    }
     // v22: canvas-driven redraw — geometry goes to <canvas> instead of SVG path 'd' updates
     projection.precision(0.5);   // full quality always — canvas is cheap
     projection.scale(view.scale).rotate(view.rotate);
@@ -3595,13 +3605,27 @@ function redraw(){
   // enough for orthographic at any zoom.
   function zoomAnchored(svgX, svgY, factor){
     const inv = (projection.invert && projection.invert([svgX, svgY])) || null;
+    // v45.aj — guard the input invert against NaN. iOS Safari pinch
+    // sometimes invokes zoomAnchored with anchor coordinates that
+    // project to a degenerate inverse on a globe-limb intersection.
+    if (inv && (isNaN(inv[0]) || isNaN(inv[1]))) {
+      view.scale = clampScale(view.scale * factor);
+      projection.scale(view.scale);
+      return;
+    }
     const newScale = clampScale(view.scale * factor);
     view.scale = newScale;
     projection.scale(newScale);
     if (inv) {
+      // Snapshot rotation so we can roll back if iteration corrupts it.
+      const safeRot = [view.rotate[0], view.rotate[1], view.rotate[2] || 0];
       for (let i = 0; i < 5; i++) {
         const cur = projection(inv);
-        if (!cur) break;
+        // v45.aj — catch NaN explicitly. d3 orthographic CAN return
+        // [NaN, NaN] (not null) on extreme limb projections, which let
+        // NaN propagate into view.rotate and broke every subsequent
+        // redraw until other code paths reset rotate.
+        if (!cur || isNaN(cur[0]) || isNaN(cur[1])) break;
         const dx = cur[0] - svgX;
         const dy = cur[1] - svgY;
         if (dx*dx + dy*dy < 0.25) break;
@@ -3611,9 +3635,22 @@ function redraw(){
         const degPerUnit = (180 / Math.PI) / (BASE_SCALE * k);
         const dLam = dx * degPerUnit / cosPhi;
         const dPhi = dy * degPerUnit;
+        if (isNaN(dLam) || isNaN(dPhi)) {
+          // Roll back any partial corruption from this iteration.
+          view.rotate[0] = safeRot[0];
+          view.rotate[1] = safeRot[1];
+          projection.rotate(view.rotate);
+          break;
+        }
         // Move the centre TOWARD the cursor's lat/lon to bring it back.
         view.rotate[0] -= dLam;
         view.rotate[1] = Math.max(-89, Math.min(89, view.rotate[1] + dPhi));
+        projection.rotate(view.rotate);
+      }
+      // Final post-loop sanity check.
+      if (isNaN(view.rotate[0]) || isNaN(view.rotate[1])) {
+        view.rotate[0] = safeRot[0];
+        view.rotate[1] = safeRot[1];
         projection.rotate(view.rotate);
       }
     }
