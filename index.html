@@ -2445,15 +2445,12 @@ function redraw(){
     DATA.forEach(d => {
       const p = projection([d.lon, d.lat]);
       const dist = gcDist(center, [d.lon, d.lat]);
-      // v45.ak — wider inFrame margin (40 → 220 units, ≈86 CSS-px on a
-      // 390-wide mobile viewport). Old 40-unit margin culled pins whose
-      // CENTER had just crossed the viewBox edge, even though their halo
-      // (≈70 SVG units on touch after CSS-px-aware sizing) was still
-      // visually intersecting the viewport — pins "disappeared" before
-      // they actually left the visible area, and reappeared when the user
-      // panned them back toward centre. The widened margin renders any
-      // pin whose halo could plausibly overlap the visible region.
-      const inFrame = p && p[0] > -220 && p[0] < 1220 && p[1] > -220 && p[1] < 780;
+      // v45.al — much wider inFrame margin (220 → 600 SVG-units, ≈230
+      // CSS-px on 390-wide mobile). User reported edge pins still pop
+      // out at 220. At deep zoom one pin halo can occupy a lot of viewBox
+      // space, so be very permissive on which pins enter the render
+      // pipeline; visual clipping is handled by SVG overflow, not us.
+      const inFrame = p && p[0] > -600 && p[0] < 1600 && p[1] > -600 && p[1] < 1160;
       if (dist < 88 && inFrame) {
         // Start each frame with the original radial offset (initialised at marker create)
         d._renderOff = [d._off[0], d._off[1]];
@@ -2577,7 +2574,15 @@ function redraw(){
       const y = d._proj[1] + d._renderOff[1];
       d._el.style.display = '';
       d._el.setAttribute('transform','translate('+x+','+y+') scale('+dotGrowth+')');
-      const limbFade = Math.min(1, Math.max(0, (88 - d._dist)/20));
+      // v45.al — tighten limbFade so it only kicks in very close to the
+      // globe limb. Old curve faded pins from dist 68 → 88 (a 20-degree
+      // band), which meant pins at moderate distance from view centre on
+      // mobile (dist ≈ 75) appeared at opacity 0.65 — looked "ghostly"
+      // and combined with the inFrame margin cull, gave the disappearing
+      // edge-pin effect. New curve: full opacity until dist 82, fade to
+      // zero by dist 89 — only the genuine limb (the last ~7 degrees)
+      // fades. Pins at dist 60-80 are fully visible.
+      const limbFade = Math.min(1, Math.max(0, (89 - d._dist) / 7));
       const isDim = d._el.classList.contains('dim');
       d._el.style.opacity = isDim ? limbFade * 0.08 : limbFade;
       d._x = x; d._y = y;
