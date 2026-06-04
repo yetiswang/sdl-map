@@ -2574,15 +2574,16 @@ function redraw(){
       const y = d._proj[1] + d._renderOff[1];
       d._el.style.display = '';
       d._el.setAttribute('transform','translate('+x+','+y+') scale('+dotGrowth+')');
-      // v45.al — tighten limbFade so it only kicks in very close to the
-      // globe limb. Old curve faded pins from dist 68 → 88 (a 20-degree
-      // band), which meant pins at moderate distance from view centre on
-      // mobile (dist ≈ 75) appeared at opacity 0.65 — looked "ghostly"
-      // and combined with the inFrame margin cull, gave the disappearing
-      // edge-pin effect. New curve: full opacity until dist 82, fade to
-      // zero by dist 89 — only the genuine limb (the last ~7 degrees)
-      // fades. Pins at dist 60-80 are fully visible.
-      const limbFade = Math.min(1, Math.max(0, (89 - d._dist) / 7));
+      // v45.am — limbFade with a minimum-visibility floor for dark mode.
+      // The old smooth fade produced opacity 0.1-0.3 near the limb, which
+      // reads as "invisible" against dark-mode background even though the
+      // pin is technically rendered. New curve: floor at 0.55 until the
+      // true cull point (dist 89), then drop to 0. Pins stay perceptible
+      // in both themes; the limb-fade aesthetic is sacrificed for
+      // consistent visibility.
+      const limbFade = d._dist >= 89
+        ? 0
+        : Math.max(0.55, Math.min(1, (89 - d._dist) / 7));
       const isDim = d._el.classList.contains('dim');
       d._el.style.opacity = isDim ? limbFade * 0.08 : limbFade;
       d._x = x; d._y = y;
