@@ -1597,7 +1597,8 @@ aside.left, aside.right, .sheet, .sheet-body {
    a tap target with stroke, glow, and slight lift. Icon is an inline SVG. */
 .wm-reopen {
   position: fixed;
-  top: 118px; left: 22px;       /* shifted down further so it clears the header */
+  /* Anchored at header-bottom + breathing room (16px); JS publishes header height. */
+  top: calc(var(--header-h, 92px) + 16px); left: 22px;
   z-index: 35;                  /* under sidebars (40) so panels slide over it */
   width: 36px; height: 36px;
   display: flex; align-items: center; justify-content: center;
@@ -1641,11 +1642,11 @@ aside.left, aside.right, .sheet, .sheet-body {
 /* Mobile placements — same visual treatment, just tighter coords + slightly
    smaller dot so it doesn't crowd the header on narrow viewports. */
 @media (max-width: 768px) {
-  .wm-reopen { top: 96px; left: 14px; width: 34px; height: 34px; }
+  .wm-reopen { top: calc(var(--header-h, 92px) + 12px); left: 14px; width: 34px; height: 34px; }
   .wm-reopen svg { width: 17px; height: 17px; }
 }
 @media (max-width: 480px) {
-  .wm-reopen { top: 84px; left: 10px; width: 32px; height: 32px; }
+  .wm-reopen { top: calc(var(--header-h, 92px) + 10px); left: 10px; width: 32px; height: 32px; }
   .wm-reopen svg { width: 16px; height: 16px; }
 }
 
@@ -4587,6 +4588,25 @@ function prewarmInteracting(){
    Welcome modal — first-visit onboarding + persistent ⓘ reopen
    Storage key: sdlmap.welcomeSeen
    ============================================================ */
+/* Measure the live header height once + on resize and publish it as
+   --header-h so the floating sidebars + info pill can anchor exactly
+   below the header without manual breakpoint guessing. */
+(function publishHeaderHeight(){
+  const root = document.documentElement;
+  const header = document.querySelector('header.top');
+  if (!header) return;
+  const update = () => {
+    const h = Math.ceil(header.getBoundingClientRect().height);
+    root.style.setProperty('--header-h', h + 'px');
+  };
+  update();
+  if (window.ResizeObserver) {
+    new ResizeObserver(update).observe(header);
+  } else {
+    window.addEventListener('resize', update);
+  }
+})();
+
 (function welcomeModal(){
   const STORAGE_KEY = 'sdlmap.welcomeSeen';
   let bd, card, btn, lastFocus;
