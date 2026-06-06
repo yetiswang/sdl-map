@@ -1486,14 +1486,42 @@ aside.left, aside.right, .sheet, .sheet-body {
    ============================================================ */
 .wm-backdrop {
   position: fixed; inset: 0; z-index: 9000;
-  background: oklch(0.08 0.01 240 / 0.55);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  /* Slightly darker base fill so the modal reads even without blur (mobile +
+     reduced-motion paths drop blur entirely; see overrides below). */
+  background: oklch(0.07 0.01 240 / 0.62);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   display: none;
   align-items: center; justify-content: center;
   padding: 20px;
   opacity: 0;
-  transition: opacity 0.22s ease;
+  /* GPU layer promotion so the blur + opacity composite on the compositor
+     thread instead of rasterising every frame. translate3d forces a stacking
+     context + own layer in both Blink and WebKit. */
+  will-change: opacity;
+  transform: translate3d(0, 0, 0);
+  /* Hint to WebKit so it doesn't re-rasterise the blurred backdrop. */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: opacity 0.18s ease;
+}
+/* Touch + small viewports: backdrop-filter is the dominant cost on iOS and
+   Android. Skip it; rely on a stronger dim instead. Visually equivalent in
+   purpose (focus the eye on the card), but ~10× cheaper to composite. */
+@media (max-width: 768px), (hover: none) {
+  .wm-backdrop {
+    background: oklch(0.04 0.01 240 / 0.82);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wm-backdrop {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: oklch(0.04 0.01 240 / 0.82);
+    transition: none;
+  }
 }
 [data-theme="light"] .wm-backdrop {
   background: oklch(0.50 0.005 240 / 0.35);
@@ -1505,7 +1533,9 @@ aside.left, aside.right, .sheet, .sheet-body {
   border-radius: 4px;
   max-width: 540px;
   width: 100%;
-  max-height: calc(100vh - 40px);
+  /* dvh tracks the iOS Safari dynamic toolbar correctly; vh causes the card
+     to be sized for full-toolbar-collapsed state and overflows when bars show. */
+  max-height: calc(100dvh - 32px);
   overflow-y: auto;
   padding: 36px 36px 28px;
   color: var(--ink);
@@ -1651,11 +1681,24 @@ aside.left, aside.right, .sheet, .sheet-body {
 }
 
 @media (max-width: 560px) {
-  .wm-card { padding: 28px 22px 22px; }
-  .wm-title { font-size: 22px; }
-  .wm-intro { font-size: 13.5px; }
-  .wm-controls { grid-template-columns: 1fr; gap: 6px; }
+  .wm-card { padding: 22px 20px 18px; }
+  .wm-logo { width: 72px; height: 72px; }
+  .wm-head { gap: 10px; margin-bottom: 16px; }
+  .wm-title { font-size: 20px; }
+  .wm-intro { font-size: 13px; line-height: 1.55; margin-bottom: 16px; }
+  .wm-sec-h { margin-bottom: 8px; }
+  .wm-controls { grid-template-columns: 1fr; gap: 4px; margin-bottom: 16px; }
+  .wm-ctrl { padding: 6px 0; }
+  .wm-ctrl .wm-ctrl-v { font-size: 12.5px; line-height: 1.4; }
+  .wm-foot { font-size: 10px; padding-top: 12px; margin-bottom: 14px; }
+  .wm-cta { font-size: 10.5px; padding: 10px 18px; }
   /* leave wm-reopen mobile coords from the rule above — don't override here */
+}
+@media (max-width: 380px) {
+  .wm-card { padding: 18px 16px 14px; }
+  .wm-logo { width: 60px; height: 60px; }
+  .wm-title { font-size: 18px; }
+  .wm-intro { font-size: 12.5px; margin-bottom: 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
