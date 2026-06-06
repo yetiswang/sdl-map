@@ -1557,13 +1557,18 @@ aside.left, aside.right, .sheet, .sheet-body {
 .wm-hero { flex: 0 0 auto; padding: 36px 36px 0; }
 .wm-intro-fixed { flex: 0 0 auto; padding: 0 36px 8px; }
 .wm-howto {
+  position: relative;
   flex: 1 1 auto;
   min-height: 0;                  /* required so flex child can shrink + scroll */
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  /* Stop scroll-chaining to the page underneath; permit vertical swipe gestures. */
+  overscroll-behavior: contain;
+  touch-action: pan-y;
   padding: 8px 36px 12px;
-  /* Nearly invisible scrollbar: super thin + low-alpha thumb. Visible enough
-     to signal scrollability without breaking the editorial look. */
+  /* Nearly invisible scrollbar (desktop) — super thin + low-alpha thumb.
+     iOS Safari ignores ::-webkit-scrollbar styling on touch elements, so on
+     mobile the visual cue is the bottom fade gradient (see ::after). */
   scrollbar-width: thin;
   scrollbar-color: oklch(from var(--ink) l c h / 0.18) transparent;
 }
@@ -1577,6 +1582,21 @@ aside.left, aside.right, .sheet, .sheet-body {
 .wm-howto:focus-within::-webkit-scrollbar-thumb {
   background: oklch(from var(--ink) l c h / 0.32);
 }
+/* Soft fade at the bottom edge of the scroll zone — visible whenever there
+   is more content below. The single universally-readable "scrollable" cue. */
+.wm-howto::after {
+  content: '';
+  position: sticky;
+  display: block;
+  left: 0; right: 0; bottom: 0;
+  height: 28px;
+  margin: -28px -36px 0;          /* pull over right/left padding so fade spans full width */
+  background: linear-gradient(to top, var(--surface-overlay) 10%, transparent 100%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.wm-howto.has-scroll-below::after { opacity: 1; }
 .wm-backdrop.is-open .wm-card { transform: translateY(0) scale(1); }
 [data-theme="light"] .wm-card {
   box-shadow:
@@ -4790,6 +4810,23 @@ function prewarmInteracting(){
     document.getElementById('wmXClose').addEventListener('click', close);
     btn.addEventListener('click', open);
     bd.addEventListener('click', (e) => { if (e.target === bd) close(); });
+
+    /* Toggle the bottom fade gradient on .wm-howto: visible whenever there is
+       more content below the current scroll position, hidden at the bottom.
+       Universally-readable "scroll for more" cue on every engine including iOS
+       Safari where native scrollbars don't render at rest. */
+    const howto = bd.querySelector('.wm-howto');
+    if (howto) {
+      const updateScrollHint = () => {
+        const more = howto.scrollHeight - howto.clientHeight - howto.scrollTop > 2;
+        howto.classList.toggle('has-scroll-below', more);
+      };
+      howto.addEventListener('scroll', updateScrollHint, { passive: true });
+      window.addEventListener('resize', updateScrollHint);
+      /* Re-measure after open animation + after fonts settle. */
+      setTimeout(updateScrollHint, 100);
+      setTimeout(updateScrollHint, 500);
+    }
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && bd.classList.contains('is-open')) close();
     });
