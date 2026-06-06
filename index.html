@@ -1554,6 +1554,29 @@ aside.left, aside.right, .sheet, .sheet-body {
     0 24px 56px oklch(0 0 0 / 0.16),
     0 8px 24px oklch(0 0 0 / 0.08);
 }
+/* Close (✕) button — always visible top-right inside the card. Critical on
+   touch where ESC and backdrop-click are non-obvious affordances. Tap target
+   meets 40×40 accessibility minimum on every breakpoint. */
+.wm-x {
+  position: absolute; top: 10px; right: 10px;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  color: var(--ink-3);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.16s ease,
+              border-color 0.16s ease,
+              color 0.16s ease,
+              transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.wm-x svg { width: 18px; height: 18px; stroke: currentColor; fill: none; display: block; }
+.wm-x:hover { background: var(--bg-2); border-color: var(--rule); color: var(--ink); }
+.wm-x:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.wm-x:active { transform: scale(0.94); }
+.wm-card { position: relative; }   /* anchor for .wm-x */
 .wm-head {
   display: flex; flex-direction: column; align-items: center;
   gap: 14px; margin-bottom: 22px;
@@ -1672,12 +1695,12 @@ aside.left, aside.right, .sheet, .sheet-body {
 /* Mobile placements — same visual treatment, just tighter coords + slightly
    smaller dot so it doesn't crowd the header on narrow viewports. */
 @media (max-width: 768px) {
-  .wm-reopen { top: calc(var(--header-h, 92px) + 12px); left: 14px; width: 41px; height: 41px; }
-  .wm-reopen svg { width: 20px; height: 20px; }
+  .wm-reopen { top: calc(var(--header-h, 92px) + 12px); left: 14px; width: 53px; height: 53px; }
+  .wm-reopen svg { width: 26px; height: 26px; }
 }
 @media (max-width: 480px) {
-  .wm-reopen { top: calc(var(--header-h, 92px) + 10px); left: 10px; width: 38px; height: 38px; }
-  .wm-reopen svg { width: 19px; height: 19px; }
+  .wm-reopen { top: calc(var(--header-h, 92px) + 10px); left: 10px; width: 49px; height: 49px; }
+  .wm-reopen svg { width: 25px; height: 25px; }
 }
 
 @media (max-width: 560px) {
@@ -1691,7 +1714,18 @@ aside.left, aside.right, .sheet, .sheet-body {
   .wm-ctrl { padding: 6px 0; }
   .wm-ctrl .wm-ctrl-v { font-size: 12.5px; line-height: 1.4; }
   .wm-foot { font-size: 10px; padding-top: 12px; margin-bottom: 14px; }
-  .wm-cta { font-size: 10.5px; padding: 10px 18px; }
+  /* Make the CTA stretch full-width and pin to the bottom of the card on
+     mobile so it's always reachable even when content scrolls. */
+  .wm-actions {
+    position: sticky;
+    bottom: 0;
+    background: var(--surface-overlay);
+    padding-top: 10px;
+    margin: 0 -20px -18px;     /* extend bg to card edges, cancel inner padding */
+    padding-left: 20px; padding-right: 20px; padding-bottom: 14px;
+    border-top: 1px solid var(--rule-2);
+  }
+  .wm-cta { font-size: 11px; padding: 12px 18px; width: 100%; }
   /* leave wm-reopen mobile coords from the rule above — don't override here */
 }
 @media (max-width: 380px) {
@@ -4660,6 +4694,12 @@ function prewarmInteracting(){
     wrap.innerHTML = `
       <div id="wmBackdrop" class="wm-backdrop" role="dialog" aria-modal="true" aria-labelledby="wmTitle" hidden>
         <div class="wm-card">
+          <button type="button" class="wm-x" id="wmXClose" aria-label="Close" title="Close">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="18" y1="6" x2="6" y2="18" />
+            </svg>
+          </button>
           <div class="wm-head">
             <img class="wm-logo" src="sdl_favicon.png" alt="SDL Landscape icon" />
             <div class="wm-eyebrow">About this map</div>
@@ -4710,6 +4750,7 @@ function prewarmInteracting(){
     btn = document.getElementById('wmReopen');
 
     document.getElementById('wmClose').addEventListener('click', close);
+    document.getElementById('wmXClose').addEventListener('click', close);
     btn.addEventListener('click', open);
     bd.addEventListener('click', (e) => { if (e.target === bd) close(); });
     document.addEventListener('keydown', (e) => {
