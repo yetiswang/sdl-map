@@ -95,7 +95,10 @@ body{ min-height:100vh; -webkit-font-smoothing:antialiased; }
 }
 aside{
   position: fixed;
-  top: 0;
+  /* Anchor below the header so the panel's top isn't clipped by the header
+     (which is z-index:60 with a solid background). Mobile breakpoints adjust
+     this value to match their tighter header. */
+  top: var(--header-h, 92px);
   bottom: 0;
   width: clamp(280px, 22vw, 340px);
   padding: 24px 22px 24px;
