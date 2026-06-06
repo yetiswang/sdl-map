@@ -1550,28 +1550,33 @@ aside.left, aside.right, .sheet, .sheet-body {
   transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;        /* anchor for .wm-x */
 }
-/* Scrollable content region. Padded; CTA stays outside this so it doesn't
-   scroll. Visible thin scrollbar + bottom fade hint that there's more. */
-.wm-scroll {
+/* The hero block (favicon + title) and intro are fixed at the top of the
+   card; they live OUTSIDE the scroll region so they never move. The "How to
+   use" section is the ONLY scrollable region — it shrinks/grows to fit the
+   remaining card height. */
+.wm-hero { flex: 0 0 auto; padding: 36px 36px 0; }
+.wm-intro-fixed { flex: 0 0 auto; padding: 0 36px 8px; }
+.wm-howto {
   flex: 1 1 auto;
+  min-height: 0;                  /* required so flex child can shrink + scroll */
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;   /* iOS momentum */
-  padding: 36px 36px 18px;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 36px 12px;
+  /* Nearly invisible scrollbar: super thin + low-alpha thumb. Visible enough
+     to signal scrollability without breaking the editorial look. */
   scrollbar-width: thin;
-  scrollbar-color: var(--ink-3) transparent;
-  /* Soft mask at the bottom edge so the last line subtly fades — a visual
-     cue that content extends. Disappears when scrolled to bottom because the
-     mask is on the scrolling element, not on a sticky pseudo. */
+  scrollbar-color: oklch(from var(--ink) l c h / 0.18) transparent;
 }
-.wm-scroll::-webkit-scrollbar { width: 8px; }
-.wm-scroll::-webkit-scrollbar-thumb {
-  background: var(--ink-3);
-  border-radius: 8px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
+.wm-howto::-webkit-scrollbar { width: 4px; }
+.wm-howto::-webkit-scrollbar-track { background: transparent; }
+.wm-howto::-webkit-scrollbar-thumb {
+  background: oklch(from var(--ink) l c h / 0.18);
+  border-radius: 4px;
 }
-.wm-scroll::-webkit-scrollbar-thumb:hover { background: var(--ink-2); background-clip: padding-box; }
-.wm-scroll::-webkit-scrollbar-track { background: transparent; }
+.wm-howto:hover::-webkit-scrollbar-thumb,
+.wm-howto:focus-within::-webkit-scrollbar-thumb {
+  background: oklch(from var(--ink) l c h / 0.32);
+}
 .wm-backdrop.is-open .wm-card { transform: translateY(0) scale(1); }
 [data-theme="light"] .wm-card {
   box-shadow:
@@ -1747,7 +1752,9 @@ aside.left, aside.right, .sheet, .sheet-body {
   .wm-foot { font-size: 10px; padding-top: 12px; margin-bottom: 14px; }
   /* CTA region (the card's bottom flex item) — tighter padding on mobile,
      full-width button so it's a clear primary action. */
-  .wm-scroll { padding: 22px 20px 14px; }
+  .wm-hero { padding: 22px 20px 0; }
+  .wm-intro-fixed { padding: 0 20px 6px; }
+  .wm-howto { padding: 6px 20px 10px; }
   .wm-actions { padding: 12px 20px 16px; }
   .wm-cta { font-size: 11px; padding: 12px 18px; width: 100%; }
   /* leave wm-reopen mobile coords from the rule above — don't override here */
@@ -4724,39 +4731,43 @@ function prewarmInteracting(){
               <line x1="18" y1="6" x2="6" y2="18" />
             </svg>
           </button>
-          <div class="wm-scroll">
-          <div class="wm-head">
-            <img class="wm-logo" src="sdl_favicon.png" alt="SDL Landscape icon" />
-            <div class="wm-eyebrow">About this map</div>
-            <h1 id="wmTitle" class="wm-title">The Global <span class="dim">Self-Driving Lab</span> Landscape</h1>
-          </div>
-          <p class="wm-intro">
-            A hand-curated map of where self-driving lab work is happening — national programmes, academic groups, commercial vendors, and open laboratory operating systems. It captures the landscape as I read it, not as it indexes itself. Use it to see where the field clusters, where the gaps sit, and who is doing what.
-          </p>
-          <div class="wm-sec-h">How to use</div>
-          <div class="wm-controls">
-            <div class="wm-ctrl">
-              <span class="wm-ctrl-k">Filter</span>
-              <span class="wm-ctrl-v">Click a tier chip in the sidebar (National / Academic / Commercial / LabOS) to narrow the view.</span>
-            </div>
-            <div class="wm-ctrl">
-              <span class="wm-ctrl-k">Inspect</span>
-              <span class="wm-ctrl-v">Click any marker on the map for a quick profile of the group or programme.</span>
-            </div>
-            <div class="wm-ctrl">
-              <span class="wm-ctrl-k">Reset</span>
-              <span class="wm-ctrl-v">The reset button clears active filters and re-centres the map.</span>
-            </div>
-            <div class="wm-ctrl">
-              <span class="wm-ctrl-k">Theme</span>
-              <span class="wm-ctrl-v">Toggle light / dark with the sun-moon control near the title.</span>
+          <div class="wm-hero">
+            <div class="wm-head">
+              <img class="wm-logo" src="sdl_favicon.png" alt="SDL Landscape icon" />
+              <div class="wm-eyebrow">About this map</div>
+              <h1 id="wmTitle" class="wm-title">The Global <span class="dim">Self-Driving Lab</span> Landscape</h1>
             </div>
           </div>
-          <div class="wm-foot">
-            <span>Maintained by Yuyang Wang.</span>
-            <a href="https://discoverylabs.nl" target="_blank" rel="noopener">discoverylabs.nl ↗</a>
+          <div class="wm-intro-fixed">
+            <p class="wm-intro">
+              A hand-curated map of where self-driving lab work is happening — national programmes, academic groups, commercial vendors, and open laboratory operating systems. It captures the landscape as I read it, not as it indexes itself. Use it to see where the field clusters, where the gaps sit, and who is doing what.
+            </p>
           </div>
-          </div><!-- /.wm-scroll -->
+          <div class="wm-howto">
+            <div class="wm-sec-h">How to use</div>
+            <div class="wm-controls">
+              <div class="wm-ctrl">
+                <span class="wm-ctrl-k">Filter</span>
+                <span class="wm-ctrl-v">Click a tier chip in the sidebar (National / Academic / Commercial / LabOS) to narrow the view.</span>
+              </div>
+              <div class="wm-ctrl">
+                <span class="wm-ctrl-k">Inspect</span>
+                <span class="wm-ctrl-v">Click any marker on the map for a quick profile of the group or programme.</span>
+              </div>
+              <div class="wm-ctrl">
+                <span class="wm-ctrl-k">Reset</span>
+                <span class="wm-ctrl-v">The reset button clears active filters and re-centres the map.</span>
+              </div>
+              <div class="wm-ctrl">
+                <span class="wm-ctrl-k">Theme</span>
+                <span class="wm-ctrl-v">Toggle light / dark with the sun-moon control near the title.</span>
+              </div>
+            </div>
+            <div class="wm-foot">
+              <span>Maintained by Yuyang Wang.</span>
+              <a href="https://discoverylabs.nl" target="_blank" rel="noopener">discoverylabs.nl ↗</a>
+            </div>
+          </div><!-- /.wm-howto -->
           <div class="wm-actions">
             <button type="button" class="wm-cta" id="wmClose">Explore the map →</button>
           </div>
