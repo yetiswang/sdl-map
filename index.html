@@ -1199,7 +1199,7 @@ html, body {
 .map-wrap, #map-canvas, #map {
   touch-action: none !important;
 }
-aside.left, aside.right, .sheet, .sheet-body {
+aside.left, aside.right, .sheet, .sheet-body, .wm-howto {
   touch-action: pan-y;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
@@ -4664,7 +4664,7 @@ function prewarmInteracting(){
    never reached the marker click handler. The map relies on touch-action:none
    (CSS, line 317) + its own touch handlers; no JS guard needed for it. */
 (function gestureGuard(){
-  const scrollableSel = 'aside.left, aside.right, .sheet, .sheet-body';
+  const scrollableSel = 'aside.left, aside.right, .sheet, .sheet-body, .wm-howto, .wm-backdrop';
   const mapSel = '#map, svg#map, .marker, .sdl-label';
   function insideMap(target){
     return !!(target && target.closest && target.closest(mapSel));
