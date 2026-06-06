@@ -77,46 +77,64 @@
 html, body{ margin:0; padding:0; background:var(--bg); color:var(--ink); font-family:var(--font-sans); }
 body{ min-height:100vh; -webkit-font-smoothing:antialiased; }
 
-/* v45.d — collapsible sidebars as IN-FLOW grid columns (not overlays).
-   When open, they look like the previous always-on layout. When closed, the
-   map fills the full width. No backdrop, no blur. Both sides toggle
-   independently — user can have neither / left only / right only / both. */
+/* v46 — collapsible sidebars as FLOATING OVERLAYS (not in-flow columns).
+   Reverts v45.d's grid-column model: the map keeps a stable aspect ratio
+   regardless of which side is open. Both panels toggle independently and
+   slide in from the edge over the map.
+   Header + footer stay above via z-index so panels slide *under* them. */
 #app{
   display:grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
-    "header header header"
-    "left   map    right"
-    "footer footer footer";
+    "header"
+    "map"
+    "footer";
   gap:0;
   min-height:100vh;
 }
 aside{
-  width: 0;
-  padding: 0;
-  border: 0;
-  overflow: hidden;
-  visibility: hidden;            /* v45.e — fully hidden when closed */
-  background: var(--bg);
-  transition: width .28s cubic-bezier(.2,.8,.2,1),
-              padding .28s cubic-bezier(.2,.8,.2,1),
-              border-width .28s cubic-bezier(.2,.8,.2,1),
-              visibility 0s linear .28s;   /* delay until width settles */
-  font-size: 14px;
-}
-aside.open{
+  position: fixed;
+  top: 0;
+  bottom: 0;
   width: clamp(280px, 22vw, 340px);
   padding: 24px 22px 24px;
+  background: var(--bg);
   overflow-y: auto;
+  z-index: 40;
+  font-size: 14px;
+  /* Soft shadow signals 'floating layer above the map'. */
+  box-shadow: 0 0 24px oklch(0 0 0 / 0.18);
+  transition: transform .28s cubic-bezier(.2,.8,.2,1),
+              visibility 0s linear .28s;
+  visibility: hidden;
+}
+aside.left{
+  left: 0;
+  transform: translateX(-100%);
+  border-right: 1px solid var(--rule);
+}
+aside.right{
+  right: 0;
+  transform: translateX(100%);
+  border-left: 1px solid var(--rule);
+}
+aside.open{
   visibility: visible;
-  transition: width .28s cubic-bezier(.2,.8,.2,1),
-              padding .28s cubic-bezier(.2,.8,.2,1),
-              border-width .28s cubic-bezier(.2,.8,.2,1),
+  transition: transform .28s cubic-bezier(.2,.8,.2,1),
               visibility 0s linear 0s;
 }
-aside.left.open{ border-right: 1px solid var(--rule); }
-aside.right.open{ border-left: 1px solid var(--rule); }
+aside.left.open{ transform: translateX(0); }
+aside.right.open{ transform: translateX(0); }
+
+/* Header + footer must sit ABOVE the floating panels (they fill the
+   vertical edges with the page background and would otherwise be covered
+   by the panel slide-in). */
+header.top, footer{
+  position: relative;
+  z-index: 60;
+  background: var(--bg);
+}
 /* v45.e — pull-tab buttons. Edge-anchored vertical handles that invite a
    pull-out gesture. Mobile reverts to floating pill style (overrides below). */
 .mob-toggle{
@@ -1457,6 +1475,192 @@ aside.left, aside.right, .sheet, .sheet-body {
 .tip .t-meta { font-size: var(--t-micro); letter-spacing: 0.1em; }
 .tip .t-row .k { font-size: var(--t-micro); }
 .tip .t-row .v { font-size: var(--t-small); }
+
+/* ============================================================
+   Welcome modal + persistent ⓘ reopen button (v46.welcome)
+   Adapts to light/dark via existing CSS vars (--surface-overlay,
+   --ink, --rule, etc.) — no hardcoded colors.
+   ============================================================ */
+.wm-backdrop {
+  position: fixed; inset: 0; z-index: 9000;
+  background: oklch(0.08 0.01 240 / 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+[data-theme="light"] .wm-backdrop {
+  background: oklch(0.50 0.005 240 / 0.35);
+}
+.wm-backdrop.is-open { display: flex; opacity: 1; }
+.wm-card {
+  background: var(--surface-overlay);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  max-width: 540px;
+  width: 100%;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding: 36px 36px 28px;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  box-shadow:
+    0 1px 0 oklch(0 0 0 / 0.04),
+    0 24px 56px oklch(0 0 0 / 0.45),
+    0 8px 24px oklch(0 0 0 / 0.25);
+  transform: translateY(8px) scale(0.985);
+  transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.wm-backdrop.is-open .wm-card { transform: translateY(0) scale(1); }
+[data-theme="light"] .wm-card {
+  box-shadow:
+    0 1px 0 oklch(0 0 0 / 0.04),
+    0 24px 56px oklch(0 0 0 / 0.16),
+    0 8px 24px oklch(0 0 0 / 0.08);
+}
+.wm-head {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 14px; margin-bottom: 22px;
+}
+.wm-logo {
+  width: 77px; height: 77px; object-fit: contain;
+  border-radius: 9px;
+  background: var(--bg-2);
+  padding: 9px;
+  border: 1px solid var(--rule-2);
+}
+.wm-eyebrow {
+  font-family: var(--font-mono); font-size: 10px; color: var(--ink-3);
+  letter-spacing: 0.22em; text-transform: uppercase; text-align: center;
+}
+.wm-title {
+  font-family: var(--font-sans); font-weight: 600; font-size: 26px;
+  letter-spacing: -0.01em; line-height: 1.2;
+  margin: 0; color: var(--ink); text-align: center;
+}
+.wm-title .dim { color: var(--ink-3); font-weight: 400; }
+.wm-intro {
+  font-family: var(--font-sans); font-size: 14px; line-height: 1.6;
+  color: var(--ink-2); margin: 0 0 22px;
+}
+.wm-sec-h {
+  font-family: var(--font-mono); font-size: 10px; color: var(--ink-3);
+  letter-spacing: 0.22em; text-transform: uppercase;
+  margin: 0 0 12px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--rule-2);
+}
+.wm-controls {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px 18px;
+  margin-bottom: 22px;
+}
+.wm-ctrl {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 8px 0;
+}
+.wm-ctrl .wm-ctrl-k {
+  font-family: var(--font-mono); font-size: 10px; color: var(--ink-3);
+  letter-spacing: 0.16em; text-transform: uppercase;
+}
+.wm-ctrl .wm-ctrl-v {
+  font-family: var(--font-sans); font-size: 13px; color: var(--ink); line-height: 1.45;
+}
+.wm-foot {
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-3);
+  letter-spacing: 0.04em;
+  border-top: 1px solid var(--rule-2);
+  padding-top: 14px; margin-bottom: 20px;
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+.wm-foot a {
+  color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--rule);
+  transition: color 0.16s, border-color 0.16s;
+}
+.wm-foot a:hover { color: var(--ink); border-bottom-color: var(--ink-3); }
+.wm-actions { display: flex; justify-content: flex-end; }
+.wm-cta {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 11px 22px;
+  border: 1px solid var(--ink); background: var(--ink); color: var(--bg);
+  cursor: pointer; border-radius: 2px;
+  transition: background 0.16s, color 0.16s, border-color 0.16s;
+}
+.wm-cta:hover { background: var(--bg); color: var(--ink); }
+.wm-cta:focus-visible { outline: 2px solid var(--ink-3); outline-offset: 2px; }
+
+/* Persistent reopen pill — anchored top-left of the map, clear of the header.
+   Resting state blends with the map background; hover reveals it clearly as
+   a tap target with stroke, glow, and slight lift. Icon is an inline SVG. */
+.wm-reopen {
+  position: fixed;
+  top: 118px; left: 22px;       /* shifted down further so it clears the header */
+  z-index: 35;                  /* under sidebars (40) so panels slide over it */
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  background: oklch(from var(--bg) l c h / 0.65);
+  border: 1px solid var(--rule-2);
+  border-radius: 50%;
+  color: var(--ink-3);
+  cursor: pointer;
+  padding: 0;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 2px 8px oklch(0 0 0 / 0.10);
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.wm-reopen svg {
+  width: 18px; height: 18px;
+  stroke: currentColor; fill: none;
+  display: block;
+}
+.wm-reopen:hover {
+  background: var(--bg);
+  border-color: var(--ink);
+  color: var(--ink);
+  box-shadow:
+    0 0 0 4px oklch(from var(--ink) l c h / 0.08),
+    0 8px 22px oklch(0 0 0 / 0.22);
+  transform: translateY(-2px) scale(1.08);
+}
+.wm-reopen:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+.wm-reopen:active {
+  transform: translateY(-1px) scale(1.03);
+}
+/* Mobile placements — same visual treatment, just tighter coords + slightly
+   smaller dot so it doesn't crowd the header on narrow viewports. */
+@media (max-width: 768px) {
+  .wm-reopen { top: 96px; left: 14px; width: 34px; height: 34px; }
+  .wm-reopen svg { width: 17px; height: 17px; }
+}
+@media (max-width: 480px) {
+  .wm-reopen { top: 84px; left: 10px; width: 32px; height: 32px; }
+  .wm-reopen svg { width: 16px; height: 16px; }
+}
+
+@media (max-width: 560px) {
+  .wm-card { padding: 28px 22px 22px; }
+  .wm-title { font-size: 22px; }
+  .wm-intro { font-size: 13.5px; }
+  .wm-controls { grid-template-columns: 1fr; gap: 6px; }
+  /* leave wm-reopen mobile coords from the rule above — don't override here */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wm-backdrop, .wm-card, .wm-reopen { transition: none; }
+  .wm-backdrop.is-open .wm-card { transform: none; }
+}
 
 </style>
 </head>
@@ -4377,6 +4581,118 @@ function prewarmInteracting(){
     lastState = now;
   });
   observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+})();
+
+/* ============================================================
+   Welcome modal — first-visit onboarding + persistent ⓘ reopen
+   Storage key: sdlmap.welcomeSeen
+   ============================================================ */
+(function welcomeModal(){
+  const STORAGE_KEY = 'sdlmap.welcomeSeen';
+  let bd, card, btn, lastFocus;
+
+  function ensureMarkup(){
+    if (document.getElementById('wmBackdrop')) return;
+    const wrap = document.createElement('div');
+    wrap.innerHTML = `
+      <div id="wmBackdrop" class="wm-backdrop" role="dialog" aria-modal="true" aria-labelledby="wmTitle" hidden>
+        <div class="wm-card">
+          <div class="wm-head">
+            <img class="wm-logo" src="sdl_favicon.png" alt="SDL Landscape icon" />
+            <div class="wm-eyebrow">About this map</div>
+            <h1 id="wmTitle" class="wm-title">The Global <span class="dim">Self-Driving Lab</span> Landscape</h1>
+          </div>
+          <p class="wm-intro">
+            A hand-curated map of where self-driving lab work is happening — national programmes, academic groups, commercial vendors, and open laboratory operating systems. It captures the landscape as I read it, not as it indexes itself. Use it to see where the field clusters, where the gaps sit, and who is doing what.
+          </p>
+          <div class="wm-sec-h">How to use</div>
+          <div class="wm-controls">
+            <div class="wm-ctrl">
+              <span class="wm-ctrl-k">Filter</span>
+              <span class="wm-ctrl-v">Click a tier chip in the sidebar (National / Academic / Commercial / LabOS) to narrow the view.</span>
+            </div>
+            <div class="wm-ctrl">
+              <span class="wm-ctrl-k">Inspect</span>
+              <span class="wm-ctrl-v">Click any marker on the map for a quick profile of the group or programme.</span>
+            </div>
+            <div class="wm-ctrl">
+              <span class="wm-ctrl-k">Reset</span>
+              <span class="wm-ctrl-v">The reset button clears active filters and re-centres the map.</span>
+            </div>
+            <div class="wm-ctrl">
+              <span class="wm-ctrl-k">Theme</span>
+              <span class="wm-ctrl-v">Toggle light / dark with the sun-moon control near the title.</span>
+            </div>
+          </div>
+          <div class="wm-foot">
+            <span>Maintained by Yuyang Wang.</span>
+            <a href="https://discoverylabs.nl" target="_blank" rel="noopener">discoverylabs.nl ↗</a>
+          </div>
+          <div class="wm-actions">
+            <button type="button" class="wm-cta" id="wmClose">Explore the map →</button>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="wm-reopen" id="wmReopen" aria-label="About this map" title="About this map" hidden>
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="9.25" />
+          <line x1="12" y1="11" x2="12" y2="16.5" />
+          <circle cx="12" cy="7.75" r="0.6" fill="currentColor" stroke="none" />
+        </svg>
+      </button>
+    `;
+    document.body.appendChild(wrap);
+    bd = document.getElementById('wmBackdrop');
+    card = bd.querySelector('.wm-card');
+    btn = document.getElementById('wmReopen');
+
+    document.getElementById('wmClose').addEventListener('click', close);
+    btn.addEventListener('click', open);
+    bd.addEventListener('click', (e) => { if (e.target === bd) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && bd.classList.contains('is-open')) close();
+    });
+  }
+
+  function open(){
+    if (!bd) return;
+    lastFocus = document.activeElement;
+    bd.hidden = false;
+    // double rAF so display:flex commits before opacity transition
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      bd.classList.add('is-open');
+      const focusTarget = document.getElementById('wmClose');
+      focusTarget && focusTarget.focus({ preventScroll: true });
+    }));
+  }
+
+  function close(){
+    if (!bd) return;
+    bd.classList.remove('is-open');
+    setTimeout(() => {
+      bd.hidden = true;
+      btn.hidden = false;
+      try { localStorage.setItem(STORAGE_KEY, '1'); } catch(e){}
+      if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+    }, 240);
+  }
+
+  function init(){
+    ensureMarkup();
+    let seen = false;
+    try { seen = localStorage.getItem(STORAGE_KEY) === '1'; } catch(e){}
+    if (seen) {
+      btn.hidden = false;
+    } else {
+      open();
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
 </script>
 </body>
