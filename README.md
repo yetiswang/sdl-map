@@ -5,19 +5,6 @@ Interactive global map of Self-Driving Lab initiatives — academic groups, nati
 **Live (GitHub Pages):** https://yetiswang.github.io/sdl-map/
 **Custom domain (when wired):** https://sdl-map.discoverylabs.nl/
 
-## Canonical source
-
-This repo is the canonical source for the SDL map. The file
-[`yetiswang/LSRI-presentation/sdl-map.html`](https://github.com/yetiswang/LSRI-presentation/blob/main/sdl-map.html) is a mirror, kept in sync by a GitHub Action whenever this repo's `index.html` changes on `main` (`.github/workflows/sync-to-lsri-presentation.yml`).
-
-To make the mirror push work, the secret `LSRI_MIRROR_TOKEN` must be set on this repo with a PAT (classic, `repo` scope) that has write access to `yetiswang/LSRI-presentation`. See "Sync setup" below.
-
-## Sync setup (one-time)
-
-1. Create a fine-grained or classic PAT at https://github.com/settings/tokens with `repo` scope and an expiry you can live with.
-2. In this repo: Settings → Secrets and variables → Actions → New repository secret. Name `LSRI_MIRROR_TOKEN`, value the PAT.
-3. The next push to `main` that touches `index.html` will trigger `Sync to LSRI-presentation` (visible under the Actions tab).
-
 ## Local development
 
 ```bash
