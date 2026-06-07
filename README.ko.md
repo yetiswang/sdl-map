@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="sdl_favicon.png" alt="SDL 랜드스케이프" width="120">
+  <img src="public/sdl_favicon.png" alt="SDL 랜드스케이프" width="120">
 
   <h1>전 세계 자율실험실 지도</h1>
 

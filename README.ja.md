@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="sdl_favicon.png" alt="SDL ランドスケープ" width="120">
+  <img src="public/sdl_favicon.png" alt="SDL ランドスケープ" width="120">
 
   <h1>世界の自動化実験室マップ</h1>
 

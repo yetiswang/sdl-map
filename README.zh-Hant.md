@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="sdl_favicon.png" alt="SDL 版圖" width="120">
+  <img src="public/sdl_favicon.png" alt="SDL 版圖" width="120">
 
   <h1>全球自驅動實驗室版圖</h1>
 
