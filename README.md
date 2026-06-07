@@ -18,6 +18,14 @@
     <a href="https://github.com/yetiswang/sdl-map"><img src="https://img.shields.io/github/stars/yetiswang/sdl-map.svg?style=social&label=Star" alt="GitHub stars"></a>
     <a href="https://github.com/yetiswang/sdl-map"><img src="https://img.shields.io/github/forks/yetiswang/sdl-map.svg?style=social&label=Fork" alt="GitHub forks"></a>
   </p>
+
+  <p align="center">
+    <b>English</b> ·
+    <a href="README.zh-Hans.md">简体中文</a> ·
+    <a href="README.zh-Hant.md">繁體中文</a> ·
+    <a href="README.ja.md">日本語</a> ·
+    <a href="README.ko.md">한국어</a>
+  </p>
 </div>
 
 > Self-Driving Labs (SDLs) close the loop between AI-driven hypothesis, automated synthesis, and online characterisation. This list catalogues the people, programmes, and platforms doing the work. It captures the landscape as I read it, not as it indexes itself. Entries reflect public information as of June 2026 and are continuously revised through the [interactive map](https://sdl-map.discoverylabs.nl/).
