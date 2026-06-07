@@ -699,6 +699,68 @@
     installDelegation();
   }
 
+  // Boost the wm-reopen pill so it doesn't look faded on mobile, sits above
+  // the clear button in z-order, and gets a redundant direct tap handler in
+  // case the document-level delegation loses the touch on iOS.
+  function injectReopenStyles() {
+    if (document.getElementById('sdl-reopen-style')) return;
+    var s = document.createElement('style');
+    s.id = 'sdl-reopen-style';
+    s.textContent = [
+      '.wm-reopen {',
+      '  color: var(--ink) !important;',           // full ink, not the muted ink-3
+      '  background: var(--bg-2) !important;',     // opaque, not 65% bg
+      '  border-color: var(--ink-3) !important;',  // visible ring
+      '  z-index: 60 !important;',                 // above clear button (55)
+      '  pointer-events: auto !important;',
+      '  -webkit-tap-highlight-color: rgba(0,0,0,0.12);',
+      '  touch-action: manipulation;',
+      '  opacity: 1 !important;',
+      '}',
+      '.wm-reopen:active {',
+      '  transform: scale(0.94);',
+      '  background: var(--bg) !important;',
+      '}',
+      '@media (max-width: 768px) {',
+      '  .wm-reopen {',
+      '    top: max(18px, env(safe-area-inset-top, 0px) + 12px) !important;',
+      '    width: 56px !important; height: 56px !important;',
+      '    border-width: 2px !important;',
+      '    box-shadow: 0 4px 14px oklch(0 0 0 / 0.20) !important;',
+      '  }',
+      '  .wm-reopen svg { width: 28px !important; height: 28px !important; stroke-width: 2.2 !important; }',
+      '}',
+    ].join('\n');
+    (document.head || document.documentElement).appendChild(s);
+  }
+  function bindReopenDirect() {
+    var pill = document.getElementById('wmReopen');
+    if (!pill || pill.dataset.sdlDirectBound) return;
+    pill.dataset.sdlDirectBound = '1';
+    function fire(ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      openWelcomeModal();
+    }
+    pill.addEventListener('click', fire);
+    pill.addEventListener('touchend', function (ev) {
+      if (!ev.changedTouches || ev.changedTouches.length !== 1) return;
+      fire(ev);
+    }, { passive: false });
+  }
+  function pillTickers() {
+    injectReopenStyles();
+    bindReopenDirect();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', pillTickers);
+  } else {
+    pillTickers();
+  }
+  setTimeout(pillTickers, 200);
+  setTimeout(pillTickers, 800);
+  setTimeout(pillTickers, 2000);
+
   // === Cross-frame theme listener ===
   // The Astro shell posts a message on every theme toggle. We respond by
   // invoking the legacy's applyTheme which does the full reflow + canvas
