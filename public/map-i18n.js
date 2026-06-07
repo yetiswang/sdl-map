@@ -629,44 +629,75 @@
   window.SDL_runTranslate = runTranslate;
   window.SDL_translateModal = translateModal;
 
-  // === Mobile touch defenses for the welcome modal buttons ===
-  // Same iOS Safari quirk that bit the clear button: a tap whose touchend
-  // lands inside the modal backdrop sometimes never produces a click. Bind
-  // touchend in parallel — clicking the same button twice is a no-op because
-  // the legacy close() and open() functions are idempotent (modal already
-  // closed → close() bails out via fadeStarted guard).
-  function patchModalTouch() {
-    function bindTouchClick(id) {
-      var el = document.getElementById(id);
-      if (!el || el.dataset.sdlTouchBound) return;
-      el.dataset.sdlTouchBound = '1';
-      // Make sure iOS doesn't add the 300ms tap delay or steal the event.
-      el.style.touchAction = 'manipulation';
-      el.style.webkitTapHighlightColor = 'rgba(0,0,0,0.12)';
-      el.style.cursor = 'pointer';
-      el.addEventListener('touchend', function (ev) {
-        // Skip if the gesture became a scroll
-        if (!ev.changedTouches || ev.changedTouches.length !== 1) return;
-        ev.preventDefault();
-        ev.stopPropagation();
-        // Synthesize a click — re-uses the legacy's existing click handler.
-        try { el.click(); } catch (e) {}
-      }, { passive: false });
+  // === Welcome modal: brute-force dismiss path ===
+  // The legacy hooks click handlers on #wmClose / #wmXClose during init.
+  // On mobile we've seen these buttons not respond. Instead of patching
+  // touch handlers per-button, hijack the dismiss path at the document
+  // level: any pointerdown/touchstart on wmClose/wmXClose/wm-cta/wm-x runs
+  // our own close routine, bypassing whatever legacy state is preventing
+  // the click from firing.
+  function dismissWelcomeModal() {
+    var bd = document.getElementById('wmBackdrop');
+    var reopen = document.getElementById('wmReopen');
+    if (!bd) return;
+    bd.classList.remove('is-open');
+    setTimeout(function () {
+      bd.hidden = true;
+      if (reopen) reopen.hidden = false;
+      try { localStorage.setItem('sdlmap.welcomeSeen', '1'); } catch (e) {}
+    }, 240);
+  }
+  function openWelcomeModal() {
+    var bd = document.getElementById('wmBackdrop');
+    var reopen = document.getElementById('wmReopen');
+    if (!bd) return;
+    bd.hidden = false;
+    if (reopen) reopen.hidden = true;
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { bd.classList.add('is-open'); });
+    });
+  }
+
+  // Document-level delegation, captures pointerdown AND touchstart AND click
+  // so it fires no matter which event the browser produces first. We mark
+  // the event handled to prevent double-fire.
+  function isInside(target, selectors) {
+    if (!target || !target.closest) return null;
+    for (var i = 0; i < selectors.length; i++) {
+      var hit = target.closest(selectors[i]);
+      if (hit) return hit;
     }
-    // The modal CTA + X close + reopen pill
-    bindTouchClick('wmClose');
-    bindTouchClick('wmXClose');
-    bindTouchClick('wmReopen');
+    return null;
   }
-  // Run after DOM settles + watch for the modal being lazily added later.
+  var DISMISS_SELECTORS = ['#wmClose', '#wmXClose', '.wm-cta', '.wm-x'];
+  var OPEN_SELECTORS = ['#wmReopen', '.wm-reopen'];
+  var _handled = 0;
+  function handleEvent(ev) {
+    var now = Date.now();
+    if (now - _handled < 600) return; // de-dupe
+    var t = ev.target;
+    if (isInside(t, DISMISS_SELECTORS)) {
+      _handled = now;
+      ev.preventDefault();
+      ev.stopPropagation();
+      dismissWelcomeModal();
+    } else if (isInside(t, OPEN_SELECTORS)) {
+      _handled = now;
+      ev.preventDefault();
+      ev.stopPropagation();
+      openWelcomeModal();
+    }
+  }
+  function installDelegation() {
+    ['pointerdown', 'touchstart', 'click'].forEach(function (type) {
+      document.addEventListener(type, handleEvent, { capture: true, passive: false });
+    });
+  }
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', patchModalTouch);
+    document.addEventListener('DOMContentLoaded', installDelegation);
   } else {
-    patchModalTouch();
+    installDelegation();
   }
-  setTimeout(patchModalTouch, 200);
-  setTimeout(patchModalTouch, 800);
-  setTimeout(patchModalTouch, 2000);
 
   // === Cross-frame theme listener ===
   // The Astro shell posts a message on every theme toggle. We respond by
