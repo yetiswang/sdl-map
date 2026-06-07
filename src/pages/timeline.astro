@@ -15,19 +15,22 @@ const grouped = stages.map(s => ({ stage: s, label: stageLabels[s], items: data.
 ---
 
 <UnifiedLayout title={`${ui.timeline} · ${ui.brandH1}`} lang={lang} activeView="timeline">
-  <main style="max-width:800px;margin:0 auto;padding:24px 28px;" data-pagefind-body>
-    <div style="position:relative;padding-left:24px;">
-      <div style="position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:var(--rule);"></div>
+  <main class="tl-main" data-pagefind-body>
+    <div class="tl-rail">
+      <div class="tl-line"></div>
       {grouped.map(g => (
-        <div style="position:relative;margin-bottom:32px;">
-          <div style="position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--bg-3);border:2px solid var(--ink-3);"></div>
-          <h2 style="font-size:16px;font-weight:600;margin:0 0 12px;color:var(--ink-2);">{g.label}</h2>
-          <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="tl-stage">
+          <div class="tl-dot"></div>
+          <h2 class="tl-h2">{g.label}</h2>
+          <div class="tl-stage-list">
             {g.items.map(e => (
-              <a href={`${prefix}entry/${e.id}/`} style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg-2);border:1px solid var(--rule);border-radius:8px;color:inherit;">
-                <span style="font-size:18px;">{e.flag}</span><span style={`width:8px;height:8px;border-radius:50%;background:${tierColors[e.tier]};`}></span>
-                <div style="flex:1;min-width:0;"><div style="font-weight:600;font-size:14px;">{e.name}</div><div style="font-size:11px;color:var(--ink-3);">{e.org} · {e.domain}</div></div>
-                {e.investLabel&&<div style="font-size:10px;color:var(--ink-3);font-family:var(--font-mono);white-space:nowrap;">{e.investLabel}</div>}
+              <a href={`${prefix}entry/${e.id}/`} class="tl-card">
+                <span class="tl-flag">{e.flag}</span><span class="tl-tierdot" style={`background:${tierColors[e.tier]};`}></span>
+                <div class="tl-body">
+                  <div class="tl-name">{e.name}</div>
+                  <div class="tl-meta">{e.org} · {e.domain}</div>
+                </div>
+                {e.investLabel && <div class="tl-invest">{e.investLabel}</div>}
               </a>
             ))}
           </div>
@@ -35,4 +38,28 @@ const grouped = stages.map(s => ({ stage: s, label: stageLabels[s], items: data.
       ))}
     </div>
   </main>
+  <style is:global>
+    .tl-main { max-width:800px; margin:0 auto; padding:24px 28px; box-sizing:border-box; }
+    .tl-rail { position:relative; padding-left:24px; }
+    .tl-line { position:absolute; left:6px; top:8px; bottom:8px; width:2px; background:var(--rule); }
+    .tl-stage { position:relative; margin-bottom:32px; }
+    .tl-dot { position:absolute; left:-24px; top:4px; width:14px; height:14px; border-radius:50%; background:var(--bg-3); border:2px solid var(--ink-3); }
+    .tl-h2 { font-size:16px; font-weight:600; margin:0 0 12px; color:var(--ink-2); }
+    .tl-stage-list { display:flex; flex-direction:column; gap:8px; }
+    .tl-card { display:flex; align-items:center; gap:12px; padding:10px 14px; background:var(--bg-2); border:1px solid var(--rule); border-radius:8px; color:inherit; min-width:0; }
+    .tl-flag { font-size:18px; flex-shrink:0; }
+    .tl-tierdot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+    .tl-body { flex:1; min-width:0; overflow:hidden; }
+    .tl-name { font-weight:600; font-size:14px; overflow-wrap:anywhere; }
+    .tl-meta { font-size:11px; color:var(--ink-3); overflow-wrap:anywhere; }
+    .tl-invest { font-size:10px; color:var(--ink-3); font-family:var(--font-mono); white-space:nowrap; flex-shrink:0; }
+    @media (max-width: 600px) {
+      .tl-main { padding: 16px 12px; }
+      .tl-rail { padding-left: 18px; }
+      .tl-dot { left:-18px; width:11px; height:11px; }
+      .tl-line { left:4px; }
+      .tl-card { padding:9px 11px; gap:8px; flex-wrap:wrap; }
+      .tl-invest { width:100%; padding-left:30px; }   /* drops below name when narrow */
+    }
+  </style>
 </UnifiedLayout>
