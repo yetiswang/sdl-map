@@ -702,6 +702,46 @@
   // Boost the wm-reopen pill so it doesn't look faded on mobile, sits above
   // the clear button in z-order, and gets a redundant direct tap handler in
   // case the document-level delegation loses the touch on iOS.
+  // === Welcome modal: mobile layout — give both intro and "how to use" room
+  // by making the intro scrollable too and reserving more height for howto. ===
+  function injectModalMobileStyles() {
+    if (document.getElementById('sdl-modal-mobile-style')) return;
+    var s = document.createElement('style');
+    s.id = 'sdl-modal-mobile-style';
+    s.textContent = [
+      '@media (max-width: 600px) {',
+      // Tighten outer padding so more content fits
+      '  .wm-card { padding: 0 !important; }',
+      '  .wm-hero { padding: 20px 18px 0 !important; }',
+      '  .wm-intro-fixed {',
+      '    padding: 8px 18px 6px !important;',
+      // Make the intro scrollable too — both blocks read with some scroll
+      '    max-height: 28dvh !important;',
+      '    max-height: 28vh;',                       // fallback
+      '    overflow-y: auto !important;',
+      '    -webkit-overflow-scrolling: touch;',
+      '    flex: 0 1 auto !important;',
+      '  }',
+      // Slim scrollbar so the intro doesn\'t look like a textarea
+      '  .wm-intro-fixed::-webkit-scrollbar { width: 4px; }',
+      '  .wm-intro-fixed::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 4px; }',
+      '  .wm-howto {',
+      '    min-height: 36dvh !important;',           // reserve room so it isn\'t cramped
+      '    padding: 8px 18px 12px !important;',
+      '    flex: 1 1 auto !important;',
+      '  }',
+      '  .wm-actions { padding: 12px 18px 14px !important; }',
+      '  .wm-title { font-size: 22px !important; line-height: 1.2 !important; }',
+      '  .wm-intro { font-size: 13.5px !important; line-height: 1.55 !important; }',
+      '}',
+      '@media (max-width: 380px) {',
+      '  .wm-intro-fixed { max-height: 24dvh !important; }',
+      '  .wm-howto { min-height: 40dvh !important; }',
+      '}',
+    ].join('\n');
+    (document.head || document.documentElement).appendChild(s);
+  }
+
   function injectReopenStyles() {
     if (document.getElementById('sdl-reopen-style')) return;
     var s = document.createElement('style');
@@ -768,6 +808,7 @@
   function pillTickers() {
     injectReopenStyles();
     bindReopenDirect();
+    injectModalMobileStyles();
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', pillTickers);
