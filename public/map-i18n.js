@@ -629,6 +629,45 @@
   window.SDL_runTranslate = runTranslate;
   window.SDL_translateModal = translateModal;
 
+  // === Mobile touch defenses for the welcome modal buttons ===
+  // Same iOS Safari quirk that bit the clear button: a tap whose touchend
+  // lands inside the modal backdrop sometimes never produces a click. Bind
+  // touchend in parallel — clicking the same button twice is a no-op because
+  // the legacy close() and open() functions are idempotent (modal already
+  // closed → close() bails out via fadeStarted guard).
+  function patchModalTouch() {
+    function bindTouchClick(id) {
+      var el = document.getElementById(id);
+      if (!el || el.dataset.sdlTouchBound) return;
+      el.dataset.sdlTouchBound = '1';
+      // Make sure iOS doesn't add the 300ms tap delay or steal the event.
+      el.style.touchAction = 'manipulation';
+      el.style.webkitTapHighlightColor = 'rgba(0,0,0,0.12)';
+      el.style.cursor = 'pointer';
+      el.addEventListener('touchend', function (ev) {
+        // Skip if the gesture became a scroll
+        if (!ev.changedTouches || ev.changedTouches.length !== 1) return;
+        ev.preventDefault();
+        ev.stopPropagation();
+        // Synthesize a click — re-uses the legacy's existing click handler.
+        try { el.click(); } catch (e) {}
+      }, { passive: false });
+    }
+    // The modal CTA + X close + reopen pill
+    bindTouchClick('wmClose');
+    bindTouchClick('wmXClose');
+    bindTouchClick('wmReopen');
+  }
+  // Run after DOM settles + watch for the modal being lazily added later.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', patchModalTouch);
+  } else {
+    patchModalTouch();
+  }
+  setTimeout(patchModalTouch, 200);
+  setTimeout(patchModalTouch, 800);
+  setTimeout(patchModalTouch, 2000);
+
   // === Cross-frame theme listener ===
   // The Astro shell posts a message on every theme toggle. We respond by
   // invoking the legacy's applyTheme which does the full reflow + canvas
