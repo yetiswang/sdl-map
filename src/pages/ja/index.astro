@@ -1,0 +1,12 @@
+---
+import UnifiedLayout from '../../layouts/UnifiedLayout.astro';
+import data from '../../data/sdl_data.json';
+import uiAll from '../../i18n/ui.json';
+
+const lang = 'ja';
+const ui = uiAll[lang];
+---
+
+<UnifiedLayout title={`${ui.brandH1} ${ui.brandDim}`} lang={lang} activeView="map">
+  <iframe src="/map-legacy.html?embed=1&lang=ja" style="width:100%;flex:1;min-height:0;border:none;display:block;background:var(--bg);" title="Interactive SDL Map"></iframe>
+</UnifiedLayout>

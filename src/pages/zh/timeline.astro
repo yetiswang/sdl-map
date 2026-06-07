@@ -1,0 +1,39 @@
+---
+import UnifiedLayout from '../../layouts/UnifiedLayout.astro';
+import data from '../../data/sdl_data.json';
+import uiAll from '../../i18n/ui.json';
+import { entityName, entityOrg } from '../../utils/i18n';
+
+const lang = 'zh';
+const ui = uiAll[lang];
+const prefix = lang === 'en' ? '/' : `/${lang}/`;
+
+const stages = ['operational','prototype','concept'] as const;
+const stageLabels = { operational: ui.stageOperational, prototype: ui.stagePrototype, concept: ui.stageConcept };
+const tierColors = { national:'var(--c-national)', academic:'var(--c-academic)', commercial:'var(--c-commercial)', labos:'var(--c-labos)' };
+
+const grouped = stages.map(s => ({ stage: s, label: stageLabels[s], items: data.filter(d=>d.maturity===s) })).filter(g => g.items.length > 0);
+---
+
+<UnifiedLayout title={`${ui.timeline} · ${ui.brandH1}`} lang={lang} activeView="timeline">
+  <main style="max-width:800px;margin:0 auto;padding:24px 28px;" data-pagefind-body>
+    <div style="position:relative;padding-left:24px;">
+      <div style="position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:var(--rule);"></div>
+      {grouped.map(g => (
+        <div style="position:relative;margin-bottom:32px;">
+          <div style="position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--bg-3);border:2px solid var(--ink-3);"></div>
+          <h2 style="font-size:16px;font-weight:600;margin:0 0 12px;color:var(--ink-2);">{g.label}</h2>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            {g.items.map(e => (
+              <a href={`${prefix}entry/${e.id}/`} style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg-2);border:1px solid var(--rule);border-radius:8px;color:inherit;">
+                <span style="font-size:18px;">{e.flag}</span><span style={`width:8px;height:8px;border-radius:50%;background:${tierColors[e.tier]};`}></span>
+                <div style="flex:1;min-width:0;"><div style="font-weight:600;font-size:14px;">{entityName(e.id, e.name, lang)}</div><div style="font-size:11px;color:var(--ink-3);">{entityOrg(e.id, e.org, lang)} · {e.domain}</div></div>
+                {e.investLabel&&<div style="font-size:10px;color:var(--ink-3);font-family:var(--font-mono);white-space:nowrap;">{e.investLabel}</div>}
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </main>
+</UnifiedLayout>

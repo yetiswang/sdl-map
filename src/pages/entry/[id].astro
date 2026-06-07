@@ -1,0 +1,55 @@
+---
+import UnifiedLayout from '../../layouts/UnifiedLayout.astro';
+import data from '../../data/sdl_data.json';
+import uiAll from '../../i18n/ui.json';
+import { countryName } from '../../utils/i18n';
+
+export function getStaticPaths() {
+  return data.map(e => ({ params: { id: e.id }, props: { entry: e } }));
+}
+
+const { entry } = Astro.props;
+const lang = 'en';
+const ui = uiAll[lang];
+const prefix = lang === 'en' ? '/' : `/${lang}/`;
+const tierLabels = { national:'National', academic:'Academic', commercial:'Commercial', labos:'Lab OS' };
+const tierColors = { national:'var(--c-national)', academic:'var(--c-academic)', commercial:'var(--c-commercial)', labos:'var(--c-labos)' };
+const detailFields = [
+  { label: ui.location, value: `${entry.city}, ${countryName(entry.country, lang)}` },
+  { label: ui.domain, value: entry.domain },
+  { label: ui.maturity, value: entry.maturity },
+  ...(entry.investLabel ? [{ label: ui.investment, value: entry.investLabel }] : []),
+];
+---
+
+<UnifiedLayout title={`${entry.name} · ${ui.brandH1} ${ui.brandDim}`} lang={lang}>
+  <main style="max-width:720px;margin:0 auto;padding:32px 28px;" data-pagefind-body>
+    <a href={`${prefix}list/`} style="font-size:13px;color:var(--ink-3);font-family:var(--font-mono);">{ui.back}</a>
+    <div style="margin-top:20px;padding:24px;background:var(--bg-2);border:1px solid var(--rule);border-radius:12px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <span style="font-size:28px;">{entry.flag}</span>
+        <span style={`width:10px;height:10px;border-radius:50%;background:${tierColors[entry.tier]};`}></span>
+        <span style="font-size:12px;font-family:var(--font-mono);color:var(--ink-3);text-transform:uppercase;">{tierLabels[entry.tier]}</span>
+      </div>
+      <h1 style="margin:0 0 6px;font-size:26px;font-weight:700;">{entry.name}</h1>
+      <p style="margin:0 0 16px;color:var(--ink-2);font-size:15px;">{entry.org}</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:16px 0;">
+        {detailFields.map(f => (
+          <div style="padding:12px;background:var(--bg);border-radius:8px;">
+            <div style="font-size:10px;color:var(--ink-3);font-family:var(--font-mono);text-transform:uppercase;">{f.label}</div>
+            <div style="margin-top:4px;font-size:14px;">{f.value}</div>
+          </div>
+        ))}
+      </div>
+      {entry.url && <a href={entry.url} target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;padding:10px 18px;background:var(--ink);color:var(--bg);border-radius:8px;font-weight:600;font-size:13px;">{entry.url.replace(/^https:\/\//,'').replace(/\/$/,'')} ↗</a>}
+      {entry.sources?.length>0 && (
+        <div style="margin-top:20px;">
+          <div style="font-size:11px;color:var(--ink-3);font-family:var(--font-mono);text-transform:uppercase;margin-bottom:6px;">{ui.sources}</div>
+          <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px;">
+            {entry.sources.map((s:string) => <li><a href={s} target="_blank" rel="noopener" style="font-size:12px;color:var(--ink-2);word-break:break-all;">{s}</a></li>)}
+          </ul>
+        </div>
+      )}
+    </div>
+  </main>
+</UnifiedLayout>

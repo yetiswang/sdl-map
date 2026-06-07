@@ -1,0 +1,44 @@
+---
+import ui from '../i18n/ui.json';
+
+export interface Props {
+  lang: 'en' | 'zh';
+  activeView?: 'map' | 'list' | 'timeline';
+}
+
+const { lang, activeView = 'map' } = Astro.props;
+const t = ui[lang];
+const otherLang = lang === 'en' ? 'zh' : 'en';
+const switchPath = Astro.url.pathname.replace(/^\/(en|zh)/, '') || '/';
+---
+
+<header style="position:relative; z-index:60; background:var(--bg); border-bottom:1px solid var(--rule); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+  <div style="display:flex; align-items:center; gap:12px;">
+    <a href={`/${lang}/`} style="font-weight:700; font-size:18px; color:var(--ink); text-decoration:none;">
+      {t.siteTitle}
+    </a>
+    <span style="font-size:12px; color:var(--ink-3); font-family:var(--font-mono);">74 {t.entries}</span>
+  </div>
+
+  <nav style="display:flex; align-items:center; gap:8px;">
+    <a href={`/${lang}/`} class={activeView==='map'?'active':''}>{t.navMap}</a>
+    <a href={`/${lang}/list/`} class={activeView==='list'?'active':''}>{t.navList}</a>
+    <a href={`/${lang}/timeline/`} class={activeView==='timeline'?'active':''}>{t.navTimeline}</a>
+    <span style="width:1px; height:18px; background:var(--rule); margin:0 8px;"></span>
+    <a href={`/${otherLang}${switchPath}`} style="font-family:var(--font-mono); font-size:13px; font-weight:500;">{t.langSwitch}</a>
+  </nav>
+</header>
+
+<style>
+  nav a {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: background .15s, color .15s;
+  }
+  nav a:hover { background: var(--bg-3); color: var(--ink); text-decoration: none; }
+  nav a.active { background: var(--bg-3); color: var(--ink); }
+</style>

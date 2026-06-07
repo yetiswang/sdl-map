@@ -1,0 +1,90 @@
+---
+import UnifiedLayout from '../../layouts/UnifiedLayout.astro';
+import data from '../../data/sdl_data.json';
+import uiAll from '../../i18n/ui.json';
+import { countryName } from '../../utils/i18n';
+
+const lang = 'ko';
+const ui = uiAll[lang];
+const prefix = lang === 'en' ? '/' : `/${lang}/`;
+const tiers = ['national','academic','commercial','labos'] as const;
+const tierLabels = { national: ui.tierNational, academic: ui.tierAcademic, commercial: ui.tierCommercial, labos: ui.tierLabos };
+const tierColors = { national:'var(--c-national)', academic:'var(--c-academic)', commercial:'var(--c-commercial)', labos:'var(--c-labos)' };
+const grouped = tiers.map(tier => ({ tier, label: tierLabels[tier], color: tierColors[tier], items: data.filter(d=>d.tier===tier) }));
+
+function haystack(e: any): string {
+  return [
+    e.name, e.org, e.city, countryName(e.country, lang), e.country,
+    e.domain, e.tier, e.maturity, e.scale, e.investLabel, e.id,
+  ].filter(Boolean).join(' ').toLowerCase();
+}
+---
+
+<UnifiedLayout title={`${ui.list} · ${ui.brandH1}`} lang={lang} activeView="list">
+  <main style="max-width:1100px;margin:0 auto;padding:24px 28px;">
+    <input
+      id="card-search"
+      type="search"
+      autocomplete="off"
+      placeholder={ui.searchPlaceholder}
+      style="width:100%;padding:12px 14px;font-size:15px;font-family:var(--font-sans);background:var(--bg-2);color:var(--ink);border:1px solid var(--rule);border-radius:8px;outline:none;"
+    />
+    <div class="search-hint" style="margin:8px 2px 24px;font-size:12px;color:var(--ink-3);font-family:var(--font-mono);letter-spacing:0.04em;">{ui.searchHint}</div>
+    <div id="no-results" style="display:none;padding:48px 0;text-align:center;color:var(--ink-3);font-family:var(--font-mono);font-size:13px;">{ui.noResults}</div>
+    {grouped.map(g => (
+      <section data-search-section data-tier={g.tier} style="margin-bottom:32px;">
+        <h2 style="display:flex;align-items:center;gap:10px;font-size:18px;font-weight:600;margin:0 0 16px;color:var(--ink);">
+          <span style={`width:10px;height:10px;border-radius:50%;background:${g.color};`}></span>
+          {g.label} <span data-count style="font-size:13px;color:var(--ink-3);font-family:var(--font-mono);">({g.items.length})</span>
+        </h2>
+        <div data-search-grid style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;">
+          {g.items.map(e => (
+            <a
+              href={`${prefix}entry/${e.id}/`}
+              data-search-card
+              data-search-text={haystack(e)}
+              style="display:block;padding:14px 15px;background:var(--bg-2);border:1px solid var(--rule);border-radius:8px;color:inherit;"
+            >
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="font-size:16px;">{e.flag}</span><span style="font-size:10px;color:var(--ink-3);font-family:var(--font-mono);text-transform:uppercase;">{e.domain}</span></div>
+              <div style="font-weight:600;font-size:14px;margin-bottom:4px;">{e.name}</div>
+              <div style="font-size:12px;color:var(--ink-2);">{e.org}</div>
+              <div style="font-size:11px;color:var(--ink-3);margin-top:4px;">{e.city}, {countryName(e.country, lang)}</div>
+              {e.investLabel && <div style="font-size:10px;color:var(--ink-3);font-family:var(--font-mono);margin-top:4px;">{e.investLabel}</div>}
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </main>
+  <script is:inline>
+    (function () {
+      var input = document.getElementById('card-search');
+      var noResults = document.getElementById('no-results');
+      var sections = Array.prototype.slice.call(document.querySelectorAll('[data-search-section]'));
+      var allCards = Array.prototype.slice.call(document.querySelectorAll('[data-search-card]'));
+      if (!input) return;
+      function filter() {
+        var q = (input.value || '').trim().toLowerCase();
+        var totalVisible = 0;
+        allCards.forEach(function (c) {
+          var match = !q || (c.dataset.searchText || '').indexOf(q) !== -1;
+          c.style.display = match ? '' : 'none';
+          if (match) totalVisible++;
+        });
+        sections.forEach(function (s) {
+          var visible = 0;
+          s.querySelectorAll('[data-search-card]').forEach(function (c) {
+            if (c.style.display !== 'none') visible++;
+          });
+          s.style.display = visible > 0 ? '' : 'none';
+          var counter = s.querySelector('[data-count]');
+          if (counter) counter.textContent = '(' + visible + ')';
+        });
+        noResults.style.display = totalVisible === 0 ? '' : 'none';
+      }
+      var t;
+      input.addEventListener('input', function () { clearTimeout(t); t = setTimeout(filter, 80); });
+      input.addEventListener('keydown', function (e) { if (e.key === 'Escape') { input.value = ''; filter(); } });
+    })();
+  </script>
+</UnifiedLayout>

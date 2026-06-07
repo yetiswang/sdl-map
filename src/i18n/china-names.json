@@ -1,0 +1,46 @@
+{
+  "ustc": {
+    "zh-Hans": { "name": "江俊团队 / 机器化学家", "org": "中国科学技术大学（江俊）" },
+    "zh-Hant": { "name": "江俊團隊 / 機器化學家", "org": "中國科學技術大學（江俊）" }
+  },
+  "xtalpi": {
+    "zh-Hans": { "name": "晶泰科技", "org": "晶泰科技（港交所上市）" },
+    "zh-Hant": { "name": "晶泰科技", "org": "晶泰科技（港交所上市）" }
+  },
+  "deepp": {
+    "zh-Hans": { "name": "深度原理", "org": "深度原理（Deep Principle）" },
+    "zh-Hant": { "name": "深度原理", "org": "深度原理（Deep Principle）" }
+  },
+  "qingkui": {
+    "zh-Hans": { "name": "青葵智造", "org": "青葵智造" },
+    "zh-Hant": { "name": "青葵智造", "org": "青葵智造" }
+  },
+  "yong": {
+    "zh-Hans": { "name": "甬江实验室", "org": "宁波省级实验室" },
+    "zh-Hant": { "name": "甬江實驗室", "org": "寧波省級實驗室" }
+  },
+  "dpt": {
+    "zh-Hans": { "name": "深势科技 / Bohrium", "org": "深势科技（DP Technology）" },
+    "zh-Hant": { "name": "深勢科技 / Bohrium", "org": "深勢科技（DP Technology）" }
+  },
+  "jiageng": {
+    "zh-Hans": { "name": "嘉庚创新实验室", "org": "厦门大学 / 福建省" },
+    "zh-Hant": { "name": "嘉庚創新實驗室", "org": "廈門大學 / 福建省" }
+  },
+  "shailab": {
+    "zh-Hans": { "name": "上海人工智能实验室", "org": "国家人工智能实验室" },
+    "zh-Hant": { "name": "上海人工智能實驗室", "org": "國家人工智能實驗室" }
+  },
+  "bytedance": {
+    "zh-Hans": { "name": "字节跳动 Seed AI4S", "org": "字节跳动" },
+    "zh-Hant": { "name": "字節跳動 Seed AI4S", "org": "字節跳動" }
+  },
+  "deeph": {
+    "zh-Hans": { "name": "DeepH（段路明团队）", "org": "清华大学" },
+    "zh-Hant": { "name": "DeepH（段路明團隊）", "org": "清華大學" }
+  },
+  "surff": {
+    "zh-Hans": { "name": "SurFF / Uni-MOF（王笑楠团队）", "org": "清华大学" },
+    "zh-Hant": { "name": "SurFF / Uni-MOF（王笑楠團隊）", "org": "清華大學" }
+  }
+}
