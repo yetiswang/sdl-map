@@ -707,28 +707,45 @@
     var s = document.createElement('style');
     s.id = 'sdl-reopen-style';
     s.textContent = [
+      // Match the floating clear button exactly so the two pills read as a pair.
       '.wm-reopen {',
-      '  color: var(--ink) !important;',           // full ink, not the muted ink-3
-      '  background: var(--bg-2) !important;',     // opaque, not 65% bg
-      '  border-color: var(--ink-3) !important;',  // visible ring
-      '  z-index: 60 !important;',                 // above clear button (55)
+      '  background: oklch(from var(--bg) l c h / 0.65) !important;',
+      '  border: 1px solid var(--rule) !important;',
+      '  color: var(--ink-2) !important;',
+      '  backdrop-filter: blur(6px) !important;',
+      '  -webkit-backdrop-filter: blur(6px) !important;',
+      '  box-shadow: 0 2px 8px oklch(0 0 0 / 0.12) !important;',
+      '  z-index: 60 !important;',
+      '  width: 44px !important; height: 44px !important;',
       '  pointer-events: auto !important;',
       '  -webkit-tap-highlight-color: rgba(0,0,0,0.12);',
       '  touch-action: manipulation;',
       '  opacity: 1 !important;',
       '}',
+      '.wm-reopen:hover {',
+      '  background: var(--bg) !important;',
+      '  color: var(--ink) !important;',
+      '  transform: translateY(-1px);',
+      '}',
       '.wm-reopen:active {',
       '  transform: scale(0.94);',
       '  background: var(--bg) !important;',
+      '  color: var(--ink) !important;',
       '}',
       '@media (max-width: 768px) {',
       '  .wm-reopen {',
       '    top: max(18px, env(safe-area-inset-top, 0px) + 12px) !important;',
+      '    left: 14px !important;',
       '    width: 56px !important; height: 56px !important;',
-      '    border-width: 2px !important;',
-      '    box-shadow: 0 4px 14px oklch(0 0 0 / 0.20) !important;',
       '  }',
-      '  .wm-reopen svg { width: 28px !important; height: 28px !important; stroke-width: 2.2 !important; }',
+      '  .wm-reopen svg { width: 24px !important; height: 24px !important; }',
+      '}',
+      '@media (max-width: 480px) {',
+      '  .wm-reopen {',
+      '    top: max(16px, env(safe-area-inset-top, 0px) + 10px) !important;',
+      '    left: 10px !important;',
+      '    width: 52px !important; height: 52px !important;',
+      '  }',
       '}',
     ].join('\n');
     (document.head || document.documentElement).appendChild(s);
