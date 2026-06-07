@@ -629,6 +629,41 @@
   window.SDL_runTranslate = runTranslate;
   window.SDL_translateModal = translateModal;
 
+  // === Cross-frame theme listener ===
+  // The Astro shell posts a message on every theme toggle. We respond by
+  // invoking the legacy's applyTheme which does the full reflow + canvas
+  // redraw. PostMessage is more reliable than the shell's direct call
+  // because its delivery doesn't race with iframe boot or async fetches.
+  window.addEventListener('message', function (ev) {
+    var d = ev && ev.data;
+    if (!d || d.type !== 'sdl-theme') return;
+    if (d.theme !== 'light' && d.theme !== 'dark') return;
+    function apply() {
+      if (typeof window.__sdlApplyTheme === 'function') {
+        window.__sdlApplyTheme(d.theme);
+        return true;
+      }
+      return false;
+    }
+    if (!apply()) {
+      // Legacy theme IIFE may not have run yet. Poll briefly.
+      var tries = 0;
+      var iv = setInterval(function () {
+        if (apply() || ++tries > 40) clearInterval(iv);
+      }, 100);
+    }
+  });
+
+  // Storage event fallback: another tab (or the shell's localStorage write
+  // before postMessage lands) can wake this iframe up.
+  window.addEventListener('storage', function (ev) {
+    if (ev.key !== 'sdl-map-theme') return;
+    var v = ev.newValue;
+    if ((v === 'light' || v === 'dark') && typeof window.__sdlApplyTheme === 'function') {
+      window.__sdlApplyTheme(v);
+    }
+  });
+
   // === Floating "Clear filters + selected" button (next to the ⓘ reopen) ===
   // Injected in embed mode only. Style mirrors the wm-reopen pill: same size,
   // same backdrop blur, sitting 8px to the right of the ⓘ button.

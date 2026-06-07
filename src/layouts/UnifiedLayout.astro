@@ -300,21 +300,22 @@ a{ color:inherit; text-decoration:none; }
           var next = cur === 'light' ? 'dark' : 'light';
           applyTheme(next);
           try { localStorage.setItem('sdl-map-theme', next); } catch(e){}
-          // Propagate into the embedded legacy map via its own applyTheme,
-          // which handles data-theme attribute + CSS var refresh + canvas
-          // redraw in the correct order with a synchronous layout flush
-          // baked in.
+          // Tell the iframe via THREE channels — whichever lands first wins,
+          // later ones are idempotent:
+          //   - direct __sdlApplyTheme() call when the iframe is already booted
+          //   - postMessage which delivers even if iframe is mid-async work
+          //   - the storage write above wakes the iframe on tab refocus too
           var iframe = document.getElementById('sdl-iframe');
           if (iframe && iframe.contentWindow) {
             try {
               if (typeof iframe.contentWindow.__sdlApplyTheme === 'function') {
                 iframe.contentWindow.__sdlApplyTheme(next);
               } else if (iframe.contentDocument) {
-                // Fallback if legacy hasn't booted yet
                 var doc = iframe.contentDocument;
                 if (next === 'light') doc.documentElement.setAttribute('data-theme', 'light');
                 else doc.documentElement.removeAttribute('data-theme');
               }
+              iframe.contentWindow.postMessage({ type: 'sdl-theme', theme: next }, '*');
             } catch(err){}
           }
         });
