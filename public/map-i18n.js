@@ -691,23 +691,18 @@
       '<line x1="10" y1="11" x2="10" y2="17"/>' +
       '<line x1="14" y1="11" x2="14" y2="17"/>' +
       '</svg>';
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
+    function doClear(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
       // Full "restore to original map view":
-      // 1. Clear filter chips via legacy reset button
       var resetBtn = document.getElementById('reset');
       if (resetBtn) resetBtn.click();
-      // 2. Reset zoom + pan via legacy zoom-reset button
       var zReset = document.getElementById('z-reset');
       if (zReset) zReset.click();
-      // 3. Close the detail sheet
       var sheet = document.getElementById('sdl-sheet');
       if (sheet) {
         sheet.classList.remove('open');
         document.body.classList.remove('sheet-open');
       }
-      // 4. Close the left/right drawer asides (mobile / responsive)
       ['aside.left', 'aside.right'].forEach(function (sel) {
         var el = document.querySelector(sel);
         if (el && el.classList.contains('open')) {
@@ -717,7 +712,15 @@
           document.body.classList.remove('right-open');
         }
       });
-    });
+    }
+    btn.addEventListener('click', doClear);
+    // Some mobile browsers (esp. iOS Safari near safe-area) eat clicks if the
+    // touch ends inside an overlapping element. Bind touchend as a parallel
+    // path; doClear is idempotent so double-fire is harmless.
+    btn.addEventListener('touchend', function (e) {
+      // Skip if the gesture turned into a scroll
+      if (e.changedTouches && e.changedTouches.length === 1) doClear(e);
+    }, { passive: false });
     document.body.appendChild(btn);
   }
 
@@ -739,7 +742,10 @@
       '  cursor: pointer; padding: 0;',
       '  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);',
       '  box-shadow: 0 2px 8px oklch(0 0 0 / 0.12);',
-      '  z-index: 35;',
+      '  z-index: 55;',                                   // above the legacy mob-toggle (z:55) and aside (z:40)
+      '  pointer-events: auto !important;',               // never let a parent override
+      '  -webkit-tap-highlight-color: rgba(0,0,0,0.12);', // visible tap feedback on iOS
+      '  touch-action: manipulation;',                    // skip the 300ms tap delay
       '  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;',
       '}',
       '#sdl-clear-floating:hover {',
@@ -747,15 +753,22 @@
       '  color: var(--ink);',
       '  transform: translateY(-1px);',
       '}',
+      '#sdl-clear-floating:active {',
+      '  transform: scale(0.94);',                        // explicit press feedback on touch
+      '  background: var(--bg);',
+      '  color: var(--ink);',
+      '}',
       '#sdl-clear-floating:focus-visible {',
       '  outline: 2px solid var(--ink);',
       '  outline-offset: 3px;',
       '}',
+      // Mobile: bigger touch target, dropped lower so it clears iOS safe area
+      // and any drawer pull-tabs that sit at left:0.
       '@media (max-width: 768px) {',
-      '  #sdl-clear-floating { left: 76px; width: 53px; height: 53px; }',
+      '  #sdl-clear-floating { top: max(18px, env(safe-area-inset-top, 0px) + 12px); left: 78px; width: 56px; height: 56px; }',
       '}',
       '@media (max-width: 480px) {',
-      '  #sdl-clear-floating { left: 68px; width: 49px; height: 49px; }',
+      '  #sdl-clear-floating { top: max(16px, env(safe-area-inset-top, 0px) + 10px); left: 72px; width: 52px; height: 52px; }',
       '}',
     ].join('\n');
     (document.head || document.documentElement).appendChild(s);
