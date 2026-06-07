@@ -4713,8 +4713,8 @@ function prewarmInteracting(){
 })();
 
 /* ============================================================
-   Welcome modal — first-visit onboarding + persistent ⓘ reopen
-   Storage key: sdlmap.welcomeSeen
+   Welcome modal — first-session onboarding + persistent ⓘ reopen
+   Storage key: sdlmap.welcomeSeen (sessionStorage — clears when browser/tab closes)
    ============================================================ */
 /* Measure the live header height once + on resize and publish it as
    --header-h so the floating sidebars + info pill can anchor exactly
@@ -4850,7 +4850,7 @@ function prewarmInteracting(){
     setTimeout(() => {
       bd.hidden = true;
       btn.hidden = false;
-      try { localStorage.setItem(STORAGE_KEY, '1'); } catch(e){}
+      try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch(e){}
       if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
     }, 240);
   }
@@ -4858,7 +4858,7 @@ function prewarmInteracting(){
   function init(){
     ensureMarkup();
     let seen = false;
-    try { seen = localStorage.getItem(STORAGE_KEY) === '1'; } catch(e){}
+    try { seen = sessionStorage.getItem(STORAGE_KEY) === '1'; } catch(e){}
     if (seen) {
       btn.hidden = false;
     } else {
