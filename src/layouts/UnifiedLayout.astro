@@ -119,7 +119,17 @@ function altUrl(toLang: string, script?: string | null): string {
   --rule:       oklch(0.86  0.005 85);
 }
 html, body{ margin:0; padding:0; background:var(--bg); color:var(--ink); font-family:var(--font-sans); }
-body{ min-height:100vh; -webkit-font-smoothing:antialiased; display:flex; flex-direction:column; }
+/* Use 100svh (small viewport height — the visible area when the mobile URL
+   bar is shown) instead of 100vh (the largest area when the URL bar is
+   hidden). With 100vh, body extends below the visible viewport on mobile
+   and users have to scroll to see the footer. The 100vh line is the
+   pre-svh fallback for older browsers. */
+body{ min-height:100vh; min-height:100svh; -webkit-font-smoothing:antialiased; display:flex; flex-direction:column; }
+/* Same viewport-fit treatment for the iframe-driven map page: header +
+   iframe + footer add to exactly one visible viewport, no scroll needed. */
+@supports (height: 100dvh) {
+  body { min-height: 100dvh; }
+}
 main{ flex:1; }
 a{ color:inherit; text-decoration:none; }
 
