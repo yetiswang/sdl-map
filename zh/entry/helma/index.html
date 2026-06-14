@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="dark"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><title>HELMA (Helmholtz Acceleration Alliance) · 全球自驱动实验室 版图</title><meta name="description" content="A curated interactive map of Self-Driving Laboratories worldwide."><link rel="icon" type="image/png" href="/sdl_favicon.png"><meta property="og:title" content="HELMA (Helmholtz Acceleration Alliance) · 全球自驱动实验室 版图"><meta property="og:description" content="A curated interactive map of Self-Driving Laboratories worldwide."><meta property="og:type" content="website"><meta property="og:url" content="https://sdl-map.discoverylabs.nl/zh/entry/helma/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="HELMA (Helmholtz Acceleration Alliance) · 全球自驱动实验室 版图"><meta name="twitter:description" content="A curated interactive map of Self-Driving Laboratories worldwide."><!-- Self-hosted fonts + shared design tokens (no third-party CDN). --><link rel="stylesheet" href="/tokens.css"><link rel="stylesheet" href="/fonts.css"><!-- Apply theme + ZH script preference BEFORE the iframe starts loading.
+     localStorage is shared cross-frame, so writing here (synchronously, in
+     <head>) means the iframe's own init reads consistent values regardless
+     of what the iframe URL's built-in `?script=Hans` default says. --><script>
+  (function(){
+    try {
+      var saved = localStorage.getItem('sdl-map-theme');
+      var theme = (saved === 'light' || saved === 'dark') ? saved : 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      if (saved !== theme) localStorage.setItem('sdl-map-theme', theme);
+
+      // ZH script: URL param wins, otherwise leave whatever's already saved.
+      var params = new URLSearchParams(window.location.search);
+      var urlScript = params.get('script');
+      if (urlScript === 'Hans' || urlScript === 'Hant') {
+        localStorage.setItem('sdl-zh-script', urlScript);
+      }
+    } catch(e) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script><!-- Pagefind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js" type="text/javascript"></script><style>html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--font-sans)}body{min-height:100vh;min-height:100svh;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}@supports (height: 100dvh){body{min-height:100dvh}}main{flex:1}a{color:inherit;text-decoration:none}.view-nav a{padding:6px 12px;border-radius:6px;font-size:14px;font-weight:500;color:var(--ink-2);text-decoration:none;transition:background .15s,color .15s}.view-nav a:hover,.view-nav a.active{background:var(--bg-3);color:var(--ink)}.theme-toggle-btn{appearance:none;background:var(--bg-2);color:var(--ink);border:1px solid var(--rule);border-radius:8px;width:36px;height:36px;padding:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .15s,background .15s;flex-shrink:0}.theme-toggle-btn:hover{border-color:var(--ink-3);background:var(--bg-3)}.theme-toggle-btn svg{width:18px;height:18px}:root:not([data-theme=light]) .theme-toggle-btn .ico-sun{display:none}:root[data-theme=light] .theme-toggle-btn .ico-moon{display:none}.lang-btn{font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-2);background:transparent;border:1px solid var(--rule);border-radius:6px;padding:4px 8px;cursor:pointer;transition:color .15s,background .15s;text-decoration:none;line-height:1.4}.lang-btn:hover,.lang-btn.active{color:var(--ink);background:var(--bg-3);border-color:var(--ink-3)}.lang-switcher{position:relative;display:flex;gap:4px;align-items:center}.header-stats{display:flex;align-items:baseline;gap:14px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-3);letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}.header-stats span{display:inline-flex;align-items:baseline;gap:5px}.header-stats strong{color:var(--ink);font-weight:500;font-size:14px;letter-spacing:0;font-variant-numeric:tabular-nums}.nav-cluster{display:flex;align-items:center;gap:14px;flex-shrink:0;flex-wrap:wrap}.nav-hamburger{display:none;background:var(--bg-2);border:1px solid var(--rule);border-radius:8px;width:36px;height:36px;padding:0;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);flex-shrink:0}.nav-hamburger svg{width:20px;height:20px}@media(max-width:1100px){.header-stats{display:none!important}}@media(max-width:1024px){.site-header{padding:10px 14px!important;gap:10px!important;flex-wrap:nowrap!important;align-items:center!important}.site-header .brand-eyebrow{display:none!important}.site-header .brand-h1{font-size:18px!important}.site-header .brand-h1-dim{display:none!important}.site-header .tue-logo img{height:28px!important}.site-header .nav-cluster{display:none}.site-header .nav-cluster.open{display:flex;flex-direction:column;align-items:stretch;gap:10px;position:fixed;top:54px;right:8px;padding:14px;background:var(--bg-2);border:1px solid var(--rule);border-radius:10px;box-shadow:0 8px 28px #0000004d;min-width:200px;z-index:200}.site-header .nav-cluster .view-nav{display:flex;flex-direction:column;gap:4px}.site-header .nav-cluster .view-nav a{padding:8px 12px}.site-header .nav-cluster .header-stats{display:flex!important;flex-direction:column;gap:6px;padding:8px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}.site-header .nav-cluster .lang-switcher{flex-wrap:wrap;padding:4px 0}.site-header .nav-cluster .theme-toggle-btn{align-self:flex-start}.site-header .nav-cluster>span[style*="width:1px"]{display:none}.nav-hamburger{display:inline-flex}}@media(max-width:480px){.site-header .brand-h1{font-size:15px!important}.site-header .tue-logo img{height:24px!important}}
+</style></head> <body> <!-- ===== HEADER ===== --> <header class="site-header" style="position:relative;z-index:60;background:var(--bg);display:flex;align-items:flex-end;justify-content:space-between;padding:18px 28px 14px;border-bottom:1px solid var(--rule);gap:40px;flex-wrap:wrap;"> <div style="display:flex;align-items:center;gap:20px;min-width:0;"> <a href="https://www.tue.nl/" target="_blank" rel="noopener" aria-label="TU Eindhoven" class="tue-logo" style="display:flex;align-items:center;flex-shrink:0;"> <img src="/img/tue-logo.png" alt="TU Eindhoven" style="height:36px;width:auto;display:block;"> </a> <div style="min-width:0;"> <div class="brand-eyebrow" style="font-family:var(--font-mono);font-size:10px;color:var(--ink-3);letter-spacing:0.22em;text-transform:uppercase;margin-bottom:4px;">荷兰国家材料发现实验室 · 实时追踪</div> <h1 class="brand-h1" style="font-family:var(--font-sans);font-weight:600;font-size:24px;letter-spacing:-0.01em;margin:0;color:var(--ink);line-height:1.2;"> <a href="/zh/">全球自驱动实验室</a> <span class="brand-h1-dim" style="color:var(--ink-3);font-weight:400;">版图</span> </h1> </div> </div> <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg> </button> <div class="nav-cluster" id="nav-cluster"> <!-- View nav --> <nav class="view-nav" style="display:flex;align-items:center;gap:4px;"> <a href="/zh/" class="active">地图</a> <a href="/zh/list/" class>列表</a> <a href="/zh/timeline/" class>时间轴</a> </nav> <span style="width:1px;height:20px;background:var(--rule);"></span> <!-- Stats chips (replace the old stats-bar row) --> <div class="header-stats" aria-label="Counts"> <span><strong>74</strong>项目</span> <span><strong>13</strong>国家</span> <span><strong>64</strong>运营中</span> </div> <span style="width:1px;height:20px;background:var(--rule);"></span> <!-- Language switcher: en · 简 · 繁 · 日 · 한, current always greyed out. --> <div class="lang-switcher"> <a href="/entry/helma/" class="lang-btn" title="EN" data-lang="en" data-script>EN</a><a href="/zh/entry/helma/?script=Hans" class="lang-btn active" title="简" data-lang="zh" data-script="Hans">简</a><a href="/zh/entry/helma/?script=Hant" class="lang-btn" title="繁" data-lang="zh" data-script="Hant">繁</a><a href="/ja/entry/helma/" class="lang-btn" title="日" data-lang="ja" data-script>日</a><a href="/ko/entry/helma/" class="lang-btn" title="한" data-lang="ko" data-script>한</a> </div> <!-- Theme toggle --> <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme"> <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg> </button> </div> </header> <!-- ===== MAIN CONTENT (header sits directly above the map — no stats row) ===== --> <div style="flex:1;min-height:0;display:flex;flex-direction:column;">  <main style="max-width:720px;margin:0 auto;padding:32px 28px;" data-pagefind-body> <a href="/zh/list/" style="font-size:13px;color:var(--ink-3);font-family:var(--font-mono);">← 返回</a> <div style="margin-top:20px;padding:24px;background:var(--bg-2);border:1px solid var(--rule);border-radius:12px;"> <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;"> <span style="font-size:28px;">🇩🇪</span> <span style="width:10px;height:10px;border-radius:50%;background:var(--c-national);"></span> <span style="font-size:12px;font-family:var(--font-mono);color:var(--ink-3);text-transform:uppercase;">National</span> </div> <h1 style="margin:0 0 6px;font-size:26px;font-weight:700;">HELMA (Helmholtz Acceleration Alliance)</h1> <p style="margin:0 0 16px;color:var(--ink-2);font-size:15px;">Helmholtz Assn (KIT lead)</p> <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:16px 0;"> <div style="padding:12px;background:var(--bg);border-radius:8px;"> <div style="font-size:10px;color:var(--ink-3);font-family:var(--font-mono);text-transform:uppercase;">地点</div> <div style="margin-top:4px;font-size:14px;">Karlsruhe, 德国</div> </div><div style="padding:12px;background:var(--bg);border-radius:8px;"> <div style="font-size:10px;color:var(--ink-3);font-family:var(--font-mono);text-transform:uppercase;">领域</div> <div style="margin-top:4px;font-size:14px;">cross-domain</div> </div><div style="padding:12px;background:var(--bg);border-radius:8px;"> <div style="font-size:10px;color:var(--ink-3);font-family:var(--font-mono);text-transform:uppercase;">成熟度</div> <div style="margin-top:4px;font-size:14px;">operational</div> </div><div style="padding:12px;background:var(--bg);border-radius:8px;"> <div style="font-size:10px;color:var(--ink-3);font-family:var(--font-mono);text-transform:uppercase;">投资额</div> <div style="margin-top:4px;font-size:14px;">Internal Helmholtz funding</div> </div> </div> <a href="https://www.helma.kit.edu/" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;padding:10px 18px;background:var(--ink);color:var(--bg);border-radius:8px;font-weight:600;font-size:13px;">www.helma.kit.edu ↗</a> <div style="margin-top:20px;"> <div style="font-size:11px;color:var(--ink-3);font-family:var(--font-mono);text-transform:uppercase;margin-bottom:6px;">数据来源</div> <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px;"> <li><a href="https://www.helmholtz.de/en/research/research-fields/matter/" target="_blank" rel="noopener" style="font-size:12px;color:var(--ink-2);word-break:break-all;">https://www.helmholtz.de/en/research/research-fields/matter/</a></li><li><a href="https://www.helmholtz.de/en/newsroom/article/a-revolution-with-ai-and-robotics/" target="_blank" rel="noopener" style="font-size:12px;color:var(--ink-2);word-break:break-all;">https://www.helmholtz.de/en/newsroom/article/a-revolution-with-ai-and-robotics/</a></li> </ul> </div> </div> </main>  </div> <!-- ===== FOOTER ===== --> <footer style="position:relative;z-index:60;background:var(--bg);padding:14px 28px;border-top:1px solid var(--rule);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3);letter-spacing:0.12em;"> <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;text-align:center;"> <span><a href="https://discoverylabs.nl" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">荷兰王国材料发现国家实验室（计划申请）</a> · 自驱动实验室版图</span> <span style="opacity:0.5;">·</span> <span>隶属 <a href="https://tue-flagship-advanced-materials.nl" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">埃因霍温理工大学先进材料旗舰计划</a></span> <span style="opacity:0.5;">·</span> <span>作者 <a href="https://yuyang.nl" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">王昱扬</a></span> </div> </footer> <!-- Theme toggle wiring + ZH script preference (theme is pre-applied in head) --> <script>(function(){const pageLang = "zh";
+const hansToHant = {"荷兰国家材料发现实验室 · 实时追踪":"荷蘭國家材料發現實驗室 · 實時追蹤","全球自驱动实验室":"全球自驅動實驗室","版图":"版圖","项目":"項目","筛选":"篩選","国家":"國家","运营中":"營運中","地图":"地圖","时间轴":"時間軸","荷兰王国材料发现国家实验室（计划申请）":"荷蘭王國材料發現國家實驗室（計畫申請）","自驱动实验室版图":"自驅動實驗室版圖","隶属":"隸屬","埃因霍温理工大学先进材料旗舰计划":"埃因霍溫理工大學先進材料旗艦計畫","王昱扬":"王昱揚","地点":"地點","领域":"領域","投资额":"投資額","数据来源":"資料來源","搜索实验室、国家、PI…":"搜尋實驗室、國家、PI…","国家级 / 联盟":"國家級 / 聯盟","学术 / 单一机构":"學術 / 單一機構","商业与工业":"商業與工業","实验室操作系统 / 基础设施":"實驗室作業系統 / 基礎設施","原型 / 试点":"原型 / 試點","概念 / 规划中":"概念 / 規劃中","可以搜：国家、领域、团队名、PI 姓名，比如 USA、Materials、Cooper、Jensen…":"可以搜：國家、領域、團隊名、PI 姓名，例如 USA、Materials、Cooper、Jensen…","没找到匹配项，换个关键词试试。":"沒找到符合的，換個關鍵字試試。","中国":"中國","丹麦":"丹麥","欧盟":"歐盟","法国":"法國","德国":"德國","韩国":"韓國","荷兰":"荷蘭","英国":"英國","美国":"美國","江俊团队 / 机器化学家":"江俊團隊 / 機器化學家","中国科学技术大学（江俊）":"中國科學技術大學（江俊）","甬江实验室":"甬江實驗室","宁波省级实验室":"寧波省級實驗室","深势科技 / Bohrium":"深勢科技 / Bohrium","深势科技（DP Technology）":"深勢科技（DP Technology）","嘉庚创新实验室":"嘉庚創新實驗室","厦门大学 / 福建省":"廈門大學 / 福建省","上海人工智能实验室":"上海人工智能實驗室","国家人工智能实验室":"國家人工智能實驗室","字节跳动 Seed AI4S":"字節跳動 Seed AI4S","字节跳动":"字節跳動","DeepH（段路明团队）":"DeepH（段路明團隊）","清华大学":"清華大學","SurFF / Uni-MOF（王笑楠团队）":"SurFF / Uni-MOF（王笑楠團隊）"};
+
+    (function(){
+      function applyTheme(t){
+        document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+      }
+      function wireTheme(){
+        var btn = document.getElementById('theme-toggle');
+        if (!btn) { setTimeout(wireTheme, 100); return; }
+        btn.addEventListener('click', function(e){
+          e.stopPropagation();
+          var cur = document.documentElement.getAttribute('data-theme');
+          var next = cur === 'light' ? 'dark' : 'light';
+          applyTheme(next);
+          try { localStorage.setItem('sdl-map-theme', next); } catch(e){}
+          // Tell the iframe via THREE channels — whichever lands first wins,
+          // later ones are idempotent:
+          //   - direct __sdlApplyTheme() call when the iframe is already booted
+          //   - postMessage which delivers even if iframe is mid-async work
+          //   - the storage write above wakes the iframe on tab refocus too
+          var iframe = document.getElementById('sdl-iframe');
+          if (iframe && iframe.contentWindow) {
+            try {
+              if (typeof iframe.contentWindow.__sdlApplyTheme === 'function') {
+                iframe.contentWindow.__sdlApplyTheme(next);
+              } else if (iframe.contentDocument) {
+                var doc = iframe.contentDocument;
+                if (next === 'light') doc.documentElement.setAttribute('data-theme', 'light');
+                else doc.documentElement.removeAttribute('data-theme');
+              }
+              iframe.contentWindow.postMessage({ type: 'sdl-theme', theme: next }, '*');
+            } catch(err){}
+          }
+        });
+      }
+      wireTheme();
+
+      // === Mobile hamburger toggle ===
+      function wireHamburger(){
+        var btn = document.getElementById('nav-hamburger');
+        var cluster = document.getElementById('nav-cluster');
+        if (!btn || !cluster) { setTimeout(wireHamburger, 100); return; }
+        btn.addEventListener('click', function(e){
+          e.stopPropagation();
+          var open = cluster.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        // Close on outside click
+        document.addEventListener('click', function(e){
+          if (!cluster.contains(e.target) && !btn.contains(e.target)) {
+            cluster.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+      wireHamburger();
+
+      // === ZH script (简⇄繁) — only relevant when pageLang === 'zh' ===
+      if (pageLang === 'zh') {
+        var params = new URLSearchParams(window.location.search);
+        var urlScript = params.get('script');
+        var savedScript = null;
+        try { savedScript = localStorage.getItem('sdl-zh-script'); } catch(e){}
+        var script = urlScript || savedScript || 'Hans';
+        if (urlScript) { try { localStorage.setItem('sdl-zh-script', urlScript); } catch(e){} }
+        document.documentElement.setAttribute('lang', script === 'Hant' ? 'zh-Hant' : 'zh-Hans');
+
+        // hansToHant is built once at BUILD time (see frontmatter) and injected
+        // above via define:vars. The client only walks the DOM and substitutes.
+
+        function swapToHant() {
+          if (script !== 'Hant') return;
+          var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+          var node;
+          while ((node = walker.nextNode())) {
+            var s = node.textContent;
+            if (!s) continue;
+            // Whole-string match first (common case for labels like "项目")
+            if (hansToHant[s]) { node.textContent = hansToHant[s]; continue; }
+            // Substring replace for longer sentences (e.g. footer)
+            var changed = false, out = s;
+            Object.keys(hansToHant).forEach(function (k) {
+              if (out.indexOf(k) !== -1) {
+                out = out.split(k).join(hansToHant[k]);
+                changed = true;
+              }
+            });
+            if (changed) node.textContent = out;
+          }
+        }
+
+        // Run after initial render + after any client-side updates
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', swapToHant);
+        } else {
+          swapToHant();
+        }
+
+        // No iframe src swap needed: localStorage is shared cross-frame and
+        // the head script has already written `sdl-zh-script`. The iframe's
+        // own map-i18n.js reads it before applying labels.
+      }
+    })();
+  })();</script> </body> </html>
