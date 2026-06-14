@@ -1,0 +1,35 @@
+/* Self-hosted fonts (latin subset). Replaces the Google Fonts CDN <link> in
+   both the Astro shell and the iframe (public/map-legacy.html). Removes two
+   third-party origins + the double fetch, and keeps visitor IPs off Google's
+   CDN (EU privacy). Inter ships as one variable file; IBM Plex Mono as three
+   static weights. font-display:swap keeps text visible during load. */
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/Inter.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/IBMPlexMono-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/IBMPlexMono-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/IBMPlexMono-600.woff2') format('woff2');
+}
