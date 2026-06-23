@@ -115,6 +115,29 @@
     ]
   },
   {
+    "id": "nus_ai4s",
+    "name": "NUS AI4S · Materials Data Foundry",
+    "org": "NRF Singapore · NUS I-FIM",
+    "city": "Singapore",
+    "country": "Singapore",
+    "flag": "🇸🇬",
+    "lat": 1.2966,
+    "lon": 103.7764,
+    "tier": "national",
+    "domain": "materials",
+    "maturity": "concept",
+    "charact": "multi-technique",
+    "ai": "strong",
+    "scale": "national · 4 of 8 NUS projects",
+    "invest": 120,
+    "investLabel": "S$120M (NRF AI4S, 8 projects)",
+    "url": "https://news.nus.edu.sg/ai-for-science-nus-4-ai-based-projects/",
+    "sources": [
+      "https://news.nus.edu.sg/ai-for-science-nus-4-ai-based-projects/",
+      "https://www.nrf.gov.sg/"
+    ]
+  },
+  {
     "id": "aria",
     "name": "UK ARIA AI Scientists",
     "org": "ARIA",
