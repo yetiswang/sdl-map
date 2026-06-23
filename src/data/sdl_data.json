@@ -133,8 +133,7 @@
     "investLabel": "S$120M (NRF AI4S, 8 projects)",
     "url": "https://news.nus.edu.sg/ai-for-science-nus-4-ai-based-projects/",
     "sources": [
-      "https://news.nus.edu.sg/ai-for-science-nus-4-ai-based-projects/",
-      "https://www.nrf.gov.sg/"
+      "https://news.nus.edu.sg/ai-for-science-nus-4-ai-based-projects/"
     ]
   },
   {
@@ -835,7 +834,7 @@
     "scale": "500+ cond/run",
     "invest": 0,
     "investLabel": "Municipal+VC",
-    "url": "",
+    "url": "https://www.quiktech.cn/",
     "sources": []
   },
   {
@@ -1845,7 +1844,7 @@
     "scale": "single robotic platform (perovskites)",
     "invest": 0,
     "investLabel": "—",
-    "url": "https://www.kth.se/",
+    "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12067375/",
     "sources": [
       "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12067375/"
     ]
@@ -2045,7 +2044,6 @@
     "investLabel": "$70M (Edison, 2025, ~$250M val)",
     "url": "https://www.futurehouse.org/",
     "sources": [
-      "https://www.nature.com/",
       "https://techcrunch.com/2025/05/01/futurehouse-releases-ai-tools-it-claims-can-accelerate-science/"
     ]
   }
