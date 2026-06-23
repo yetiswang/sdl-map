@@ -7,21 +7,94 @@ const lang = 'en';
 const ui = uiAll[lang];
 const prefix = lang === 'en' ? '/' : `/${lang}/`;
 
-const stages = ['operational','prototype','concept'] as const;
 const stageLabels = { operational: ui.stageOperational, prototype: ui.stagePrototype, concept: ui.stageConcept };
+const stageColors = { operational:'var(--c-national)', prototype:'var(--c-academic)', concept:'var(--c-commercial)' };
 const tierColors = { national:'var(--c-national)', academic:'var(--c-academic)', commercial:'var(--c-commercial)', labos:'var(--c-labos)' };
 
-const grouped = stages.map(s => ({ stage: s, label: stageLabels[s], items: data.filter(d=>d.maturity===s) })).filter(g => g.items.length > 0);
+const withYear = data.filter(d => typeof d.start === 'number');
+const years = withYear.map(d => d.start);
+const minYear = Math.min(...years);
+const maxYear = Math.max(...years);
+const total = withYear.length;
+
+const perYear = {};
+withYear.forEach(d => { perYear[d.start] = (perYear[d.start] || 0) + 1; });
+
+// Cumulative growth chart: render CHART_START..maxYear, fold earlier (lab-automation pre-history) into the baseline.
+const CHART_START = 2014;
+let cum = 0;
+for (let y = minYear; y < CHART_START; y++) cum += (perYear[y] || 0);
+const baseline = cum;
+const chart = [];
+for (let y = CHART_START; y <= maxYear; y++) {
+  const nw = perYear[y] || 0;
+  const prev = cum;
+  cum += nw;
+  chart.push({ year: y, nw, prevCum: prev, cum });
+}
+const chartMax = cum;
+
+// SVG geometry
+const W = 720, H = 250, padL = 30, padR = 12, padT = 22, padB = 30;
+const plotW = W - padL - padR, plotH = H - padT - padB;
+const n = chart.length;
+const slot = plotW / n;
+const bw = Math.min(36, slot * 0.6);
+const baseY = padT + plotH;
+const yOf = v => padT + plotH - (v / chartMax) * plotH;
+
+// Entries grouped by year, newest first
+const byYear = {};
+withYear.forEach(d => { (byYear[d.start] = byYear[d.start] || []).push(d); });
+const yearGroups = Object.keys(byYear).map(Number).sort((a, b) => b - a).map(y => ({
+  year: y,
+  items: byYear[y].sort((a, b) => a.tier.localeCompare(b.tier) || a.name.localeCompare(b.name)),
+}));
+
+const ariaLabel = `${ui.growthTitle}: ${baseline} by ${CHART_START - 1}, rising to ${total} by ${maxYear}`;
 ---
 
 <UnifiedLayout title={`${ui.timeline} · ${ui.brandH1}`} lang={lang} activeView="timeline">
   <main class="tl-main" data-pagefind-body>
+
+    <section class="tl-chartwrap">
+      <div class="tl-chart-head">
+        <div>
+          <div class="tl-chart-title">{ui.growthTitle}</div>
+          <div class="tl-chart-sub">{ui.growthSub}</div>
+        </div>
+        <div class="tl-chart-total"><span>{total}</span><em>{maxYear}</em></div>
+      </div>
+      <svg class="tl-chart" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label={ariaLabel}>
+        <line x1={padL} y1={baseY} x2={W - padR} y2={baseY} class="tl-axis" />
+        {chart.map((c, i) => {
+          const x = padL + slot * i + (slot - bw) / 2;
+          const yTop = yOf(c.cum);
+          const ySplit = yOf(c.prevCum);
+          return (
+            <g>
+              <rect x={x} y={ySplit} width={bw} height={Math.max(0, baseY - ySplit)} class="tl-bar-base" rx="1.5" />
+              <rect x={x} y={yTop} width={bw} height={Math.max(0, ySplit - yTop)} class="tl-bar-new" rx="1.5" />
+              <text x={x + bw / 2} y={yTop - 5} class="tl-bar-val">{c.cum}</text>
+              {c.nw > 0 && <text x={x + bw / 2} y={baseY + 19} class="tl-bar-new-lbl">+{c.nw}</text>}
+              <text x={x + bw / 2} y={baseY + 11} class="tl-bar-yr">{c.year}</text>
+            </g>
+          );
+        })}
+      </svg>
+      <div class="tl-legend">
+        <span><i class="sw-new"></i>{ui.tlFounded}</span>
+        <span><i class="sw-base"></i>cumulative</span>
+        <span class="tl-legend-note">+{baseline} lab-automation roots before {CHART_START}</span>
+      </div>
+    </section>
+
     <div class="tl-rail">
       <div class="tl-line"></div>
-      {grouped.map(g => (
+      {yearGroups.map(g => (
         <div class="tl-stage">
           <div class="tl-dot"></div>
-          <h2 class="tl-h2">{g.label}</h2>
+          <h2 class="tl-h2">{g.year}<span class="tl-yrcount">{g.items.length}</span></h2>
           <div class="tl-stage-list">
             {g.items.map(e => (
               <a href={`${prefix}entry/${e.id}/`} class="tl-card">
@@ -30,6 +103,7 @@ const grouped = stages.map(s => ({ stage: s, label: stageLabels[s], items: data.
                   <div class="tl-name">{e.name}</div>
                   <div class="tl-meta">{e.org} · {e.domain}</div>
                 </div>
+                <span class="tl-badge" style={`color:${stageColors[e.maturity]};border-color:${stageColors[e.maturity]};`}>{stageLabels[e.maturity]}</span>
                 {e.investLabel && <div class="tl-invest">{e.investLabel}</div>}
               </a>
             ))}
@@ -38,13 +112,37 @@ const grouped = stages.map(s => ({ stage: s, label: stageLabels[s], items: data.
       ))}
     </div>
   </main>
+
   <style is:global>
     .tl-main { max-width:800px; margin:0 auto; padding:24px 28px; box-sizing:border-box; }
+
+    .tl-chartwrap { background:var(--bg-2); border:1px solid var(--rule); border-radius:12px; padding:18px 18px 14px; margin-bottom:30px; }
+    .tl-chart-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:6px; }
+    .tl-chart-title { font-size:15px; font-weight:600; color:var(--ink-1); }
+    .tl-chart-sub { font-size:11.5px; color:var(--ink-3); margin-top:2px; }
+    .tl-chart-total { text-align:right; line-height:1; flex-shrink:0; }
+    .tl-chart-total span { font-size:30px; font-weight:700; color:var(--c-national); font-family:var(--font-mono); }
+    .tl-chart-total em { display:block; font-style:normal; font-size:10px; color:var(--ink-3); margin-top:2px; }
+    .tl-chart { width:100%; height:auto; display:block; }
+    .tl-axis { stroke:var(--rule); stroke-width:1; }
+    .tl-bar-base { fill:var(--c-national); opacity:0.22; }
+    .tl-bar-new  { fill:var(--c-national); opacity:0.9; }
+    .tl-bar-val { fill:var(--ink-2); font-size:9px; font-weight:600; text-anchor:middle; font-family:var(--font-mono); }
+    .tl-bar-yr { fill:var(--ink-3); font-size:8.5px; text-anchor:middle; }
+    .tl-bar-new-lbl { fill:var(--c-national); font-size:7.5px; text-anchor:middle; opacity:0.8; }
+    .tl-legend { display:flex; gap:16px; align-items:center; margin-top:8px; font-size:10.5px; color:var(--ink-3); flex-wrap:wrap; }
+    .tl-legend span { display:inline-flex; align-items:center; gap:5px; }
+    .tl-legend i { width:10px; height:10px; border-radius:2px; display:inline-block; background:var(--c-national); }
+    .tl-legend .sw-base { opacity:0.22; }
+    .tl-legend .sw-new { opacity:0.9; }
+    .tl-legend-note { margin-left:auto; font-style:italic; }
+
     .tl-rail { position:relative; padding-left:24px; }
     .tl-line { position:absolute; left:6px; top:8px; bottom:8px; width:2px; background:var(--rule); }
-    .tl-stage { position:relative; margin-bottom:32px; }
-    .tl-dot { position:absolute; left:-24px; top:4px; width:14px; height:14px; border-radius:50%; background:var(--bg-3); border:2px solid var(--ink-3); }
-    .tl-h2 { font-size:16px; font-weight:600; margin:0 0 12px; color:var(--ink-2); }
+    .tl-stage { position:relative; margin-bottom:28px; }
+    .tl-dot { position:absolute; left:-24px; top:5px; width:14px; height:14px; border-radius:50%; background:var(--bg-3); border:2px solid var(--ink-3); }
+    .tl-h2 { font-size:17px; font-weight:700; margin:0 0 12px; color:var(--ink-1); font-family:var(--font-mono); display:flex; align-items:baseline; gap:8px; }
+    .tl-yrcount { font-size:11px; font-weight:500; color:var(--ink-3); }
     .tl-stage-list { display:flex; flex-direction:column; gap:8px; }
     .tl-card { display:flex; align-items:center; gap:12px; padding:10px 14px; background:var(--bg-2); border:1px solid var(--rule); border-radius:8px; color:inherit; min-width:0; }
     .tl-flag { font-size:18px; flex-shrink:0; }
@@ -52,14 +150,17 @@ const grouped = stages.map(s => ({ stage: s, label: stageLabels[s], items: data.
     .tl-body { flex:1; min-width:0; overflow:hidden; }
     .tl-name { font-weight:600; font-size:14px; overflow-wrap:anywhere; }
     .tl-meta { font-size:11px; color:var(--ink-3); overflow-wrap:anywhere; }
+    .tl-badge { font-size:9.5px; font-weight:600; padding:2px 7px; border:1px solid; border-radius:999px; white-space:nowrap; flex-shrink:0; opacity:0.85; }
     .tl-invest { font-size:10px; color:var(--ink-3); font-family:var(--font-mono); white-space:nowrap; flex-shrink:0; }
     @media (max-width: 600px) {
       .tl-main { padding: 16px 12px; }
+      .tl-chart-total span { font-size:24px; }
       .tl-rail { padding-left: 18px; }
       .tl-dot { left:-18px; width:11px; height:11px; }
       .tl-line { left:4px; }
       .tl-card { padding:9px 11px; gap:8px; flex-wrap:wrap; }
-      .tl-invest { width:100%; padding-left:30px; }   /* drops below name when narrow */
+      .tl-badge { order:3; }
+      .tl-invest { width:100%; padding-left:30px; }
     }
   </style>
 </UnifiedLayout>

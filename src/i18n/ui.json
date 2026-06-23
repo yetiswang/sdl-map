@@ -32,7 +32,10 @@
     "stagePrototype": "Prototype / Pilot",
     "stageConcept": "Concept / Planning",
     "searchHint": "Try a country, domain, group name, or PI: USA, Materials, Cooper, Jensen…",
-    "noResults": "No matches. Try a different keyword."
+    "noResults": "No matches. Try a different keyword.",
+    "growthTitle": "Growth of self-driving labs",
+    "growthSub": "cumulative initiatives by first public year",
+    "tlFounded": "founded"
   },
   "zh-Hant": {
     "brandEyebrow": "荷蘭國家材料發現實驗室 · 實時追蹤",
@@ -67,7 +70,10 @@
     "stagePrototype": "原型 / 試點",
     "stageConcept": "概念 / 規劃中",
     "searchHint": "可以搜：國家、領域、團隊名、PI 姓名，例如 USA、Materials、Cooper、Jensen…",
-    "noResults": "沒找到符合的，換個關鍵字試試。"
+    "noResults": "沒找到符合的，換個關鍵字試試。",
+    "growthTitle": "自驅動實驗室的成長",
+    "growthSub": "按首次公開年份累計的項目數",
+    "tlFounded": "新增"
   },
   "ja": {
     "brandEyebrow": "オランダ国家材料発見研究所 · ライブ追跡",
@@ -102,7 +108,10 @@
     "stagePrototype": "試作 / パイロット",
     "stageConcept": "構想 / 計画中",
     "searchHint": "検索できるもの：国名、分野、グループ名、PI 名 — 例: USA、Materials、Cooper、Jensen…",
-    "noResults": "該当する項目はありません。別のキーワードでお試しください。"
+    "noResults": "該当する項目はありません。別のキーワードでお試しください。",
+    "growthTitle": "自律実験室の成長",
+    "growthSub": "初公開年ごとの累積数",
+    "tlFounded": "新規"
   },
   "ko": {
     "brandEyebrow": "네덜란드 국가재료발견연구소 · 실시간 추적",
@@ -137,7 +146,10 @@
     "stagePrototype": "시제품 / 파일럿",
     "stageConcept": "구상 / 계획 중",
     "searchHint": "검색 가능: 국가, 분야, 그룹명, PI 이름 — 예: USA, Materials, Cooper, Jensen…",
-    "noResults": "일치하는 항목이 없습니다. 다른 키워드로 시도해 보세요."
+    "noResults": "일치하는 항목이 없습니다. 다른 키워드로 시도해 보세요.",
+    "growthTitle": "자율 실험실의 성장",
+    "growthSub": "첫 공개 연도별 누적 수",
+    "tlFounded": "신규"
   },
   "zh": {
     "brandEyebrow": "荷兰国家材料发现实验室 · 实时追踪",
@@ -172,6 +184,9 @@
     "stagePrototype": "原型 / 试点",
     "stageConcept": "概念 / 规划中",
     "searchHint": "可以搜：国家、领域、团队名、PI 姓名，比如 USA、Materials、Cooper、Jensen…",
-    "noResults": "没找到匹配项，换个关键词试试。"
+    "noResults": "没找到匹配项，换个关键词试试。",
+    "growthTitle": "自驱动实验室的增长",
+    "growthSub": "按首次公开年份累计的项目数",
+    "tlFounded": "新增"
   }
 }
