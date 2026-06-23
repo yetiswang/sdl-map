@@ -59,6 +59,11 @@ Large public-sector or trans-institutional SDL programmes with national or pan-r
 - [PEPR DIADEM](https://www.pepr-diadem.fr/) - France 2030 programme run by CNRS, CEA, and seven academic partners, funding 51 projects that fuse AI with synthesis and characterisation across France (Paris, France · €85M / 8 yrs).
 - [UK ARIA AI Scientists](https://aria.org.uk/) - ARIA programme funding 12 AI Scientist projects testing autonomous hypothesis-to-experiment systems across drugs, batteries, quantum dots, and biology (London, UK · £6M / 9 months).
 - [US DOE National Labs](https://arpa-e.energy.gov/) - US federal SDL funding through ARPA-E's $40M catalyst programme and CHIPS R&D's $100M semiconductor-materials programme for autonomous chemistry and electronics discovery (Washington DC, USA · $140M total).
+- [NSF AI Institute for Materials Innovation](https://news.cornell.edu/stories/2025/07/national-science-foundation-announces-cornell-led-ai-materials-institute) - First NSF AI institute dedicated to materials, coordinating closed-loop autonomous experimentation across Cornell, Princeton, CCNY, and Boston University (Ithaca, USA · $20M NSF).
+- [NRC BattMAP / BattPAP](https://nrc.canada.ca/en/research-development/research-collaboration/programs/critical-battery-materials-initiative) - National Research Council Canada self-driving labs for battery-materials discovery and critical-mineral processing under the Critical Battery Materials Initiative (Mississauga, Canada · federal).
+- [AIChemy (UK AI for Chemistry Hub)](https://aichemy.ac.uk) - £12M EPSRC national hub (Liverpool + Imperial) developing AI-planned robotic and autonomous chemistry, including mobile robot scientists for exploratory synthesis (Liverpool, UK · £12M EPSRC).
+- [RIKEN / IST Maholo SDL](https://www.riken.jp/en/) - JST-funded national self-driving lab (Maholo robotic-arm platform) for closed-loop materials discovery, with a prototyping lab at RIKEN BDR Kobe and a demonstrator at Institute of Science Tokyo (Kobe, Japan · ~¥1.1B JST).
+- [AIST AUTOkobo](https://www.aist.go.jp/index_en.html) - AIST's Multi-Modal AI lab-automation initiative for autonomous experimentation, now spanning all seven AIST research departments (Tsukuba, Japan).
 
 ---
 
@@ -93,6 +98,11 @@ Single-institution or PI-led groups operating SDLs in the lab.
 - [Shanghai AI Laboratory](https://www.shlab.org.cn/) - National AGI lab whose AGI4S programme builds Intern-S1 scientific foundation models and the Intern-Discovery agent-plus-instrument platform (Shanghai, China · National AI Lab).
 - [SNU SDL Ecosystem](https://en.snu.ac.kr/research/highlights?md=v&bbsidx=153588) - Yousung Jung's group uses LLMs to predict material synthesisability, anchoring a wider SNU autonomous-lab cluster across batteries and catalysis (Seoul, Korea · SNU).
 - [SurFF / Uni-MOF (Wang Group)](https://www.nature.com/articles/s43588-025-00839-0) - Xiaonan Wang's group building foundation models (SurFF, Uni-MOF) for catalyst surfaces and MOF gas adsorption at high-throughput screening scale (Beijing, China · Tsinghua).
+- [AURORA (KTH)](https://www.kth.se/) - Modular robotic platform integrating automated synthesis, characterisation, and evaluation, demonstrated on metal-halide perovskites (Stockholm, Sweden · KTH).
+- [CELEST Autonomous Battery Lab](https://www.kit.edu/kit/english/pi_2022_011_battery-research-first-fully-automatic-laboratory-starts-operation.php) - Fully automated, AI-planned battery-materials lab that autonomously synthesises, assembles, and cycles cells (Ulm, Germany · KIT + Ulm + HIU).
+- [EPFL Self-Driving Lab (LIAC)](https://www.epfl.ch/labs/liac/) - Self-driving platform for nano- and advanced-materials synthesis with active-learning optimisation (Lausanne, Switzerland · EPFL).
+- [KIMS Autonomous Alloy Lab](https://www.kims.re.kr/?lang=en) - Closed-loop alloy discovery (arc-melting to annealing to XRD) with reinforcement-learning optimisation (Changwon, Korea · KIMS).
+- [KIER Smart Laboratory](https://www.kier.re.kr/eng) - 24-hour autonomous synthesis, analysis, and XRD for safety-critical energy and catalyst materials (Daejeon, Korea · KIER).
 
 ---
 
@@ -126,6 +136,12 @@ For-profit SDL companies, pharma in-house programmes, and hardware/instrument ve
 - [Tecan Group](https://www.tecan.com/) - Swiss-listed maker of Fluent and Freedom EVO liquid-handling platforms plus OEM components for diagnostics and life-science automation (Männedorf, Switzerland · SIX: TECN · CHF 934M rev).
 - [XtalPi 晶泰科技](https://en.xtalpi.com/) - HKEX-listed AI + quantum-physics + robotics platform running autonomous drug-discovery and materials labs across Shenzhen, Shanghai, and Boston (Shenzhen, China · HKEX 2228 · HK$47B pipeline).
 - [Yongjiang Lab 甬江实验室](https://www.ylab.ac.cn/en/) - Zhejiang provincial materials research institute running advanced functional, structural, and transformative materials platforms including a 6-inch micro-nano device line (Ningbo, China · provincial).
+- [Radical AI](https://radical-ai.com) - AI agents coupled to a closed-loop robotic lab discovering inorganic materials, alloys, and electrolytes; CSO Gerbrand Ceder built LBNL's A-Lab (New York, USA · $55M seed).
+- [Mattiq](https://mattiq.com) - Northwestern spinout running high-throughput combinatorial megalibrary synthesis of millions of nanomaterials per day to train AI for clean-energy catalysts (Chicago, USA · ~$35M).
+- [Dunia Innovations](https://dunia.ai) - Self-driving labs running the full design-make-test-analyse loop for electrocatalyst, battery, and CO2-conversion materials, scaling to a €280M Berlin GigaLab (Berlin, Germany · €10.6M seed + €280M).
+- [ChemLex](https://chemlex.ai) - 24/7 fully automated robotic synthesis line (~800 reactions/day) coupling AI to wet-lab chemistry for drug discovery (Singapore · $45M).
+- [MegaRobo 镁伽科技](https://en.megarobo.tech/) - China's largest smart-lab robotics company, building autonomous agents that run real experiments across life sciences, chemistry, and energy materials (Beijing, China · ~$300M).
+- [FutureHouse / Edison Scientific](https://www.futurehouse.org/) - AI-scientist agent stack (the Robin multi-agent discovery system) coupled to its own robotic wet lab; for-profit spinout Edison (San Francisco, USA · $70M).
 
 ---
 
