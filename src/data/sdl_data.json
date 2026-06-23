@@ -377,7 +377,7 @@
       "https://www.chalmers.se/en/departments/cse/our-research/data-science-and-ai/king-lab/",
       "https://research.chalmers.se/en/person/rossk"
     ],
-    "start": 2024
+    "start": 2020
   },
   {
     "id": "cooper",
@@ -400,7 +400,7 @@
     "sources": [
       "https://www.liverpool.ac.uk/cooper-group/"
     ],
-    "start": 2018
+    "start": 2020
   },
   {
     "id": "helma",
@@ -661,7 +661,7 @@
       "https://doi.org/10.1038/s44286-024-00139-w",
       "https://www.nature.com/articles/s44286-022-00018-3"
     ],
-    "start": 2021
+    "start": 2022
   },
   {
     "id": "noel",
@@ -684,7 +684,7 @@
     "sources": [
       "https://www.uva.nl/en/profile/n/o/t.noel/t.noel.html"
     ],
-    "start": 2020
+    "start": 2018
   },
   {
     "id": "differ-er",
@@ -757,7 +757,7 @@
       "https://www.businesswire.com/news/home/20251211748411/en/Medra-Raises-$52-Million-Series-A-to-Build-Physical-AI-Scientists",
       "https://www.medra.ai/medra-lab-001"
     ],
-    "start": 2021
+    "start": 2024
   },
   {
     "id": "periodic",
@@ -988,7 +988,7 @@
       "https://seed.bytedance.com/en/",
       "https://seed.bytedance.com/en/research"
     ],
-    "start": 2021
+    "start": 2024
   },
   {
     "id": "deeph",
@@ -1035,7 +1035,7 @@
     "sources": [
       "https://chemrxiv.org/engage/api-gateway/chemrxiv/assets/orp/resource/item/6447d756e4bbbe4bbf3afeaa/original/metal-organic-frameworks-meet-uni-mof-a-revolutionary-gas-adsorption-detector.pdf"
     ],
-    "start": 2025
+    "start": 2024
   },
   {
     "id": "novartis",
@@ -1178,7 +1178,7 @@
       "https://ai-science-foundry.cmu.edu/about-ai-science-foundry",
       "https://www.cmu.edu/future-of-science/cloud-lab/index.html"
     ],
-    "start": 2025
+    "start": 2024
   },
   {
     "id": "strateos",
@@ -1414,7 +1414,7 @@
       "https://www.munich-startup.de/en/startups/unitelabs/",
       "https://sila-standard.com/sila_device/unitelabs-connectivity-platform/"
     ],
-    "start": 2022
+    "start": 2025
   },
   {
     "id": "cenevo",
@@ -1557,7 +1557,7 @@
       "https://www.chemify.io/",
       "https://www.chemify.io/about"
     ],
-    "start": 2023
+    "start": 2018
   },
   {
     "id": "grzybowski",
@@ -1580,7 +1580,7 @@
     "sources": [
       "https://scholar.google.com/citations?user=hjS0xZ0AAAAJ&hl=pl"
     ],
-    "start": 2023
+    "start": 2021
   },
   {
     "id": "burke",
@@ -2021,7 +2021,7 @@
     "sources": [
       "https://pubs.rsc.org/en/content/articlehtml/2025/dd/d4dd00387j"
     ],
-    "start": 2017
+    "start": 2022
   },
   {
     "id": "aist_autokobo",
@@ -2067,7 +2067,7 @@
     "sources": [
       "https://pubs.rsc.org/en/content/articlehtml/2026/dd/d6dd00024j"
     ],
-    "start": 2024
+    "start": 2025
   },
   {
     "id": "kier_smartlab",
@@ -2090,7 +2090,7 @@
     "sources": [
       "https://pubs.rsc.org/en/content/articlehtml/2026/dd/d6dd00024j"
     ],
-    "start": 2024
+    "start": 2026
   },
   {
     "id": "megarobo",
