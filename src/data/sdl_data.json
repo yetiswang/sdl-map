@@ -2137,5 +2137,29 @@
       "https://techcrunch.com/2025/05/01/futurehouse-releases-ai-tools-it-claims-can-accelerate-science/"
     ],
     "start": 2023
+  },
+  {
+    "id": "ascend",
+    "name": "ASCEND",
+    "org": "HZB + Fritz Haber Inst. (MPG)",
+    "city": "Berlin",
+    "country": "Germany",
+    "flag": "🇩🇪",
+    "lat": 52.43,
+    "lon": 13.53,
+    "tier": "national",
+    "domain": "chemistry",
+    "maturity": "concept",
+    "charact": "multi-technique",
+    "ai": "strong",
+    "scale": "AI closed-loop catalyst SDLs + digital twins",
+    "invest": 32,
+    "investLabel": "€30M / 5 yrs (BMFTR)",
+    "url": "https://ascend-project.berlin/",
+    "sources": [
+      "https://ascend-project.berlin/news/a-new-era-in-catalysis-ascend-launch-in-berlin-e30-million-in-funding/",
+      "https://www.helmholtz-berlin.de/"
+    ],
+    "start": 2026
   }
 ]
