@@ -140,7 +140,7 @@ For-profit SDL companies, pharma in-house programmes, and hardware/instrument ve
 - [Radical AI](https://radical-ai.com) - AI agents coupled to a closed-loop robotic lab discovering inorganic materials, alloys, and electrolytes; CSO Gerbrand Ceder built LBNL's A-Lab (New York, USA · $55M seed).
 - [Mattiq](https://mattiq.com) - Northwestern spinout running high-throughput combinatorial megalibrary synthesis of millions of nanomaterials per day to train AI for clean-energy catalysts (Chicago, USA · ~$35M).
 - [Dunia Innovations](https://dunia.ai) - Self-driving labs running the full design-make-test-analyse loop for electrocatalyst, battery, and CO2-conversion materials, scaling to a €280M Berlin GigaLab (Berlin, Germany · €10.6M seed + €280M).
-- [ChemLex](https://chemlex.ai) - 24/7 fully automated robotic synthesis line (~800 reactions/day) coupling AI to wet-lab chemistry for drug discovery (Singapore · $45M).
+- [ChemLex](https://chemlex.com) - 24/7 fully automated robotic synthesis line (~800 reactions/day) coupling AI to wet-lab chemistry for drug discovery (Singapore · $45M).
 - [MegaRobo 镁伽科技](https://en.megarobo.tech/) - China's largest smart-lab robotics company, building autonomous agents that run real experiments across life sciences, chemistry, and energy materials (Beijing, China · ~$300M).
 - [FutureHouse / Edison Scientific](https://www.futurehouse.org/) - AI-scientist agent stack (the Robin multi-agent discovery system) coupled to its own robotic wet lab; for-profit spinout Edison (San Francisco, USA · $70M).
 
