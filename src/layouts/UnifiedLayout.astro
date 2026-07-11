@@ -9,7 +9,7 @@ export interface Props {
   description?: string;
   lang: string;
   ogImage?: string;
-  activeView?: 'map' | 'list' | 'timeline';
+  activeView?: 'map' | 'list' | 'timeline' | 'watch';
 }
 
 const {
@@ -241,6 +241,7 @@ a{ color:inherit; text-decoration:none; }
         <a href={`${prefix}`} class={activeView==='map'?'active':''}>{ui.map}</a>
         <a href={`${prefix}list/`} class={activeView==='list'?'active':''}>{ui.list}</a>
         <a href={`${prefix}timeline/`} class={activeView==='timeline'?'active':''}>{ui.timeline}</a>
+        <a href={`${prefix}watch/`} class={activeView==='watch'?'active':''}>{ui.watch}</a>
       </nav>
       <span style="width:1px;height:20px;background:var(--rule);"></span>
       <!-- Stats chips (replace the old stats-bar row) -->

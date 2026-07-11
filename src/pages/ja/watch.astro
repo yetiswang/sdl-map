@@ -1,0 +1,37 @@
+---
+import UnifiedLayout from '../../layouts/UnifiedLayout.astro';
+import watch from '../../data/sdl_watch.json';
+import uiAll from '../../i18n/ui.json';
+
+const lang = 'ja';
+const ui = uiAll[lang];
+const prefix = lang === 'en' ? '/' : `/${lang}/`;
+
+// Newest-first. Data is authored newest-first; sort defensively by ISO date desc.
+const items = [...watch].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+---
+
+<UnifiedLayout title={`${ui.watch} · ${ui.brandH1}`} lang={lang} activeView="watch">
+  <main style="max-width:1100px;margin:0 auto;padding:24px 28px;" data-pagefind-body>
+    <p style="max-width:660px;margin:0 0 28px;font-size:14px;line-height:1.6;color:var(--ink-2);">{ui.watchIntro}</p>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      {items.map(it => (
+        <article style="padding:18px 20px;background:var(--bg-2);border:1px solid var(--rule);border-radius:8px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-3);">
+            <time datetime={it.date}>{it.date}</time>
+            <span style="width:1px;height:11px;background:var(--rule);"></span>
+            <span>{it.kind}</span>
+          </div>
+          <h2 style="margin:0 0 8px;font-size:17px;font-weight:600;line-height:1.4;color:var(--ink);">{it.title}</h2>
+          <p style="margin:0;font-size:14px;line-height:1.65;color:var(--ink-2);">{it.summary}</p>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:14px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.02em;">
+            {it.sources?.map(s => (
+              <a href={s.url} target="_blank" rel="noopener" style="color:var(--ink-3);border-bottom:1px dotted var(--ink-3);">{s.label} ↗</a>
+            ))}
+            {it.related && <a href={`${prefix}entry/${it.related}/`} style="color:var(--ink-2);margin-left:auto;">{ui.viewEntry}</a>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </main>
+</UnifiedLayout>

@@ -2161,5 +2161,30 @@
       "https://www.helmholtz-berlin.de/"
     ],
     "start": 2026
+  },
+  {
+    "id": "tsinghua-yaghi",
+    "name": "AI-Assisted Materials Discovery Institute",
+    "org": "Tsinghua University (Omar Yaghi)",
+    "city": "Beijing",
+    "country": "China",
+    "flag": "🇨🇳",
+    "lat": 40.00,
+    "lon": 116.33,
+    "tier": "national",
+    "domain": "materials",
+    "maturity": "concept",
+    "charact": "—",
+    "ai": "strong",
+    "scale": "national · Nobel-laureate-led (announced 2026)",
+    "invest": 0,
+    "investLabel": "—",
+    "url": "https://www.tsinghua.edu.cn/en/info/1244/14984.htm",
+    "sources": [
+      "https://www.tsinghua.edu.cn/en/info/1244/14984.htm",
+      "https://www.nature.com/articles/d41586-026-02143-x",
+      "https://www.nytimes.com/2026/07/09/science/nobel-winning-us-chemist-will-move-to-china-to-lead-ai-institute.html"
+    ],
+    "start": 2026
   }
 ]

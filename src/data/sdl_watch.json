@@ -1,0 +1,15 @@
+[
+  {
+    "id": "yaghi-tsinghua-2026",
+    "date": "2026-07-09",
+    "kind": "talent",
+    "title": "Nobel laureate Omar Yaghi moves to Tsinghua to lead an AI materials-discovery institute",
+    "summary": "Omar Yaghi (2025 Chemistry Nobel; the pioneer of metal-organic frameworks) has left UC Berkeley for a full-time chair at Tsinghua University in Beijing, where he will lead a new AI-assisted materials-discovery institute. A high-profile US-to-China move on exactly the frontier DiscoveryLabNL is building for.",
+    "related": "tsinghua-yaghi",
+    "sources": [
+      { "label": "Nature", "url": "https://www.nature.com/articles/d41586-026-02143-x" },
+      { "label": "NYT", "url": "https://www.nytimes.com/2026/07/09/science/nobel-winning-us-chemist-will-move-to-china-to-lead-ai-institute.html" },
+      { "label": "Tsinghua", "url": "https://www.tsinghua.edu.cn/en/info/1244/14984.htm" }
+    ]
+  }
+]
