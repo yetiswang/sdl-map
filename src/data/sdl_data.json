@@ -2109,7 +2109,7 @@
     "scale": "smart-lab robotics (China #1 by revenue)",
     "invest": 300,
     "investLabel": "~$300M (Series C/D)",
-    "url": "https://en.megarobo.tech/",
+    "url": "https://en.megarobo.com/",
     "sources": [
       "https://www.crunchbase.com/organization/megarobo"
     ],
@@ -2169,7 +2169,7 @@
     "city": "Beijing",
     "country": "China",
     "flag": "🇨🇳",
-    "lat": 40.00,
+    "lat": 40.0,
     "lon": 116.33,
     "tier": "national",
     "domain": "materials",
