@@ -1,5 +1,19 @@
 [
   {
+    "id": "cuspai-materials-foundry-2026",
+    "date": "2026-07-20",
+    "kind": "milestone",
+    "title": "Cusp AI launches an 'AI Materials Foundry' and raises a $450M Series B at a roughly €2.2B valuation",
+    "summary": "Cusp AI, the AI-materials-discovery startup co-founded by Max Welling (Amsterdam-based) and Chad Edwards, has launched the 'AI Materials Foundry': a global network of 45+ founding partners (NVIDIA, Meta, Samsung, Hyundai Motor Group, Henkel, Applied Materials, Tokyo Electron, Lam Research) pooling compute and scientific resources to accelerate materials discovery for chipmaking and other industries. The launch came with a $450M (€393M) Series B at a roughly €2.2B ($2.6B) valuation, led by Kleiner Perkins and NEA with Jeff Bezos' Bezos Expeditions participating. A privately funded, Welling-anchored push on exactly the AI-driven materials-discovery frontier DiscoveryLabNL is building national public infrastructure for.",
+    "related": "cusp_cam",
+    "sources": [
+      { "label": "Cusp AI (Medium)", "url": "https://medium.com/@CuspAI/launching-our-ai-materials-foundry-and-450-million-series-b-f5603d8259dd" },
+      { "label": "EU-Startups", "url": "https://www.eu-startups.com/2026/07/cuspai-raises-e393-2-million-at-e2-2-billion-valuation-launches-ai-materials-foundry-to-accelerate-materials-discovery/" },
+      { "label": "Bloomberg", "url": "https://www.bloomberg.com/news/articles/2026-07-20/bezos-backs-startup-focused-on-material-discovery-for-chipmaking" },
+      { "label": "Silicon Republic", "url": "https://www.siliconrepublic.com/start-ups/cambridges-cuspai-launches-ai-materials-foundry-confirms-450m-raise" }
+    ]
+  },
+  {
     "id": "yaghi-tsinghua-2026",
     "date": "2026-07-09",
     "kind": "talent",
