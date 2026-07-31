@@ -1,5 +1,18 @@
 [
   {
+    "id": "nsf-pcl-test-bed-2026",
+    "date": "2026-07-22",
+    "kind": "funding",
+    "title": "NSF commits ~$400M to a national network of AI-driven 'programmable cloud laboratories'",
+    "summary": "The US National Science Foundation launched the 'NSF Test Bed: Toward a Network of Programmable Cloud Laboratories (NSF PCL Test Bed)', awarding $380M to 20 teams over four years, with upwards of $20M in matching philanthropic funding from the Astera Institute (~$400M total). The teams will build a nationwide, remotely accessible network of AI-enabled automated laboratories aiming for 'a virtuous cycle of automated hypothesis generation, autonomous experimentation and generation and interpretation of large volumes of high-quality experimental data', across disciplines from biology and chemistry to soft materials, 2D materials, metals, material characterisation and electronics; several PCL Nodes include participation by the US DOE National Labs. One example node: Penn State's $20M 'LATTICE' (Layered and Thin-film Technologies with Intelligent Cloud Experimentation), led by Distinguished Professor Joan Redwing with Argonne National Laboratory, for AI-enabled thin-film materials discovery, characterisation and optimisation.",
+    "related": "doe",
+    "sources": [
+      { "label": "NSF", "url": "https://www.nsf.gov/tip/updates/nsf-announces-400m-investment-new-national-network-ai" },
+      { "label": "NSF PCL Test Bed (program)", "url": "https://www.nsf.gov/funding/opportunities/pcl-test-bed-test-bed-toward-network-programmable-cloud-laboratories" },
+      { "label": "Penn State (LATTICE node)", "url": "https://www.psu.edu/news/research/story/penn-state-awarded-20m-lead-nsf-programmable-cloud-laboratory" }
+    ]
+  },
+  {
     "id": "cuspai-materials-foundry-2026",
     "date": "2026-07-20",
     "kind": "milestone",
