@@ -66,7 +66,8 @@ Large public-sector or trans-institutional SDL programmes with national or pan-r
 - [AIST AUTOkobo](https://www.aist.go.jp/index_en.html) - AIST's Multi-Modal AI lab-automation initiative for autonomous experimentation, now spanning all seven AIST research departments (Tsukuba, Japan).
 - [ASCEND](https://ascend-project.berlin/) - BMFTR-funded consortium led by Helmholtz-Zentrum Berlin and the Fritz Haber Institute (with BASF, Siemens Energy, Dunia Innovations, and TU Berlin/BasCat) running AI-guided self-driving labs, high-throughput characterisation, and digital twins to accelerate catalyst discovery for sustainable chemistry (Berlin, Germany · €30M / 5 yrs).
 - [NSF PCL Test Bed](https://www.nsf.gov/tip/updates/nsf-announces-400m-investment-new-national-network-ai) - NSF national network of AI-enabled programmable cloud laboratories: ~$380M to 20 teams over four years plus Astera Institute matching, anchored by nodes like Penn State's LATTICE thin-film SDL with Argonne (State College PA / national, USA · $400M NSF + Astera).
-- [Ewha IMMS Self-Driving Lab](https://imms.ewha.ac.kr/en/) - Korea's MSIT / NRL 2.0 national research laboratory at Ewha Womans University (director Hoi Ri Moon); a 330 m² self-driving lab with ten function-based workstations across five material classes, a Bayesian-optimisation and LLM-agent decision layer, moving to open-access user operation from 2028 (Seoul, Korea · KRW 95B gov / 10 yrs).
+- [Ewha IMMS Self-Driving Lab](https://imms.ewha.ac.kr/en/) - Korea's MSIT / NRL 2.0 national research laboratory at Ewha Womans University (director Hoi Ri Moon); a 330 m² self-driving lab with ten function-based workstations across five material classes, a Bayesian-optimisation and LLM-agent decision layer, moving to open-access user operation from 2028 (Seoul, Korea · KRW 114B / 10 yrs).
+- [Swiss Cat+](https://www.epfl.ch/research/facilities/swisscat/) - ETH Domain-funded national catalysis infrastructure jointly operated by EPFL and ETH Zurich, combining robotic high-throughput experimentation, AI-guided experimental design, and automated workflows to enable self-driving laboratories for catalyst discovery and optimization across homogeneous and heterogeneous catalysis
 
 ---
 
@@ -108,6 +109,7 @@ Single-institution or PI-led groups operating SDLs in the lab.
 - [KIER Smart Laboratory](https://www.kier.re.kr/eng) - 24-hour autonomous synthesis, analysis, and XRD for safety-critical energy and catalyst materials (Daejeon, Korea · KIER).
 - [Matter Lab](http://matter.toronto.edu) - Alán Aspuru-Guzik's group; originated the modern SDL field with ChemOS (2017) and spun out Kebotix, Atinary, and the Acceleration Consortium (Toronto, Canada · U Toronto / Vector Institute).
 - [IMDEA Materials SDL](https://materials.imdea.org/) - Haranczyk group self-driving lab for automated polymer processing (melt and solution workflows), serving six Madrid research groups and the Materials-Commons EU network (Getafe/Madrid, Spain · IMDEA).
+- [IPRD](https://eps.leeds.ac.uk/chemical-engineering-innovative-manufacturing-products/doc/research-spotlight-3) - Institute of Process Research and Development, University of Leeds (Leeds, UK · IPRD Lab 650 m²).
 
 ---
 
