@@ -190,7 +190,7 @@
   {
     "id": "bigchem",
     "name": "Big Chemistry",
-    "org": "Radboud + TU/e ICMS hub",
+    "org": "Radboud (lead) + TU/e, Groningen, AMOLF, Fontys",
     "city": "Nijmegen",
     "country": "Netherlands",
     "flag": "🇳🇱",
@@ -209,7 +209,7 @@
       "https://www.bigchemistry-nijmegen.nl/",
       "https://www.ru.nl/en/research/research-projects/robot-lab-for-big-chemistry-in-the-netherlands"
     ],
-    "start": 2023
+    "start": 2022
   },
   {
     "id": "diadem",
@@ -2186,5 +2186,102 @@
       "https://www.nytimes.com/2026/07/09/science/nobel-winning-us-chemist-will-move-to-china-to-lead-ai-institute.html"
     ],
     "start": 2026
+  },
+  {
+    "id": "nsf_pcl",
+    "name": "NSF PCL Test Bed",
+    "org": "NSF + Astera Institute",
+    "city": "State College, PA",
+    "country": "USA",
+    "flag": "🇺🇸",
+    "lat": 40.7934,
+    "lon": -77.86,
+    "tier": "national",
+    "domain": "cross-domain",
+    "maturity": "concept",
+    "charact": "multi-technique",
+    "ai": "strong",
+    "scale": "20 teams",
+    "invest": 400,
+    "investLabel": "$400M",
+    "url": "https://www.nsf.gov/tip/updates/nsf-announces-400m-investment-new-national-network-ai",
+    "sources": [
+      "https://www.nsf.gov/tip/updates/nsf-announces-400m-investment-new-national-network-ai",
+      "https://www.nsf.gov/funding/opportunities/pcl-test-bed-test-bed-toward-network-programmable-cloud-laboratories",
+      "https://www.psu.edu/news/research/story/penn-state-awarded-20m-lead-nsf-programmable-cloud-laboratory"
+    ],
+    "start": 2026
+  },
+  {
+    "id": "solve",
+    "name": "SOLVE Chemistry",
+    "org": "SOLVE Chemistry Ltd",
+    "city": "London",
+    "country": "UK",
+    "flag": "🇬🇧",
+    "lat": 51.5099,
+    "lon": -0.2246,
+    "tier": "commercial",
+    "domain": "chemistry",
+    "maturity": "operational",
+    "charact": "single-technique",
+    "ai": "strong",
+    "scale": "flow SDL",
+    "invest": 4,
+    "investLabel": "£4M",
+    "url": "https://www.solvechemistry.com/",
+    "sources": [
+      "https://www.solvechemistry.com/",
+      "https://www.linkedin.com/company/solve-chemistry/"
+    ],
+    "start": 2024
+  },
+  {
+    "id": "matter",
+    "name": "Matter Lab",
+    "org": "University of Toronto / Vector Institute",
+    "city": "Toronto",
+    "country": "Canada",
+    "flag": "🇨🇦",
+    "lat": 43.6629,
+    "lon": -79.3957,
+    "tier": "academic",
+    "domain": "cross-domain",
+    "maturity": "operational",
+    "charact": "—",
+    "ai": "strong",
+    "scale": "ChemOS origin",
+    "invest": 0,
+    "investLabel": "—",
+    "url": "http://matter.toronto.edu",
+    "sources": [
+      "https://mission-innovation.net/press-release-materials-workshop-report/",
+      "https://www.science.org/doi/10.1126/scirobotics.aat5559",
+      "https://pubs.acs.org/acscii/article/4/2/144/733253/The-Matter-Simulation-R-evolution"
+    ],
+    "start": 2017
+  },
+  {
+    "id": "imdea",
+    "name": "IMDEA Materials SDL",
+    "org": "IMDEA Materials Institute",
+    "city": "Getafe (Madrid)",
+    "country": "Spain",
+    "flag": "🇪🇸",
+    "lat": 40.3078,
+    "lon": -3.7264,
+    "tier": "academic",
+    "domain": "materials",
+    "maturity": "operational",
+    "charact": "—",
+    "ai": "partial",
+    "scale": "6 groups served",
+    "invest": 0,
+    "investLabel": "—",
+    "url": "https://materials.imdea.org/",
+    "sources": [
+      "https://www.youtube.com/watch?v=tWub0OgBGhE"
+    ],
+    "start": 2022
   }
 ]

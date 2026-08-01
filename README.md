@@ -65,6 +65,7 @@ Large public-sector or trans-institutional SDL programmes with national or pan-r
 - [RIKEN / IST Maholo SDL](https://www.riken.jp/en/) - JST-funded national self-driving lab (Maholo robotic-arm platform) for closed-loop materials discovery, with a prototyping lab at RIKEN BDR Kobe and a demonstrator at Institute of Science Tokyo (Kobe, Japan · ~¥1.1B JST).
 - [AIST AUTOkobo](https://www.aist.go.jp/index_en.html) - AIST's Multi-Modal AI lab-automation initiative for autonomous experimentation, now spanning all seven AIST research departments (Tsukuba, Japan).
 - [ASCEND](https://ascend-project.berlin/) - BMFTR-funded consortium led by Helmholtz-Zentrum Berlin and the Fritz Haber Institute (with BASF, Siemens Energy, Dunia Innovations, and TU Berlin/BasCat) running AI-guided self-driving labs, high-throughput characterisation, and digital twins to accelerate catalyst discovery for sustainable chemistry (Berlin, Germany · €30M / 5 yrs).
+- [NSF PCL Test Bed](https://www.nsf.gov/tip/updates/nsf-announces-400m-investment-new-national-network-ai) - NSF national network of AI-enabled programmable cloud laboratories: ~$380M to 20 teams over four years plus Astera Institute matching, anchored by nodes like Penn State's LATTICE thin-film SDL with Argonne (State College PA / national, USA · $400M NSF + Astera).
 
 ---
 
@@ -104,6 +105,8 @@ Single-institution or PI-led groups operating SDLs in the lab.
 - [EPFL Self-Driving Lab (LIAC)](https://www.epfl.ch/labs/liac/) - Self-driving platform for nano- and advanced-materials synthesis with active-learning optimisation (Lausanne, Switzerland · EPFL).
 - [KIMS Autonomous Alloy Lab](https://www.kims.re.kr/?lang=en) - Closed-loop alloy discovery (arc-melting to annealing to XRD) with reinforcement-learning optimisation (Changwon, Korea · KIMS).
 - [KIER Smart Laboratory](https://www.kier.re.kr/eng) - 24-hour autonomous synthesis, analysis, and XRD for safety-critical energy and catalyst materials (Daejeon, Korea · KIER).
+- [Matter Lab](http://matter.toronto.edu) - Alán Aspuru-Guzik's group; originated the modern SDL field with ChemOS (2017) and spun out Kebotix, Atinary, and the Acceleration Consortium (Toronto, Canada · U Toronto / Vector Institute).
+- [IMDEA Materials SDL](https://materials.imdea.org/) - Haranczyk group self-driving lab for automated polymer processing (melt and solution workflows), serving six Madrid research groups and the Materials-Commons EU network (Getafe/Madrid, Spain · IMDEA).
 
 ---
 
@@ -143,6 +146,7 @@ For-profit SDL companies, pharma in-house programmes, and hardware/instrument ve
 - [ChemLex](https://chemlex.com) - 24/7 fully automated robotic synthesis line (~800 reactions/day) coupling AI to wet-lab chemistry for drug discovery (Singapore · $45M).
 - [MegaRobo 镁伽科技](https://en.megarobo.tech/) - China's largest smart-lab robotics company, building autonomous agents that run real experiments across life sciences, chemistry, and energy materials (Beijing, China · ~$300M).
 - [FutureHouse / Edison Scientific](https://www.futurehouse.org/) - AI-scientist agent stack (the Robin multi-agent discovery system) coupled to its own robotic wet lab; for-profit spinout Edison (San Francisco, USA · $70M).
+- [SOLVE Chemistry](https://www.solvechemistry.com/) - London SDL flow lab pairing online-UHPLC high-throughput experimentation with Bayesian optimisation for predictive process chemistry and right-first-time scale-up (London, UK · £4M).
 
 ---
 
