@@ -2283,5 +2283,29 @@
       "https://www.youtube.com/watch?v=tWub0OgBGhE"
     ],
     "start": 2022
+  },
+  {
+    "id": "ewha_imms",
+    "name": "Ewha IMMS Self-Driving Lab",
+    "org": "Ewha Womans University / IMMS (NRL 2.0)",
+    "city": "Seoul",
+    "country": "Korea",
+    "flag": "🇰🇷",
+    "lat": 37.57,
+    "lon": 126.95,
+    "tier": "national",
+    "domain": "materials",
+    "maturity": "operational",
+    "charact": "multi-technique",
+    "ai": "strong",
+    "scale": "330 m² · 10 workstations · 5 material classes",
+    "invest": 69,
+    "investLabel": "KRW 95B gov (~$69M) / 10 yrs · MSIT+MOE (NRL 2.0)",
+    "url": "https://imms.ewha.ac.kr/en/",
+    "sources": [
+      "https://imms.ewha.ac.kr/en/news/83",
+      "https://www.hankyung.com/article/2026072665561"
+    ],
+    "start": 2025
   }
 ]

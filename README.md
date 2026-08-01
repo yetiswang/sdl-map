@@ -66,6 +66,7 @@ Large public-sector or trans-institutional SDL programmes with national or pan-r
 - [AIST AUTOkobo](https://www.aist.go.jp/index_en.html) - AIST's Multi-Modal AI lab-automation initiative for autonomous experimentation, now spanning all seven AIST research departments (Tsukuba, Japan).
 - [ASCEND](https://ascend-project.berlin/) - BMFTR-funded consortium led by Helmholtz-Zentrum Berlin and the Fritz Haber Institute (with BASF, Siemens Energy, Dunia Innovations, and TU Berlin/BasCat) running AI-guided self-driving labs, high-throughput characterisation, and digital twins to accelerate catalyst discovery for sustainable chemistry (Berlin, Germany · €30M / 5 yrs).
 - [NSF PCL Test Bed](https://www.nsf.gov/tip/updates/nsf-announces-400m-investment-new-national-network-ai) - NSF national network of AI-enabled programmable cloud laboratories: ~$380M to 20 teams over four years plus Astera Institute matching, anchored by nodes like Penn State's LATTICE thin-film SDL with Argonne (State College PA / national, USA · $400M NSF + Astera).
+- [Ewha IMMS Self-Driving Lab](https://imms.ewha.ac.kr/en/) - Korea's MSIT / NRL 2.0 national research laboratory at Ewha Womans University (director Hoi Ri Moon); a 330 m² self-driving lab with ten function-based workstations across five material classes, a Bayesian-optimisation and LLM-agent decision layer, moving to open-access user operation from 2028 (Seoul, Korea · KRW 95B gov / 10 yrs).
 
 ---
 
