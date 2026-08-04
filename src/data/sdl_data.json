@@ -2356,5 +2356,30 @@
       "https://www.chimia.ch/chimia/article/view/2023_154"
     ],
     "start": 2020
+  },
+  {
+    "id": "odacell",
+    "name": "ODACell",
+    "org": "Ångström Advanced Battery Centre (ÅABC) · Uppsala University",
+    "city": "Uppsala",
+    "country": "Sweden",
+    "flag": "🇸🇪",
+    "lat": 59.8383,
+    "lon": 17.647,
+    "tier": "academic",
+    "domain": "batteries",
+    "maturity": "operational",
+    "charact": "single-technique",
+    "ai": "strong",
+    "scale": "single robotic platform",
+    "invest": 0,
+    "investLabel": "—",
+    "url": "https://github.com/jyik/ODACell",
+    "sources": [
+      "https://doi.org/10.1016/j.xcrp.2025.102548",
+      "https://urn.kb.se/resolve?urn=urn:nbn:se:uu:diva-578031",
+      "https://doi.org/10.5281/zenodo.14191482"
+    ],
+    "start": 2022
   }
 ]
