@@ -110,6 +110,7 @@ Single-institution or PI-led groups operating SDLs in the lab.
 - [Matter Lab](http://matter.toronto.edu) - Alán Aspuru-Guzik's group; originated the modern SDL field with ChemOS (2017) and spun out Kebotix, Atinary, and the Acceleration Consortium (Toronto, Canada · U Toronto / Vector Institute).
 - [IMDEA Materials SDL](https://materials.imdea.org/) - Haranczyk group self-driving lab for automated polymer processing (melt and solution workflows), serving six Madrid research groups and the Materials-Commons EU network (Getafe/Madrid, Spain · IMDEA).
 - [IPRD](https://eps.leeds.ac.uk/chemical-engineering-innovative-manufacturing-products/doc/research-spotlight-3) - Institute of Process Research and Development, University of Leeds (Leeds, UK · IPRD Lab 650 m²).
+- [ODACell](https://github.com/jyik/ODACell) - Self-driving battery laboratory developed at Uppsala University's Ångström Advanced Battery Centre, integrating automated electrolyte formulation, robotic coin-cell assembly, in-line cycling, computer vision, and Bayesian optimization for closed-loop electrolyte discovery (Uppsala, Sweden · Uppsala University).
 
 ---
 
