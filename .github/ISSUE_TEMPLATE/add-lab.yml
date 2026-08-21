@@ -1,0 +1,147 @@
+name: "Suggest a lab / initiative"
+description: "Propose a new entry for the Global Self-Driving Lab Landscape — no Git knowledge needed."
+title: "[Lab] "
+labels: ["lab-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping map the SDL landscape! Fill in what you know — **name, organization, URL, and sources are the essentials**; everything else the curator can complete. Entries are reviewed against public information before they appear on [sdl-map.discoverylabs.nl](https://sdl-map.discoverylabs.nl/).
+  - type: input
+    id: name
+    attributes:
+      label: Lab / initiative name
+      placeholder: "e.g. ODACell"
+    validations:
+      required: true
+  - type: input
+    id: org
+    attributes:
+      label: Organization
+      description: Institute, university, or company (and parent programme if any).
+      placeholder: "e.g. Ångström Advanced Battery Centre · Uppsala University"
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: City, Country
+      placeholder: "e.g. Uppsala, Sweden"
+    validations:
+      required: true
+  - type: input
+    id: coords
+    attributes:
+      label: Coordinates (optional)
+      description: "Latitude, longitude — helps place the pin precisely."
+      placeholder: "e.g. 59.8383, 17.647"
+  - type: dropdown
+    id: tier
+    attributes:
+      label: Tier
+      options:
+        - academic — single-institution or PI-led group
+        - national — public programme or consortium
+        - commercial — company or industrial programme
+        - labos — lab OS / orchestration platform
+    validations:
+      required: true
+  - type: dropdown
+    id: domain
+    attributes:
+      label: Domain
+      options:
+        - materials
+        - chemistry
+        - cross-domain
+        - drug-discovery
+        - biology
+        - energy
+        - batteries
+        - biomaterials
+        - orchestration
+    validations:
+      required: true
+  - type: dropdown
+    id: maturity
+    attributes:
+      label: Maturity
+      options:
+        - operational — running experiments today
+        - prototype — built, being commissioned
+        - industrial — deployed at industrial scale
+        - concept — announced / funded, not yet built
+    validations:
+      required: true
+  - type: dropdown
+    id: ai
+    attributes:
+      label: AI in the loop
+      options:
+        - strong — AI closes the experimental loop
+        - partial — AI assists, human closes the loop
+        - planned — announced but not yet implemented
+        - none
+    validations:
+      required: true
+  - type: dropdown
+    id: charact
+    attributes:
+      label: Characterisation in the loop (optional)
+      options:
+        - multi-technique
+        - single-technique
+        - advanced-multimodal
+        - synthesis-only
+        - integrated
+        - unclear / not applicable
+  - type: input
+    id: url
+    attributes:
+      label: Primary URL
+      description: Must resolve (no parking pages).
+      placeholder: "https://…"
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: "2–3 authoritative links: institutional press release, peer-reviewed paper, official funding announcement."
+      placeholder: |
+        https://doi.org/…
+        https://…
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: One-sentence description
+      description: What the lab automates and toward which scientific goal.
+    validations:
+      required: true
+  - type: input
+    id: start
+    attributes:
+      label: Start year (optional)
+      placeholder: "e.g. 2022"
+  - type: input
+    id: funding
+    attributes:
+      label: Funding / investment (optional)
+      placeholder: "e.g. $20M NSF award"
+  - type: dropdown
+    id: relationship
+    attributes:
+      label: Your relationship to this lab (optional)
+      options:
+        - I lead it
+        - I work there
+        - Unaffiliated — community suggestion
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: The information above is public and verifiable via the sources given.
+          required: true

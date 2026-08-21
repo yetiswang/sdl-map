@@ -38,7 +38,8 @@
     "noResults": "No matches. Try a different keyword.",
     "growthTitle": "Growth of self-driving labs",
     "growthSub": "cumulative initiatives by first public year",
-    "tlFounded": "founded"
+    "tlFounded": "founded",
+    "footerSuggest": "Suggest a lab"
   },
   "zh-Hant": {
     "brandEyebrow": "荷蘭國家材料發現實驗室 · 實時追蹤",
@@ -79,7 +80,8 @@
     "noResults": "沒找到符合的，換個關鍵字試試。",
     "growthTitle": "自驅動實驗室的成長",
     "growthSub": "按首次公開年份累計的項目數",
-    "tlFounded": "新增"
+    "tlFounded": "新增",
+    "footerSuggest": "提交新條目"
   },
   "ja": {
     "brandEyebrow": "オランダ国家材料発見研究所 · ライブ追跡",
@@ -120,7 +122,8 @@
     "noResults": "該当する項目はありません。別のキーワードでお試しください。",
     "growthTitle": "自律実験室の成長",
     "growthSub": "初公開年ごとの累積数",
-    "tlFounded": "新規"
+    "tlFounded": "新規",
+    "footerSuggest": "ラボを提案"
   },
   "ko": {
     "brandEyebrow": "네덜란드 국가재료발견연구소 · 실시간 추적",
@@ -161,7 +164,8 @@
     "noResults": "일치하는 항목이 없습니다. 다른 키워드로 시도해 보세요.",
     "growthTitle": "자율 실험실의 성장",
     "growthSub": "첫 공개 연도별 누적 수",
-    "tlFounded": "신규"
+    "tlFounded": "신규",
+    "footerSuggest": "랩 제안하기"
   },
   "zh": {
     "brandEyebrow": "荷兰国家材料发现实验室 · 实时追踪",
@@ -202,6 +206,7 @@
     "noResults": "没找到匹配项，换个关键词试试。",
     "growthTitle": "自驱动实验室的增长",
     "growthSub": "按首次公开年份累计的项目数",
-    "tlFounded": "新增"
+    "tlFounded": "新增",
+    "footerSuggest": "提交新条目"
   }
 }

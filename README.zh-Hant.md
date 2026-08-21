@@ -99,7 +99,7 @@ python3 -m http.server 8000
 
 ## 🤝 貢獻
 
-歡迎指正、新增與回報計畫更名 / 結束。請開 issue 或 PR。每個新條目請包含：
+歡迎指正、新增與回報計畫更名 / 結束。請開 issue 或 PR；不熟悉 Git 也可以直接使用 **[提交表單](https://github.com/yetiswang/sdl-map/issues/new?template=add-lab.yml)**（結構化範本，逐項填寫即可）。每個新條目請包含：
 
 - **名稱 + 機構 + 地點**（含經緯度）。
 - **主要 URL**（必須可連線，不能跳到網域停泊頁）。

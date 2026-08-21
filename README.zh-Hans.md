@@ -99,7 +99,7 @@ python3 -m http.server 8000
 
 ## 🤝 贡献
 
-欢迎纠错、新增和报告项目更名 / 关闭。请提 issue 或 PR。每个新条目请包含：
+欢迎纠错、新增和报告项目更名 / 关闭。请提 issue 或 PR；不熟悉 Git 也可以直接使用 **[提交表单](https://github.com/yetiswang/sdl-map/issues/new?template=add-lab.yml)**（结构化模板，逐项填写即可）。每个新条目请包含：
 
 - **名称 + 机构 + 地点**（含经纬度）。
 - **主 URL**（必须可访问，不能跳转到域名停放页）。
