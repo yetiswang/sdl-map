@@ -1,5 +1,23 @@
 [
   {
+    "id": "utk-athena-2026",
+    "date": "2026-08-12",
+    "kind": "funding",
+    "title": "UT Knoxville wins $20M NSF award for ATHENA — autonomous microscopy + synthesis cloud testbed led by Sergei Kalinin",
+    "summary": "The University of Tennessee, Knoxville secured a $20M NSF award to build ATHENA (Advanced Testbed for High-throughput Experimentation in Nano- and Atomic Science), a node in NSF's Programmable Cloud Laboratories initiative. Led by Sergei Kalinin — a defining figure in autonomous microscopy — with co-PIs Gerd Duscher, Mahshid Ahmadi and Hairong Qi and twelve UT faculty, partnering Northwestern and Johns Hopkins, ATHENA combines autonomous microscopy with automated materials synthesis into remotely accessible, cloud-operated self-driving laboratories built on open software standards, targeting a 10–30× increase in experimental throughput. A companion $5M Johns Hopkins-led award on an AI for Materials Design Network includes UT's Michela Taufer.",
+    "related": "nsf_pcl",
+    "sources": [
+      {
+        "label": "UT Knoxville (Tickle College of Engineering)",
+        "url": "https://tickle.utk.edu/mse/ut-secures-20m-nsf-grant-to-pioneer-breakthroughs-in-automated-materials-discovery/"
+      },
+      {
+        "label": "NSF PCL Test Bed (program)",
+        "url": "https://www.nsf.gov/funding/opportunities/pcl-test-bed-test-bed-toward-network-programmable-cloud-laboratories"
+      }
+    ]
+  },
+  {
     "id": "nsf-pcl-test-bed-2026",
     "date": "2026-07-22",
     "kind": "funding",
@@ -7,9 +25,18 @@
     "summary": "The US National Science Foundation launched the 'NSF Test Bed: Toward a Network of Programmable Cloud Laboratories (NSF PCL Test Bed)', awarding $380M to 20 teams over four years, with upwards of $20M in matching philanthropic funding from the Astera Institute (~$400M total). The teams will build a nationwide, remotely accessible network of AI-enabled automated laboratories aiming for 'a virtuous cycle of automated hypothesis generation, autonomous experimentation and generation and interpretation of large volumes of high-quality experimental data', across disciplines from biology and chemistry to soft materials, 2D materials, metals, material characterisation and electronics; several PCL Nodes include participation by the US DOE National Labs. One example node: Penn State's $20M 'LATTICE' (Layered and Thin-film Technologies with Intelligent Cloud Experimentation), led by Distinguished Professor Joan Redwing with Argonne National Laboratory, for AI-enabled thin-film materials discovery, characterisation and optimisation.",
     "related": "doe",
     "sources": [
-      { "label": "NSF", "url": "https://www.nsf.gov/tip/updates/nsf-announces-400m-investment-new-national-network-ai" },
-      { "label": "NSF PCL Test Bed (program)", "url": "https://www.nsf.gov/funding/opportunities/pcl-test-bed-test-bed-toward-network-programmable-cloud-laboratories" },
-      { "label": "Penn State (LATTICE node)", "url": "https://www.psu.edu/news/research/story/penn-state-awarded-20m-lead-nsf-programmable-cloud-laboratory" }
+      {
+        "label": "NSF",
+        "url": "https://www.nsf.gov/tip/updates/nsf-announces-400m-investment-new-national-network-ai"
+      },
+      {
+        "label": "NSF PCL Test Bed (program)",
+        "url": "https://www.nsf.gov/funding/opportunities/pcl-test-bed-test-bed-toward-network-programmable-cloud-laboratories"
+      },
+      {
+        "label": "Penn State (LATTICE node)",
+        "url": "https://www.psu.edu/news/research/story/penn-state-awarded-20m-lead-nsf-programmable-cloud-laboratory"
+      }
     ]
   },
   {
@@ -20,10 +47,22 @@
     "summary": "Cusp AI, the AI-materials-discovery startup co-founded by Max Welling (Amsterdam-based) and Chad Edwards, has launched the 'AI Materials Foundry': a global network of 45+ founding partners (NVIDIA, Meta, Samsung, Hyundai Motor Group, Henkel, Applied Materials, Tokyo Electron, Lam Research) pooling compute and scientific resources to accelerate materials discovery for chipmaking and other industries. The launch came with a $450M (€393M) Series B at a roughly €2.2B ($2.6B) valuation, led by Kleiner Perkins and NEA with Jeff Bezos' Bezos Expeditions participating. A privately funded, Welling-anchored push on exactly the AI-driven materials-discovery frontier DiscoveryLabNL is building national public infrastructure for.",
     "related": "cusp_cam",
     "sources": [
-      { "label": "Cusp AI (Medium)", "url": "https://medium.com/@CuspAI/launching-our-ai-materials-foundry-and-450-million-series-b-f5603d8259dd" },
-      { "label": "EU-Startups", "url": "https://www.eu-startups.com/2026/07/cuspai-raises-e393-2-million-at-e2-2-billion-valuation-launches-ai-materials-foundry-to-accelerate-materials-discovery/" },
-      { "label": "Bloomberg", "url": "https://www.bloomberg.com/news/articles/2026-07-20/bezos-backs-startup-focused-on-material-discovery-for-chipmaking" },
-      { "label": "Silicon Republic", "url": "https://www.siliconrepublic.com/start-ups/cambridges-cuspai-launches-ai-materials-foundry-confirms-450m-raise" }
+      {
+        "label": "Cusp AI (Medium)",
+        "url": "https://medium.com/@CuspAI/launching-our-ai-materials-foundry-and-450-million-series-b-f5603d8259dd"
+      },
+      {
+        "label": "EU-Startups",
+        "url": "https://www.eu-startups.com/2026/07/cuspai-raises-e393-2-million-at-e2-2-billion-valuation-launches-ai-materials-foundry-to-accelerate-materials-discovery/"
+      },
+      {
+        "label": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/articles/2026-07-20/bezos-backs-startup-focused-on-material-discovery-for-chipmaking"
+      },
+      {
+        "label": "Silicon Republic",
+        "url": "https://www.siliconrepublic.com/start-ups/cambridges-cuspai-launches-ai-materials-foundry-confirms-450m-raise"
+      }
     ]
   },
   {
@@ -34,9 +73,18 @@
     "summary": "Omar Yaghi (2025 Chemistry Nobel; the pioneer of metal-organic frameworks) has left UC Berkeley for a full-time chair at Tsinghua University in Beijing, where he will lead a new AI-assisted materials-discovery institute. A high-profile US-to-China move on exactly the frontier DiscoveryLabNL is building for.",
     "related": "tsinghua-yaghi",
     "sources": [
-      { "label": "Nature", "url": "https://www.nature.com/articles/d41586-026-02143-x" },
-      { "label": "NYT", "url": "https://www.nytimes.com/2026/07/09/science/nobel-winning-us-chemist-will-move-to-china-to-lead-ai-institute.html" },
-      { "label": "Tsinghua", "url": "https://www.tsinghua.edu.cn/en/info/1244/14984.htm" }
+      {
+        "label": "Nature",
+        "url": "https://www.nature.com/articles/d41586-026-02143-x"
+      },
+      {
+        "label": "NYT",
+        "url": "https://www.nytimes.com/2026/07/09/science/nobel-winning-us-chemist-will-move-to-china-to-lead-ai-institute.html"
+      },
+      {
+        "label": "Tsinghua",
+        "url": "https://www.tsinghua.edu.cn/en/info/1244/14984.htm"
+      }
     ]
   }
 ]

@@ -26,7 +26,7 @@
   </p>
 </div>
 
-> 자율실험실(Self-Driving Lab, SDL)은 AI 기반 가설 생성, 자동화 합성, 온라인 분석을 하나의 루프로 닫는 시스템입니다. 이 목록은 그 일을 실제로 하고 있는 사람과 프로젝트, 플랫폼을 기록한 것입니다. 검색엔진이 만든 목록이 아니라 제가 본 그대로의 분포입니다. 2026년 6월 시점의 공개 정보를 기반으로 [인터랙티브 지도](https://sdl-map.discoverylabs.nl/)와 함께 지속적으로 갱신됩니다.
+> 자율실험실(Self-Driving Lab, SDL)은 AI 기반 가설 생성, 자동화 합성, 온라인 분석을 하나의 루프로 닫는 시스템입니다. 이 목록은 그 일을 실제로 하고 있는 사람과 프로젝트, 플랫폼을 기록한 것입니다. 검색엔진이 만든 목록이 아니라 제가 본 그대로의 분포입니다. 2026년 8월 시점의 공개 정보를 기반으로 [인터랙티브 지도](https://sdl-map.discoverylabs.nl/)와 함께 지속적으로 갱신됩니다.
 
 ## 📚 목차
 
@@ -45,15 +45,15 @@
 
 ## 🌍 국가 프로젝트 / 컨소시엄
 
-공공 부문이 주도하거나 여러 기관에 걸친 국가/지역 규모의 SDL 프로젝트. Acceleration Consortium, BIG-MAP / FULL-MAP, PEPR DIADEM, DiscoveryLabNL 등 11개 전체 항목은 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)를 참고하세요.
+공공 부문이 주도하거나 여러 기관에 걸친 국가/지역 규모의 SDL 프로젝트. NSF PCL Test Bed, Acceleration Consortium, BIG-MAP / FULL-MAP, PEPR DIADEM, DiscoveryLabNL 등 21개 전체 항목은 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)를 참고하세요.
 
 ## 🎓 학술 그룹
 
-단일 기관 또는 PI가 주도해 실제로 SDL을 운영하는 연구 그룹. A-Lab, Cooper Group, Jensen Lab, Jun Jiang 그룹 / ChemAgents + Robot Chemist, 嘉庚创新실험실 등 27개 전체 항목은 [English README → Academic Groups](README.md#-academic-groups)를 참고하세요.
+단일 기관 또는 PI가 주도해 실제로 SDL을 운영하는 연구 그룹. A-Lab, Matter Lab, ODACell, Cooper Group, Jensen Lab, Jun Jiang 그룹 / ChemAgents + Robot Chemist 등 36개 전체 항목은 [English README → Academic Groups](README.md#-academic-groups)를 참고하세요.
 
 ## 🏭 상업 및 산업
 
-영리 SDL 회사, 제약사 사내 프로그램, SDL과 관련된 하드웨어 / 기기 벤더. Lila Sciences, XtalPi, Cusp AI, DP Technology / Bohrium 등 26개 전체 항목은 [English README → Commercial & Industrial](README.md#-commercial--industrial)를 참고하세요.
+영리 SDL 회사, 제약사 사내 프로그램, SDL과 관련된 하드웨어 / 기기 벤더. Lila Sciences, XtalPi, Cusp AI, DP Technology / Bohrium 등 33개 전체 항목은 [English README → Commercial & Industrial](README.md#-commercial--industrial)를 참고하세요.
 
 ## 🛰 랩 OS / 오케스트레이션
 

@@ -26,7 +26,7 @@
   </p>
 </div>
 
-> 自動化実験室（Self-Driving Lab、SDL）は、AI 駆動の仮説生成、自動化された合成、オンラインキャラクタリゼーションを一つのループに閉じます。このリストは、その仕事を実際にやっている人・プロジェクト・プラットフォームを記録したものです。検索エンジンが拾ったリストではなく、私が見たままの分布図です。2026 年 6 月時点の公開情報に基づき、[インタラクティブマップ](https://sdl-map.discoverylabs.nl/) と連動して継続的に更新しています。
+> 自動化実験室（Self-Driving Lab、SDL）は、AI 駆動の仮説生成、自動化された合成、オンラインキャラクタリゼーションを一つのループに閉じます。このリストは、その仕事を実際にやっている人・プロジェクト・プラットフォームを記録したものです。検索エンジンが拾ったリストではなく、私が見たままの分布図です。2026 年 8 月時点の公開情報に基づき、[インタラクティブマップ](https://sdl-map.discoverylabs.nl/) と連動して継続的に更新しています。
 
 ## 📚 目次
 
@@ -45,15 +45,15 @@
 
 ## 🌍 国家プロジェクト・コンソーシアム
 
-公的セクター主導、複数機関にまたがる国家規模・地域規模の SDL プロジェクト。Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL ほか全 11 件は [English README → National Programmes & Consortia](README.md#-national-programmes--consortia) を参照。
+公的セクター主導、複数機関にまたがる国家規模・地域規模の SDL プロジェクト。NSF PCL Test Bed、Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL ほか全 21 件は [English README → National Programmes & Consortia](README.md#-national-programmes--consortia) を参照。
 
 ## 🎓 学術グループ
 
-単一機関または PI が主導し、実際に SDL を動かしている研究グループ。A-Lab、Cooper Group、Jensen Lab、Jun Jiang グループ / ChemAgents + Robot Chemist、嘉庚創新実験室ほか全 27 件は [English README → Academic Groups](README.md#-academic-groups) を参照。
+単一機関または PI が主導し、実際に SDL を動かしている研究グループ。A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、Jun Jiang グループ / ChemAgents + Robot Chemist ほか全 36 件は [English README → Academic Groups](README.md#-academic-groups) を参照。
 
 ## 🏭 商業・産業
 
-営利の SDL 企業、製薬企業の社内プログラム、および SDL 関連のハードウェア / 計測機器ベンダー。Lila Sciences、XtalPi、Cusp AI、DP Technology / Bohrium ほか全 26 件は [English README → Commercial & Industrial](README.md#-commercial--industrial) を参照。
+営利の SDL 企業、製薬企業の社内プログラム、および SDL 関連のハードウェア / 計測機器ベンダー。Lila Sciences、XtalPi、Cusp AI、DP Technology / Bohrium ほか全 33 件は [English README → Commercial & Industrial](README.md#-commercial--industrial) を参照。
 
 ## 🛰 ラボ OS・オーケストレーション
 

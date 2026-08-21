@@ -26,7 +26,7 @@
   </p>
 </div>
 
-> 自驱动实验室（SDL）把 AI 驱动的假设生成、自动化合成与在线表征闭合成一个回路。这份清单记录正在做这件事的人、计划和平台。它呈现的是我读到的版图，不是搜索引擎索引出来的结果。条目反映截至 2026 年 6 月的公开信息，通过 [交互式地图](https://sdl-map.discoverylabs.nl/) 持续修订。
+> 自驱动实验室（SDL）把 AI 驱动的假设生成、自动化合成与在线表征闭合成一个回路。这份清单记录正在做这件事的人、计划和平台。它呈现的是我读到的版图，不是搜索引擎索引出来的结果。条目反映截至 2026 年 8 月的公开信息，通过 [交互式地图](https://sdl-map.discoverylabs.nl/) 持续修订。
 
 ## 📚 目录
 
@@ -45,15 +45,15 @@
 
 ## 🌍 国家计划与联盟
 
-由公共部门主导、跨机构合作的 SDL 国家级或区域级计划。完整 11 个条目（包括 Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL 等）见 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)。
+由公共部门主导、跨机构合作的 SDL 国家级或区域级计划。完整 21 个条目（包括 NSF PCL Test Bed、Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL 等）见 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)。
 
 ## 🎓 学术团队
 
-由单一机构或 PI 主导，正在运行 SDL 的研究组。完整 27 个条目（包括 A-Lab、Cooper Group、Jensen Lab、江俊团队 / ChemAgents + Robot Chemist、嘉庚创新实验室等）见 [English README → Academic Groups](README.md#-academic-groups)。
+由单一机构或 PI 主导，正在运行 SDL 的研究组。完整 36 个条目（包括 A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、江俊团队 / ChemAgents + Robot Chemist、嘉庚创新实验室等）见 [English README → Academic Groups](README.md#-academic-groups)。
 
 ## 🏭 商业与工业
 
-营利型 SDL 公司、药企内部计划，以及与 SDL 相关的硬件 / 仪器供应商。完整 26 个条目（包括 Lila Sciences、晶泰科技、Cusp AI、深势科技 / Bohrium 等）见 [English README → Commercial & Industrial](README.md#-commercial--industrial)。
+营利型 SDL 公司、药企内部计划，以及与 SDL 相关的硬件 / 仪器供应商。完整 33 个条目（包括 Lila Sciences、晶泰科技、Cusp AI、深势科技 / Bohrium 等）见 [English README → Commercial & Industrial](README.md#-commercial--industrial)。
 
 ## 🛰 实验室操作系统与编排
 
