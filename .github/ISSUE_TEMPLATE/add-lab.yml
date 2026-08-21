@@ -81,7 +81,7 @@ body:
         - strong — AI closes the experimental loop
         - partial — AI assists, human closes the loop
         - planned — announced but not yet implemented
-        - none
+        - no AI in the loop
     validations:
       required: true
   - type: dropdown
