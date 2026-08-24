@@ -26,6 +26,10 @@
     <a href="README.ja.md">日本語</a> ·
     <a href="README.ko.md">한국어</a>
   </p>
+
+  <a href="https://sdl-map.discoverylabs.nl/">
+    <img src="public/sdl-landscape-card.png" alt="Global Self-Driving Lab Landscape: interactive world map, growth timeline, watch feed, five languages" width="850">
+  </a>
 </div>
 
 > Self-Driving Labs (SDLs) close the loop between AI-driven hypothesis, automated synthesis, and online characterisation. This list catalogues the people, programmes, and platforms doing the work. It captures the landscape as I read it, not as it indexes itself. Entries reflect public information as of June 2026 and are continuously revised through the [interactive map](https://sdl-map.discoverylabs.nl/).

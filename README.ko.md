@@ -24,6 +24,10 @@
     <a href="README.ja.md">日本語</a> ·
     <b>한국어</b>
   </p>
+
+  <a href="https://sdl-map.discoverylabs.nl/">
+    <img src="public/sdl-landscape-card.png" alt="글로벌 자율실험실 랜드스케이프: 인터랙티브 지도, 성장 타임라인, 워치 피드, 5개 언어" width="850">
+  </a>
 </div>
 
 > 자율실험실(Self-Driving Lab, SDL)은 AI 기반 가설 생성, 자동화 합성, 온라인 분석을 하나의 루프로 닫는 시스템입니다. 이 목록은 그 일을 실제로 하고 있는 사람과 프로젝트, 플랫폼을 기록한 것입니다. 검색엔진이 만든 목록이 아니라 제가 본 그대로의 분포입니다. 2026년 8월 시점의 공개 정보를 기반으로 [인터랙티브 지도](https://sdl-map.discoverylabs.nl/)와 함께 지속적으로 갱신됩니다.

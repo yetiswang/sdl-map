@@ -24,6 +24,10 @@
     <a href="README.ja.md">日本語</a> ·
     <a href="README.ko.md">한국어</a>
   </p>
+
+  <a href="https://sdl-map.discoverylabs.nl/">
+    <img src="public/sdl-landscape-card.png" alt="全球自驱动实验室版图:交互式地图、增长时间轴、动态追踪、五种语言" width="850">
+  </a>
 </div>
 
 > 自驱动实验室（SDL）把 AI 驱动的假设生成、自动化合成与在线表征闭合成一个回路。这份清单记录正在做这件事的人、计划和平台。它呈现的是我读到的版图，不是搜索引擎索引出来的结果。条目反映截至 2026 年 8 月的公开信息，通过 [交互式地图](https://sdl-map.discoverylabs.nl/) 持续修订。
