@@ -382,7 +382,7 @@
   {
     "id": "cooper",
     "name": "Cooper Group / MIF Liverpool",
-    "org": "U Liverpool (MIF facility)",
+    "org": "U Liverpool (MIF, opened 2017; CMD forerunner 2007)",
     "city": "Liverpool",
     "country": "UK",
     "flag": "🇬🇧",
@@ -398,9 +398,10 @@
     "investLabel": "£81M MIF (Unilever £25M + UKRPIF £11M)",
     "url": "https://www.liverpool.ac.uk/materials-innovation-factory/",
     "sources": [
-      "https://www.liverpool.ac.uk/cooper-group/"
+      "https://www.liverpool.ac.uk/cooper-group/",
+      "https://results2021.ref.ac.uk/impact?searchTerm=Centre%20for%20Materials%20Discovery"
     ],
-    "start": 2020
+    "start": 2017
   },
   {
     "id": "helma",
