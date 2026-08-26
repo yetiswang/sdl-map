@@ -39,7 +39,16 @@
     "growthTitle": "Growth of self-driving labs",
     "growthSub": "cumulative initiatives by first public year",
     "tlFounded": "founded",
-    "footerSuggest": "Suggest a lab"
+    "footerSuggest": "Suggest a lab",
+    "watchAll": "All",
+    "kindFunding": "Funding",
+    "kindLab": "New lab",
+    "kindTalent": "Talent",
+    "kindPolicy": "Policy",
+    "kindMilestone": "Milestone",
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "rssLabel": "RSS"
   },
   "zh-Hant": {
     "brandEyebrow": "荷蘭國家材料發現實驗室 · 實時追蹤",
@@ -81,7 +90,16 @@
     "growthTitle": "自驅動實驗室的成長",
     "growthSub": "按首次公開年份累計的項目數",
     "tlFounded": "新增",
-    "footerSuggest": "提交新條目"
+    "footerSuggest": "提交新條目",
+    "watchAll": "全部",
+    "kindFunding": "資金",
+    "kindLab": "新實驗室",
+    "kindTalent": "人才",
+    "kindPolicy": "政策",
+    "kindMilestone": "里程碑",
+    "showMore": "展開",
+    "showLess": "收起",
+    "rssLabel": "RSS 訂閱"
   },
   "ja": {
     "brandEyebrow": "オランダ国家材料発見研究所 · ライブ追跡",
@@ -123,7 +141,16 @@
     "growthTitle": "自律実験室の成長",
     "growthSub": "初公開年ごとの累積数",
     "tlFounded": "新規",
-    "footerSuggest": "ラボを提案"
+    "footerSuggest": "ラボを提案",
+    "watchAll": "すべて",
+    "kindFunding": "資金",
+    "kindLab": "新設ラボ",
+    "kindTalent": "人材",
+    "kindPolicy": "政策",
+    "kindMilestone": "マイルストーン",
+    "showMore": "続きを読む",
+    "showLess": "閉じる",
+    "rssLabel": "RSS"
   },
   "ko": {
     "brandEyebrow": "네덜란드 국가재료발견연구소 · 실시간 추적",
@@ -165,7 +192,16 @@
     "growthTitle": "자율 실험실의 성장",
     "growthSub": "첫 공개 연도별 누적 수",
     "tlFounded": "신규",
-    "footerSuggest": "랩 제안하기"
+    "footerSuggest": "랩 제안하기",
+    "watchAll": "전체",
+    "kindFunding": "펀딩",
+    "kindLab": "신규 랩",
+    "kindTalent": "인재",
+    "kindPolicy": "정책",
+    "kindMilestone": "마일스톤",
+    "showMore": "더 보기",
+    "showLess": "접기",
+    "rssLabel": "RSS"
   },
   "zh": {
     "brandEyebrow": "荷兰国家材料发现实验室 · 实时追踪",
@@ -207,6 +243,15 @@
     "growthTitle": "自驱动实验室的增长",
     "growthSub": "按首次公开年份累计的项目数",
     "tlFounded": "新增",
-    "footerSuggest": "提交新条目"
+    "footerSuggest": "提交新条目",
+    "watchAll": "全部",
+    "kindFunding": "资金",
+    "kindLab": "新实验室",
+    "kindTalent": "人才",
+    "kindPolicy": "政策",
+    "kindMilestone": "里程碑",
+    "showMore": "展开",
+    "showLess": "收起",
+    "rssLabel": "RSS 订阅"
   }
 }

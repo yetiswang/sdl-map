@@ -1,0 +1,162 @@
+---
+// Shared Watch list: kind chips, filter pills, month grouping, date rail,
+// clamped summaries with expand, per-item anchors, RSS link.
+// Used by all locale watch pages. Tokens only — see DESIGN.md.
+import watch from '../data/sdl_watch.json';
+import uiAll from '../i18n/ui.json';
+
+interface Props { lang: string }
+const { lang } = Astro.props;
+const ui = (uiAll as Record<string, Record<string, string>>)[lang];
+const prefix = lang === 'en' ? '/' : `/${lang}/`;
+
+const items = [...watch].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+
+const kindLabel = (k: string) =>
+  ui['kind' + k.charAt(0).toUpperCase() + k.slice(1)] || k;
+
+const kindsPresent = [...new Set(items.map(i => i.kind))];
+const kindCounts: Record<string, number> = {};
+for (const it of items) kindCounts[it.kind] = (kindCounts[it.kind] || 0) + 1;
+
+// Group newest-first items by YYYY-MM (locale-neutral mono eyebrow)
+const groups: { month: string; items: typeof items }[] = [];
+for (const it of items) {
+  const m = it.date.slice(0, 7);
+  const g = groups[groups.length - 1];
+  if (g && g.month === m) g.items.push(it);
+  else groups.push({ month: m, items: [it] });
+}
+---
+
+<div class="w-head">
+  <p class="w-intro">{ui.watchIntro}</p>
+  <a class="w-rss" href="/watch.xml" title="RSS">{ui.rssLabel} ⤓</a>
+</div>
+
+<div class="w-pills" role="group" id="w-pills" data-show-more={ui.showMore} data-show-less={ui.showLess}>
+  <button class="w-pill is-on" data-kind="all">{ui.watchAll} <span class="w-count">{items.length}</span></button>
+  {kindsPresent.map(k => (
+    <button class="w-pill" data-kind={k}>{kindLabel(k)} <span class="w-count">{kindCounts[k]}</span></button>
+  ))}
+</div>
+
+{groups.map(g => (
+  <section class="w-group" data-month={g.month}>
+    <h2 class="w-month">{g.month}</h2>
+    {g.items.map(it => (
+      <article class="w-item" id={it.id} data-kind={it.kind}>
+        <div class="w-rail">
+          <time datetime={it.date}>{it.date.slice(8)}</time>
+        </div>
+        <div class="w-body">
+          <div class="w-meta">
+            <span class="w-chip">{kindLabel(it.kind)}</span>
+            <a class="w-anchor" href={`#${it.id}`} aria-label="Permalink">¶</a>
+          </div>
+          <h3 class="w-title">{it.title}</h3>
+          <p class="w-sum">{it.summary}</p>
+          <div class="w-links">
+            {it.sources?.map(s => (
+              <a href={s.url} target="_blank" rel="noopener">{s.label} ↗</a>
+            ))}
+            {it.related && <a class="w-entry" href={`${prefix}entry/${it.related}/`}>{ui.viewEntry}</a>}
+          </div>
+        </div>
+      </article>
+    ))}
+  </section>
+))}
+
+<style>
+  .w-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: 0 0 20px; }
+  .w-intro { max-width: 62ch; margin: 0; font-size: 14px; line-height: 1.6; color: var(--ink-2); }
+  .w-rss { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+           color: var(--ink-3); border-bottom: 1px dotted var(--ink-3); white-space: nowrap; }
+  .w-rss:hover { color: var(--ink-2); }
+
+  .w-pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 26px; }
+  .w-pill { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--ink-2); background: var(--bg-2); border: 1px solid var(--rule); border-radius: 999px;
+            padding: 6px 12px; cursor: pointer; }
+  .w-pill:hover { background: var(--bg-3); }
+  .w-pill.is-on { color: var(--ink); background: var(--bg-3); border-color: var(--ink-4); }
+  .w-count { color: var(--ink-4); margin-left: 2px; font-variant-numeric: tabular-nums; }
+
+  .w-month { margin: 30px 0 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em;
+             text-transform: uppercase; color: var(--ink-4); font-weight: 500; }
+  .w-group:first-of-type .w-month { margin-top: 0; }
+
+  .w-item { display: grid; grid-template-columns: 56px 1fr; gap: 0 18px;
+            padding: 18px 0; border-top: 1px solid var(--rule-2); }
+  .w-rail time { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3);
+                 font-variant-numeric: tabular-nums; letter-spacing: 0.08em; }
+  .w-body { min-width: 0; max-width: 72ch; }
+
+  .w-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .w-chip { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--ink-2); background: var(--bg-3); border: 1px solid var(--rule);
+            border-radius: 4px; padding: 3px 8px; }
+  .w-anchor { font-size: 12px; color: var(--ink-4); opacity: 0; transition: opacity 0.12s; }
+  .w-item:hover .w-anchor, .w-anchor:focus { opacity: 1; }
+  .w-item:target { background: var(--bg-2); }
+
+  .w-title { margin: 0 0 8px; font-size: 16.5px; font-weight: 600; line-height: 1.4; color: var(--ink); }
+  .w-sum { margin: 0; font-size: 14px; line-height: 1.65; color: var(--ink-2); }
+  .w-sum.is-clamped { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  :global(.w-more) { margin-top: 6px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--ink-3); background: none; border: none; padding: 0;
+            cursor: pointer; border-bottom: 1px dotted var(--ink-3); }
+  :global(.w-more:hover) { color: var(--ink-2); }
+
+  .w-links { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 12px;
+             font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.02em; }
+  .w-links a { color: var(--ink-3); border-bottom: 1px dotted var(--ink-3); }
+  .w-links a:hover { color: var(--ink-2); }
+  .w-links .w-entry { color: var(--ink-2); margin-left: auto; }
+
+  @media (max-width: 640px) {
+    .w-item { grid-template-columns: 1fr; }
+    .w-rail { display: none; }
+    .w-head { flex-direction: column; }
+  }
+</style>
+
+<script>
+  // Kind filtering
+  const pills = document.querySelectorAll<HTMLButtonElement>('.w-pill');
+  pills.forEach(p => p.addEventListener('click', () => {
+    pills.forEach(q => q.classList.toggle('is-on', q === p));
+    const kind = p.dataset.kind;
+    document.querySelectorAll<HTMLElement>('.w-item').forEach(it => {
+      it.style.display = (kind === 'all' || it.dataset.kind === kind) ? '' : 'none';
+    });
+    document.querySelectorAll<HTMLElement>('.w-group').forEach(g => {
+      const visible = g.querySelector('.w-item:not([style*="none"])');
+      g.style.display = visible ? '' : 'none';
+    });
+  }));
+
+  // Clamp long summaries + expand toggle (progressive: full text without JS)
+  const pillsEl = document.getElementById('w-pills');
+  const MORE = pillsEl?.dataset.showMore || 'Show more';
+  const LESS = pillsEl?.dataset.showLess || 'Show less';
+  document.querySelectorAll<HTMLElement>('.w-sum').forEach(sum => {
+    sum.classList.add('is-clamped');
+    if (sum.scrollHeight <= sum.clientHeight + 4) { sum.classList.remove('is-clamped'); return; }
+    const btn = document.createElement('button');
+    btn.className = 'w-more';
+    btn.textContent = MORE;
+    btn.addEventListener('click', () => {
+      const clamped = sum.classList.toggle('is-clamped');
+      btn.textContent = clamped ? MORE : LESS;
+    });
+    sum.after(btn);
+  });
+
+  // Auto-expand a targeted (permalinked) item
+  if (location.hash) {
+    const t = document.querySelector(location.hash + ' .w-sum.is-clamped');
+    if (t) { t.classList.remove('is-clamped'); const b = t.parentElement?.querySelector('.w-more'); if (b) b.textContent = LESS; }
+  }
+</script>
