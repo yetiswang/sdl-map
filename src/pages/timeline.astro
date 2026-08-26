@@ -48,11 +48,12 @@ const msByYear = {};
 for (const m of evolution.milestones) (msByYear[m.year] = msByYear[m.year] || []).push(m);
 
 // SVG geometry
-const W = 720, H = 264, padL = 30, padR = 12, padT = 36, padB = 30;
+const W = 720, H = 340, padL = 42, padR = 14, padT = 48, padB = 34;
 const plotW = W - padL - padR, plotH = H - padT - padB;
 const n = chart.length;
 const slot = plotW / n;
-const bw = Math.min(36, slot * 0.6);
+const bw = Math.min(40, slot * 0.66);
+const gridVals = [25, 50, 75, 100].filter(v => v < chartMax);
 const baseY = padT + plotH;
 const yOf = v => padT + plotH - (v / chartMax) * plotH;
 
@@ -80,14 +81,19 @@ const ariaLabel = `${ui.growthTitle}: ${baseline} by ${CHART_START - 1}, rising 
         <div class="tl-chart-total"><span>{total}</span><em>{maxYear}</em></div>
       </div>
       <svg class="tl-chart" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label={ariaLabel}>
+        {gridVals.map(v => (
+          <g>
+            <line x1={padL} y1={yOf(v)} x2={W - padR} y2={yOf(v)} class="tl-grid" />
+            <text x={padL - 7} y={yOf(v) + 3} class="tl-grid-lbl">{v}</text>
+          </g>
+        ))}
         {eras.map((e, i) => {
           const x1 = padL + slot * (e.from - CHART_START);
           const w = slot * (e.to - e.from + 1);
           return (
             <g>
-              {i % 2 === 1 && <rect x={x1} y={padT - 22} width={w} height={plotH + 22} class="tl-era-band" />}
-              {i > 0 && <line x1={x1} y1={padT - 22} x2={x1} y2={baseY} class="tl-era-rule" />}
-              <text x={Math.min(x1 + w / 2, W - padR - 4)} y={padT - 13} class="tl-era-lbl" text-anchor={x1 + w / 2 > W - padR - 70 ? "end" : "middle"}>{e.label}</text>
+              {i > 0 && <line x1={x1} y1={padT - 26} x2={x1} y2={baseY} class="tl-era-rule" />}
+              <text x={Math.min(x1 + w / 2, W - padR - 4)} y={padT - 16} class="tl-era-lbl" text-anchor={x1 + w / 2 > W - padR - 90 ? "end" : "middle"}>{e.label}</text>
             </g>
           );
         })}
@@ -96,13 +102,15 @@ const ariaLabel = `${ui.growthTitle}: ${baseline} by ${CHART_START - 1}, rising 
           const x = padL + slot * i + (slot - bw) / 2;
           const yTop = yOf(c.cum);
           const ySplit = yOf(c.prevCum);
+          const gap = (baseY - ySplit) > 3 && (ySplit - yTop) > 3 ? 1.5 : 0;
+          const isFirst = i === 0, isLast = i === chart.length - 1;
           return (
-            <g>
-              <rect x={x} y={ySplit} width={bw} height={Math.max(0, baseY - ySplit)} class="tl-bar-base" rx="1.5" />
-              <rect x={x} y={yTop} width={bw} height={Math.max(0, ySplit - yTop)} class="tl-bar-new" rx="1.5" />
-              <text x={x + bw / 2} y={yTop - 5} class="tl-bar-val">{c.cum}</text>
-              {c.nw > 0 && <text x={x + bw / 2} y={baseY + 19} class="tl-bar-new-lbl">+{c.nw}</text>}
-              <text x={x + bw / 2} y={baseY + 11} class="tl-bar-yr">{c.year}</text>
+            <g class="tl-barg">
+              <title>{c.year}: {c.cum} ({c.nw > 0 ? `+${c.nw}` : '±0'})</title>
+              <rect x={x} y={ySplit} width={bw} height={Math.max(0, baseY - ySplit)} class="tl-bar-base" />
+              <rect x={x} y={yTop} width={bw} height={Math.max(0, ySplit - yTop - gap)} class="tl-bar-new" />
+              {(isFirst || isLast) && <text x={x + bw / 2} y={yTop - 7} class={isLast ? "tl-bar-val tl-bar-val-last" : "tl-bar-val"}>{c.cum}</text>}
+              <text x={x + bw / 2} y={baseY + 16} class="tl-bar-yr">{c.year}</text>
             </g>
           );
         })}
@@ -167,22 +175,24 @@ const ariaLabel = `${ui.growthTitle}: ${baseline} by ${CHART_START - 1}, rising 
     .tl-chart-total em { display:block; font-style:normal; font-size:10px; color:var(--ink-3); margin-top:2px; }
     .tl-chart { width:100%; height:auto; display:block; }
     .tl-axis { stroke:var(--rule); stroke-width:1; }
+    .tl-grid { stroke:var(--rule-2); stroke-width:1; }
+    .tl-grid-lbl { fill:var(--ink-4); font-size:9.5px; text-anchor:end; font-family:var(--font-mono); font-variant-numeric:tabular-nums; }
     .tl-bar-base { fill:var(--c-national); opacity:0.22; }
     .tl-bar-new  { fill:var(--c-national); opacity:0.9; }
-    .tl-bar-val { fill:var(--ink-2); font-size:9px; font-weight:600; text-anchor:middle; font-family:var(--font-mono); }
-    .tl-bar-yr { fill:var(--ink-3); font-size:8.5px; text-anchor:middle; }
-    .tl-bar-new-lbl { fill:var(--c-national); font-size:7.5px; text-anchor:middle; opacity:0.8; }
-    .tl-legend { display:flex; gap:16px; align-items:center; margin-top:8px; font-size:10.5px; color:var(--ink-3); flex-wrap:wrap; }
+    .tl-barg:hover .tl-bar-base { opacity:0.32; }
+    .tl-bar-val { fill:var(--ink-2); font-size:11px; font-weight:600; text-anchor:middle; font-family:var(--font-mono); font-variant-numeric:tabular-nums; }
+    .tl-bar-val-last { fill:var(--ink); font-size:12.5px; }
+    .tl-bar-yr { fill:var(--ink-3); font-size:10.5px; text-anchor:middle; font-family:var(--font-mono); }
+    .tl-legend { display:flex; gap:16px; align-items:center; margin-top:10px; font-size:12px; color:var(--ink-3); flex-wrap:wrap; }
     .tl-legend span { display:inline-flex; align-items:center; gap:5px; }
     .tl-legend i { width:10px; height:10px; border-radius:2px; display:inline-block; background:var(--c-national); }
     .tl-legend .sw-base { opacity:0.22; }
     .tl-legend .sw-new { opacity:0.9; }
     .tl-legend-note { margin-left:auto; font-style:italic; }
 
-    .tl-era-band { fill:var(--bg-3); opacity:0.5; }
-    .tl-era-rule { stroke:var(--rule); stroke-width:1; stroke-dasharray:2 3; }
-    .tl-era-lbl { fill:var(--ink-3); font-size:7.5px; text-anchor:middle; font-family:var(--font-mono); letter-spacing:0.06em; text-transform:uppercase; }
-    .tl-evo-attrib { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:10px; padding-top:10px; border-top:1px solid var(--rule-2); font-size:10px; color:var(--ink-4); font-family:var(--font-mono); }
+    .tl-era-rule { stroke:var(--rule); stroke-width:1; opacity:0.7; }
+    .tl-era-lbl { fill:var(--ink-3); font-size:10.5px; text-anchor:middle; font-family:var(--font-mono); letter-spacing:0.05em; text-transform:uppercase; }
+    .tl-evo-attrib { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:10px; padding-top:10px; border-top:1px solid var(--rule-2); font-size:11.5px; color:var(--ink-4); font-family:var(--font-mono); }
     .tl-axis-key b { color:var(--ink-3); font-weight:600; border:1px solid var(--rule); border-radius:3px; padding:0 4px; margin-right:3px; }
     .tl-evo-attrib a { margin-left:auto; color:var(--ink-4); border-bottom:1px dotted var(--ink-4); font-style:italic; }
     .tl-evo-attrib a:hover { color:var(--ink-3); }
