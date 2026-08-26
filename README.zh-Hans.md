@@ -53,7 +53,7 @@
 
 ## 🎓 学术团队
 
-由单一机构或 PI 主导，正在运行 SDL 的研究组。完整 36 个条目（包括 A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、江俊团队 / ChemAgents + Robot Chemist、嘉庚创新实验室等）见 [English README → Academic Groups](README.md#-academic-groups)。
+由单一机构或 PI 主导，正在运行 SDL 的研究组。完整 38 个条目（包括 A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、江俊团队 / ChemAgents + Robot Chemist、嘉庚创新实验室等）见 [English README → Academic Groups](README.md#-academic-groups)。
 
 ## 🏭 商业与工业
 

@@ -2381,5 +2381,54 @@
       "https://doi.org/10.5281/zenodo.14191482"
     ],
     "start": 2022
+  },
+  {
+    "id": "empa_aurora",
+    "name": "Aurora (Empa)",
+    "org": "Empa (Battaglia Lab, Materials for Energy Conversion)",
+    "city": "Duebendorf",
+    "country": "Switzerland",
+    "flag": "🇨🇭",
+    "lat": 47.4,
+    "lon": 8.61,
+    "tier": "academic",
+    "domain": "batteries",
+    "maturity": "operational",
+    "charact": "multi-technique",
+    "ai": "strong",
+    "scale": ">1200 cycler channels",
+    "invest": 0,
+    "investLabel": "—",
+    "url": "https://www.empa.ch/econversion",
+    "sources": [
+      "https://doi.org/10.1002/batt.202500155",
+      "https://pubs.rsc.org/doi/d5dd00567a",
+      "https://zenodo.org/records/15481956"
+    ],
+    "start": 2022
+  },
+  {
+    "id": "empa_ophelia",
+    "name": "Ophelia (Empa)",
+    "org": "Empa (Battaglia Lab, Materials for Energy Conversion)",
+    "city": "Duebendorf",
+    "country": "Switzerland",
+    "flag": "🇨🇭",
+    "lat": 47.42,
+    "lon": 8.63,
+    "tier": "academic",
+    "domain": "energy",
+    "maturity": "operational",
+    "charact": "multi-technique",
+    "ai": "strong",
+    "scale": "8 parallel CO2 electrolysis reactors",
+    "invest": 0,
+    "investLabel": "—",
+    "url": "https://www.empa.ch/econversion",
+    "sources": [
+      "https://doi.org/10.1038/s41929-024-01172-x",
+      "https://www.empa.ch/web/s604/parallel-co2-electrolysis"
+    ],
+    "start": 2024
   }
 ]
