@@ -3,6 +3,7 @@
 // clamped summaries with expand, per-item anchors, RSS link.
 // Used by all locale watch pages. Tokens only — see DESIGN.md.
 import watch from '../data/sdl_watch.json';
+import PageHead from './PageHead.astro';
 import uiAll from '../i18n/ui.json';
 
 interface Props { lang: string }
@@ -29,10 +30,9 @@ for (const it of items) {
 }
 ---
 
-<div class="w-head">
-  <p class="w-intro">{ui.watchIntro}</p>
+<PageHead title={ui.watch} desc={ui.watchIntro}>
   <a class="w-rss" href="/watch.xml" title="RSS">{ui.rssLabel} ⤓</a>
-</div>
+</PageHead>
 
 <div class="w-pills" role="group" id="w-pills" data-show-more={ui.showMore} data-show-less={ui.showLess}>
   <button class="w-pill is-on" data-kind="all">{ui.watchAll} <span class="w-count">{items.length}</span></button>
@@ -69,8 +69,6 @@ for (const it of items) {
 ))}
 
 <style>
-  .w-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: 0 0 20px; }
-  .w-intro { max-width: 62ch; margin: 0; font-size: 14px; line-height: 1.6; color: var(--ink-2); }
   .w-rss { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
            color: var(--ink-3); border-bottom: 1px dotted var(--ink-3); white-space: nowrap; }
   .w-rss:hover { color: var(--ink-2); }

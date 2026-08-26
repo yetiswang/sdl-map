@@ -1,5 +1,6 @@
 ---
 import UnifiedLayout from '../../layouts/UnifiedLayout.astro';
+import PageHead from '../../components/PageHead.astro';
 import data from '../../data/sdl_data.json';
 import uiAll from '../../i18n/ui.json';
 import chinaNames from '../../i18n/china-names.json';
@@ -30,8 +31,9 @@ function haystack(e: any): string {
 }
 ---
 
-<UnifiedLayout title={`${ui.list} · ${ui.brandH1}`} lang={lang} activeView="list">
+<UnifiedLayout title={`${ui.list} · ${ui.brandH1}`} description={ui.listIntro} lang={lang} activeView="list">
   <main style="max-width:1100px;margin:0 auto;padding:24px 28px;">
+    <PageHead title={ui.list} desc={ui.listIntro} />
     <input
       id="card-search"
       type="search"

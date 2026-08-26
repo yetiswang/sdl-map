@@ -1,5 +1,6 @@
 ---
 import UnifiedLayout from '../../layouts/UnifiedLayout.astro';
+import PageHead from '../../components/PageHead.astro';
 import WatchList from '../../components/WatchList.astro';
 import uiAll from '../../i18n/ui.json';
 
@@ -7,7 +8,7 @@ const lang = 'ko';
 const ui = uiAll[lang];
 ---
 
-<UnifiedLayout title={`${ui.watch} · ${ui.brandH1}`} lang={lang} activeView="watch">
+<UnifiedLayout title={`${ui.watch} · ${ui.brandH1}`} description={ui.watchIntro} lang={lang} activeView="watch">
   <main style="max-width:1100px;margin:0 auto;padding:24px 28px;" data-pagefind-body>
     <WatchList lang={lang} />
   </main>
