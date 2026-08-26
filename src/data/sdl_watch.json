@@ -1,5 +1,27 @@
 [
   {
+    "id": "chem-reasoning-sdl-debate-2026",
+    "date": "2026-08-26",
+    "kind": "milestone",
+    "title": "Chem hosts the field's first structured debate on 'reasoning SDLs' — Abolhasani Catalyst + five Reaction responses",
+    "summary": "Chem's August 2026 issue (Vol. 12/8) pairs Milad Abolhasani's Catalyst commentary 'When self-driving labs begin to reason' — arguing the SDL bottleneck has moved from executing experiments to deciding what science to do next — with five invited Reaction responses from leading groups: Chen/Xie/Jiang (USTC) call for experimentally grounded chemical world models; Boser/Glorius (Münster) bring synthetic-chemistry adoption realism; Fan/Liu (UCLA) demand agentic AI that explains as well as optimizes; Aspuru-Guzik/Bernales (Toronto) argue for trust infrastructure 'beyond fragile eloquence'; and Sin/Segura/Winkler/Schwaller (EPFL LIAC + Roche) frame reasoning labs as reproducible physical infrastructure. Notably, every response converges on verification and infrastructure rather than raw capability — the same month the anchor author's Nature Reviews Chemistry review recast SDLs as shared scientific infrastructure.",
+    "sources": [
+      {
+        "label": "Abolhasani Catalyst (Chem)",
+        "url": "https://doi.org/10.1016/j.chempr.2026.103108"
+      },
+      {
+        "label": "Aspuru-Guzik & Bernales Reaction",
+        "url": "https://doi.org/10.1016/j.chempr.2026.103163"
+      },
+      {
+        "label": "Schwaller et al. Reaction",
+        "url": "https://doi.org/10.1016/j.chempr.2026.103147"
+      }
+    ],
+    "related": "abolh"
+  },
+  {
     "id": "utk-athena-2026",
     "date": "2026-08-12",
     "kind": "funding",
