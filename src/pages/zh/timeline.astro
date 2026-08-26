@@ -44,6 +44,7 @@ const eras = evolution.eras.map(e => ({
   to: e.to ?? maxYear,
 }));
 const axisLegend = [['G', ui.axisG], ['S', ui.axisS], ['D', ui.axisD]];
+const eraOpacity = [0.35, 0.65, 1.0];
 const msByYear = {};
 for (const m of evolution.milestones) (msByYear[m.year] = msByYear[m.year] || []).push(m);
 
@@ -93,7 +94,8 @@ const ariaLabel = `${ui.growthTitle}: ${baseline} by ${CHART_START - 1}, rising 
           return (
             <g>
               {i > 0 && <line x1={x1} y1={padT - 36} x2={x1} y2={baseY} class="tl-era-rule" />}
-              <text x={Math.min(x1 + w / 2, W - padR - 4)} y={padT - 44} class="tl-era-lbl" text-anchor={x1 + w / 2 > W - padR - 90 ? "end" : "middle"}>{e.label}</text>
+              <circle cx={x1 + 5} cy={padT - 48} r="3.5" fill="var(--c-national)" opacity={eraOpacity[i] ?? 1} />
+              <text x={x1 + 14} y={padT - 44} class="tl-era-lbl" text-anchor="start">{e.label}</text>
             </g>
           );
         })}
@@ -191,7 +193,7 @@ const ariaLabel = `${ui.growthTitle}: ${baseline} by ${CHART_START - 1}, rising 
     .tl-legend-note { margin-left:auto; font-style:italic; }
 
     .tl-era-rule { stroke:var(--rule); stroke-width:1; opacity:0.7; }
-    .tl-era-lbl { fill:var(--ink-2); font-size:11.5px; text-anchor:middle; font-family:var(--font-mono); letter-spacing:0.05em; text-transform:uppercase; }
+    .tl-era-lbl { fill:var(--ink-2); font-size:11.5px; font-family:var(--font-mono); letter-spacing:0.05em; text-transform:uppercase; }
     .tl-evo-attrib { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:10px; padding-top:10px; border-top:1px solid var(--rule-2); font-size:11.5px; color:var(--ink-4); font-family:var(--font-mono); }
     .tl-axis-key b { color:var(--ink-3); font-weight:600; border:1px solid var(--rule); border-radius:3px; padding:0 4px; margin-right:3px; }
     .tl-evo-attrib a { margin-left:auto; color:var(--ink-4); border-bottom:1px dotted var(--ink-4); font-style:italic; }
