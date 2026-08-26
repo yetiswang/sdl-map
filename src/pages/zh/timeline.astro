@@ -2,6 +2,7 @@
 import UnifiedLayout from '../../layouts/UnifiedLayout.astro';
 import PageHead from '../../components/PageHead.astro';
 import data from '../../data/sdl_data.json';
+import evolution from '../../data/sdl_evolution.json';
 import uiAll from '../../i18n/ui.json';
 
 const lang = 'zh';
@@ -35,8 +36,19 @@ for (let y = CHART_START; y <= maxYear; y++) {
 }
 const chartMax = cum;
 
+// Evolution framing (after Canty & Abolhasani, Nat. Rev. Chem. 2026)
+const eras = evolution.eras.map(e => ({
+  ...e,
+  label: ui[e.key],
+  from: Math.max(e.from, CHART_START),
+  to: e.to ?? maxYear,
+}));
+const axisLegend = [['G', ui.axisG], ['S', ui.axisS], ['D', ui.axisD]];
+const msByYear = {};
+for (const m of evolution.milestones) (msByYear[m.year] = msByYear[m.year] || []).push(m);
+
 // SVG geometry
-const W = 720, H = 250, padL = 30, padR = 12, padT = 22, padB = 30;
+const W = 720, H = 264, padL = 30, padR = 12, padT = 36, padB = 30;
 const plotW = W - padL - padR, plotH = H - padT - padB;
 const n = chart.length;
 const slot = plotW / n;
@@ -68,6 +80,17 @@ const ariaLabel = `${ui.growthTitle}: ${baseline} by ${CHART_START - 1}, rising 
         <div class="tl-chart-total"><span>{total}</span><em>{maxYear}</em></div>
       </div>
       <svg class="tl-chart" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label={ariaLabel}>
+        {eras.map((e, i) => {
+          const x1 = padL + slot * (e.from - CHART_START);
+          const w = slot * (e.to - e.from + 1);
+          return (
+            <g>
+              {i % 2 === 1 && <rect x={x1} y={padT - 22} width={w} height={plotH + 22} class="tl-era-band" />}
+              {i > 0 && <line x1={x1} y1={padT - 22} x2={x1} y2={baseY} class="tl-era-rule" />}
+              <text x={Math.min(x1 + w / 2, W - padR - 4)} y={padT - 13} class="tl-era-lbl" text-anchor={x1 + w / 2 > W - padR - 70 ? "end" : "middle"}>{e.label}</text>
+            </g>
+          );
+        })}
         <line x1={padL} y1={baseY} x2={W - padR} y2={baseY} class="tl-axis" />
         {chart.map((c, i) => {
           const x = padL + slot * i + (slot - bw) / 2;
@@ -89,6 +112,10 @@ const ariaLabel = `${ui.growthTitle}: ${baseline} by ${CHART_START - 1}, rising 
         <span><i class="sw-base"></i>cumulative</span>
         <span class="tl-legend-note">+{baseline} lab-automation roots before {CHART_START}</span>
       </div>
+      <div class="tl-evo-attrib">
+        {axisLegend.map(([k, v]) => <span class="tl-axis-key"><b>{k}</b> {v}</span>)}
+        <a href="https://doi.org/10.1038/s41570-026-00847-2" target="_blank" rel="noopener">{ui.evoAttrib} ↗</a>
+      </div>
     </section>
 
     <div class="tl-rail">
@@ -97,6 +124,19 @@ const ariaLabel = `${ui.growthTitle}: ${baseline} by ${CHART_START - 1}, rising 
         <div class="tl-stage">
           <div class="tl-dot"></div>
           <h2 class="tl-h2">{g.year}<span class="tl-yrcount">{g.items.length}</span></h2>
+          {msByYear[g.year] && (
+            <div class="tl-ms">
+              <div class="tl-ms-label">{ui.milestonesLabel}</div>
+              {msByYear[g.year].map(m => (
+                <a href={`${prefix}entry/${m.entry}/`} class="tl-ms-item">
+                  <span class="tl-ms-star">★</span>
+                  <span class="tl-ms-name">{m.name}</span>
+                  <span class="tl-ms-axes">{m.axes.map(a => <b class="tl-ms-axis">{a}</b>)}</span>
+                  <span class="tl-ms-note">{m.note}</span>
+                </a>
+              ))}
+            </div>
+          )}
           <div class="tl-stage-list">
             {g.items.map(e => (
               <a href={`${prefix}entry/${e.id}/`} class="tl-card">
@@ -138,6 +178,24 @@ const ariaLabel = `${ui.growthTitle}: ${baseline} by ${CHART_START - 1}, rising 
     .tl-legend .sw-base { opacity:0.22; }
     .tl-legend .sw-new { opacity:0.9; }
     .tl-legend-note { margin-left:auto; font-style:italic; }
+
+    .tl-era-band { fill:var(--bg-3); opacity:0.5; }
+    .tl-era-rule { stroke:var(--rule); stroke-width:1; stroke-dasharray:2 3; }
+    .tl-era-lbl { fill:var(--ink-3); font-size:7.5px; text-anchor:middle; font-family:var(--font-mono); letter-spacing:0.06em; text-transform:uppercase; }
+    .tl-evo-attrib { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:10px; padding-top:10px; border-top:1px solid var(--rule-2); font-size:10px; color:var(--ink-4); font-family:var(--font-mono); }
+    .tl-axis-key b { color:var(--ink-3); font-weight:600; border:1px solid var(--rule); border-radius:3px; padding:0 4px; margin-right:3px; }
+    .tl-evo-attrib a { margin-left:auto; color:var(--ink-4); border-bottom:1px dotted var(--ink-4); font-style:italic; }
+    .tl-evo-attrib a:hover { color:var(--ink-3); }
+
+    .tl-ms { margin:0 0 12px; padding:10px 14px; background:var(--bg-2); border:1px solid var(--rule); border-radius:8px; }
+    .tl-ms-label { font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-4); margin-bottom:8px; }
+    .tl-ms-item { display:flex; align-items:baseline; gap:8px; padding:4px 0; color:inherit; min-width:0; flex-wrap:wrap; }
+    .tl-ms-star { color:var(--c-national); font-size:11px; flex-shrink:0; }
+    .tl-ms-name { font-weight:600; font-size:13px; color:var(--ink); }
+    .tl-ms-axes { display:inline-flex; gap:3px; flex-shrink:0; }
+    .tl-ms-axis { font-family:var(--font-mono); font-size:9px; font-weight:600; color:var(--ink-3); border:1px solid var(--rule); border-radius:3px; padding:0 4px; }
+    .tl-ms-note { font-size:12px; color:var(--ink-3); flex-basis:100%; padding-left:19px; }
+    .tl-ms-item:hover .tl-ms-name { color:var(--c-national); }
 
     .tl-rail { position:relative; padding-left:24px; }
     .tl-line { position:absolute; left:6px; top:8px; bottom:8px; width:2px; background:var(--rule); }

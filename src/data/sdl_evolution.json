@@ -1,0 +1,26 @@
+{
+  "_comment": "Evolution framing after Canty & Abolhasani, Nat. Rev. Chem. 2026, 10, 523-537 (https://doi.org/10.1038/s41570-026-00847-2). Eras periodise the field's arc toward networked SDLs / collective scientific superintelligence (CSS); milestones follow the review's Table 1, restricted to platforms with a map entry. Axes: G generalizability, S scalability, D comprehensive structured (meta)data. Notes are data-level English (like entry fields).",
+  "source": "https://doi.org/10.1038/s41570-026-00847-2",
+  "eras": [
+    { "key": "era1", "from": 2014, "to": 2019 },
+    { "key": "era2", "from": 2020, "to": 2023 },
+    { "key": "era3", "from": 2024, "to": null }
+  ],
+  "milestones": [
+    { "year": 2016, "name": "ARES OS", "entry": "ares_afrl", "axes": ["D"], "note": "First major infrastructure package for SDL deployment; proper database organization of experimental data" },
+    { "year": 2018, "name": "Chemputer", "entry": "cronin", "axes": ["G"], "note": "Device and protocol abstraction — chemistry digitalized as executable code" },
+    { "year": 2020, "name": "Mobile Robot Chemist", "entry": "cooper", "axes": ["G", "S"], "note": "Extensibility through mechanical training; physical agent decoupled from apparatus scaling" },
+    { "year": 2020, "name": "CAMEO", "entry": "cameo_nist", "axes": ["G"], "note": "Opt-in human collaboration; joint phase mapping and property optimization at the beamline" },
+    { "year": 2020, "name": "MAOSIC", "entry": "maosic_cuhksz", "axes": ["S"], "note": "First cloud-SDL demonstration — remote operation" },
+    { "year": 2021, "name": "AMANDA", "entry": "amadap", "axes": ["S", "D"], "note": "Multiplatform control architecture; data and hardware integration structuring" },
+    { "year": 2022, "name": "Reconfigurable flow (Nambiar et al.)", "entry": "jensen", "axes": ["G"], "note": "Online reconfiguration of flow chemistry systems" },
+    { "year": 2023, "name": "AlphaFlow", "entry": "abolh", "axes": ["G"], "note": "Variable-process multistep nanoparticle optimization in flow" },
+    { "year": 2023, "name": "FINALES", "entry": "bigmap", "axes": ["S", "D"], "note": "Decentralized experimental + simulation control; BattINFO ontology for data capture" },
+    { "year": 2023, "name": "A-Lab", "entry": "alab", "axes": ["G"], "note": "Intensive solids handling — solid-state synthesis of complex powders" },
+    { "year": 2023, "name": "CoScientist", "entry": "coscient", "axes": ["G", "D"], "note": "LLM-based experimental design, planning, and execution" },
+    { "year": 2023, "name": "AMD Platform", "entry": "jensen", "axes": ["G"], "note": "Closed-loop multistep synthesis with automatic process rectification" },
+    { "year": 2024, "name": "MicroCycle", "entry": "novartis", "axes": ["S"], "note": "Integration with existing industrial (Novartis) infrastructure" },
+    { "year": 2024, "name": "RoboChem", "entry": "noel", "axes": ["G"], "note": "Multiscale operation in flow — photocatalytic optimization and scale-up" },
+    { "year": 2025, "name": "MINERVA", "entry": "minerva_bam", "axes": ["D"], "note": "ELN/LIMS integration via OpenBIS — the data layer built in" }
+  ]
+}

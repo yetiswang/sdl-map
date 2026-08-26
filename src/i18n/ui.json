@@ -50,7 +50,15 @@
     "showLess": "Show less",
     "rssLabel": "RSS",
     "listIntro": "Every initiative on the map as a searchable, filterable directory — grouped by tier, with domain, maturity, scale, and investment at a glance.",
-    "timelineIntro": "How the field grew: cumulative initiatives by first public year, and every entry placed on the timeline."
+    "timelineIntro": "How the field grew: cumulative initiatives by first public year, and every entry placed on the timeline.",
+    "era1": "closed-loop demos",
+    "era2": "multipurpose platforms",
+    "era3": "networked SDLs → CSS",
+    "axisG": "generalizability",
+    "axisS": "scalability",
+    "axisD": "structured (meta)data",
+    "milestonesLabel": "Milestones",
+    "evoAttrib": "Eras & milestones after Canty & Abolhasani, Nat. Rev. Chem. 2026 · CSS = collective scientific superintelligence"
   },
   "zh-Hant": {
     "brandEyebrow": "荷蘭國家材料發現實驗室 · 實時追蹤",
@@ -103,7 +111,15 @@
     "showLess": "收起",
     "rssLabel": "RSS 訂閱",
     "listIntro": "地圖上的全部條目,可搜尋、可篩選的目錄——按類別分組,域、成熟度、規模與投資一覽。",
-    "timelineIntro": "領域如何成長:按首次公開年份累計的條目數,以及時間軸上的每一個條目。"
+    "timelineIntro": "領域如何成長:按首次公開年份累計的條目數,以及時間軸上的每一個條目。",
+    "era1": "閉環演示",
+    "era2": "多用途平台",
+    "era3": "網絡化 SDL → CSS",
+    "axisG": "通用性",
+    "axisS": "可擴展性",
+    "axisD": "結構化(元)數據",
+    "milestonesLabel": "里程碑",
+    "evoAttrib": "分期與里程碑依據 Canty & Abolhasani, Nat. Rev. Chem. 2026 · CSS = 集體科學超級智能"
   },
   "ja": {
     "brandEyebrow": "オランダ国家材料発見研究所 · ライブ追跡",
@@ -156,7 +172,15 @@
     "showLess": "閉じる",
     "rssLabel": "RSS",
     "listIntro": "マップ上の全項目を検索・絞り込み可能なディレクトリとして表示——カテゴリ別に、分野・成熟度・規模・投資を一覧。",
-    "timelineIntro": "分野の成長:初公開年ごとの累計数と、タイムライン上の全項目。"
+    "timelineIntro": "分野の成長:初公開年ごとの累計数と、タイムライン上の全項目。",
+    "era1": "クローズドループ実証",
+    "era2": "多目的プラットフォーム",
+    "era3": "ネットワーク化 SDL → CSS",
+    "axisG": "汎用性",
+    "axisS": "スケーラビリティ",
+    "axisD": "構造化(メタ)データ",
+    "milestonesLabel": "マイルストーン",
+    "evoAttrib": "時代区分とマイルストーンは Canty & Abolhasani, Nat. Rev. Chem. 2026 に基づく · CSS = 集合的科学超知能"
   },
   "ko": {
     "brandEyebrow": "네덜란드 국가재료발견연구소 · 실시간 추적",
@@ -209,7 +233,15 @@
     "showLess": "접기",
     "rssLabel": "RSS",
     "listIntro": "지도 위 모든 항목을 검색·필터 가능한 디렉토리로 — 카테고리별, 분야·성숙도·규모·투자 한눈에.",
-    "timelineIntro": "분야의 성장: 최초 공개 연도별 누적 수와 타임라인 위의 모든 항목."
+    "timelineIntro": "분야의 성장: 최초 공개 연도별 누적 수와 타임라인 위의 모든 항목.",
+    "era1": "폐루프 실증",
+    "era2": "다목적 플랫폼",
+    "era3": "네트워크형 SDL → CSS",
+    "axisG": "일반화",
+    "axisS": "확장성",
+    "axisD": "구조화 (메타)데이터",
+    "milestonesLabel": "마일스톤",
+    "evoAttrib": "시대 구분과 마일스톤: Canty & Abolhasani, Nat. Rev. Chem. 2026 기준 · CSS = 집단 과학 초지능"
   },
   "zh": {
     "brandEyebrow": "荷兰国家材料发现实验室 · 实时追踪",
@@ -262,6 +294,14 @@
     "showLess": "收起",
     "rssLabel": "RSS 订阅",
     "listIntro": "地图上的全部条目,可搜索、可筛选的目录——按类别分组,域、成熟度、规模与投资一览。",
-    "timelineIntro": "领域如何成长:按首次公开年份累计的条目数,以及时间轴上的每一个条目。"
+    "timelineIntro": "领域如何成长:按首次公开年份累计的条目数,以及时间轴上的每一个条目。",
+    "era1": "闭环演示",
+    "era2": "多用途平台",
+    "era3": "网络化 SDL → CSS",
+    "axisG": "通用性",
+    "axisS": "可扩展性",
+    "axisD": "结构化(元)数据",
+    "milestonesLabel": "里程碑",
+    "evoAttrib": "分期与里程碑依据 Canty & Abolhasani, Nat. Rev. Chem. 2026 · CSS = 集体科学超级智能"
   }
 }
