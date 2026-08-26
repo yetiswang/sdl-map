@@ -48,7 +48,7 @@ const msByYear = {};
 for (const m of evolution.milestones) (msByYear[m.year] = msByYear[m.year] || []).push(m);
 
 // SVG geometry
-const W = 720, H = 340, padL = 42, padR = 14, padT = 48, padB = 34;
+const W = 720, H = 360, padL = 42, padR = 14, padT = 66, padB = 34;
 const plotW = W - padL - padR, plotH = H - padT - padB;
 const n = chart.length;
 const slot = plotW / n;
@@ -92,8 +92,8 @@ const ariaLabel = `${ui.growthTitle}: ${baseline} by ${CHART_START - 1}, rising 
           const w = slot * (e.to - e.from + 1);
           return (
             <g>
-              {i > 0 && <line x1={x1} y1={padT - 26} x2={x1} y2={baseY} class="tl-era-rule" />}
-              <text x={Math.min(x1 + w / 2, W - padR - 4)} y={padT - 16} class="tl-era-lbl" text-anchor={x1 + w / 2 > W - padR - 90 ? "end" : "middle"}>{e.label}</text>
+              {i > 0 && <line x1={x1} y1={padT - 36} x2={x1} y2={baseY} class="tl-era-rule" />}
+              <text x={Math.min(x1 + w / 2, W - padR - 4)} y={padT - 44} class="tl-era-lbl" text-anchor={x1 + w / 2 > W - padR - 90 ? "end" : "middle"}>{e.label}</text>
             </g>
           );
         })}
@@ -176,13 +176,13 @@ const ariaLabel = `${ui.growthTitle}: ${baseline} by ${CHART_START - 1}, rising 
     .tl-chart { width:100%; height:auto; display:block; }
     .tl-axis { stroke:var(--rule); stroke-width:1; }
     .tl-grid { stroke:var(--rule-2); stroke-width:1; }
-    .tl-grid-lbl { fill:var(--ink-4); font-size:9.5px; text-anchor:end; font-family:var(--font-mono); font-variant-numeric:tabular-nums; }
+    .tl-grid-lbl { fill:var(--ink-3); font-size:10px; text-anchor:end; font-family:var(--font-mono); font-variant-numeric:tabular-nums; }
     .tl-bar-base { fill:var(--c-national); opacity:0.22; }
     .tl-bar-new  { fill:var(--c-national); opacity:0.9; }
     .tl-barg:hover .tl-bar-base { opacity:0.32; }
     .tl-bar-val { fill:var(--ink-2); font-size:11px; font-weight:600; text-anchor:middle; font-family:var(--font-mono); font-variant-numeric:tabular-nums; }
     .tl-bar-val-last { fill:var(--ink); font-size:12.5px; }
-    .tl-bar-yr { fill:var(--ink-3); font-size:10.5px; text-anchor:middle; font-family:var(--font-mono); }
+    .tl-bar-yr { fill:var(--ink-2); font-size:10.5px; text-anchor:middle; font-family:var(--font-mono); }
     .tl-legend { display:flex; gap:16px; align-items:center; margin-top:10px; font-size:12px; color:var(--ink-3); flex-wrap:wrap; }
     .tl-legend span { display:inline-flex; align-items:center; gap:5px; }
     .tl-legend i { width:10px; height:10px; border-radius:2px; display:inline-block; background:var(--c-national); }
@@ -191,7 +191,7 @@ const ariaLabel = `${ui.growthTitle}: ${baseline} by ${CHART_START - 1}, rising 
     .tl-legend-note { margin-left:auto; font-style:italic; }
 
     .tl-era-rule { stroke:var(--rule); stroke-width:1; opacity:0.7; }
-    .tl-era-lbl { fill:var(--ink-3); font-size:10.5px; text-anchor:middle; font-family:var(--font-mono); letter-spacing:0.05em; text-transform:uppercase; }
+    .tl-era-lbl { fill:var(--ink-2); font-size:11.5px; text-anchor:middle; font-family:var(--font-mono); letter-spacing:0.05em; text-transform:uppercase; }
     .tl-evo-attrib { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:10px; padding-top:10px; border-top:1px solid var(--rule-2); font-size:11.5px; color:var(--ink-4); font-family:var(--font-mono); }
     .tl-axis-key b { color:var(--ink-3); font-weight:600; border:1px solid var(--rule); border-radius:3px; padding:0 4px; margin-right:3px; }
     .tl-evo-attrib a { margin-left:auto; color:var(--ink-4); border-bottom:1px dotted var(--ink-4); font-style:italic; }
