@@ -2430,5 +2430,125 @@
       "https://www.empa.ch/web/s604/parallel-co2-electrolysis"
     ],
     "start": 2024
+  },
+  {
+    "id": "ares_afrl",
+    "name": "ARES (AFRL)",
+    "org": "US Air Force Research Laboratory (Maruyama)",
+    "city": "Dayton, OH",
+    "country": "USA",
+    "flag": "🇺🇸",
+    "lat": 39.78,
+    "lon": -84.05,
+    "tier": "national",
+    "domain": "materials",
+    "maturity": "operational",
+    "charact": "single-technique",
+    "ai": "strong",
+    "scale": "ARES OS infrastructure package",
+    "invest": 0,
+    "investLabel": "—",
+    "url": "https://afresearchlab.com/",
+    "sources": [
+      "https://doi.org/10.1038/npjcompumats.2016.31",
+      "https://doi.org/10.1038/s41570-026-00847-2"
+    ],
+    "start": 2016
+  },
+  {
+    "id": "cameo_nist",
+    "name": "CAMEO (NIST)",
+    "org": "NIST (Kusne) + synchrotron beamlines",
+    "city": "Gaithersburg, MD",
+    "country": "USA",
+    "flag": "🇺🇸",
+    "lat": 39.14,
+    "lon": -77.22,
+    "tier": "national",
+    "domain": "materials",
+    "maturity": "operational",
+    "charact": "multi-technique",
+    "ai": "strong",
+    "scale": "beamline-scale autonomous phase mapping",
+    "invest": 0,
+    "investLabel": "—",
+    "url": "https://www.nist.gov/",
+    "sources": [
+      "https://doi.org/10.1038/s41467-020-19597-w",
+      "https://doi.org/10.1038/s41570-026-00847-2"
+    ],
+    "start": 2020
+  },
+  {
+    "id": "minerva_bam",
+    "name": "MINERVA (BAM)",
+    "org": "BAM Berlin (Ruehle junior research group)",
+    "city": "Berlin",
+    "country": "Germany",
+    "flag": "🇩🇪",
+    "lat": 52.43,
+    "lon": 13.23,
+    "tier": "national",
+    "domain": "materials",
+    "maturity": "operational",
+    "charact": "multi-technique",
+    "ai": "strong",
+    "scale": "7 materials across 5 nanomaterial classes",
+    "invest": 0,
+    "investLabel": "—",
+    "url": "https://www.bam.de/Content/EN/Standard-Articles/About-us/Jobs-and-Careers/Young-Science/project-group-ruehle-self-driving-lab-advanced-materials.html",
+    "sources": [
+      "https://doi.org/10.1021/acsnano.4c17504",
+      "https://doi.org/10.1038/s41570-026-00847-2"
+    ],
+    "start": 2025
+  },
+  {
+    "id": "bear_bu",
+    "name": "BEAR (Brown Lab, BU)",
+    "org": "Boston University (Keith A. Brown / KABlab)",
+    "city": "Boston, MA",
+    "country": "USA",
+    "flag": "🇺🇸",
+    "lat": 42.35,
+    "lon": -71.11,
+    "tier": "academic",
+    "domain": "materials",
+    "maturity": "operational",
+    "charact": "integrated",
+    "ai": "strong",
+    "scale": "mechanical-design SDL (additive mfg)",
+    "invest": 0,
+    "investLabel": "—",
+    "url": "https://www.kablab.org/",
+    "sources": [
+      "https://doi.org/10.1126/sciadv.aaz1708",
+      "https://doi.org/10.1038/s41570-026-00847-2"
+    ],
+    "start": 2020
+  },
+  {
+    "id": "maosic_cuhksz",
+    "name": "MAOSIC (CUHK-Shenzhen)",
+    "org": "CUHK-Shenzhen / AIRS (Xi Zhu)",
+    "city": "Shenzhen",
+    "country": "China",
+    "flag": "🇨🇳",
+    "lat": 22.69,
+    "lon": 114.21,
+    "tier": "academic",
+    "domain": "materials",
+    "maturity": "prototype",
+    "charact": "single-technique",
+    "ai": "strong",
+    "scale": "first cloud-SDL demonstration",
+    "invest": 0,
+    "investLabel": "—",
+    "url": "https://airs.cuhk.edu.cn/en/team/xizhu",
+    "sources": [
+      "https://doi.org/10.1038/s41467-020-15728-5",
+      "https://doi.org/10.1038/s41570-026-00847-2"
+    ],
+    "start": 2020
   }
 ]

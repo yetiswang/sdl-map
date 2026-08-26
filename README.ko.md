@@ -49,11 +49,11 @@
 
 ## 🌍 국가 프로젝트 / 컨소시엄
 
-공공 부문이 주도하거나 여러 기관에 걸친 국가/지역 규모의 SDL 프로젝트. NSF PCL Test Bed, Acceleration Consortium, BIG-MAP / FULL-MAP, PEPR DIADEM, DiscoveryLabNL 등 21개 전체 항목은 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)를 참고하세요.
+공공 부문이 주도하거나 여러 기관에 걸친 국가/지역 규모의 SDL 프로젝트. NSF PCL Test Bed, Acceleration Consortium, BIG-MAP / FULL-MAP, PEPR DIADEM, DiscoveryLabNL 등 24개 전체 항목은 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)를 참고하세요.
 
 ## 🎓 학술 그룹
 
-단일 기관 또는 PI가 주도해 실제로 SDL을 운영하는 연구 그룹. A-Lab, Matter Lab, ODACell, Cooper Group, Jensen Lab, Jun Jiang 그룹 / ChemAgents + Robot Chemist 등 38개 전체 항목은 [English README → Academic Groups](README.md#-academic-groups)를 참고하세요.
+단일 기관 또는 PI가 주도해 실제로 SDL을 운영하는 연구 그룹. A-Lab, Matter Lab, ODACell, Cooper Group, Jensen Lab, Jun Jiang 그룹 / ChemAgents + Robot Chemist 등 40개 전체 항목은 [English README → Academic Groups](README.md#-academic-groups)를 참고하세요.
 
 ## 🏭 상업 및 산업
 

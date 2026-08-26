@@ -49,11 +49,11 @@
 
 ## 🌍 國家計畫與聯盟
 
-由公共部門主導、跨機構合作的 SDL 國家級或區域級計畫。完整 21 個條目（包括 NSF PCL Test Bed、Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL 等）見 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)。
+由公共部門主導、跨機構合作的 SDL 國家級或區域級計畫。完整 24 個條目（包括 NSF PCL Test Bed、Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL 等）見 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)。
 
 ## 🎓 學術團隊
 
-由單一機構或 PI 主導，正在運行 SDL 的研究組。完整 38 個條目（包括 A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、江俊團隊 / ChemAgents + Robot Chemist、嘉庚創新實驗室等）見 [English README → Academic Groups](README.md#-academic-groups)。
+由單一機構或 PI 主導，正在運行 SDL 的研究組。完整 40 個條目（包括 A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、江俊團隊 / ChemAgents + Robot Chemist、嘉庚創新實驗室等）見 [English README → Academic Groups](README.md#-academic-groups)。
 
 ## 🏭 商業與工業
 

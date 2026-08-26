@@ -49,11 +49,11 @@
 
 ## 🌍 国家プロジェクト・コンソーシアム
 
-公的セクター主導、複数機関にまたがる国家規模・地域規模の SDL プロジェクト。NSF PCL Test Bed、Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL ほか全 21 件は [English README → National Programmes & Consortia](README.md#-national-programmes--consortia) を参照。
+公的セクター主導、複数機関にまたがる国家規模・地域規模の SDL プロジェクト。NSF PCL Test Bed、Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL ほか全 24 件は [English README → National Programmes & Consortia](README.md#-national-programmes--consortia) を参照。
 
 ## 🎓 学術グループ
 
-単一機関または PI が主導し、実際に SDL を動かしている研究グループ。A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、Jun Jiang グループ / ChemAgents + Robot Chemist ほか全 38 件は [English README → Academic Groups](README.md#-academic-groups) を参照。
+単一機関または PI が主導し、実際に SDL を動かしている研究グループ。A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、Jun Jiang グループ / ChemAgents + Robot Chemist ほか全 40 件は [English README → Academic Groups](README.md#-academic-groups) を参照。
 
 ## 🏭 商業・産業
 
