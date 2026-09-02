@@ -1880,12 +1880,18 @@ window.SDL_CATEGORIES = {
   fetch('/vendor/countries-50m.json')
     .then(r => r.json())
     .then(w => {
-      geoHi = {
-        land: topojson.feature(w, w.objects.land),
-        mesh: topojson.mesh(w, w.objects.countries, (a, b) => a !== b),
-        outer: topojson.mesh(w, w.objects.countries, (a, b) => a === b),
+      // Defer the topojson decode (~100ms on a 756KB topology) to an idle
+      // slot so it can't steal a frame from early interaction.
+      const build = () => {
+        geoHi = {
+          land: topojson.feature(w, w.objects.land),
+          mesh: topojson.mesh(w, w.objects.countries, (a, b) => a !== b),
+          outer: topojson.mesh(w, w.objects.countries, (a, b) => a === b),
+        };
+        redrawRaf();   // repaint crisp as soon as it's available
       };
-      redrawRaf();   // repaint crisp as soon as it's available
+      if (window.requestIdleCallback) requestIdleCallback(build, { timeout: 3000 });
+      else setTimeout(build, 400);
     })
     .catch(() => {}); // 110m remains a complete fallback
 
@@ -2600,6 +2606,8 @@ window.SDL_CATEGORIES = {
   // captured colours) keeps the previous palette until the next interaction.
   window.redrawRaf = redrawRaf;
 
+// v46.b — motion-detection state for the hi/lo geometry choice in redraw().
+let _lastViewSig = '', _lastViewMove = 0, _settleTimer = null;
 function redraw(){
     // v45.aj — defensive sanity guard. If any code path corrupted view
     // state into NaN (e.g. an iOS-Safari edge case in zoomAnchored), the
@@ -2667,10 +2675,20 @@ function redraw(){
     _ctx.stroke();
     _ctx.globalAlpha = 1;
 
-    // v46.b — geometry source per frame: 50m when idle (crisp borders for
-    // reading), 110m while interacting (smooth drag/pinch) or until the
-    // hi-res file has arrived.
-    const _hi = geoHi && !isInteracting;
+    // v46.b — geometry source per frame: 50m when settled (crisp borders for
+    // reading), 110m while the view is CHANGING. The `interacting` class only
+    // covers drag/pinch, so detect motion directly: wheel zoom, zoom buttons,
+    // double-click, inertia, and flyTo all change the view per frame and must
+    // render light. A settle redraw fires ~200ms after the last change so the
+    // crisp frame appears the moment motion stops.
+    const _viewSig = view.scale + '|' + view.rotate[0].toFixed(4) + '|' + view.rotate[1].toFixed(4) + '|' + mapMode;
+    const _nowT = performance.now();
+    if (_viewSig !== _lastViewSig) { _lastViewSig = _viewSig; _lastViewMove = _nowT; }
+    const _moving = (_nowT - _lastViewMove) < 160;
+    if (_moving && _settleTimer === null) {
+      _settleTimer = setTimeout(() => { _settleTimer = null; redrawRaf(); }, 200);
+    }
+    const _hi = geoHi && !isInteracting && !_moving;
     const _gLand  = _hi ? geoHi.land  : landFeat;
     const _gMesh  = _hi ? geoHi.mesh  : countriesMesh;
     const _gOuter = _hi ? geoHi.outer : countriesOuter;
