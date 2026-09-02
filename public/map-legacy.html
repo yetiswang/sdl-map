@@ -1886,8 +1886,13 @@ window.SDL_CATEGORIES = {
   function anyFilterActive(){
     return Object.values(state.filters).some(s => s.size>0);
   }
-  // v46 — filtered-entry handle for /export.js
+  // v46 — filtered-entry + filter-state handles for /export.js
   window.__sdlGetFiltered = () => DATA.filter(isMatch);
+  window.__sdlGetFilters = () => {
+    const o = {};
+    for (const k of Object.keys(state.filters)) o[k] = [...state.filters[k]];
+    return o;
+  };
 
   function investRadius(inv){
     if(!inv || inv<=0) return 4.5;
@@ -1930,7 +1935,6 @@ window.SDL_CATEGORIES = {
       <div class="section-h">Country</div>
       <div class="chips" data-group="country"></div>
       <button class="reset-btn" id="reset">Clear all filters</button>
-      <button class="reset-btn" id="export-open">Export map…</button>
     </aside>
 
     <div class="map-wrap" id="map-wrap">

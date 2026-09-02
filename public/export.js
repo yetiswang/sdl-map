@@ -29,7 +29,10 @@
     var cs = getComputedStyle(root);
     function gv(n) { return cs.getPropertyValue(n).trim(); }
     var raw = {
-      bg: gv('--bg'), ocean: gv('--globe-gradient-end') || gv('--bg-2'),
+      bg: gv('--bg'),
+      // Light exports read like a print map: pale sea (bg-2), defined land.
+      // Dark keeps the globe's deep ocean shade.
+      ocean: theme === 'light' ? (gv('--bg-2') || gv('--globe-gradient-end')) : (gv('--globe-gradient-end') || gv('--bg-2')),
       land: gv('--land'), landEdge: gv('--land-edge'),
       graticule: gv('--graticule'), rule: gv('--rule'),
       ink: gv('--ink'), ink2: gv('--ink-2'), ink3: gv('--ink-3'),
@@ -58,31 +61,123 @@
   var SANS = "'Inter','Helvetica Neue',Arial,sans-serif";
   var MONO = "'IBM Plex Mono',Menlo,Consolas,monospace";
 
-  function buildExportSVG(entries, theme, fontCSS) {
-    var pal = resolveTokens(theme);
-    var geo = window.__sdlExportGeo;
-    var CATS = window.SDL_CATEGORIES;
-
-    // Fit the projection to the selected pins; clamp so one lone pin doesn't
-    // produce a street-level map and the world fit stays the floor.
-    var proj = d3.geoNaturalEarth1();
+  // Crop the viewport to the selection: pad the pins' geographic bbox
+  // (never tighter than ~4°×3° so a single lab still gets country context),
+  // fit to it, and only clamp against street-level absurdity.
+  function makeProjection(entries) {
     var worldScale = d3.geoNaturalEarth1().fitExtent([[40, 110], [W - 40, H - 130]], { type: 'Sphere' }).scale();
-    var mp = { type: 'MultiPoint', coordinates: entries.map(function (d) { return [d.lon, d.lat]; }) };
-    proj.fitExtent([[70, 140], [W - 70, H - 160]], mp);
-    var maxScale = worldScale * 6;
-    if (!isFinite(proj.scale()) || proj.scale() > maxScale) {
-      proj.scale(maxScale);
-      var cen = d3.geoCentroid(mp);
-      if (cen && isFinite(cen[0])) {
-        var p = proj(cen), t = proj.translate();
-        proj.translate([t[0] + (W / 2 - p[0]), t[1] + (H * 0.53 - p[1])]);
-      }
-    }
-    if (proj.scale() < worldScale) {
+    var lons = entries.map(function (d) { return d.lon; });
+    var lats = entries.map(function (d) { return d.lat; });
+    var minLon = Math.min.apply(null, lons), maxLon = Math.max.apply(null, lons);
+    var minLat = Math.min.apply(null, lats), maxLat = Math.max.apply(null, lats);
+    var padLon = Math.max((maxLon - minLon) * 0.18, 2.0);
+    var padLat = Math.max((maxLat - minLat) * 0.18, 1.5);
+    // MultiPoint (pins + padded bbox corners) — a spherical Polygon here is a
+    // winding-order trap: wound the wrong way it means "the world minus the
+    // box" and the fit silently degrades to a whole-world view.
+    var lo1 = Math.max(-179.9, minLon - padLon), lo2 = Math.min(179.9, maxLon + padLon);
+    var la1 = Math.max(-84, minLat - padLat), la2 = Math.min(84, maxLat + padLat);
+    var box = {
+      type: 'MultiPoint',
+      coordinates: entries.map(function (d) { return [d.lon, d.lat]; })
+        .concat([[lo1, la1], [lo2, la1], [lo2, la2], [lo1, la2]]),
+    };
+    var proj = d3.geoNaturalEarth1().fitExtent([[70, 150], [W - 70, H - 160]], box);
+    if (!isFinite(proj.scale()) || proj.scale() < worldScale) {
       proj = d3.geoNaturalEarth1().fitExtent([[40, 110], [W - 40, H - 130]], { type: 'Sphere' });
     }
+    var maxScale = worldScale * 60;
+    if (proj.scale() > maxScale) {
+      var keep = maxScale / proj.scale();
+      var t = proj.translate(), c = [W / 2, H * 0.53];
+      proj.scale(maxScale).translate([c[0] + (t[0] - c[0]) * keep, c[1] + (t[1] - c[1]) * keep]);
+    }
+    return { proj: proj, zoom: proj.scale() / worldScale };
+  }
+
+  // High-resolution geometry (50m world atlas) for cropped exports; the live
+  // map keeps the light 110m file. Same-origin, fetched once on demand.
+  var _geo50 = null;
+  function hiResGeo() {
+    if (_geo50) return _geo50;
+    _geo50 = fetch('/vendor/countries-50m.json')
+      .then(function (r) { return r.json(); })
+      .then(function (w) {
+        // d3-geo fills spherical polygons: a ring wound the wrong way means
+        // "everything except this shape" and paints the oceans as land.
+        // Rewind any polygon that claims more than half the sphere.
+        function rewind(f) {
+          // topojson.feature returns a Feature OR (for a GeometryCollection
+          // object, as world-atlas 'land' is) a FeatureCollection.
+          (f.features || [f]).forEach(function (feat) {
+            var geom = feat.geometry;
+            var polys = geom.type === 'Polygon' ? [geom.coordinates] : geom.coordinates;
+            polys.forEach(function (rings) {
+              if (d3.geoArea({ type: 'Polygon', coordinates: rings }) > 2 * Math.PI) {
+                rings.forEach(function (r) { r.reverse(); });
+              }
+            });
+          });
+          return f;
+        }
+        return {
+          land: rewind(topojson.feature(w, w.objects.land)),
+          mesh: topojson.mesh(w, w.objects.countries, function (a, b) { return a !== b; }),
+          outer: topojson.mesh(w, w.objects.countries, function (a, b) { return a === b; }),
+        };
+      })
+      .catch(function () { return null; });
+    return _geo50;
+  }
+
+  // Adaptive title from the active filter state, e.g.
+  // "SDL Landscape: Academic institutions in the Netherlands".
+  var TIER_NATURAL = {
+    national: 'National programmes & consortia',
+    academic: 'Academic institutions',
+    commercial: 'Commercial & industrial platforms',
+    labos: 'Lab OS & orchestration platforms',
+  };
+  var THE_COUNTRIES = { Netherlands: 1, UK: 1, USA: 1, EU: 1 };
+  function joinNatural(arr) {
+    if (arr.length <= 1) return arr.join('');
+    return arr.slice(0, -1).join(', ') + ' & ' + arr[arr.length - 1];
+  }
+  function exportTitle() {
+    var f = window.__sdlGetFilters ? window.__sdlGetFilters() : {};
+    var CATS = window.SDL_CATEGORIES;
+    function labels(group, ids) {
+      return (ids || []).map(function (id) {
+        var o = (CATS[group] && CATS[group].options.find(function (x) { return x.id === id; }));
+        return o ? o.label : id;
+      });
+    }
+    var parts = [];
+    if (f.tier && f.tier.length && f.tier.length <= 2) {
+      parts.push(joinNatural(f.tier.map(function (t) { return TIER_NATURAL[t] || t; })));
+    }
+    if (f.domain && f.domain.length && f.domain.length <= 2) parts.push(joinNatural(labels('domain', f.domain)));
+    if (f.maturity && f.maturity.length && f.maturity.length <= 2) parts.push(joinNatural(labels('maturity', f.maturity)).toLowerCase());
+    if (f.charact && f.charact.length === 1) parts.push(labels('charact', f.charact)[0].toLowerCase() + ' characterisation');
+    var suffix = '';
+    if (f.country && f.country.length) {
+      var cs = f.country.map(function (c) { return (THE_COUNTRIES[c] ? 'the ' : '') + c; });
+      suffix = ' in ' + (cs.length <= 3 ? joinNatural(cs) : f.country.length + ' countries');
+    }
+    if (!parts.length && !suffix) return 'Global Self-Driving Lab Landscape';
+    var head = parts.length ? parts.join(' · ') : 'Self-driving labs';
+    var title = 'SDL Landscape: ' + head + suffix;
+    return title.length > 95 ? 'SDL Landscape: filtered selection' + suffix : title;
+  }
+
+  function buildExportSVG(entries, theme, fontCSS, fit, geoOverride) {
+    var pal = resolveTokens(theme);
+    var geo = geoOverride || window.__sdlExportGeo;
+    var CATS = window.SDL_CATEGORIES;
+    var proj = fit.proj;
     var path = d3.geoPath(proj);
-    var grat = d3.geoGraticule().step([15, 15]);
+    var gratStep = fit.zoom > 20 ? 2.5 : fit.zoom > 8 ? 5 : 15;
+    var grat = d3.geoGraticule().step([gratStep, gratStep]);
 
     var s = [];
     s.push('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '">');
@@ -155,7 +250,9 @@
     entries.forEach(function (d) { countries[d.country] = 1; });
     var nC = Object.keys(countries).length;
     var date = new Date().toISOString().slice(0, 10);
-    s.push('<text x="40" y="52" font-family="' + SANS + '" font-size="30" font-weight="700" fill="' + pal.ink + '">Global Self-Driving Lab Landscape</text>');
+    var title = exportTitle();
+    var titleSize = title.length > 58 ? 24 : 30;
+    s.push('<text x="40" y="52" font-family="' + SANS + '" font-size="' + titleSize + '" font-weight="700" fill="' + pal.ink + '">' + esc(title) + '</text>');
     s.push('<text x="40" y="78" font-family="' + MONO + '" font-size="13" letter-spacing="1.5" fill="' + pal.ink3 + '">' +
       entries.length + ' INITIATIVES · ' + nC + ' COUNTRIES · ' + date + '</text>');
 
@@ -258,13 +355,13 @@
   }
 
   // ---- dialog ------------------------------------------------------------
-  var STYLE = '\n.exp-backdrop{position:fixed;inset:0;z-index:400;display:none;align-items:center;justify-content:center;background:oklch(0.1 0.01 240/0.55);backdrop-filter:blur(4px);}\n.exp-backdrop.open{display:flex;}\n.exp-card{width:min(440px,92vw);background:var(--surface-overlay,var(--bg-2));border:1px solid var(--rule);border-radius:12px;padding:22px 24px;color:var(--ink);font-family:var(--font-sans);}\n.exp-card h2{margin:0 0 4px;font-size:17px;font-weight:650;}\n.exp-sub{font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:var(--ink-3);margin-bottom:16px;}\n.exp-row{display:flex;align-items:center;gap:10px;margin:12px 0;}\n.exp-row .lbl{font-size:12px;color:var(--ink-2);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.14em;min-width:64px;}\n.exp-seg{display:flex;gap:6px;flex-wrap:wrap;}\n.exp-seg button{padding:7px 14px;font-size:13px;font-family:var(--font-sans);background:var(--bg-2);color:var(--ink-2);border:1px solid var(--rule);border-radius:7px;cursor:pointer;}\n.exp-seg button:hover{background:var(--bg-3);color:var(--ink);}\n.exp-seg button.sel{color:var(--ink);border-color:var(--ink-3);background:var(--bg-3);}\n.exp-seg a{padding:7px 14px;font-size:13px;font-family:var(--font-sans);background:var(--bg-2);color:var(--ink-2);border:1px solid var(--rule);border-radius:7px;text-decoration:none;}\n.exp-seg a:hover{background:var(--bg-3);color:var(--ink);}\n.exp-close{position:absolute;top:10px;right:12px;background:none;border:none;color:var(--ink-3);font-size:20px;cursor:pointer;}\n.exp-card{position:relative;}\n.exp-note{font-size:11px;color:var(--ink-3);margin-top:14px;line-height:1.5;}\n.exp-busy{opacity:0.5;pointer-events:none;}\n';
+  var STYLE = '\n.exp-backdrop{position:fixed;inset:0;z-index:400;display:none;align-items:center;justify-content:center;background:oklch(0.1 0.01 240/0.55);backdrop-filter:blur(4px);}\n.exp-backdrop.open{display:flex;}\n.exp-card{width:min(440px,92vw);background:var(--surface-overlay,var(--bg-2));border:1px solid var(--rule);border-radius:12px;padding:22px 24px;color:var(--ink);font-family:var(--font-sans);}\n.exp-card h2{margin:0 0 4px;font-size:17px;font-weight:650;}\n.exp-intro{font-size:12.5px;color:var(--ink-2);line-height:1.5;margin:2px 0 10px;}\n.exp-sub{font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:var(--ink-3);margin-bottom:16px;}\n.exp-row{display:flex;align-items:center;gap:10px;margin:12px 0;}\n.exp-row .lbl{font-size:12px;color:var(--ink-2);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.14em;min-width:64px;}\n.exp-seg{display:flex;gap:6px;flex-wrap:wrap;}\n.exp-seg button{padding:7px 14px;font-size:13px;font-family:var(--font-sans);background:var(--bg-2);color:var(--ink-2);border:1px solid var(--rule);border-radius:7px;cursor:pointer;}\n.exp-seg button:hover{background:var(--bg-3);color:var(--ink);}\n.exp-seg button.sel{color:var(--ink);border-color:var(--ink-3);background:var(--bg-3);}\n.exp-seg a{padding:7px 14px;font-size:13px;font-family:var(--font-sans);background:var(--bg-2);color:var(--ink-2);border:1px solid var(--rule);border-radius:7px;text-decoration:none;}\n.exp-seg a:hover{background:var(--bg-3);color:var(--ink);}\n.exp-close{position:absolute;top:10px;right:12px;background:none;border:none;color:var(--ink-3);font-size:20px;cursor:pointer;}\n.exp-card{position:relative;}\n.exp-note{font-size:11px;color:var(--ink-3);margin-top:14px;line-height:1.5;}\n.exp-busy{opacity:0.5;pointer-events:none;}\n';
 
   var theme = 'light';
 
-  function openDialog() {
+  function openMapDialog() {
     var entries = window.__sdlGetFiltered ? window.__sdlGetFiltered() : (window.SDL_DATA || []);
-    var el = document.getElementById('exp-backdrop');
+    var el = document.getElementById('exp-map-backdrop');
     if (!el) return;
     var countries = {};
     entries.forEach(function (d) { countries[d.country] = 1; });
@@ -273,34 +370,51 @@
     el.classList.add('open');
   }
 
+  function openDataDialog() {
+    var el = document.getElementById('exp-data-backdrop');
+    if (el) el.classList.add('open');
+  }
+
   function wire() {
+    var n = (window.SDL_DATA || []).length || '';
     var host = document.createElement('div');
     host.innerHTML =
       '<style>' + STYLE + '</style>' +
-      '<div class="exp-backdrop" id="exp-backdrop">' +
+      // --- Map export dialog ---
+      '<div class="exp-backdrop" id="exp-map-backdrop">' +
       '<div class="exp-card">' +
-      '<button class="exp-close" id="exp-close" aria-label="Close">×</button>' +
+      '<button class="exp-close" aria-label="Close">×</button>' +
       '<h2>Export map</h2>' +
+      '<div class="exp-intro">Select filters on the map, then export the current view — the title, crop, and legend follow your selection.</div>' +
       '<div class="exp-sub" id="exp-count"></div>' +
       '<div class="exp-row"><span class="lbl">Theme</span><span class="exp-seg" id="exp-theme">' +
       '<button data-v="light" class="sel">Light</button><button data-v="dark">Dark</button></span></div>' +
       '<div class="exp-row"><span class="lbl">Format</span><span class="exp-seg" id="exp-fmt">' +
       '<button data-v="svg">SVG</button><button data-v="png">PNG</button>' +
       '<button data-v="jpeg">JPEG</button><button data-v="pdf">PDF</button></span></div>' +
+      '<div class="exp-note">SVG stays vector-editable; PNG/JPEG render at 3200×2000; PDF wraps the raster on one page.</div>' +
+      '</div></div>' +
+      // --- Data & sharing dialog ---
+      '<div class="exp-backdrop" id="exp-data-backdrop">' +
+      '<div class="exp-card">' +
+      '<button class="exp-close" aria-label="Close">×</button>' +
+      '<h2>Data & sharing</h2>' +
+      '<div class="exp-intro">Take the full dataset with you, or share the map.</div>' +
       '<div class="exp-row"><span class="lbl">Data</span><span class="exp-seg">' +
       '<a href="/sdl-data.txt" download="sdl-landscape.txt">TXT</a>' +
       '<a href="/sdl-data.csv" download="sdl-landscape.csv">CSV</a>' +
       '<a href="/sdl-data.xlsx" download="sdl-landscape.xlsx">XLSX</a>' +
       '<a href="/analytics/sdl-analytics.zip" download>Charts pack</a></span></div>' +
-      '<div class="exp-note">The map export honours the sidebar filters (type, maturity, domain, characterisation, country) — narrow the selection there first. SVG stays vector-editable; PNG/JPEG render at 3200×2000; PDF wraps the raster on one page. Data downloads and the analysis charts pack (7 charts, SVG+PNG) always cover the full dataset.</div>' +
+      '<div class="exp-row"><span class="lbl">Share</span><span class="exp-seg" id="exp-share"></span></div>' +
+      '<div class="exp-note">Downloads always cover the full ' + n + '-entry dataset, regenerated with every update. The charts pack holds 7 analysis charts (country, type, domain, maturity, AI-readiness, growth, investment) as SVG + PNG.</div>' +
       '</div></div>';
     document.body.appendChild(host);
 
-    document.getElementById('exp-close').onclick = function () {
-      document.getElementById('exp-backdrop').classList.remove('open');
-    };
-    document.getElementById('exp-backdrop').addEventListener('click', function (e) {
-      if (e.target === this) this.classList.remove('open');
+    document.querySelectorAll('.exp-backdrop').forEach(function (bd) {
+      bd.addEventListener('click', function (e) {
+        if (e.target === bd) bd.classList.remove('open');
+      });
+      bd.querySelector('.exp-close').onclick = function () { bd.classList.remove('open'); };
     });
     document.getElementById('exp-theme').addEventListener('click', function (e) {
       var b = e.target.closest('button'); if (!b) return;
@@ -312,30 +426,135 @@
       doExport(b.dataset.v);
     });
 
-    // The sidebar (and its #export-open button) is built by the main script
-    // after an async geo fetch — delegate instead of binding directly.
-    document.addEventListener('click', function (e) {
-      if (e.target.closest && e.target.closest('#export-open')) openDialog();
+    // Share the WEBSITE (not the rendered export) to social platforms.
+    var shareURL = 'https://sdl-map.discoverylabs.nl';
+    var shareText = 'The Global Self-Driving Lab Landscape — ' +
+      ((window.SDL_DATA || []).length || 'over 100') + ' initiatives mapped worldwide';
+    var eu = encodeURIComponent(shareURL), et = encodeURIComponent(shareText);
+    var shares = [
+      ['X', 'https://twitter.com/intent/tweet?text=' + et + '&url=' + eu],
+      ['LinkedIn', 'https://www.linkedin.com/sharing/share-offsite/?url=' + eu],
+      ['Bluesky', 'https://bsky.app/intent/compose?text=' + et + '%20' + eu],
+    ];
+    var shareHost = document.getElementById('exp-share');
+    shares.forEach(function (s) {
+      var a = document.createElement('a');
+      a.textContent = s[0];
+      a.href = s[1];
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      shareHost.appendChild(a);
     });
-    window.__sdlExportOpen = openDialog;
+
+    injectFabs();
+    window.__sdlExportOpen = openMapDialog;
+    window.__sdlDataOpen = openDataDialog;
+  }
+
+  // Floating buttons 3 + 4 in the top-left cluster, next to the info
+  // (wm-reopen) and clear (sdl-clear-floating) round buttons, same style.
+  var FAB_TITLES = {
+    map: { en: 'Export map', 'zh-Hans': '导出地图', 'zh-Hant': '匯出地圖', ja: '地図をエクスポート', ko: '지도 내보내기' },
+    data: { en: 'Data & sharing', 'zh-Hans': '数据与分享', 'zh-Hant': '數據與分享', ja: 'データと共有', ko: '데이터 및 공유' },
+  };
+  var ICON_EXPORT =
+    '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>' +
+    '<polyline points="7 10 12 15 17 10"/>' +
+    '<line x1="12" y1="15" x2="12" y2="3"/>' +
+    '</svg>';
+  var ICON_DATA =
+    '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<ellipse cx="12" cy="5" rx="8" ry="3"/>' +
+    '<path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/>' +
+    '<path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/>' +
+    '</svg>';
+
+  function injectFabs() {
+    if (document.getElementById('sdl-export-floating')) return;
+    var embed = !!window.SDL_EMBED;
+    var key = window.SDL_LANG === 'zh'
+      ? (window.SDL_ZH_SCRIPT === 'Hant' ? 'zh-Hant' : 'zh-Hans')
+      : (window.SDL_LANG || 'en');
+
+    function makeFab(id, kind, icon, onClick) {
+      var title = FAB_TITLES[kind][key] || FAB_TITLES[kind].en;
+      var btn = document.createElement('button');
+      btn.id = id;
+      btn.type = 'button';
+      btn.className = 'sdl-fab';
+      btn.setAttribute('aria-label', title);
+      btn.setAttribute('title', title);
+      btn.innerHTML = icon;
+      btn.addEventListener('click', onClick);
+      document.body.appendChild(btn);
+    }
+
+    // Geometry mirrors #sdl-clear-floating (embed) / takes its slot when the
+    // clear button is absent (standalone).
+    var pos = embed
+      ? ['#sdl-export-floating { top: 14px; left: 122px; }',
+         '#sdl-data-floating   { top: 14px; left: 174px; }',
+         '@media (max-width: 768px) {',
+         '  .sdl-fab { top: max(18px, env(safe-area-inset-top, 0px) + 12px) !important; width: 56px; height: 56px; }',
+         '  #sdl-export-floating { left: 142px; }',
+         '  #sdl-data-floating   { left: 206px; }',
+         '}',
+         '@media (max-width: 480px) {',
+         '  .sdl-fab { top: max(16px, env(safe-area-inset-top, 0px) + 10px) !important; width: 52px; height: 52px; }',
+         '  #sdl-export-floating { left: 132px; }',
+         '  #sdl-data-floating   { left: 192px; }',
+         '}']
+      : ['#sdl-export-floating { top: calc(var(--header-h, 92px) + 16px); left: 70px; }',
+         '#sdl-data-floating   { top: calc(var(--header-h, 92px) + 16px); left: 122px; }'];
+    var s = document.createElement('style');
+    s.textContent = [
+      '.sdl-fab {',
+      '  position: fixed;',
+      '  width: 44px; height: 44px;',
+      '  display: inline-flex; align-items: center; justify-content: center;',
+      '  background: oklch(from var(--bg) l c h / 0.65);',
+      '  border: 1px solid var(--rule);',
+      '  color: var(--ink-2);',
+      '  border-radius: 50%;',
+      '  cursor: pointer; padding: 0;',
+      '  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);',
+      '  box-shadow: 0 2px 8px oklch(0 0 0 / 0.12);',
+      '  z-index: 55;',
+      '  pointer-events: auto !important;',
+      '  -webkit-tap-highlight-color: rgba(0,0,0,0.12);',
+      '  touch-action: manipulation;',
+      '  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;',
+      '}',
+      '.sdl-fab:hover { background: var(--bg); color: var(--ink); transform: translateY(-1px); }',
+      '.sdl-fab:active { transform: scale(0.94); background: var(--bg); color: var(--ink); }',
+      '.sdl-fab:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }',
+    ].concat(pos).join('\n');
+    (document.head || document.documentElement).appendChild(s);
+    makeFab('sdl-export-floating', 'map', ICON_EXPORT, openMapDialog);
+    makeFab('sdl-data-floating', 'data', ICON_DATA, openDataDialog);
   }
 
   function doExport(fmt) {
-    var card = document.querySelector('.exp-card');
+    var card = document.querySelector('#exp-map-backdrop .exp-card');
     card.classList.add('exp-busy');
     var entries = window.__sdlGetFiltered ? window.__sdlGetFiltered() : (window.SDL_DATA || []);
     var date = new Date().toISOString().slice(0, 10);
     var base = 'sdl-map-' + date;
     var done = function () { card.classList.remove('exp-busy'); };
     try {
+      var fit = makeProjection(entries);
+      // Cropped views get the 50m coastlines; whole-world stays light on 110m.
+      var geoP = fit.zoom > 3 ? hiResGeo() : Promise.resolve(null);
       if (fmt === 'svg') {
-        var svg = buildExportSVG(entries, theme, '');
-        download(base + '.svg', new Blob([svg], { type: 'image/svg+xml' }));
-        done();
+        geoP.then(function (g) {
+          var svg = buildExportSVG(entries, theme, '', fit, g);
+          download(base + '.svg', new Blob([svg], { type: 'image/svg+xml' }));
+        }).then(done, function (err) { console.error('export failed', err); done(); });
         return;
       }
-      fontCSS().then(function (fc) {
-        var svg = buildExportSVG(entries, theme, fc);
+      Promise.all([fontCSS(), geoP]).then(function (fg) {
+        var svg = buildExportSVG(entries, theme, fg[0], fit, fg[1]);
         var pal = resolveTokens(theme);
         if (fmt === 'png') {
           return rasterize(svg, 'image/png', undefined, null).then(function (u) { download(base + '.png', u); });
