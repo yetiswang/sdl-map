@@ -122,6 +122,9 @@ Single-institution or PI-led groups operating SDLs in the lab.
 - [IPRD](https://eps.leeds.ac.uk/chemical-engineering-innovative-manufacturing-products/doc/research-spotlight-3) - Institute of Process Research and Development, University of Leeds (Leeds, UK · IPRD Lab 650 m²).
 - [ODACell](https://github.com/jyik/ODACell) - Self-driving battery laboratory developed at Uppsala University's Ångström Advanced Battery Centre, integrating automated electrolyte formulation, robotic coin-cell assembly, in-line cycling, computer vision, and Bayesian optimization for closed-loop electrolyte discovery (Uppsala, Sweden · Uppsala University).
 - [Ophelia (Empa)](https://www.empa.ch/econversion) - Battaglia Lab platform running 8 parallel CO₂-electrolysis reactors for gas-diffusion electrodes with automated online gas and liquid product analysis, published as an open blueprint (Duebendorf, Switzerland · Empa).
+- [AI for Materials Initiative (Hip Lab)](https://www.ntu.edu.sg/mse/research/ai-for-materials-initiative) - Kedar Hippalgaonkar's initiative integrating AI, robotics, and agentically driven high-throughput experiments for functional energy and electronic materials, backed by a S$25M MTI Programmatic Award and the S$10M Mat-GDT platform (Singapore · NTU).
+- [ChemTech Lab](https://chemtech.dev/) - Connor Taylor's self-driving laboratory for drug discovery and chemical process development, funded through a £2M RAEng research fellowship (Nottingham, UK · University of Nottingham).
+- [MAITENA (CIC energiGUNE)](https://cicenergigune.com/en) - Automation and AI platform for inorganic energy materials combining automated co-precipitation, solvothermal, and sol-gel synthesis with XRD and electrochemical characterisation and active-learning experiment design (Vitoria-Gasteiz, Spain · CIC energiGUNE).
 
 ---
 
@@ -176,6 +179,7 @@ Software platforms, scheduling layers, and instrument-connectivity standards tha
 - [Benchling](https://www.benchling.com/) - Cloud R&D platform combining ELN, registry, inventory, and workflow tools for biotech, used by most large biopharma (San Francisco, USA · $412M · $6B val).
 - [Cenevo (Titian + Labguru)](https://www.cenevo.com/) - Post-merger entity behind Mosaic sample tracking and Labguru ELN/LIMS, integrating 150+ instruments across biopharma R&D (London, UK · undisclosed).
 - [HighRes + Opentrons](https://highres.com/) - Modular robotic workcells and Cellario scheduling software paired with Opentrons via a 2026 agent-to-agent AI workflow partnership (Beverly, USA · strategic partnership).
+- [QPillars](https://qpillars.com/) - Zurich startup making lab instruments agent-ready through MCP servers and SiLA 2 drivers, so AI copilots can turn natural-language requests into validated, reproducible instrument workflows (Zurich, Switzerland · Innosuisse-backed).
 - [Synthace](https://www.synthace.com/) - Digital experiment platform for designing, simulating, and executing high-dimensional multivariate experiments on lab automation hardware (London, UK · undisclosed).
 - [Unchained Labs (Stuntman)](https://www.unchainedlabs.com/) - Stuntman is a natural-language AI automation platform with flexible hardware for biologics, gene therapy, and reaction screening (Pleasanton, USA · undisclosed).
 - [UniteLabs](https://unitelabs.io/) - Python-based lab automation OS connecting 175+ instruments through one API for code-defined, version-controlled workflows (Munich, Germany · €2.77M pre-seed).

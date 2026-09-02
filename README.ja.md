@@ -30,7 +30,7 @@
   </a>
 </div>
 
-> 自動化実験室（Self-Driving Lab、SDL）は、AI 駆動の仮説生成、自動化された合成、オンラインキャラクタリゼーションを一つのループに閉じます。このリストは、その仕事を実際にやっている人・プロジェクト・プラットフォームを記録したものです。検索エンジンが拾ったリストではなく、私が見たままの分布図です。2026 年 8 月時点の公開情報に基づき、[インタラクティブマップ](https://sdl-map.discoverylabs.nl/) と連動して継続的に更新しています。
+> 自動化実験室（Self-Driving Lab、SDL）は、AI 駆動の仮説生成、自動化された合成、オンラインキャラクタリゼーションを一つのループに閉じます。このリストは、その仕事を実際にやっている人・プロジェクト・プラットフォームを記録したものです。検索エンジンが拾ったリストではなく、私が見たままの分布図です。2026 年 9 月時点の公開情報に基づき、[インタラクティブマップ](https://sdl-map.discoverylabs.nl/) と連動して継続的に更新しています。
 
 ## 📚 目次
 
@@ -53,7 +53,7 @@
 
 ## 🎓 学術グループ
 
-単一機関または PI が主導し、実際に SDL を動かしている研究グループ。A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、Jun Jiang グループ / ChemAgents + Robot Chemist ほか全 40 件は [English README → Academic Groups](README.md#-academic-groups) を参照。
+単一機関または PI が主導し、実際に SDL を動かしている研究グループ。A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、Jun Jiang グループ / ChemAgents + Robot Chemist ほか全 43 件は [English README → Academic Groups](README.md#-academic-groups) を参照。
 
 ## 🏭 商業・産業
 
@@ -61,7 +61,7 @@
 
 ## 🛰 ラボ OS・オーケストレーション
 
-SDL を動かすためのソフトウェアプラットフォーム、スケジューリング層、装置接続標準。Automata LINQ、Benchling、Artificial、Atinary ほか全 10 件は [English README → Lab OS & Orchestration](README.md#-lab-os--orchestration) を参照。
+SDL を動かすためのソフトウェアプラットフォーム、スケジューリング層、装置接続標準。Automata LINQ、Benchling、Artificial、Atinary ほか全 11 件は [English README → Lab OS & Orchestration](README.md#-lab-os--orchestration) を参照。
 
 ---
 

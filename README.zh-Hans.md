@@ -30,7 +30,7 @@
   </a>
 </div>
 
-> 自驱动实验室（SDL）把 AI 驱动的假设生成、自动化合成与在线表征闭合成一个回路。这份清单记录正在做这件事的人、计划和平台。它呈现的是我读到的版图，不是搜索引擎索引出来的结果。条目反映截至 2026 年 8 月的公开信息，通过 [交互式地图](https://sdl-map.discoverylabs.nl/) 持续修订。
+> 自驱动实验室（SDL）把 AI 驱动的假设生成、自动化合成与在线表征闭合成一个回路。这份清单记录正在做这件事的人、计划和平台。它呈现的是我读到的版图，不是搜索引擎索引出来的结果。条目反映截至 2026 年 9 月的公开信息，通过 [交互式地图](https://sdl-map.discoverylabs.nl/) 持续修订。
 
 ## 📚 目录
 
@@ -53,7 +53,7 @@
 
 ## 🎓 学术团队
 
-由单一机构或 PI 主导，正在运行 SDL 的研究组。完整 40 个条目（包括 A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、江俊团队 / ChemAgents + Robot Chemist、嘉庚创新实验室等）见 [English README → Academic Groups](README.md#-academic-groups)。
+由单一机构或 PI 主导，正在运行 SDL 的研究组。完整 43 个条目（包括 A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、江俊团队 / ChemAgents + Robot Chemist、嘉庚创新实验室等）见 [English README → Academic Groups](README.md#-academic-groups)。
 
 ## 🏭 商业与工业
 
@@ -61,7 +61,7 @@
 
 ## 🛰 实验室操作系统与编排
 
-让 SDL 跑起来的软件平台、调度层与仪器互联标准。完整 10 个条目（包括 Automata LINQ、Benchling、Artificial、Atinary 等）见 [English README → Lab OS & Orchestration](README.md#-lab-os--orchestration)。
+让 SDL 跑起来的软件平台、调度层与仪器互联标准。完整 11 个条目（包括 Automata LINQ、Benchling、Artificial、Atinary 等）见 [English README → Lab OS & Orchestration](README.md#-lab-os--orchestration)。
 
 ---
 

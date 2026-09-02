@@ -30,7 +30,7 @@
   </a>
 </div>
 
-> 자율실험실(Self-Driving Lab, SDL)은 AI 기반 가설 생성, 자동화 합성, 온라인 분석을 하나의 루프로 닫는 시스템입니다. 이 목록은 그 일을 실제로 하고 있는 사람과 프로젝트, 플랫폼을 기록한 것입니다. 검색엔진이 만든 목록이 아니라 제가 본 그대로의 분포입니다. 2026년 8월 시점의 공개 정보를 기반으로 [인터랙티브 지도](https://sdl-map.discoverylabs.nl/)와 함께 지속적으로 갱신됩니다.
+> 자율실험실(Self-Driving Lab, SDL)은 AI 기반 가설 생성, 자동화 합성, 온라인 분석을 하나의 루프로 닫는 시스템입니다. 이 목록은 그 일을 실제로 하고 있는 사람과 프로젝트, 플랫폼을 기록한 것입니다. 검색엔진이 만든 목록이 아니라 제가 본 그대로의 분포입니다. 2026년 9월 시점의 공개 정보를 기반으로 [인터랙티브 지도](https://sdl-map.discoverylabs.nl/)와 함께 지속적으로 갱신됩니다.
 
 ## 📚 목차
 
@@ -53,7 +53,7 @@
 
 ## 🎓 학술 그룹
 
-단일 기관 또는 PI가 주도해 실제로 SDL을 운영하는 연구 그룹. A-Lab, Matter Lab, ODACell, Cooper Group, Jensen Lab, Jun Jiang 그룹 / ChemAgents + Robot Chemist 등 40개 전체 항목은 [English README → Academic Groups](README.md#-academic-groups)를 참고하세요.
+단일 기관 또는 PI가 주도해 실제로 SDL을 운영하는 연구 그룹. A-Lab, Matter Lab, ODACell, Cooper Group, Jensen Lab, Jun Jiang 그룹 / ChemAgents + Robot Chemist 등 43개 전체 항목은 [English README → Academic Groups](README.md#-academic-groups)를 참고하세요.
 
 ## 🏭 상업 및 산업
 
@@ -61,7 +61,7 @@
 
 ## 🛰 랩 OS / 오케스트레이션
 
-SDL을 돌리기 위한 소프트웨어 플랫폼, 스케줄링 계층, 장비 연결 표준. Automata LINQ, Benchling, Artificial, Atinary 등 10개 전체 항목은 [English README → Lab OS & Orchestration](README.md#-lab-os--orchestration)를 참고하세요.
+SDL을 돌리기 위한 소프트웨어 플랫폼, 스케줄링 계층, 장비 연결 표준. Automata LINQ, Benchling, Artificial, Atinary 등 11개 전체 항목은 [English README → Lab OS & Orchestration](README.md#-lab-os--orchestration)를 참고하세요.
 
 ---
 
