@@ -148,6 +148,9 @@ body.right-open .mob-toggle.right { right: clamp(280px, 22vw, 340px); }
   font-size:10px; padding: 1px 5px; border-radius:10px;
   min-width:14px; text-align:center;
 }
+/* v46: the right tab sits flush with the screen edge — keep its badge on the
+   inner side so it can't clip off-viewport. */
+.mob-toggle.right .badge{ right: auto; left: -6px; }
 /* Drawer close X kept for in-sidebar close affordance. */
 .drawer-close{
   position:absolute; top:12px; right:12px;
@@ -1903,8 +1906,8 @@ window.SDL_CATEGORIES = {
   const app = document.getElementById('app');
   app.innerHTML = `
     <header class="top">
-    <button class="mob-toggle mob-only left" id="mob-filters" aria-label="Open filters"><span class="chev"></span><span class="lbl">Filters</span></button>
-    <button class="mob-toggle mob-only right" id="mob-selected" aria-label="Open selected list"><span class="chev"></span><span class="lbl">Selected</span><span class="badge" id="mob-selected-n">0</span></button>
+    <button class="mob-toggle mob-only left" id="mob-filters" aria-label="Open filters"><span class="chev"></span><span class="lbl">Filters</span><span class="badge" id="mob-filters-n" style="display:none">0</span></button>
+    <button class="mob-toggle mob-only right" id="mob-selected" aria-label="Open selected list"><span class="chev"></span><span class="lbl">Selected</span><span class="badge" id="mob-selected-n" style="display:none">0</span></button>
       <div class="brand-lockup">
         <a class="tue-logo" href="https://www.tue.nl/" target="_blank" rel="noopener" aria-label="TU Eindhoven">
           <img src="img/tue-logo.png" alt="TU Eindhoven">
@@ -2496,6 +2499,21 @@ window.SDL_CATEGORIES = {
     document.getElementById('count-total').textContent = DATA.length;
     document.getElementById('count-shown').textContent = active ? shown : DATA.length;
     document.getElementById('count-countries').textContent = countryset.size;
+
+    // v46 — edge-tab badges, driven from here (the one place every filter
+    // change passes through). Left = number of active filter chips, right =
+    // number of highlighted initiatives; both hidden when nothing is active.
+    const nFilters = Object.values(state.filters).reduce((a, s) => a + s.size, 0);
+    const fBadge = document.getElementById('mob-filters-n');
+    if (fBadge) {
+      fBadge.textContent = nFilters;
+      fBadge.style.display = nFilters > 0 ? '' : 'none';
+    }
+    const sBadge = document.getElementById('mob-selected-n');
+    if (sBadge) {
+      sBadge.textContent = shown;
+      sBadge.style.display = active ? '' : 'none';
+    }
 
     renderList();
     redraw();          // refresh inline opacity so dim/hl takes effect immediately
@@ -4122,19 +4140,10 @@ function redraw(){
   // return in setupMobileDrawers when the DOM wasn't ready). See marker
   // setup section for the active code path.
 
-  // Update badge count for selected (looks at active filter chips)
-  function updateBadge(){
-    const badge = document.getElementById('mob-selected-n');
-    if (!badge) return;
-    const activeCount = document.querySelectorAll('.chip.active').length || 0;
-    badge.textContent = activeCount;
-    badge.style.display = activeCount > 0 ? 'inline-block' : 'none';
-  }
-  updateBadge();
-  // Re-check on any chip click
-  document.addEventListener('click', (e) => {
-    if (e.target.closest('.chip')) setTimeout(updateBadge, 50);
-  });
+  // v46 — the edge-tab badges are now updated by the main render() (which
+  // every filter change passes through). The old chip-click poller here ran
+  // in an IIFE that could early-return before the async-built DOM existed,
+  // leaving the badge frozen at its markup value.
 })();
 
 
