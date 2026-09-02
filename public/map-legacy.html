@@ -1815,11 +1815,22 @@ window.SDL_CATEGORIES = {
      in place before the main app reads them) -->
 <script src="/sdl-data.js"></script>
 <script src="/map-i18n.js"></script>
+<script src="/export.js" defer></script>
 
 <script>
 (async function(){
   const CATS = window.SDL_CATEGORIES;
   const DATA = window.SDL_DATA;
+  // v46 — Country filter group, derived from the dataset so it can never
+  // drift from the pins. Flag emoji reads across every locale; the English
+  // country name stays untranslated (matches the data values isMatch tests).
+  {
+    const byCountry = new Map();
+    DATA.forEach(d => {
+      if (!byCountry.has(d.country)) byCountry.set(d.country, { id: d.country, label: (d.flag ? d.flag + ' ' : '') + d.country });
+    });
+    CATS.country = { label: 'Country', options: [...byCountry.values()].sort((a, b) => a.id.localeCompare(b.id)) };
+  }
   const DOT_TOUCH_FLOOR = 0.85;
   const PICK_RADIUS_MOUSE_PX = 28;
   const PICK_RADIUS_TOUCH_PX = 48;
@@ -1853,10 +1864,12 @@ window.SDL_CATEGORIES = {
   const countriesFeat = topojson.feature(world, world.objects.countries);
   const countriesMesh = topojson.mesh(world, world.objects.countries, (a,b) => a !== b);
   const countriesOuter = topojson.mesh(world, world.objects.countries, (a,b) => a === b);
+  // v46 — geometry handles for /export.js (standalone export renderer)
+  window.__sdlExportGeo = { land: landFeat, mesh: countriesMesh, outer: countriesOuter };
 
   // State
   const state = {
-    filters: { tier: new Set(), maturity: new Set(), domain: new Set(), charact: new Set() },
+    filters: { tier: new Set(), maturity: new Set(), domain: new Set(), charact: new Set(), country: new Set() },
     hover: null,
   };
 
@@ -1873,6 +1886,8 @@ window.SDL_CATEGORIES = {
   function anyFilterActive(){
     return Object.values(state.filters).some(s => s.size>0);
   }
+  // v46 — filtered-entry handle for /export.js
+  window.__sdlGetFiltered = () => DATA.filter(isMatch);
 
   function investRadius(inv){
     if(!inv || inv<=0) return 4.5;
@@ -1912,7 +1927,10 @@ window.SDL_CATEGORIES = {
       <div class="chips" data-group="tier"></div>
       <div class="section-h">Maturity</div>
       <div class="chips" data-group="maturity"></div>
+      <div class="section-h">Country</div>
+      <div class="chips" data-group="country"></div>
       <button class="reset-btn" id="reset">Clear all filters</button>
+      <button class="reset-btn" id="export-open">Export map…</button>
     </aside>
 
     <div class="map-wrap" id="map-wrap">

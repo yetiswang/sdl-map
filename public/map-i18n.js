@@ -82,8 +82,10 @@
         Maturity: '成熟度',
         Domain: '领域',
         'Characterisation in Loop': '回路中的表征',
+        Country: '国家',
       },
       resetBtn: '清除所有筛选',
+      exportBtn: '导出地图…',
       mobToggle: { Filters: '筛选', Selected: '已选' },
       counts: { Initiatives: '项目', Highlighted: '已筛选', Countries: '国家' },
       zoomHint: '拖动平移 · 滚动缩放 · 双击放大',
@@ -168,8 +170,10 @@
         Maturity: '成熟度',
         Domain: '領域',
         'Characterisation in Loop': '迴路中的表徵',
+        Country: '國家',
       },
       resetBtn: '清除所有篩選',
+      exportBtn: '匯出地圖…',
       mobToggle: { Filters: '篩選', Selected: '已選' },
       counts: { Initiatives: '項目', Highlighted: '已篩選', Countries: '國家' },
       zoomHint: '拖動平移 · 滾動縮放 · 雙擊放大',
@@ -254,8 +258,10 @@
         Maturity: '成熟度',
         Domain: '分野',
         'Characterisation in Loop': 'ループ内キャラクタリゼーション',
+        Country: '国・地域',
       },
       resetBtn: 'すべてのフィルタをクリア',
+      exportBtn: '地図をエクスポート…',
       mobToggle: { Filters: 'フィルタ', Selected: '選択' },
       counts: { Initiatives: 'プロジェクト', Highlighted: '選択中', Countries: '国' },
       zoomHint: 'ドラッグで移動 · スクロールでズーム · ダブルクリックで拡大',
@@ -340,8 +346,10 @@
         Maturity: '성숙도',
         Domain: '분야',
         'Characterisation in Loop': '루프 내 캐릭터라이제이션',
+        Country: '국가',
       },
       resetBtn: '모든 필터 지우기',
+      exportBtn: '지도 내보내기…',
       mobToggle: { Filters: '필터', Selected: '선택' },
       counts: { Initiatives: '프로젝트', Highlighted: '선택', Countries: '국가' },
       zoomHint: '드래그로 이동 · 스크롤로 줌 · 더블클릭으로 확대',
@@ -536,6 +544,9 @@
     // Reset button
     var reset = document.getElementById('reset');
     if (reset && t.resetBtn) reset.textContent = t.resetBtn;
+    // Export dialog opener
+    var expBtn = document.getElementById('export-open');
+    if (expBtn && t.exportBtn) expBtn.textContent = t.exportBtn;
     // Mobile toggles (the .lbl span inside)
     document.querySelectorAll('.mob-toggle .lbl').forEach(function (el) {
       var orig = (el.textContent || '').trim();
