@@ -40,6 +40,7 @@
 - [🎓 Academic Groups](#-academic-groups)
 - [🏭 Commercial & Industrial](#-commercial--industrial)
 - [🛰 Lab OS & Orchestration](#-lab-os--orchestration)
+- [📥 Data Downloads & Export](#-data-downloads--export)
 - [📐 Data Schema](#-data-schema)
 - [🛠 Local Development](#-local-development)
 - [🤝 Contributing](#-contributing)
@@ -185,6 +186,15 @@ Software platforms, scheduling layers, and instrument-connectivity standards tha
 - [UniteLabs](https://unitelabs.io/) - Python-based lab automation OS connecting 175+ instruments through one API for code-defined, version-controlled workflows (Munich, Germany · €2.77M pre-seed).
 
 ---
+
+## 📥 Data Downloads & Export
+
+Everything on the map can be taken with you:
+
+- **Dataset** — [`sdl-data.txt`](https://sdl-map.discoverylabs.nl/sdl-data.txt) (grouped plain text) · [`sdl-data.csv`](https://sdl-map.discoverylabs.nl/sdl-data.csv) · [`sdl-data.xlsx`](https://sdl-map.discoverylabs.nl/sdl-data.xlsx). Regenerated from `src/data/sdl_data.json` at every build, so they always match the live pins. Download buttons also sit on the [list page](https://sdl-map.discoverylabs.nl/list/).
+- **Map export** — the map's *Export map…* dialog renders the current filter selection (type, maturity, domain, characterisation, **country**) to SVG, PNG, JPEG, or a one-page PDF, in light or dark, with legend and attribution. Built for reports and slides.
+- **Analysis charts** — [`sdl-analytics.zip`](https://sdl-map.discoverylabs.nl/analytics/sdl-analytics.zip): seven matplotlib charts (country, tier, domain, maturity, AI-readiness distributions; growth by year; reported investment) as SVG + PNG, regenerated with `npm run analytics` on every dataset update.
+- **View toggle** — the map now offers a flat Natural Earth projection alongside the globe for a one-glance world overview.
 
 ## 📐 Data Schema
 
