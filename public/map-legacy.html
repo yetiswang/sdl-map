@@ -1870,6 +1870,25 @@ window.SDL_CATEGORIES = {
   // v46 — geometry handles for /export.js (standalone export renderer)
   window.__sdlExportGeo = { land: landFeat, mesh: countriesMesh, outer: countriesOuter };
 
+  // v46.b — high-resolution base map for idle frames. The 110m file above
+  // stays the interaction geometry (~10× fewer vertices keeps drag/pinch
+  // smooth, esp. mobile); the 50m atlas loads in the background and idle
+  // frames repaint with it, so borders are crisp whenever the map is
+  // actually being read. Same file the export renderer fetches — the
+  // browser cache serves the second request.
+  let geoHi = null;
+  fetch('/vendor/countries-50m.json')
+    .then(r => r.json())
+    .then(w => {
+      geoHi = {
+        land: topojson.feature(w, w.objects.land),
+        mesh: topojson.mesh(w, w.objects.countries, (a, b) => a !== b),
+        outer: topojson.mesh(w, w.objects.countries, (a, b) => a === b),
+      };
+      redrawRaf();   // repaint crisp as soon as it's available
+    })
+    .catch(() => {}); // 110m remains a complete fallback
+
   // State
   const state = {
     filters: { tier: new Set(), maturity: new Set(), domain: new Set(), charact: new Set(), country: new Set() },
@@ -2648,10 +2667,18 @@ function redraw(){
     _ctx.stroke();
     _ctx.globalAlpha = 1;
 
+    // v46.b — geometry source per frame: 50m when idle (crisp borders for
+    // reading), 110m while interacting (smooth drag/pinch) or until the
+    // hi-res file has arrived.
+    const _hi = geoHi && !isInteracting;
+    const _gLand  = _hi ? geoHi.land  : landFeat;
+    const _gMesh  = _hi ? geoHi.mesh  : countriesMesh;
+    const _gOuter = _hi ? geoHi.outer : countriesOuter;
+
     // Land fill
     _ctx.fillStyle = COL_LAND;
     _ctx.beginPath();
-    _pathC(landFeat);
+    _pathC(_gLand);
     _ctx.fill();
 
     // Country borders (inner mesh)
@@ -2659,14 +2686,14 @@ function redraw(){
     _ctx.lineWidth = 0.5;
     _ctx.globalAlpha = 0.9;
     _ctx.beginPath();
-    _pathC(countriesMesh);
+    _pathC(_gMesh);
     _ctx.stroke();
 
     // Outer borders (slightly thicker)
     _ctx.strokeStyle = 'oklch(0.40 0.01 240)';
     _ctx.lineWidth = 0.7;
     _ctx.beginPath();
-    _pathC(countriesOuter);
+    _pathC(_gOuter);
     _ctx.stroke();
     _ctx.globalAlpha = 1;
 
