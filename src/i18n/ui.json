@@ -58,7 +58,9 @@
     "axisS": "scalability",
     "axisD": "structured (meta)data",
     "milestonesLabel": "Milestones",
-    "evoAttrib": "Eras & milestones after Canty & Abolhasani, Nat. Rev. Chem. 2026 · CSS = collective scientific superintelligence"
+    "evoAttrib": "Eras & milestones after Canty & Abolhasani, Nat. Rev. Chem. 2026 · CSS = collective scientific superintelligence",
+    "downloadData": "Download the dataset",
+    "downloadHint": "Full dataset, regenerated with every update"
   },
   "zh-Hant": {
     "brandEyebrow": "荷蘭國家材料發現實驗室 · 實時追蹤",
@@ -119,7 +121,9 @@
     "axisS": "可擴展性",
     "axisD": "結構化(元)數據",
     "milestonesLabel": "里程碑",
-    "evoAttrib": "分期與里程碑依據 Canty & Abolhasani, Nat. Rev. Chem. 2026 · CSS = 集體科學超級智能"
+    "evoAttrib": "分期與里程碑依據 Canty & Abolhasani, Nat. Rev. Chem. 2026 · CSS = 集體科學超級智能",
+    "downloadData": "下載數據集",
+    "downloadHint": "完整數據集，隨每次更新重新生成"
   },
   "ja": {
     "brandEyebrow": "オランダ国家材料発見研究所 · ライブ追跡",
@@ -180,7 +184,9 @@
     "axisS": "スケーラビリティ",
     "axisD": "構造化(メタ)データ",
     "milestonesLabel": "マイルストーン",
-    "evoAttrib": "時代区分とマイルストーンは Canty & Abolhasani, Nat. Rev. Chem. 2026 に基づく · CSS = 集合的科学超知能"
+    "evoAttrib": "時代区分とマイルストーンは Canty & Abolhasani, Nat. Rev. Chem. 2026 に基づく · CSS = 集合的科学超知能",
+    "downloadData": "データセットをダウンロード",
+    "downloadHint": "全データセット、更新のたびに再生成"
   },
   "ko": {
     "brandEyebrow": "네덜란드 국가재료발견연구소 · 실시간 추적",
@@ -241,7 +247,9 @@
     "axisS": "확장성",
     "axisD": "구조화 (메타)데이터",
     "milestonesLabel": "마일스톤",
-    "evoAttrib": "시대 구분과 마일스톤: Canty & Abolhasani, Nat. Rev. Chem. 2026 기준 · CSS = 집단 과학 초지능"
+    "evoAttrib": "시대 구분과 마일스톤: Canty & Abolhasani, Nat. Rev. Chem. 2026 기준 · CSS = 집단 과학 초지능",
+    "downloadData": "데이터셋 다운로드",
+    "downloadHint": "전체 데이터셋, 업데이트 시마다 재생성"
   },
   "zh": {
     "brandEyebrow": "荷兰国家材料发现实验室 · 实时追踪",
@@ -302,6 +310,8 @@
     "axisS": "可扩展性",
     "axisD": "结构化(元)数据",
     "milestonesLabel": "里程碑",
-    "evoAttrib": "分期与里程碑依据 Canty & Abolhasani, Nat. Rev. Chem. 2026 · CSS = 集体科学超级智能"
+    "evoAttrib": "分期与里程碑依据 Canty & Abolhasani, Nat. Rev. Chem. 2026 · CSS = 集体科学超级智能",
+    "downloadData": "下载数据集",
+    "downloadHint": "完整数据集，随每次更新重新生成"
   }
 }

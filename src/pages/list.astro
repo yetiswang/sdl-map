@@ -27,6 +27,13 @@ function haystack(e: any): string {
 <UnifiedLayout title={`${ui.list} · ${ui.brandH1}`} description={ui.listIntro} lang={lang} activeView="list">
   <main style="max-width:1100px;margin:0 auto;padding:24px 28px;">
     <PageHead title={ui.list} desc={ui.listIntro} />
+    <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin:-8px 2px 22px;font-family:var(--font-mono);font-size:12px;color:var(--ink-3);">
+      <span style="text-transform:uppercase;letter-spacing:0.16em;font-size:11px;">{ui.downloadData}</span>
+      <a href="/sdl-data.txt" download="sdl-landscape.txt" style="color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;">TXT</a>
+      <a href="/sdl-data.csv" download="sdl-landscape.csv" style="color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;">CSV</a>
+      <a href="/sdl-data.xlsx" download="sdl-landscape.xlsx" style="color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;">XLSX</a>
+      <span style="opacity:0.8;">{ui.downloadHint}</span>
+    </div>
     <input
       id="card-search"
       type="search"

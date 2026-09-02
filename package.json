@@ -15,6 +15,7 @@
     "astro": "^6.4.4"
   },
   "devDependencies": {
+    "fflate": "^0.8.3",
     "pagefind": "^1.5.2"
   }
 }
