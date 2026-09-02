@@ -4888,10 +4888,10 @@ if (window !== window.parent) { document.documentElement.classList.add('iframed'
     var nav = document.createElement('nav');
     nav.className = 'ssg-nav';
     nav.style.cssText = 'display:flex;align-items:center;gap:8px;margin-right:16px;';
-    nav.innerHTML = '<a href=\"/\" style=\"padding:6px 12px;border-radius:6px;font-size:14px;font-weight:500;color:var(--ink);text-decoration:none;background:var(--bg-3);\">Map</a>'+
-      '<a href=\"/list/\" style=\"padding:6px 12px;border-radius:6px;font-size:14px;font-weight:500;color:var(--ink-2);text-decoration:none;\">List</a>'+
-      '<a href=\"/timeline/\" style=\"padding:6px 12px;border-radius:6px;font-size:14px;font-weight:500;color:var(--ink-2);text-decoration:none;\">Timeline</a>'+
-      '<a href=\"/watch/\" style=\"padding:6px 12px;border-radius:6px;font-size:14px;font-weight:500;color:var(--ink-2);text-decoration:none;\">Watch</a>';
+    nav.innerHTML = '<a href=\"/\" data-tip=\"Interactive world map of SDL initiatives\" style=\"padding:6px 12px;border-radius:6px;font-size:14px;font-weight:500;color:var(--ink);text-decoration:none;background:var(--bg-3);\">Map</a>'+
+      '<a href=\"/list/\" data-tip=\"All initiatives as searchable cards\" style=\"padding:6px 12px;border-radius:6px;font-size:14px;font-weight:500;color:var(--ink-2);text-decoration:none;\">List</a>'+
+      '<a href=\"/timeline/\" data-tip=\"Landscape growth by start year\" style=\"padding:6px 12px;border-radius:6px;font-size:14px;font-weight:500;color:var(--ink-2);text-decoration:none;\">Timeline</a>'+
+      '<a href=\"/watch/\" data-tip=\"Curated landscape news feed\" style=\"padding:6px 12px;border-radius:6px;font-size:14px;font-weight:500;color:var(--ink-2);text-decoration:none;\">Watch</a>';
     var sep = document.createElement('span');
     sep.style.cssText = 'width:1px;height:20px;background:var(--ink-4);';
     hr.insertBefore(sep, hr.firstChild);
@@ -4908,7 +4908,7 @@ if (window !== window.parent) { document.documentElement.classList.add('iframed'
    or aria-label — so map-i18n's translated titles carry over unchanged.
    Mouse-only by design: touch has no hover. */
 (function () {
-  var SEL = '.zoom-ctl button, .region-nav button, .mob-toggle, .theme-toggle, .wm-reopen, .sdl-fab, #sdl-clear-floating';
+  var SEL = '.zoom-ctl button, .region-nav button, .mob-toggle, .theme-toggle, .wm-reopen, .sdl-fab, #sdl-clear-floating, .ssg-nav a[data-tip]';
   var style = document.createElement('style');
   style.textContent =
     '.ctl-tip{position:fixed;z-index:300;background:var(--surface-overlay,var(--bg-2));border:1px solid var(--rule);' +
