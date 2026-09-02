@@ -90,6 +90,7 @@
       zoomHint: '拖动平移 · 滚动缩放 · 双击放大',
       region: { 'r-eu': '前往欧洲', 'r-us': '前往美国', 'r-ea': '前往东亚' },
       viewCtl: { 'v-globe': '地球视图', 'v-flat': '平面地图' },
+      ctlTips: { 'z-in': '放大', 'z-out': '缩小', 'z-reset': '重置视图', 'theme-toggle': '切换明暗主题', 'mob-filters': '筛选地图 — 类型、成熟度、领域、国家', 'mob-selected': '高亮列表 — 当前匹配的项目', wmReopen: '关于此图' },
       eyebrow: '荷兰国家材料发现实验室 · 实时追踪',
       brandH1Pre: '全球自驱动实验室',
       brandH1Post: '版图',
@@ -177,6 +178,7 @@
       zoomHint: '拖動平移 · 滾動縮放 · 雙擊放大',
       region: { 'r-eu': '前往歐洲', 'r-us': '前往美國', 'r-ea': '前往東亞' },
       viewCtl: { 'v-globe': '地球視圖', 'v-flat': '平面地圖' },
+      ctlTips: { 'z-in': '放大', 'z-out': '縮小', 'z-reset': '重置視圖', 'theme-toggle': '切換明暗主題', 'mob-filters': '篩選地圖 — 類型、成熟度、領域、國家', 'mob-selected': '高亮列表 — 當前匹配的項目', wmReopen: '關於此圖' },
       eyebrow: '荷蘭國家材料發現實驗室 · 即時追蹤',
       brandH1Pre: '全球自驅動實驗室',
       brandH1Post: '版圖',
@@ -264,6 +266,7 @@
       zoomHint: 'ドラッグで移動 · スクロールでズーム · ダブルクリックで拡大',
       region: { 'r-eu': '欧州へ', 'r-us': '米国へ', 'r-ea': '東アジアへ' },
       viewCtl: { 'v-globe': '地球儀ビュー', 'v-flat': '平面マップ' },
+      ctlTips: { 'z-in': 'ズームイン', 'z-out': 'ズームアウト', 'z-reset': 'ビューをリセット', 'theme-toggle': 'テーマ切替', 'mob-filters': '地図をフィルタ — 種類・成熟度・分野・国', 'mob-selected': 'ハイライト一覧 — 現在の該当項目', wmReopen: 'この地図について' },
       eyebrow: 'オランダ国家材料発見研究所 · ライブ追跡',
       brandH1Pre: 'グローバル自動実験室',
       brandH1Post: 'ランドスケープ',
@@ -351,6 +354,7 @@
       zoomHint: '드래그로 이동 · 스크롤로 줌 · 더블클릭으로 확대',
       region: { 'r-eu': '유럽으로', 'r-us': '미국으로', 'r-ea': '동아시아로' },
       viewCtl: { 'v-globe': '지구본 보기', 'v-flat': '평면 지도' },
+      ctlTips: { 'z-in': '확대', 'z-out': '축소', 'z-reset': '보기 초기화', 'theme-toggle': '테마 전환', 'mob-filters': '지도 필터 — 유형·성숙도·분야·국가', 'mob-selected': '하이라이트 목록 — 현재 일치 항목', wmReopen: '이 지도에 대하여' },
       eyebrow: '네덜란드 국가재료발견연구소 · 실시간 추적',
       brandH1Pre: '글로벌 자율실험실',
       brandH1Post: '랜드스케이프',
@@ -562,6 +566,12 @@
     ['v-globe', 'v-flat'].forEach(function (id) {
       var el = document.getElementById(id);
       if (el && t.viewCtl && t.viewCtl[id]) el.title = t.viewCtl[id];
+    });
+    // Control hover tips (data-tip feeds the custom .ctl-tip; drop the
+    // native title so it can't double up)
+    Object.keys(t.ctlTips || {}).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) { el.dataset.tip = t.ctlTips[id]; el.removeAttribute('title'); }
     });
     // Brand strings — only matter when not in embed mode
     if (!embed) {
