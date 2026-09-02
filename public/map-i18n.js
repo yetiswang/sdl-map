@@ -88,6 +88,7 @@
       counts: { Initiatives: '项目', Highlighted: '已筛选', Countries: '国家' },
       zoomHint: '拖动平移 · 滚动缩放 · 双击放大',
       region: { 'r-eu': '前往欧洲', 'r-us': '前往美国', 'r-ea': '前往东亚' },
+      viewCtl: { 'v-globe': '地球视图', 'v-flat': '平面地图' },
       eyebrow: '荷兰国家材料发现实验室 · 实时追踪',
       brandH1Pre: '全球自驱动实验室',
       brandH1Post: '版图',
@@ -173,6 +174,7 @@
       counts: { Initiatives: '項目', Highlighted: '已篩選', Countries: '國家' },
       zoomHint: '拖動平移 · 滾動縮放 · 雙擊放大',
       region: { 'r-eu': '前往歐洲', 'r-us': '前往美國', 'r-ea': '前往東亞' },
+      viewCtl: { 'v-globe': '地球視圖', 'v-flat': '平面地圖' },
       eyebrow: '荷蘭國家材料發現實驗室 · 即時追蹤',
       brandH1Pre: '全球自驅動實驗室',
       brandH1Post: '版圖',
@@ -258,6 +260,7 @@
       counts: { Initiatives: 'プロジェクト', Highlighted: '選択中', Countries: '国' },
       zoomHint: 'ドラッグで移動 · スクロールでズーム · ダブルクリックで拡大',
       region: { 'r-eu': '欧州へ', 'r-us': '米国へ', 'r-ea': '東アジアへ' },
+      viewCtl: { 'v-globe': '地球儀ビュー', 'v-flat': '平面マップ' },
       eyebrow: 'オランダ国家材料発見研究所 · ライブ追跡',
       brandH1Pre: 'グローバル自動実験室',
       brandH1Post: 'ランドスケープ',
@@ -343,6 +346,7 @@
       counts: { Initiatives: '프로젝트', Highlighted: '선택', Countries: '국가' },
       zoomHint: '드래그로 이동 · 스크롤로 줌 · 더블클릭으로 확대',
       region: { 'r-eu': '유럽으로', 'r-us': '미국으로', 'r-ea': '동아시아로' },
+      viewCtl: { 'v-globe': '지구본 보기', 'v-flat': '평면 지도' },
       eyebrow: '네덜란드 국가재료발견연구소 · 실시간 추적',
       brandH1Pre: '글로벌 자율실험실',
       brandH1Post: '랜드스케이프',
@@ -549,6 +553,11 @@
     ['r-eu', 'r-us', 'r-ea'].forEach(function (id) {
       var el = document.getElementById(id);
       if (el && t.region && t.region[id]) el.title = t.region[id];
+    });
+    // Globe/flat view toggle titles
+    ['v-globe', 'v-flat'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && t.viewCtl && t.viewCtl[id]) el.title = t.viewCtl[id];
     });
     // Brand strings — only matter when not in embed mode
     if (!embed) {
