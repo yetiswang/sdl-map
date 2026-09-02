@@ -336,7 +336,7 @@ MAOSIC (CUHK-Shenzhen) — CUHK-Shenzhen / AIRS (Xi Zhu)
   domain: materials · maturity: prototype · ai: strong · since: 2020 · investment: —
   https://airs.cuhk.edu.cn/en/team/xizhu
 
-AI for Materials Initiative (Hip Lab) — NTU Singapore (Kedar Hippalgaonkar)
+AI4Mat Initiative | Hip Lab — NTU Singapore (Kedar Hippalgaonkar)
   Singapore, Singapore
   domain: materials · maturity: operational · ai: strong · since: 2018 · investment: S$35M (MTI + Mat-GDT)
   https://www.ntu.edu.sg/mse/research/ai-for-materials-initiative
