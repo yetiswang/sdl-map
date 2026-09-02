@@ -499,7 +499,7 @@ footer .ident a.author:hover { color: var(--ink); border-bottom-color: var(--ink
 
 /* Region navigation buttons — overlaid on the map, below zoom controls */
 .region-nav{
-  position:absolute; top:140px; right:16px; z-index:20;
+  position:absolute; top:214px; right:16px; z-index:20;  /* v46: below the 5-button zoom cluster */
   display:flex; flex-direction:column; gap:4px;
 }
 .region-nav button{
@@ -702,7 +702,7 @@ footer .ident a.author:hover { color: var(--ink); border-bottom-color: var(--ink
     font-size: 22px;
   }
   .zoom-ctl #z-reset { font-size: 18px; }
-  .region-nav { top: 168px; right: 12px; }
+  .region-nav { top: 258px; right: 12px; }  /* v46: 5-button cluster */
   .region-nav button {
     padding: 9px 12px;
     font-size: 12px;
@@ -754,7 +754,7 @@ footer .ident a.author:hover { color: var(--ink); border-bottom-color: var(--ink
   .country-label[data-tier="2"]{ font-size: 12px !important; }
   .country-label[data-tier="3"]{ font-size: 11px !important; }
   /* Region nav: bigger touch targets */
-  .region-nav { top: 220px; }
+  .region-nav { top: 326px; }  /* v46: 5-button cluster */
   .region-nav button {
     padding: 12px 14px;
     font-size: 13px;
@@ -876,7 +876,7 @@ footer .ident a.author:hover { color: var(--ink); border-bottom-color: var(--ink
   .zoom-ctl #z-reset { font-size: 20px !important; }
   .region-nav {
     top: auto !important;
-    bottom: 180px !important;       /* above the zoom-ctl */
+    bottom: 282px !important;       /* above the 5-button zoom-ctl (v46) */
     right: 16px !important;
     gap: 6px;
   }
@@ -939,7 +939,7 @@ footer .ident a.author:hover { color: var(--ink); border-bottom-color: var(--ink
   .brand .eyebrow { display: none; }
   .map-wrap { min-height: calc(100dvh - 52px); }
   .zoom-ctl button { width: 44px !important; height: 44px !important; }
-  .region-nav { bottom: 168px !important; }
+  .region-nav { bottom: 274px !important; }  /* v46: 5-button cluster */
   .region-nav button { padding: 8px 10px !important; font-size: 11px !important; }
 }
 
@@ -1394,7 +1394,7 @@ aside.left, aside.right, .sheet, .sheet-body, .wm-howto {
   }
   .zoom-ctl #z-reset { font-size: 16px !important; }
   .region-nav {
-    bottom: 168px !important;
+    bottom: 274px !important;   /* v46: above the 5-button zoom cluster */
     right: var(--s-4) !important;
     gap: var(--s-1);
   }
