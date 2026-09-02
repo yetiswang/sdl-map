@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="573.257187pt" height="222.984459pt" viewBox="0 0 573.257187 222.984459" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-02T13:02:39.125519</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 222.984459 
+L 573.257187 222.984459 
+L 573.257187 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 119.917188 197.880694 
+L 561.017187 197.880694 
+L 561.017187 48.471094 
+L 119.917188 48.471094 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1"/>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 10px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end; fill: #4a4f57" x="116.417188" y="70.531525" transform="rotate(-0 116.417188 70.531525)">National / Consortium</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 10px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end; fill: #4a4f57" x="116.417188" y="108.052771" transform="rotate(-0 116.417188 108.052771)">Academic / Institution</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 10px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end; fill: #4a4f57" x="116.417188" y="145.574017" transform="rotate(-0 116.417188 145.574017)">Commercial / Industrial</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_4"/>
+     <g id="text_4">
+      <text style="font-size: 10px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end; fill: #4a4f57" x="116.417188" y="183.095262" transform="rotate(-0 116.417188 183.095262)">Lab OS / Orchestration</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 119.917188 55.262439 
+L 340.651132 55.262439 
+L 340.651132 78.525611 
+L 119.917188 78.525611 
+z
+" clip-path="url(#p84b7738b1c)" style="fill: #aa6d00"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 119.917188 92.783685 
+L 524.596087 92.783685 
+L 524.596087 116.046857 
+L 119.917188 116.046857 
+z
+" clip-path="url(#p84b7738b1c)" style="fill: #0085b9"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 119.917188 130.30493 
+L 423.426362 130.30493 
+L 423.426362 153.568103 
+L 119.917188 153.568103 
+z
+" clip-path="url(#p84b7738b1c)" style="fill: #d40924"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 119.917188 167.826176 
+L 221.086912 167.826176 
+L 221.086912 191.089348 
+L 119.917188 191.089348 
+z
+" clip-path="url(#p84b7738b1c)" style="fill: #8451c9"/>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 9px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="346.721316" y="69.249494" transform="rotate(-0 346.721316 69.249494)">24</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 9px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="530.66627" y="106.77074" transform="rotate(-0 530.66627 106.77074)">44</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 9px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="429.496545" y="144.291985" transform="rotate(-0 429.496545 144.291985)">33</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 9px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="227.157096" y="181.813231" transform="rotate(-0 227.157096 181.813231)">11</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 8.5px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="119.917188" y="43.449551" transform="rotate(-0 119.917188 43.449551)">Tier colours as on the map</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 650; font-size: 15px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #16181d" x="119.917188" y="18.471094" transform="rotate(-0 119.917188 18.471094)">Initiatives by type</text>
+   </g>
+  </g>
+  <g id="text_11">
+   <text style="font-size: 7.5px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end; fill: #8a8f96" x="566.057188" y="214.224694" transform="rotate(-0 566.057188 214.224694)">sdl-map.discoverylabs.nl · 112 initiatives · 2026-09-02</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p84b7738b1c">
+   <rect x="119.917188" y="48.471094" width="441.1" height="149.4096"/>
+  </clipPath>
+ </defs>
+</svg>

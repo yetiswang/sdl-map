@@ -1,0 +1,580 @@
+SDL LANDSCAPE — SELF-DRIVING LAB INITIATIVES WORLDWIDE
+112 initiatives · 15 countries · dataset of 2026-09-02
+https://sdl-map.discoverylabs.nl
+MIT — cite the map when reusing (github.com/yetiswang/sdl-map)
+
+========================================================================
+NATIONAL / FLAGSHIP PROGRAMMES (24)
+========================================================================
+
+Acceleration Consortium — University of Toronto
+  Toronto, Canada
+  domain: chemistry · maturity: operational · ai: partial · since: 2019 · investment: $500M (CFREF+matched)
+  https://acceleration.utoronto.ca/
+
+CAPeX Pioneer Center — DTU + 4 universities
+  Lyngby, Denmark
+  domain: energy · maturity: operational · ai: strong · since: 2022 · investment: €40M / 13 yrs
+  https://capex.dtu.dk/
+
+BIG-MAP / FULL-MAP — Battery2030+ consortium
+  Brussels, EU
+  domain: batteries · maturity: operational · ai: strong · since: 2020 · investment: €40M (H2020+HE)
+  https://www.big-map.eu/
+
+US DOE National Labs — DOE (ARPA-E + CHIPS)
+  Washington DC, USA
+  domain: materials · maturity: operational · ai: strong · since: 2024 · investment: $140M
+  https://arpa-e.energy.gov/
+
+Korea 500 SDL Initiative — MOTIE AI+R&D Strategy
+  Seoul, Korea
+  domain: cross-domain · maturity: operational · ai: strong · since: 2024 · investment: $320M by 2035
+  https://www.motie.go.kr/en/main.do
+
+NUS AI4S · Materials Data Foundry — NRF Singapore · NUS I-FIM + U Toronto
+  Singapore, Singapore
+  domain: materials · maturity: concept · ai: strong · since: 2026 · investment: S$120M (NRF AI4S, 8 projects)
+  https://news.nus.edu.sg/ai-for-science-nus-4-ai-based-projects/
+
+UK ARIA AI Scientists — ARIA
+  London, UK
+  domain: cross-domain · maturity: operational · ai: strong · since: 2025 · investment: £6M
+  https://aria.org.uk/
+
+DiscoveryLabNL — NWO LSRI
+  Eindhoven, Netherlands
+  domain: materials · maturity: concept · ai: planned · since: 2025 · investment: €30M (planned)
+  https://discoverylabs.nl/
+
+Big Chemistry — Radboud (lead) + TU/e, Groningen, AMOLF, Fontys
+  Nijmegen, Netherlands
+  domain: chemistry · maturity: operational · ai: partial · since: 2022 · investment: €96.9M (NGF)
+  https://bigchemistry.nl/
+
+PEPR DIADEM — CNRS + CEA (France 2030)
+  Paris, France
+  domain: materials · maturity: operational · ai: partial · since: 2022 · investment: €85M / 8 yrs
+  https://www.pepr-diadem.fr/
+
+HELMA (Helmholtz Acceleration Alliance) — Helmholtz Assn (KIT lead)
+  Karlsruhe, Germany
+  domain: cross-domain · maturity: operational · ai: strong · since: 2024 · investment: Internal Helmholtz funding
+  https://www.helma.kit.edu/
+
+BioPACIFIC MIP — UCLA + UCSB (NSF MIP)
+  Los Angeles, USA
+  domain: biomaterials · maturity: operational · ai: strong · since: 2020 · investment: $43.5M (DMR-1933487 + DMR-2445868)
+  https://biopacificmip.org/
+
+NSF AI Institute for Materials Innovation — Cornell-led (Princeton, CCNY, BU)
+  Ithaca, USA
+  domain: materials · maturity: operational · ai: strong · since: 2025 · investment: $20M (NSF, 2025)
+  https://news.cornell.edu/stories/2025/07/national-science-foundation-announces-cornell-led-ai-materials-institute
+
+NRC BattMAP / BattPAP — National Research Council Canada
+  Mississauga, Canada
+  domain: batteries · maturity: operational · ai: strong · since: 2023 · investment: Federal (Critical Minerals Strategy)
+  https://nrc.canada.ca/en/research-development/research-collaboration/programs/critical-battery-materials-initiative
+
+AIChemy (UK AI for Chemistry Hub) — U Liverpool + Imperial (EPSRC)
+  Liverpool, UK
+  domain: chemistry · maturity: operational · ai: strong · since: 2024 · investment: £12M EPSRC (+£19M partner)
+  https://aichemy.ac.uk
+
+RIKEN / IST Maholo SDL — RIKEN BDR + Inst. Science Tokyo (JST)
+  Kobe, Japan
+  domain: materials · maturity: operational · ai: strong · since: 2022 · investment: ~¥1.1B (~$7.3M JST)
+  https://www.riken.jp/en/
+
+AIST AUTOkobo — AIST (Multi-Modal AI project)
+  Tsukuba, Japan
+  domain: cross-domain · maturity: operational · ai: strong · since: 2023 · investment: —
+  https://www.aist.go.jp/index_en.html
+
+ASCEND — HZB + Fritz Haber Inst. (MPG)
+  Berlin, Germany
+  domain: chemistry · maturity: concept · ai: strong · since: 2026 · investment: €30M / 5 yrs (BMFTR)
+  https://ascend-project.berlin/
+
+AI-Assisted Materials Discovery Institute — Tsinghua University (Omar Yaghi)
+  Beijing, China
+  domain: materials · maturity: concept · ai: strong · since: 2026 · investment: —
+  https://www.tsinghua.edu.cn/en/info/1244/14984.htm
+
+NSF PCL Test Bed — NSF + Astera Institute
+  State College, PA, USA
+  domain: cross-domain · maturity: concept · ai: strong · since: 2026 · investment: $400M
+  https://www.nsf.gov/tip/updates/nsf-announces-400m-investment-new-national-network-ai
+
+Ewha IMMS Self-Driving Lab — Ewha Womans University / IMMS (NRL 2.0)
+  Seoul, Korea
+  domain: materials · maturity: operational · ai: strong · since: 2025 · investment: KRW 114B (~$83M) / 10 yrs · MSIT+MOE+Ewha
+  https://imms.ewha.ac.kr/en/
+
+ARES (AFRL) — US Air Force Research Laboratory (Maruyama)
+  Dayton, OH, USA
+  domain: materials · maturity: operational · ai: strong · since: 2016 · investment: —
+  https://afresearchlab.com/
+
+CAMEO (NIST) — NIST (Kusne) + synchrotron beamlines
+  Gaithersburg, MD, USA
+  domain: materials · maturity: operational · ai: strong · since: 2020 · investment: —
+  https://www.nist.gov/
+
+MINERVA (BAM) — BAM Berlin (Ruehle junior research group)
+  Berlin, Germany
+  domain: materials · maturity: operational · ai: strong · since: 2025 · investment: —
+  https://www.bam.de/Content/EN/Standard-Articles/About-us/Jobs-and-Careers/Young-Science/project-group-ruehle-self-driving-lab-advanced-materials.html
+
+========================================================================
+ACADEMIC PLATFORMS (44)
+========================================================================
+
+A-Lab — Berkeley / LBNL
+  Berkeley, USA
+  domain: materials · maturity: operational · ai: strong · since: 2023 · investment: —
+  https://ceder.berkeley.edu/research-areas/autonomous-experimentation-for-accelerated-materials-discovery/
+
+Polybot — Argonne (CNM)
+  Lemont, USA
+  domain: materials · maturity: operational · ai: strong · since: 2024 · investment: —
+  https://www.anl.gov/cnm/article/transforming-electronic-polymer-manufacturing-with-polybot
+
+CMU Cloud Lab — Carnegie Mellon
+  Pittsburgh, USA
+  domain: cross-domain · maturity: operational · ai: strong · since: 2021 · investment: —
+  https://cloudlab.cmu.edu/
+
+Coscientist — CMU (Gomes Group)
+  Pittsburgh, USA
+  domain: chemistry · maturity: operational · ai: strong · since: 2023 · investment: —
+  https://www.cmu.edu/chemistry/news/2023/1220_ai-coscientist-automates-discovery.html
+
+Abolhasani Lab — NC State
+  Raleigh, USA
+  domain: chemistry · maturity: operational · ai: strong · since: 2020 · investment: —
+  https://www.abolhasanilab.com/
+
+Genesis — Chalmers (King Group)
+  Gothenburg, Sweden
+  domain: biology · maturity: prototype · ai: strong · since: 2020 · investment: £1M
+  https://www.automationof.science/
+
+Cooper Group / MIF Liverpool — U Liverpool (MIF, opened 2017; CMD forerunner 2007)
+  Liverpool, UK
+  domain: materials · maturity: operational · ai: strong · since: 2017 · investment: £81M MIF (Unilever £25M + UKRPIF £11M)
+  https://www.liverpool.ac.uk/materials-innovation-factory/
+
+AMADAP — FAU Erlangen
+  Erlangen, Germany
+  domain: materials · maturity: prototype · ai: strong · since: 2021 · investment: —
+  https://www.solar.fau.de/
+
+NIMS Autonomous AI Network — NIMS + Tsukuba
+  Tsukuba, Japan
+  domain: materials · maturity: prototype · ai: strong · since: 2015 · investment: —
+  https://www.nims.go.jp/group/autonomous/index_en.html
+
+dLab — U Tokyo
+  Tokyo, Japan
+  domain: materials · maturity: operational · ai: strong · since: 2025 · investment: —
+  https://www.u-tokyo.ac.jp/focus/en/press/z0508_00407.html
+
+KAIST-POSCO Autonomous Lab — KAIST + POSCO
+  Daejeon, Korea
+  domain: batteries · maturity: operational · ai: strong · since: 2025 · investment: —
+  https://www.kaist.ac.kr/en/
+
+KIST MARK System — KIST
+  Seoul, Korea
+  domain: chemistry · maturity: prototype · ai: strong · since: 2024 · investment: —
+  https://www.kist.re.kr/eng/index.do
+
+SNU SDL Ecosystem — SNU / Jung Lab
+  Seoul, Korea
+  domain: cross-domain · maturity: operational · ai: strong · since: 2026 · investment: —
+  https://en.snu.ac.kr/research/highlights?md=v&bbsidx=153588
+
+Jun Jiang Group / ChemAgents + Robot Chemist — USTC Hefei (Jun Jiang)
+  Hefei, China
+  domain: chemistry · maturity: operational · ai: strong · since: 2022 · investment: —
+  http://staff.ustc.edu.cn/~jiangj1/
+
+Noël Group — U Amsterdam
+  Amsterdam, Netherlands
+  domain: chemistry · maturity: operational · ai: strong · since: 2018 · investment: —
+  https://www.noelresearchgroup.com/
+
+DIFFER Autonomous Energy Materials Discovery (Süleyman Er) — DIFFER (NWO institute)
+  Eindhoven, Netherlands
+  domain: energy · maturity: operational · ai: strong · since: 2017 · investment: —
+  https://www.differ.nl/research/autonomous-energy-materials-discovery
+
+Jiageng Innovation Lab 嘉庚创新实验室 — Xiamen University / Fujian Province
+  Xiamen, China
+  domain: materials · maturity: operational · ai: strong · since: 2019 · investment: Provincial
+  https://www.ikkem.com/
+
+Shanghai AI Laboratory — National AI Lab
+  Shanghai, China
+  domain: cross-domain · maturity: operational · ai: strong · since: 2020 · investment: Government
+  https://www.shlab.org.cn/
+
+DeepH (Duan Group) — Tsinghua University
+  Beijing, China
+  domain: materials · maturity: operational · ai: strong · since: 2022 · investment: —
+  https://www.sciencedirect.com/science/article/pii/S2095927324004079
+
+SurFF / Uni-MOF (Wang Group) — Tsinghua University
+  Beijing, China
+  domain: materials · maturity: operational · ai: strong · since: 2024 · investment: —
+  https://www.nature.com/articles/s43588-025-00839-0
+
+Jensen Lab — MIT
+  Cambridge MA, USA
+  domain: chemistry · maturity: operational · ai: strong · since: 2018 · investment: Science 2023: 312 molecules
+  https://jensenlab.mit.edu/
+
+Cronin Group / Chemify — U Glasgow
+  Glasgow, UK
+  domain: chemistry · maturity: operational · ai: strong · since: 2018 · investment: Chemify (startup)
+  https://www.chem.gla.ac.uk/cronin/
+
+Grzybowski Group / IBS-CARS — UNIST + Polish Acad. Sci.
+  Ulsan, Korea
+  domain: chemistry · maturity: operational · ai: strong · since: 2021 · investment: Chematica/Synthia
+  https://www.ibs.re.kr/eng/sub02_06_01.do
+
+MMLI / Burke Group — UIUC
+  Champaign, USA
+  domain: chemistry · maturity: operational · ai: strong · since: 2020 · investment: $20M+ (NSF)
+  https://moleculemaker.org/
+
+Hein Lab / Telescope — UBC
+  Vancouver, Canada
+  domain: chemistry · maturity: operational · ai: strong · since: 2019 · investment: Telescope Innovations
+  https://telescopeinnovations.com/
+
+Ley Group — U Cambridge
+  Cambridge, UK
+  domain: chemistry · maturity: operational · ai: none · since: 2018 · investment: Flow + PAT pioneer
+  https://ley.group.ch.cam.ac.uk/
+
+Doyle Group — UCLA
+  Los Angeles, USA
+  domain: chemistry · maturity: operational · ai: strong · since: 2018 · investment: HTE + ML
+  https://www.doylelab.com/
+
+AURORA (KTH) — KTH Royal Institute of Technology
+  Stockholm, Sweden
+  domain: materials · maturity: operational · ai: strong · since: 2025 · investment: —
+  https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12067375/
+
+CELEST Autonomous Battery Lab — KIT + Ulm + HIU
+  Ulm, Germany
+  domain: batteries · maturity: operational · ai: strong · since: 2022 · investment: —
+  https://www.kit.edu/kit/english/pi_2022_011_battery-research-first-fully-automatic-laboratory-starts-operation.php
+
+EPFL Self-Driving Lab (LIAC) — EPFL (ISIC / LIAC)
+  Lausanne, Switzerland
+  domain: materials · maturity: operational · ai: strong · since: 2022 · investment: —
+  https://www.epfl.ch/labs/liac/
+
+KIMS Autonomous Alloy Lab — Korea Institute of Materials Science
+  Changwon, Korea
+  domain: materials · maturity: operational · ai: strong · since: 2025 · investment: —
+  https://www.kims.re.kr/?lang=en
+
+KIER Smart Laboratory — Korea Institute of Energy Research
+  Daejeon, Korea
+  domain: energy · maturity: operational · ai: strong · since: 2026 · investment: —
+  https://www.kier.re.kr/eng
+
+Matter Lab — University of Toronto / Vector Institute
+  Toronto, Canada
+  domain: cross-domain · maturity: operational · ai: strong · since: 2017 · investment: —
+  http://matter.toronto.edu
+
+IMDEA Materials SDL — IMDEA Materials Institute
+  Getafe (Madrid), Spain
+  domain: materials · maturity: operational · ai: partial · since: 2022 · investment: —
+  https://materials.imdea.org/
+
+IPRD — Institute of Process Research and Development
+  Leeds, UK
+  domain: chemistry · maturity: operational · ai: strong · since: 2012 · investment: >£15M / 5 years
+  https://eps.leeds.ac.uk/chemical-engineering-innovative-manufacturing-products/doc/research-spotlight-3
+
+Swiss Cat+ — EPFL, ETHZ
+  Lausanne, Switzerland
+  domain: chemistry · maturity: operational · ai: strong · since: 2020 · investment: —
+  https://www.epfl.ch/research/facilities/swisscat/
+
+ODACell — Ångström Advanced Battery Centre (ÅABC) · Uppsala University
+  Uppsala, Sweden
+  domain: batteries · maturity: operational · ai: strong · since: 2022 · investment: —
+  https://github.com/jyik/ODACell
+
+Aurora (Empa) — Empa (Battaglia Lab, Materials for Energy Conversion)
+  Duebendorf, Switzerland
+  domain: batteries · maturity: operational · ai: strong · since: 2022 · investment: —
+  https://www.empa.ch/econversion
+
+Ophelia (Empa) — Empa (Battaglia Lab, Materials for Energy Conversion)
+  Duebendorf, Switzerland
+  domain: energy · maturity: operational · ai: strong · since: 2024 · investment: —
+  https://www.empa.ch/econversion
+
+BEAR (Brown Lab, BU) — Boston University (Keith A. Brown / KABlab)
+  Boston, MA, USA
+  domain: materials · maturity: operational · ai: strong · since: 2020 · investment: —
+  https://www.kablab.org/
+
+MAOSIC (CUHK-Shenzhen) — CUHK-Shenzhen / AIRS (Xi Zhu)
+  Shenzhen, China
+  domain: materials · maturity: prototype · ai: strong · since: 2020 · investment: —
+  https://airs.cuhk.edu.cn/en/team/xizhu
+
+AI for Materials Initiative (Hip Lab) — NTU Singapore (Kedar Hippalgaonkar)
+  Singapore, Singapore
+  domain: materials · maturity: operational · ai: strong · since: 2018 · investment: S$35M (MTI + Mat-GDT)
+  https://www.ntu.edu.sg/mse/research/ai-for-materials-initiative
+
+ChemTech Lab — University of Nottingham (Connor Taylor)
+  Nottingham, UK
+  domain: cross-domain · maturity: operational · ai: strong · since: 2025 · investment: £2M (RAEng fellowship)
+  https://chemtech.dev/
+
+MAITENA (CIC energiGUNE) — CIC energiGUNE
+  Vitoria-Gasteiz, Spain
+  domain: energy · maturity: operational · ai: partial · since: 2024 · investment: —
+  https://cicenergigune.com/en
+
+========================================================================
+COMMERCIAL PLATFORMS (33)
+========================================================================
+
+Cusp AI (Cambridge HQ) — Cusp AI (M. Welling co-founder)
+  Cambridge, UK
+  domain: materials · maturity: operational · ai: strong · since: 2024 · investment: $100M+ Series A · $520M val
+  https://www.cusp.ai/
+
+Cusp AI (Amsterdam node) — Cusp AI (Amsterdam Science Park)
+  Amsterdam, Netherlands
+  domain: materials · maturity: operational · ai: strong · since: 2024 · investment: Part of $520M val
+  https://www.cusp.ai/
+
+Lila Sciences — Lila.ai
+  Cambridge MA, USA
+  domain: drug-discovery · maturity: operational · ai: strong · since: 2023 · investment: $550M
+  https://www.lila.ai/
+
+Medra AI — Medra, Inc. (Michelle Lee)
+  San Francisco, USA
+  domain: drug-discovery · maturity: operational · ai: strong · since: 2024 · investment: $63M total (Series A Dec 2025)
+  https://www.medra.ai
+
+Periodic Labs — Periodic Labs
+  San Francisco, USA
+  domain: materials · maturity: operational · ai: strong · since: 2025 · investment: Undisclosed VC
+  https://periodic.com/
+
+XtalPi 晶泰科技 — XtalPi (HKEX)
+  Shenzhen, China
+  domain: drug-discovery · maturity: industrial · ai: strong · since: 2015 · investment: HK$47B pipeline
+  https://en.xtalpi.com/
+
+LabGenius — LabGenius
+  London, UK
+  domain: biology · maturity: operational · ai: strong · since: 2019 · investment: Undisclosed VC
+  https://labgeniustx.com/
+
+Deep Principle 深度原理 — Deep Principle
+  Hangzhou, China
+  domain: drug-discovery · maturity: operational · ai: strong · since: 2024 · investment: A2 round
+  https://www.deepprinciple.com/
+
+Qingkui 青葵智造 — Qingkui
+  Yichang, China
+  domain: chemistry · maturity: industrial · ai: strong · since: 2021 · investment: Municipal+VC
+  https://www.quiktech.cn/
+
+Yongjiang Lab 甬江实验室 — Provincial (Ningbo)
+  Ningbo, China
+  domain: chemistry · maturity: operational · ai: strong · since: 2021 · investment: Government
+  https://www.ylab.ac.cn/en/
+
+DP Technology / Bohrium 深势科技 — DP Technology
+  Beijing, China
+  domain: materials · maturity: operational · ai: strong · since: 2018 · investment: VC
+  https://www.dp.tech/en
+
+ByteDance Seed AI4S — ByteDance
+  Beijing, China
+  domain: drug-discovery · maturity: operational · ai: strong · since: 2024 · investment: Corporate
+  https://seed.bytedance.com/en/direction/ai_for_science
+
+Novartis MicroCycle — Novartis
+  Basel, Switzerland
+  domain: drug-discovery · maturity: operational · ai: strong · since: 2024 · investment: Internal
+  https://www.novartis.com/stories/new-drug-manufacturing-tools-change-pharma-chemistry
+
+Chemspeed / SciY — Bruker
+  Füllinsdorf, Switzerland
+  domain: cross-domain · maturity: operational · ai: strong · since: 1998 · investment: Public (BRKR)
+  https://www.chemspeed.com/
+
+Fraunhofer MAPs — Fraunhofer ISC
+  Würzburg, Germany
+  domain: materials · maturity: operational · ai: strong · since: 2020 · investment: €20M
+  https://www.isc.fraunhofer.de/en/fields-of-activity/applications/digital-transformation/maps-materials-acceleration-platforms.html
+
+Emerald Cloud Lab — ECL
+  South San Francisco, USA
+  domain: cross-domain · maturity: operational · ai: strong · since: 2015 · investment: Undisclosed VC
+  https://www.emeraldcloudlab.com/
+
+Ginkgo Bioworks — Ginkgo
+  Boston, USA
+  domain: biology · maturity: operational · ai: strong · since: 2015 · investment: $786M raised
+  https://www.ginkgo.bio/
+
+CMU AI Science Foundry — Carnegie Mellon
+  Pittsburgh, USA
+  domain: cross-domain · maturity: operational · ai: strong · since: 2024 · investment: Federal+Univ
+  https://ai-science-foundry.cmu.edu/
+
+Strateos — Strateos
+  San Diego, USA
+  domain: drug-discovery · maturity: operational · ai: strong · since: 2013 · investment: VC
+  https://strateos.com/
+
+Kebotix — Kebotix
+  Cambridge MA, USA
+  domain: materials · maturity: operational · ai: strong · since: 2017 · investment: $23.7M Series B
+  https://www.kebotix.com/
+
+Arctoris — Arctoris
+  Oxford, UK
+  domain: drug-discovery · maturity: operational · ai: strong · since: 2018 · investment: ~$15M
+  https://www.arctoris.com/
+
+Culture Biosciences — Culture Bio
+  South San Francisco, USA
+  domain: biology · maturity: operational · ai: strong · since: 2019 · investment: $107M
+  https://www.culturebiosciences.com/
+
+Hamilton Company — Hamilton
+  Reno, USA
+  domain: cross-domain · maturity: operational · ai: none · since: 1980 · investment: Private
+  https://www.hamiltoncompany.com/
+
+Opentrons — Opentrons Labworks
+  Brooklyn, USA
+  domain: cross-domain · maturity: operational · ai: strong · since: 2014 · investment: $261M raised
+  https://opentrons.com/
+
+Tecan Group — Tecan (SIX: TECN)
+  Männedorf, Switzerland
+  domain: cross-domain · maturity: operational · ai: partial · since: 1995 · investment: Public (SIX)
+  https://www.tecan.com/
+
+Peak Analysis & Automation — PAA (Grenova)
+  Farnborough, UK
+  domain: cross-domain · maturity: operational · ai: partial · since: 1992 · investment: Private
+  https://paa-automation.com/
+
+Radical AI — Radical AI (Gerbrand Ceder, CSO)
+  New York, USA
+  domain: materials · maturity: operational · ai: strong · since: 2024 · investment: $55M seed (2025, RTX + NVIDIA)
+  https://radical-ai.com
+
+Mattiq — Mattiq (ex-Northwestern, Mirkin)
+  Chicago, USA
+  domain: materials · maturity: operational · ai: strong · since: 2023 · investment: ~$35M
+  https://mattiq.com
+
+Dunia Innovations — Dunia (GigaLab, Berlin)
+  Berlin, Germany
+  domain: energy · maturity: operational · ai: strong · since: 2022 · investment: €10.6M seed · €280M GigaLab
+  https://dunia.ai
+
+ChemLex — ChemLex (Sean Lin)
+  Singapore, Singapore
+  domain: drug-discovery · maturity: operational · ai: strong · since: 2022 · investment: $45M (2025, Granite Asia)
+  https://chemlex.com
+
+MegaRobo 镁伽科技 — MegaRobo Technologies
+  Beijing, China
+  domain: cross-domain · maturity: industrial · ai: partial · since: 2019 · investment: ~$300M (Series C/D)
+  https://en.megarobo.com/
+
+FutureHouse / Edison Scientific — FutureHouse (nonprofit) + Edison
+  San Francisco, USA
+  domain: biology · maturity: prototype · ai: strong · since: 2023 · investment: $70M (Edison, 2025, ~$250M val)
+  https://www.futurehouse.org/
+
+SOLVE Chemistry — SOLVE Chemistry Ltd
+  London, UK
+  domain: chemistry · maturity: operational · ai: strong · since: 2024 · investment: £4M
+  https://www.solvechemistry.com/
+
+========================================================================
+LAB OS / ORCHESTRATION (11)
+========================================================================
+
+Automata (LINQ) — Automata
+  London, UK
+  domain: orchestration · maturity: operational · ai: strong · since: 2023 · investment: $45M Series C
+  https://www.automata.tech/
+
+Benchling — Benchling
+  San Francisco, USA
+  domain: orchestration · maturity: operational · ai: strong · since: 2014 · investment: $412M · $6B val
+  https://www.benchling.com/
+
+Artificial — Artificial
+  London, UK
+  domain: orchestration · maturity: operational · ai: strong · since: 2018 · investment: Undisclosed
+  https://www.artificial.com/
+
+Synthace — Synthace
+  London, UK
+  domain: orchestration · maturity: operational · ai: strong · since: 2014 · investment: Undisclosed
+  https://www.synthace.com/
+
+Unchained Labs (Stuntman) — Unchained Labs
+  Pleasanton, USA
+  domain: orchestration · maturity: operational · ai: strong · since: 2016 · investment: Undisclosed
+  https://www.unchainedlabs.com/
+
+UniteLabs — UniteLabs
+  Munich, Germany
+  domain: orchestration · maturity: operational · ai: strong · since: 2025 · investment: Undisclosed
+  https://unitelabs.io/
+
+Cenevo (Titian + Labguru) — Titian + Labguru merger
+  London, UK
+  domain: orchestration · maturity: operational · ai: strong · since: 2025 · investment: Undisclosed
+  https://www.cenevo.com/
+
+HighRes + Opentrons — HighRes Biosolutions × Opentrons
+  Beverly, USA
+  domain: orchestration · maturity: prototype · ai: strong · since: 2005 · investment: Partnership
+  https://highresbio.com/
+
+Atinary — Atinary
+  Lausanne, Switzerland
+  domain: orchestration · maturity: operational · ai: strong · since: 2019 · investment: Undisclosed
+  https://atinary.com/
+
+ABB Robotics — ABB
+  Zürich, Switzerland
+  domain: orchestration · maturity: operational · ai: strong · since: 2023 · investment: Public
+  https://new.abb.com/products/robotics
+
+QPillars — QPillars GmbH
+  Zurich, Switzerland
+  domain: orchestration · maturity: operational · ai: strong · since: 2024 · investment: —
+  https://qpillars.com/

@@ -82,12 +82,15 @@
         Maturity: '成熟度',
         Domain: '领域',
         'Characterisation in Loop': '回路中的表征',
+        Country: '国家',
       },
       resetBtn: '清除所有筛选',
+      exportBtn: '导出地图…',
       mobToggle: { Filters: '筛选', Selected: '已选' },
       counts: { Initiatives: '项目', Highlighted: '已筛选', Countries: '国家' },
       zoomHint: '拖动平移 · 滚动缩放 · 双击放大',
       region: { 'r-eu': '前往欧洲', 'r-us': '前往美国', 'r-ea': '前往东亚' },
+      viewCtl: { 'v-globe': '地球视图', 'v-flat': '平面地图' },
       eyebrow: '荷兰国家材料发现实验室 · 实时追踪',
       brandH1Pre: '全球自驱动实验室',
       brandH1Post: '版图',
@@ -167,12 +170,15 @@
         Maturity: '成熟度',
         Domain: '領域',
         'Characterisation in Loop': '迴路中的表徵',
+        Country: '國家',
       },
       resetBtn: '清除所有篩選',
+      exportBtn: '匯出地圖…',
       mobToggle: { Filters: '篩選', Selected: '已選' },
       counts: { Initiatives: '項目', Highlighted: '已篩選', Countries: '國家' },
       zoomHint: '拖動平移 · 滾動縮放 · 雙擊放大',
       region: { 'r-eu': '前往歐洲', 'r-us': '前往美國', 'r-ea': '前往東亞' },
+      viewCtl: { 'v-globe': '地球視圖', 'v-flat': '平面地圖' },
       eyebrow: '荷蘭國家材料發現實驗室 · 即時追蹤',
       brandH1Pre: '全球自驅動實驗室',
       brandH1Post: '版圖',
@@ -252,12 +258,15 @@
         Maturity: '成熟度',
         Domain: '分野',
         'Characterisation in Loop': 'ループ内キャラクタリゼーション',
+        Country: '国・地域',
       },
       resetBtn: 'すべてのフィルタをクリア',
+      exportBtn: '地図をエクスポート…',
       mobToggle: { Filters: 'フィルタ', Selected: '選択' },
       counts: { Initiatives: 'プロジェクト', Highlighted: '選択中', Countries: '国' },
       zoomHint: 'ドラッグで移動 · スクロールでズーム · ダブルクリックで拡大',
       region: { 'r-eu': '欧州へ', 'r-us': '米国へ', 'r-ea': '東アジアへ' },
+      viewCtl: { 'v-globe': '地球儀ビュー', 'v-flat': '平面マップ' },
       eyebrow: 'オランダ国家材料発見研究所 · ライブ追跡',
       brandH1Pre: 'グローバル自動実験室',
       brandH1Post: 'ランドスケープ',
@@ -337,12 +346,15 @@
         Maturity: '성숙도',
         Domain: '분야',
         'Characterisation in Loop': '루프 내 캐릭터라이제이션',
+        Country: '국가',
       },
       resetBtn: '모든 필터 지우기',
+      exportBtn: '지도 내보내기…',
       mobToggle: { Filters: '필터', Selected: '선택' },
       counts: { Initiatives: '프로젝트', Highlighted: '선택', Countries: '국가' },
       zoomHint: '드래그로 이동 · 스크롤로 줌 · 더블클릭으로 확대',
       region: { 'r-eu': '유럽으로', 'r-us': '미국으로', 'r-ea': '동아시아로' },
+      viewCtl: { 'v-globe': '지구본 보기', 'v-flat': '평면 지도' },
       eyebrow: '네덜란드 국가재료발견연구소 · 실시간 추적',
       brandH1Pre: '글로벌 자율실험실',
       brandH1Post: '랜드스케이프',
@@ -532,6 +544,9 @@
     // Reset button
     var reset = document.getElementById('reset');
     if (reset && t.resetBtn) reset.textContent = t.resetBtn;
+    // Export dialog opener
+    var expBtn = document.getElementById('export-open');
+    if (expBtn && t.exportBtn) expBtn.textContent = t.exportBtn;
     // Mobile toggles (the .lbl span inside)
     document.querySelectorAll('.mob-toggle .lbl').forEach(function (el) {
       var orig = (el.textContent || '').trim();
@@ -549,6 +564,11 @@
     ['r-eu', 'r-us', 'r-ea'].forEach(function (id) {
       var el = document.getElementById(id);
       if (el && t.region && t.region[id]) el.title = t.region[id];
+    });
+    // Globe/flat view toggle titles
+    ['v-globe', 'v-flat'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && t.viewCtl && t.viewCtl[id]) el.title = t.viewCtl[id];
     });
     // Brand strings — only matter when not in embed mode
     if (!embed) {
