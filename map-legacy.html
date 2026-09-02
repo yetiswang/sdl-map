@@ -1925,8 +1925,8 @@ window.SDL_CATEGORIES = {
   const app = document.getElementById('app');
   app.innerHTML = `
     <header class="top">
-    <button class="mob-toggle mob-only left" id="mob-filters" aria-label="Open filters"><span class="chev"></span><span class="lbl">Filters</span><span class="badge" id="mob-filters-n" style="display:none">0</span></button>
-    <button class="mob-toggle mob-only right" id="mob-selected" aria-label="Open selected list"><span class="chev"></span><span class="lbl">Selected</span><span class="badge" id="mob-selected-n" style="display:none">0</span></button>
+    <button class="mob-toggle mob-only left" id="mob-filters" aria-label="Open filters" title="Filter the map — type, maturity, domain, country"><span class="chev"></span><span class="lbl">Filters</span><span class="badge" id="mob-filters-n" style="display:none">0</span></button>
+    <button class="mob-toggle mob-only right" id="mob-selected" aria-label="Open selected list" title="Highlighted initiatives — list of current matches"><span class="chev"></span><span class="lbl">Selected</span><span class="badge" id="mob-selected-n" style="display:none">0</span></button>
       <div class="brand-lockup">
         <a class="tue-logo" href="https://www.tue.nl/" target="_blank" rel="noopener" aria-label="TU Eindhoven">
           <img src="img/tue-logo.png" alt="TU Eindhoven">
@@ -4899,6 +4899,67 @@ if (window !== window.parent) { document.documentElement.classList.add('iframed'
   }
   go();
   window.__sdlRefreshTheme = function(){ /* no canvas to refresh here */ };
+})();
+</script>
+<script>
+/* v46.c — instant hover tips for every map control. Native title tooltips
+   are slow and inconsistent; this swaps them for one token-styled tip that
+   reads each control's title (moved to data-tip to suppress the native one)
+   or aria-label — so map-i18n's translated titles carry over unchanged.
+   Mouse-only by design: touch has no hover. */
+(function () {
+  var SEL = '.zoom-ctl button, .region-nav button, .mob-toggle, .theme-toggle, .wm-reopen, .sdl-fab, #sdl-clear-floating';
+  var style = document.createElement('style');
+  style.textContent =
+    '.ctl-tip{position:fixed;z-index:300;background:var(--surface-overlay,var(--bg-2));border:1px solid var(--rule);' +
+    'color:var(--ink);font-family:var(--font-mono);font-size:11px;letter-spacing:0.05em;padding:5px 10px;' +
+    'border-radius:6px;pointer-events:none;opacity:0;transition:opacity .12s ease;white-space:nowrap;' +
+    'backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}' +
+    '.ctl-tip.show{opacity:1;}';
+  document.head.appendChild(style);
+  var tip = document.createElement('div');
+  tip.className = 'ctl-tip';
+  document.body.appendChild(tip);
+  var cur = null;
+
+  function hide() { cur = null; tip.classList.remove('show'); }
+
+  document.addEventListener('mouseover', function (e) {
+    var b = e.target && e.target.closest ? e.target.closest(SEL) : null;
+    if (!b) { if (cur) hide(); return; }
+    if (b === cur) return;
+    cur = b;
+    if (b.hasAttribute('title')) {
+      b.dataset.tip = b.getAttribute('title');
+      b.removeAttribute('title');
+    }
+    var label = b.dataset.tip || b.getAttribute('aria-label');
+    if (!label) { hide(); return; }
+    tip.textContent = label;
+    tip.classList.add('show');
+    requestAnimationFrame(function () {
+      if (cur !== b) return;
+      var r = b.getBoundingClientRect();
+      var tw = tip.offsetWidth, th = tip.offsetHeight, x, y;
+      if (r.left < 80) {                              // left-edge controls → tip to the right
+        x = r.right + 10; y = r.top + r.height / 2 - th / 2;
+      } else if (window.innerWidth - r.right < 80) {  // right-edge controls → tip to the left
+        x = r.left - tw - 10; y = r.top + r.height / 2 - th / 2;
+      } else if (r.top + r.height / 2 < window.innerHeight / 2) {
+        x = r.left + r.width / 2 - tw / 2; y = r.bottom + 8;
+      } else {
+        x = r.left + r.width / 2 - tw / 2; y = r.top - th - 8;
+      }
+      tip.style.left = Math.max(8, Math.min(x, window.innerWidth - tw - 8)) + 'px';
+      tip.style.top = Math.max(8, Math.min(y, window.innerHeight - th - 8)) + 'px';
+    });
+  });
+  document.addEventListener('mouseout', function (e) {
+    if (!cur) return;
+    var to = e.relatedTarget && e.relatedTarget.closest ? e.relatedTarget.closest(SEL) : null;
+    if (to !== cur) hide();
+  });
+  document.addEventListener('click', hide, true);
 })();
 </script>
 </body>
