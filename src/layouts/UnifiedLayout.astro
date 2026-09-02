@@ -241,10 +241,10 @@ a{ color:inherit; text-decoration:none; }
     <div class="nav-cluster" id="nav-cluster">
       <!-- View nav -->
       <nav class="view-nav" style="display:flex;align-items:center;gap:4px;">
-        <a href={`${prefix}`} class={activeView==='map'?'active':''}>{ui.map}</a>
-        <a href={`${prefix}list/`} class={activeView==='list'?'active':''}>{ui.list}</a>
-        <a href={`${prefix}timeline/`} class={activeView==='timeline'?'active':''}>{ui.timeline}</a>
-        <a href={`${prefix}watch/`} class={activeView==='watch'?'active':''}>{ui.watch}</a>
+        <a href={`${prefix}`} class={activeView==='map'?'active':''} data-tip={ui.navTipMap}>{ui.map}</a>
+        <a href={`${prefix}list/`} class={activeView==='list'?'active':''} data-tip={ui.navTipList}>{ui.list}</a>
+        <a href={`${prefix}timeline/`} class={activeView==='timeline'?'active':''} data-tip={ui.navTipTimeline}>{ui.timeline}</a>
+        <a href={`${prefix}watch/`} class={activeView==='watch'?'active':''} data-tip={ui.navTipWatch}>{ui.watch}</a>
       </nav>
       <span style="width:1px;height:20px;background:var(--rule);"></span>
       <!-- Stats chips (replace the old stats-bar row) -->
@@ -405,5 +405,48 @@ a{ color:inherit; text-decoration:none; }
       }
     })();
   </script>
+<script is:inline>
+/* v46.c — instant hover tips for the view nav (same .ctl-tip pattern as the
+   map's control tips; mouse-only, reads data-tip). */
+(function () {
+  var SEL = '.view-nav a[data-tip]';
+  var style = document.createElement('style');
+  style.textContent =
+    '.ctl-tip{position:fixed;z-index:300;background:var(--surface-overlay,var(--bg-2));border:1px solid var(--rule);' +
+    'color:var(--ink);font-family:var(--font-mono);font-size:11px;letter-spacing:0.05em;padding:5px 10px;' +
+    'border-radius:6px;pointer-events:none;opacity:0;transition:opacity .12s ease;white-space:nowrap;' +
+    'backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}' +
+    '.ctl-tip.show{opacity:1;}';
+  document.head.appendChild(style);
+  var tip = document.createElement('div');
+  tip.className = 'ctl-tip';
+  document.body.appendChild(tip);
+  var cur = null;
+  function hide() { cur = null; tip.classList.remove('show'); }
+  document.addEventListener('mouseover', function (e) {
+    var b = e.target && e.target.closest ? e.target.closest(SEL) : null;
+    if (!b) { if (cur) hide(); return; }
+    if (b === cur) return;
+    cur = b;
+    tip.textContent = b.dataset.tip;
+    tip.classList.add('show');
+    requestAnimationFrame(function () {
+      if (cur !== b) return;
+      var r = b.getBoundingClientRect();
+      var tw = tip.offsetWidth, th = tip.offsetHeight;
+      var x = Math.max(8, Math.min(r.left + r.width / 2 - tw / 2, window.innerWidth - tw - 8));
+      var y = r.bottom + 8;
+      tip.style.left = x + 'px';
+      tip.style.top = y + 'px';
+    });
+  });
+  document.addEventListener('mouseout', function (e) {
+    if (!cur) return;
+    var to = e.relatedTarget && e.relatedTarget.closest ? e.relatedTarget.closest(SEL) : null;
+    if (to !== cur) hide();
+  });
+  document.addEventListener('click', hide, true);
+})();
+</script>
 </body>
 </html>
