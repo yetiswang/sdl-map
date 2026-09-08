@@ -2670,5 +2670,29 @@
       "https://www.siat.ac.cn/symt/202604/t20260416_8186608.html"
     ],
     "start": 2023
+  },
+  {
+    "id": "zju-bmi",
+    "name": "ZJU iBioFoundry + iChemFoundry",
+    "org": "Zhejiang University Hangzhou Innovation Center",
+    "city": "Hangzhou",
+    "country": "China",
+    "flag": "🇨🇳",
+    "lat": 30.21,
+    "lon": 120.25,
+    "tier": "academic",
+    "domain": "cross-domain",
+    "maturity": "operational",
+    "charact": "multi-technique",
+    "ai": "strong",
+    "scale": "300+ instruments · 14,000 m²",
+    "invest": 0,
+    "investLabel": "ZJU + Hangzhou",
+    "url": "https://hic.zju.edu.cn/ibct/58279/list.htm",
+    "sources": [
+      "https://hic.zju.edu.cn/ibct/58279/list.htm",
+      "http://hic.zju.edu.cn/82840/list.htm"
+    ],
+    "start": 2020
   }
 ]
