@@ -1,5 +1,5 @@
 SDL LANDSCAPE — SELF-DRIVING LAB INITIATIVES WORLDWIDE
-113 initiatives · 15 countries · dataset of 2026-09-08
+114 initiatives · 15 countries · dataset of 2026-09-08
 https://sdl-map.discoverylabs.nl
 MIT — cite the map when reusing (github.com/yetiswang/sdl-map)
 
@@ -133,7 +133,7 @@ Shenzhen Synthetic Biology Infrastructure — CAS SIAT
   https://infrasynbio.siat.ac.cn/en
 
 ========================================================================
-ACADEMIC PLATFORMS (44)
+ACADEMIC PLATFORMS (45)
 ========================================================================
 
 A-Lab — Berkeley / LBNL
@@ -355,6 +355,11 @@ MAITENA (CIC energiGUNE) — CIC energiGUNE
   Vitoria-Gasteiz, Spain
   domain: energy · maturity: operational · ai: partial · since: 2024 · investment: —
   https://cicenergigune.com/en
+
+ZJU iBioFoundry + iChemFoundry — Zhejiang University Hangzhou Innovation Center
+  Hangzhou, China
+  domain: cross-domain · maturity: operational · ai: strong · since: 2020 · investment: ZJU + Hangzhou
+  https://hic.zju.edu.cn/ibct/58279/list.htm
 
 ========================================================================
 COMMERCIAL PLATFORMS (33)
