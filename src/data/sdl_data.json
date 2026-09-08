@@ -2646,5 +2646,29 @@
       "https://sila-standard.com/interview-with-iacob-marian-from-qpillars/"
     ],
     "start": 2024
+  },
+  {
+    "id": "szsynbio",
+    "name": "Shenzhen Synthetic Biology Infrastructure",
+    "org": "CAS SIAT",
+    "city": "Shenzhen",
+    "country": "China",
+    "flag": "🇨🇳",
+    "lat": 22.74,
+    "lon": 113.92,
+    "tier": "national",
+    "domain": "biology",
+    "maturity": "operational",
+    "charact": "multi-technique",
+    "ai": "strong",
+    "scale": "national facility",
+    "invest": 0,
+    "investLabel": "National major RI",
+    "url": "https://infrasynbio.siat.ac.cn/en",
+    "sources": [
+      "https://www.siat.ac.cn/cxpt/202412/t20241214_7458457.html",
+      "https://www.siat.ac.cn/symt/202604/t20260416_8186608.html"
+    ],
+    "start": 2023
   }
 ]
