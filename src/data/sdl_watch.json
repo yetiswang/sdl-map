@@ -40,6 +40,28 @@
     ]
   },
   {
+    "id": "korea-autonomous-lab-consortium-2026",
+    "date": "2026-08-11",
+    "kind": "milestone",
+    "title": "Korea launches a national Autonomous-Laboratory Consortium — 80 institutions behind the K-Moonshot lab build-out",
+    "summary": "MSIT convened the Autonomous Laboratory Industry–Academia–Research Consortium in Seoul: ~50 companies (Samsung SAIT, SK Hynix, LG Chem, Hyundai Motor, Park Systems) and ~30 universities and institutes (KIST, KIMM, KIMS, KRIBB), chaired by SNU's Yousung Jung with the National AI Science Research Center and KBSI as secretariat. The $36.5M two-year primary programme builds one general-purpose autonomous lab, five specialized labs and four autonomous experiment centers (secondary batteries, hydrogen, aerospace/mobility, organic semiconductors/displays), and standardizes equipment, protocols and data formats — feeding national AI training datasets under the K-Moonshot initiative. Alongside MOTIE's 500-SDL commitment, Korea now has both an industrial target and an institutional coordination body.",
+    "sources": [
+      {
+        "label": "HelloDD (헬로디디)",
+        "url": "https://www.hellodd.com/news/articleView.html?idxno=112789"
+      },
+      {
+        "label": "Herald Business (헤럴드경제)",
+        "url": "https://biz.heraldcorp.com/article/10837471"
+      },
+      {
+        "label": "Science and Medicine Group (EN summary)",
+        "url": "https://www.scienceandmedicinegroup.com/resource/south-korea-autonomous-labs-ai-consortium/"
+      }
+    ],
+    "related": "korea500"
+  },
+  {
     "id": "nsf-pcl-test-bed-2026",
     "date": "2026-07-22",
     "kind": "funding",
