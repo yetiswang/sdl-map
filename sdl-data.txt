@@ -1,10 +1,10 @@
 SDL LANDSCAPE — SELF-DRIVING LAB INITIATIVES WORLDWIDE
-112 initiatives · 15 countries · dataset of 2026-09-08
+113 initiatives · 15 countries · dataset of 2026-09-08
 https://sdl-map.discoverylabs.nl
 MIT — cite the map when reusing (github.com/yetiswang/sdl-map)
 
 ========================================================================
-NATIONAL / FLAGSHIP PROGRAMMES (24)
+NATIONAL / FLAGSHIP PROGRAMMES (25)
 ========================================================================
 
 Acceleration Consortium — University of Toronto
@@ -126,6 +126,11 @@ MINERVA (BAM) — BAM Berlin (Ruehle junior research group)
   Berlin, Germany
   domain: materials · maturity: operational · ai: strong · since: 2025 · investment: —
   https://www.bam.de/Content/EN/Standard-Articles/About-us/Jobs-and-Careers/Young-Science/project-group-ruehle-self-driving-lab-advanced-materials.html
+
+Shenzhen Synthetic Biology Infrastructure — CAS SIAT
+  Shenzhen, China
+  domain: biology · maturity: operational · ai: strong · since: 2023 · investment: National major RI
+  https://infrasynbio.siat.ac.cn/en
 
 ========================================================================
 ACADEMIC PLATFORMS (44)
