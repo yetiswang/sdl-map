@@ -1,5 +1,5 @@
 SDL LANDSCAPE — SELF-DRIVING LAB INITIATIVES WORLDWIDE
-114 initiatives · 15 countries · dataset of 2026-09-08
+114 initiatives · 15 countries · dataset of 2026-09-09
 https://sdl-map.discoverylabs.nl
 MIT — cite the map when reusing (github.com/yetiswang/sdl-map)
 
