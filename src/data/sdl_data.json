@@ -2694,5 +2694,104 @@
       "http://hic.zju.edu.cn/82840/list.htm"
     ],
     "start": 2020
+  },
+  {
+    "id": "aithyra",
+    "name": "AITHYRA",
+    "org": "Austrian Academy of Sciences (ÖAW) · Vienna BioCenter",
+    "city": "Vienna",
+    "country": "Austria",
+    "flag": "🇦🇹",
+    "lat": 48.19,
+    "lon": 16.4,
+    "tier": "academic",
+    "domain": "biology",
+    "maturity": "prototype",
+    "charact": "single-technique",
+    "ai": "strong",
+    "scale": "AI-driven robotics lab · 100 m² phase I → 400 m² phase II · 10–14 groups",
+    "invest": 150,
+    "investLabel": "€150M / 12 yrs (Boehringer Ingelheim Stiftung)",
+    "url": "https://aithyra.at/",
+    "sources": [
+      "https://aithyra.at/research/research-at-aithyra",
+      "https://aithyra.at/research/groups/wali-malik",
+      "https://boehringer-ingelheim-stiftung.de/en/what-we-fund/funding-initiatives/aithyra-institute.html"
+    ],
+    "start": 2024
+  },
+  {
+    "id": "allen_biodesign",
+    "name": "AI BioDesign (Allen Institute)",
+    "org": "Allen Institute + UW + Fred Hutch · Fund for Science and Technology",
+    "city": "Seattle",
+    "country": "USA",
+    "flag": "🇺🇸",
+    "lat": 47.62,
+    "lon": -122.34,
+    "tier": "academic",
+    "domain": "biology",
+    "maturity": "operational",
+    "charact": "single-technique",
+    "ai": "strong",
+    "scale": "accelerator · massively parallel in-tube libraries (scale not from robotics)",
+    "invest": 95,
+    "investLabel": "$95M (FFST)",
+    "url": "https://alleninstitute.org/",
+    "sources": [
+      "https://alleninstitute.org/news/ai-biodesign-accelerator-combines-experimental-biology-and-artificial-intelligence-to-learn-natures-design-rules",
+      "https://www.eurekalert.org/news-releases/1141802"
+    ],
+    "start": 2026
+  },
+  {
+    "id": "circulab",
+    "name": "CircuLab",
+    "org": "Stockholm University · WISE Research Technology Platform",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "flag": "🇸🇪",
+    "lat": 59.37,
+    "lon": 18.05,
+    "tier": "academic",
+    "domain": "materials",
+    "maturity": "operational",
+    "charact": "multi-technique",
+    "ai": "strong",
+    "scale": "4 clusters · ~20 instruments · open to academia, start-ups, industry",
+    "invest": 0,
+    "investLabel": "WISE + Stockholm University (part of SEK 136M over 4 platforms)",
+    "url": "https://wise-materials.org/platform/circulab",
+    "sources": [
+      "https://wise-materials.org/platform/circulab",
+      "https://www.su.se/english/news/articles/2026-08-17-launch-of-the-wise-research-technology-platfrom-circulab",
+      "https://www.su.se/english/news/articles/2024-01-17-sek-136-millions-granted-to-materials-research-at-stockholm-university"
+    ],
+    "start": 2024
+  },
+  {
+    "id": "bessy3",
+    "name": "BESSY III",
+    "org": "Helmholtz-Zentrum Berlin (HZB)",
+    "city": "Berlin",
+    "country": "Germany",
+    "flag": "🇩🇪",
+    "lat": 52.43,
+    "lon": 13.53,
+    "tier": "national",
+    "domain": "materials",
+    "maturity": "concept",
+    "charact": "advanced-multimodal",
+    "ai": "planned",
+    "scale": "4th-gen soft X-ray source · CDR 2027 · operations mid-2030s",
+    "invest": 900,
+    "investLabel": "≈€900M construction (est., 2020 prices)",
+    "url": "https://www.helmholtz-berlin.de/forschung/quellen/bessy3/index_en.html",
+    "sources": [
+      "https://www.helmholtz-berlin.de/media/landing/bessy3/index.html",
+      "https://jacow.org/icalepcs2023/papers/mo2ao04.pdf",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10119534"
+    ],
+    "start": 2022
   }
 ]
