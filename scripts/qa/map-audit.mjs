@@ -104,6 +104,9 @@ try {
   for (const [dev, opts] of Object.entries(DEVICES)) {
     if (ONLY && ONLY !== dev) continue;
     const ctx = await browser.newContext(opts);
+    // The map plays a once-per-session arrival (≈1.4 s, names last). The audit
+    // measures the settled state, so mark the session as already arrived.
+    await ctx.addInitScript(() => { try { sessionStorage.setItem('sdl-arrived', '1'); } catch (e) {} });
     const page = await ctx.newPage();
     await page.goto(BASE + '/', { waitUntil: 'load' });
     const frame = await frameOf(page);

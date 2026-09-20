@@ -1075,8 +1075,10 @@ body.interacting .land { opacity: 0.92; }
     border-radius: 12px;
     border: 1px solid var(--rule);
     box-shadow: 0 20px 48px rgba(0,0,0,0.55);
-    transform: translateX(420px);   /* off-screen right */
-    transition: transform 0.28s cubic-bezier(0.4,0,0.2,1), opacity 0.2s;
+    /* 2026-09-20: grows from the pin it belongs to (origin set by openSheet) */
+    transform: scale(0.94);
+    transform-origin: var(--card-origin, 100% 30%);
+    transition: transform var(--t-base, 200ms) var(--ease-enter, ease-out), opacity var(--t-base, 200ms) var(--ease-enter, ease-out);
     opacity: 0;
     pointer-events: none;
   }
@@ -1864,6 +1866,8 @@ window.SDL_CATEGORIES = {
   const DRAG_THRESHOLD_PX = 8;
   const DRAG_THRESHOLD_TOUCH_PX = 18;
   const TIER_PRIORITY = { national: 4, commercial: 3, academic: 2, labos: 1 };
+  // 2026-09-20 motion gate: every JS animation collapses to its final frame.
+  const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function isTouchMode(){
     return document.body.classList.contains('is-touch');
@@ -2421,6 +2425,7 @@ window.SDL_CATEGORIES = {
   const DATA_BY_ID = new Map(DATA.map(d => [d.id, d]));
   const TREE = window.SDLClusters.buildHierarchy(DATA);
   const _dispState = new Map();   // node id → {node, mode:'steady'|'in'|'out', t0, from, to, pos, travel}
+  let _arrivalT0 = 0;             // >0 while the once-per-session arrival cascade runs
   let _clusterThr = null, _firstFrame = true, _lastPxPerKm = 1, _lastSpiderKm = 0;
   const _clusterObst = [];        // displayed discs {x,y,r} in SVG units — label placement avoids them
   let _inViewSig = '', _inViewIds = [], _inViewTimer = null;
@@ -2876,7 +2881,7 @@ function redraw(){
     _lastPxPerKm = _pxPerKm; _lastSpiderKm = _spiderKm;
     const _displayed = SDLClusters.cut(TREE, _clusterThr, _spiderKm);
     const _now = performance.now();
-    const ANIM_MS = 250;
+    const ANIM_MS = REDUCED_MOTION ? 1 : 250;
     const _newSet = new Map();
     _displayed.forEach(n => _newSet.set(n.id, n));
     const _prevPos = new Map();
@@ -2898,7 +2903,11 @@ function redraw(){
       if (a) _inPlace.add(a.id);
     });
     // Entering nodes: emerge from the ancestor that was on screen (split) or
-    // appear in place (merge, first frame).
+    // appear in place (merge, first frame). On the once-per-session arrival
+    // the first frame's nodes enter in place, nearest to the view centre
+    // first, 28 ms apart (≈1.1 s for the whole cascade).
+    const _arriving = _firstFrame && _arrivalT0 > 0;
+    if (_arriving) _displayed.slice().sort((a, b) => gcDist(center, [a.lon, a.lat]) - gcDist(center, [b.lon, b.lat])).forEach((n, i) => { n._arrRank = i; });
     _newSet.forEach((n, id) => {
       if (_dispState.has(id)) return;
       const own = [n.lon, n.lat];
@@ -2908,11 +2917,12 @@ function redraw(){
         while (a && !_prevPos.has(a.id)) a = a.parent;
         if (a) from = _prevPos.get(a.id).slice();
       }
-      _dispState.set(id, { node: n, mode: _firstFrame ? 'steady' : 'in', t0: _now, from: from, to: own, pos: from.slice(), travel: from !== own });
+      const t0 = _arriving ? _arrivalT0 + 250 + Math.min(n._arrRank || 0, 30) * 28 : _now;
+      _dispState.set(id, { node: n, mode: (_firstFrame && !_arriving) ? 'steady' : 'in', t0: t0, from: from, to: own, pos: from.slice(), travel: from !== own });
     });
     _firstFrame = false;
     let _animating = false;
-    const showLabels = isTouch ? k >= 1.0 : k >= 3.0;
+    const showLabels = (_arrivalT0 && _now < _arrivalT0 + 1150) ? false : (isTouch ? k >= 1.0 : k >= 3.0);   // names come last on arrival
     const _active = anyFilterActive();
     const _pinR   = SDLClusters.pinRadiusCss(isTouch, false) / _scrScaleR;
     const _pinRhl = SDLClusters.pinRadiusCss(isTouch, true)  / _scrScaleR;
@@ -2924,7 +2934,7 @@ function redraw(){
       const n = st.node;
       let alpha = 1, e = 1;
       if (st.mode !== 'steady') {
-        const t = Math.min(1, (_now - st.t0) / ANIM_MS);
+        const t = Math.max(0, Math.min(1, (_now - st.t0) / ANIM_MS));   // t<0 while a staggered arrival waits
         e = SDLClusters.easeOutCubic(t);
         st.pos = [st.from[0] + (st.to[0] - st.from[0]) * e, st.from[1] + (st.to[1] - st.from[1]) * e];
         alpha = st.mode === 'in' ? e : 1 - e;
@@ -3968,6 +3978,7 @@ function redraw(){
   // 2026-09-20 — generic short flight (rotate + scale), used by cluster taps.
   let _flyViewRaf = null;
   function flyToView(targetRot, targetScale, duration){
+    if (REDUCED_MOTION) duration = 1;
     if (_flyViewRaf) cancelAnimationFrame(_flyViewRaf);
     stopZoomInertia();
     const startRot = [...view.rotate], startScale = view.scale, t0 = performance.now();
@@ -4231,7 +4242,7 @@ function redraw(){
 
     // Zoom-out trough: pull back to global view mid-flight
     const midScale = needsArc ? BASE_SCALE * 1.0 : (start.scale + target.scale) / 2;
-    const duration = needsArc ? 1400 : 800; // longer for cross-globe flights
+    const duration = REDUCED_MOTION ? 1 : (needsArc ? 1400 : 800); // longer for cross-globe flights
 
     // Highlight active button
     document.querySelectorAll('.region-nav button').forEach(b => b.classList.remove('active-region'));
@@ -4309,6 +4320,23 @@ function redraw(){
   });
 
   svg.style.cursor = 'grab';
+  // 2026-09-20 — arrival, once per session: the camera settles from 0.94×
+  // over 700 ms, discs cascade in from the centre outwards, names follow,
+  // chrome fades in at 900 ms. Reduced motion and repeat visits get the
+  // final frame at once. Total ≈ 1.4 s; nothing a reader needs waits on it.
+  (function arrival(){
+    let seen = false;
+    try { seen = sessionStorage.getItem('sdl-arrived') === '1'; } catch (e) {}
+    if (seen || REDUCED_MOTION) { document.body.classList.remove('arriving'); return; }
+    try { sessionStorage.setItem('sdl-arrived', '1'); } catch (e) {}
+    document.body.classList.add('arriving');
+    _arrivalT0 = performance.now();
+    const target = view.scale;
+    view.scale = target * 0.94;
+    setTimeout(() => flyToView([...view.rotate], target, 700), 30);
+    setTimeout(() => document.body.classList.remove('arriving'), 900);
+    setTimeout(() => { _arrivalT0 = 0; redrawRaf(); }, 1500);
+  })();
   redraw();
   render();
 })();
@@ -4500,16 +4528,30 @@ function setupBottomSheet(){
         <span class="s-name" id="sheet-name">${d.flag || ''} ${d.name}</span>
       </div>
       <div class="sheet-meta">${tierLabel} · ${d.city}, ${d.country}</div>
-      <div class="sheet-row"><span class="k">Org</span><span class="v">${d.org || '—'}</span></div>
-      <div class="sheet-row"><span class="k">Domain</span><span class="v">${domLabel}</span></div>
-      <div class="sheet-row"><span class="k">Maturity</span><span class="v">${matLabel}</span></div>
-      <div class="sheet-row"><span class="k">Characterisation</span><span class="v">${chLabel}</span></div>
-      <div class="sheet-row"><span class="k">AI</span><span class="v">${d.ai || '—'}</span></div>
-      <div class="sheet-row"><span class="k">Scale</span><span class="v">${d.scale || '—'}</span></div>
-      <div class="sheet-row"><span class="k">Investment</span><span class="v">${d.investLabel || '—'}</span></div>
+      <div class="sheet-row" style="--i:0"><span class="k">Org</span><span class="v">${d.org || '—'}</span></div>
+      <div class="sheet-row" style="--i:1"><span class="k">Domain</span><span class="v">${domLabel}</span></div>
+      <div class="sheet-row" style="--i:2"><span class="k">Maturity</span><span class="v">${matLabel}</span></div>
+      <div class="sheet-row" style="--i:3"><span class="k">Characterisation</span><span class="v">${chLabel}</span></div>
+      <div class="sheet-row" style="--i:4"><span class="k">AI</span><span class="v">${d.ai || '—'}</span></div>
+      <div class="sheet-row" style="--i:5"><span class="k">Scale</span><span class="v">${d.scale || '—'}</span></div>
+      <div class="sheet-row" style="--i:6"><span class="k">Investment</span><span class="v">${d.investLabel || '—'}</span></div>
       ${linksHtml}
     `;
     sheet.style.transform = '';   // clear any stuck inline transform from prior swipe
+    // 2026-09-20 — desktop card scales up from the pin it belongs to.
+    try {
+      const svgEl = document.getElementById('map');
+      if (svgEl && d._x != null) {
+        const r = svgEl.getBoundingClientRect();
+        const sc = Math.min(r.width / 1000, r.height / 560);
+        const px = r.left + (r.width - 1000 * sc) / 2 + d._x * sc;
+        const py = r.top + (r.height - 560 * sc) / 2 + d._y * sc;
+        const cr = sheet.getBoundingClientRect();
+        const ox = Math.max(-40, Math.min(140, (px - cr.left) / Math.max(1, cr.width) * 100));
+        const oy = Math.max(-40, Math.min(140, (py - cr.top) / Math.max(1, cr.height) * 100));
+        sheet.style.setProperty('--card-origin', ox.toFixed(0) + '% ' + oy.toFixed(0) + '%');
+      }
+    } catch (e) {}
     sheet.classList.add('open');
     document.body.classList.add('sheet-open');
     _sheetOpenedAt = performance.now();

@@ -55,3 +55,14 @@ Supersedes the glassmorphism entry in Anti-patterns. What stays forbidden is the
 - **Mechanism** (`public/glass.css`): a surface opts in with `class="glass"` (+ `glass-strong`). Inside `@supports (backdrop-filter)` the class sets `--surface`, `--surface-image`, `--surface-blur`, `--surface-edge`, `--surface-shadow`; consumers read them with the solid `--surface-overlay` / `--surface-deep` as fallback. Styles that other scripts inject at runtime (export.js, map-i18n.js) are out-specified in `map-chrome.css` by rules that read the same properties.
 - **Guards, all load-bearing:** no backdrop-filter → solid; `prefers-reduced-transparency` → solid; **moving-map freeze**: `body.interacting`, `body.map-moving` (set by `redraw()` while the view changes) and a dragging sheet switch every glass surface to the strong solid with blur off, easing back over `--t-base` when motion stops. Glass is seen at rest and never paid for during a gesture.
 - **Never** a second accent, a glow, a gradient field, or glass on a chip.
+
+## Motion (2026-09-20)
+Tokens in `public/tokens.css`: `--t-fast` 120 ms, `--t-base` 200, `--t-slow` 280, `--t-flight` 450; `--ease-standard`, `--ease-enter`, `--ease-exit`. Every motion answers an action or explains a state change; nothing loops except the highlight pulse. `prefers-reduced-motion` collapses all of it: the map's JS animations run at 1 ms (`REDUCED_MOTION`), the CSS transitions are switched off, the arrival is skipped.
+1. **Arrival, once per session** (`sessionStorage['sdl-arrived']`): camera settles from 0.94× over 700 ms; discs and pins cascade in from the view centre outwards, 28 ms apart; names are held until 1.15 s; chrome (`body.arriving`) fades in at 900 ms. ≈1.4 s, and nothing a reader needs waits on it.
+2. **Split and merge**: 250 ms travel-and-fade along the cluster tree (Phase 1).
+3. **Flights**: region chips, disc taps and reset use `flyToView` / `flyTo`; long flights arc out and in.
+4. **Control response**: press scales to 0.96 over `--t-fast`; pointer devices get a 1 px hover lift; focus-visible ring on every control.
+5. **Phone sheet**: height moves on a JS spring (stiffness 320, damping 30) fed the release velocity; rubber band at a third past peek and full; a flick over 0.45 px/ms goes one state further. `--msheet-h` follows every frame so the reset button rides along. States: peek 112 px, half 52 svh, full 86 svh.
+6. **Detail card**: desktop grows from 0.94 at the pin it belongs to (`--card-origin` set by `openSheet`); phone rises from the bottom with rows following 30 ms apart.
+7. **Tips**: fade plus a 4 px rise over `--t-fast`.
+8. **Theme flip**: glass surfaces and controls cross-fade colour over `--t-base`; the canvas repaints at once.

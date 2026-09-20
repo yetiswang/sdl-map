@@ -82,17 +82,42 @@
 
   // ---- state -------------------------------------------------------------
   var STATES = ['peek', 'half', 'full'];
+  var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Height moves on a spring (stiffness 320, damping 30, unit mass), fed the
+  // release velocity of a drag so a flick carries. --msheet-h follows every
+  // frame so the reset button rides along.
+  var springRaf = null;
+  function applyH(h) { sheet.style.height = h + 'px'; document.documentElement.style.setProperty('--msheet-h', Math.round(h) + 'px'); }
+  function springTo(target, v0, instant) {
+    if (springRaf) { cancelAnimationFrame(springRaf); springRaf = null; }
+    if (instant || REDUCED) { sheet.style.height = ''; document.documentElement.style.setProperty('--msheet-h', target + 'px'); return; }
+    var h = sheet.getBoundingClientRect().height, v = v0 || 0, last = performance.now();
+    sheet.classList.add('is-springing'); document.body.classList.add('msheet-springing');
+    function step(now) {
+      var dt = Math.min(0.032, (now - last) / 1000); last = now;
+      var a = -320 * (h - target) - 30 * v;
+      v += a * dt; h += v * dt;
+      if (Math.abs(h - target) < 0.5 && Math.abs(v) < 4) {
+        sheet.classList.remove('is-springing'); document.body.classList.remove('msheet-springing');
+        sheet.style.height = ''; document.documentElement.style.setProperty('--msheet-h', target + 'px'); springRaf = null; return;
+      }
+      applyH(h);
+      springRaf = requestAnimationFrame(step);
+    }
+    springRaf = requestAnimationFrame(step);
+  }
   function heightFor(s) {
     if (s === 'peek') return 112;
     if (s === 'half') return Math.round(window.innerHeight * 0.52);
     return Math.round(window.innerHeight * 0.86);
   }
-  function setState(s, remember) {
+  function setState(s, remember, v0) {
     if (STATES.indexOf(s) < 0) s = 'peek';
+    var first = !sheet.dataset.ready;
+    sheet.dataset.ready = '1';
     sheet.dataset.state = s;
     sheet.classList.toggle('glass-strong', s !== 'peek');   // reading surfaces are less transparent
-    sheet.style.height = '';
-    document.documentElement.style.setProperty('--msheet-h', heightFor(s) + 'px');
+    springTo(heightFor(s), v0, first);
     document.body.classList.toggle('msheet-open', s !== 'peek');
     grip.setAttribute('aria-expanded', String(s !== 'peek'));
     grip.setAttribute('aria-label', s === 'peek' ? t.expand : t.collapse);
@@ -116,7 +141,8 @@
   var head = sheet.querySelector('#msheet-head');
   head.addEventListener('pointerdown', function (e) {
     if (e.target.closest('button') && e.pointerType !== 'touch') return;
-    drag = { y0: e.clientY, h0: sheet.getBoundingClientRect().height, moved: false, id: e.pointerId };
+    if (springRaf) { cancelAnimationFrame(springRaf); springRaf = null; sheet.classList.remove('is-springing'); document.body.classList.remove('msheet-springing'); }
+    drag = { y0: e.clientY, h0: sheet.getBoundingClientRect().height, moved: false, id: e.pointerId, samples: [{ t: performance.now(), y: e.clientY }] };
     head.setPointerCapture(e.pointerId);
   });
   head.addEventListener('pointermove', function (e) {
@@ -125,16 +151,28 @@
     if (!drag.moved && Math.abs(dy) < 6) return;
     drag.moved = true;
     sheet.classList.add('is-dragging');
-    sheet.style.height = Math.max(heightFor('peek') - 20, Math.min(heightFor('full'), drag.h0 + dy)) + 'px';
+    drag.samples.push({ t: performance.now(), y: e.clientY }); if (drag.samples.length > 6) drag.samples.shift();
+    // Rubber band past the ends: a third of the overshoot, so the limit is felt.
+    var lo = heightFor('peek'), hi = heightFor('full'), h = drag.h0 + dy;
+    if (h > hi) h = hi + (h - hi) * 0.3; else if (h < lo) h = lo - (lo - h) * 0.3;
+    applyH(h);
   });
   function endDrag(e) {
     if (!drag || (e && e.pointerId !== drag.id)) return;
-    var moved = drag.moved, h = sheet.getBoundingClientRect().height;
+    var moved = drag.moved, h = sheet.getBoundingClientRect().height, smp = drag.samples;
     drag = null;
     sheet.classList.remove('is-dragging');
     if (!moved) return;                   // a tap: the button handlers act
-    var best = STATES.reduce(function (acc, s) { return Math.abs(heightFor(s) - h) < Math.abs(heightFor(acc) - h) ? s : acc; }, 'peek');
-    setState(best);
+    // Release velocity in px/ms (positive = finger moving up = sheet growing).
+    var v = 0;
+    if (smp.length >= 2) { var a = smp[0], b = smp[smp.length - 1]; var dt = b.t - a.t; if (dt > 0) v = (a.y - b.y) / dt; }
+    var nearest = STATES.reduce(function (acc, s) { return Math.abs(heightFor(s) - h) < Math.abs(heightFor(acc) - h) ? s : acc; }, 'peek');
+    var target = nearest;
+    if (Math.abs(v) > 0.45) {              // a flick goes one step further in its direction
+      var i = STATES.indexOf(nearest) + (v > 0 ? 1 : -1);
+      target = STATES[Math.max(0, Math.min(STATES.length - 1, i))];
+    }
+    setState(target, true, v * 1000);
   }
   head.addEventListener('pointerup', endDrag);
   head.addEventListener('pointercancel', endDrag);
