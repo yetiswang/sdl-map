@@ -37,7 +37,7 @@
 
   // ---- DOM ---------------------------------------------------------------
   var sheet = document.createElement('section');
-  sheet.className = 'msheet glass';
+  sheet.className = 'msheet glass glass-mid glass-steady';   // one material through every state and gesture (glass.css)
   sheet.id = 'msheet';
   sheet.dataset.state = 'peek';
   sheet.setAttribute('aria-label', t.inView);
@@ -116,7 +116,6 @@
     var first = !sheet.dataset.ready;
     sheet.dataset.ready = '1';
     sheet.dataset.state = s;
-    sheet.classList.toggle('glass-strong', s !== 'peek');   // reading surfaces are less transparent
     springTo(heightFor(s), v0, first);
     document.body.classList.toggle('msheet-open', s !== 'peek');
     grip.setAttribute('aria-expanded', String(s !== 'peek'));
