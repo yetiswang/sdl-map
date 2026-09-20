@@ -85,6 +85,10 @@
     touch-action: pan-y;
   }
   .msheet.is-dragging { transition: none; }
+  /* A grid row of 1fr still grows to its content unless the item may shrink;
+     without min-height:0 the list ran below the viewport and nothing scrolled. */
+  .msheet { overflow: hidden; }
+  .msheet-body { min-height: 0; }
   .msheet-head { padding: 6px 14px 8px; touch-action: none; user-select: none; -webkit-user-select: none; }
   .msheet-bar { display: block; width: 40px; height: 4px; border-radius: 2px; background: var(--ink-3); opacity: .6; margin: 2px auto 8px; }
   .msheet-row1 { display: flex; align-items: center; gap: 8px; min-height: 40px; }
@@ -101,14 +105,26 @@
   .msheet-grip { margin-left: auto; width: 44px; height: 40px; appearance: none; background: transparent; border: 0; color: var(--ink-3); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: var(--r-soft, 8px); }
   .msheet-grip svg { transition: transform .28s; }
   .msheet:not([data-state="peek"]) .msheet-grip svg { transform: rotate(180deg); }
-  .msheet-row2 { display: flex; gap: 6px; margin-top: 4px; }
+  .msheet-row2 { display: flex; gap: 5px; margin-top: 4px; align-items: center; }
   .msheet-chip {
-    flex: 1 1 0; min-height: 40px; appearance: none; cursor: pointer;
+    flex: 1 1 0; min-width: 0; min-height: 40px; padding: 0 2px; appearance: none; cursor: pointer;
     background: transparent; border: 1px solid var(--rule); color: var(--ink-2);
     border-radius: var(--r-soft, 8px);
-    font: 600 10.5px/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase;
+    font: 600 9.5px/1 var(--font-mono); letter-spacing: .03em; text-transform: uppercase;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .msheet-chip.is-on { border-color: var(--accent); color: var(--accent); }
+  .msheet-sep { width: 1px; height: 24px; background: var(--rule); margin: 0 2px; flex: 0 0 auto; }
+  /* About · Data · Globe/flat: the three things that used to be floating buttons */
+  .msheet-ico {
+    flex: 0 0 40px; width: 40px; height: 40px; appearance: none; cursor: pointer;
+    background: transparent; border: 1px solid var(--rule); color: var(--ink-2);
+    border-radius: var(--r-soft, 8px); display: inline-flex; align-items: center; justify-content: center;
+  }
+  .msheet-ico:active { background: var(--bg-3); color: var(--ink); }
+  .msheet .ico-flat { display: none; }
+  .msheet.is-flat .ico-flat { display: inline; }
+  .msheet.is-flat .ico-globe { display: none; }
 
   .msheet-body { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: 0 14px 16px; }
   .msheet[data-state="peek"] .msheet-body { visibility: hidden; }
@@ -129,6 +145,7 @@
     min-height: 44px; appearance: none; cursor: pointer;
     background: var(--bg-2); border: 1px solid var(--rule); color: var(--ink);
     border-radius: var(--r-soft, 8px); font: 500 14px/1 var(--font-sans);
+    display: inline-flex; align-items: center; justify-content: center; text-decoration: none;
   }
   .msheet-action:active { background: var(--bg-3); }
   @media (prefers-reduced-motion: reduce) {

@@ -236,7 +236,10 @@ const ariaLabel = `${ui.growthTitle}: ${baseline} by ${CHART_START - 1}, rising 
       .tl-line { left:4px; }
       .tl-card { padding:9px 11px; gap:8px; flex-wrap:wrap; }
       .tl-badge { order:3; }
-      .tl-invest { width:100%; padding-left:30px; }
+      /* 100% + 30px padding in content-box made every card 30px wider than the
+         phone, and the whole page with it. Border-box, and let it wrap. */
+      .tl-invest { width:100%; padding-left:30px; box-sizing:border-box; white-space:normal; }
+      .tl-main { overflow-x:clip; }
     }
   </style>
 </UnifiedLayout>

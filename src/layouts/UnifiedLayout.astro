@@ -215,6 +215,13 @@ a{ color:inherit; text-decoration:none; }
   .site-header .brand-h1 { font-size:15px !important; }
   .site-header .tue-logo img { height:24px !important; }
 }
+/* Phone footer: one quiet line, not three. The dropped words are the ones a
+   phone reader already knows from the header; every link survives. */
+@media (max-width: 640px) {
+  .site-footer { padding:7px 12px !important; font-size:9.5px !important; letter-spacing:0.04em !important; }
+  .site-footer-row { gap:6px !important; }
+  .site-footer .ft-opt { display:none; }
+}
 </style>
 
 <!-- Pagefind -->
@@ -286,11 +293,11 @@ a{ color:inherit; text-decoration:none; }
   </div>
 
   <!-- ===== FOOTER ===== -->
-  <footer style="position:relative;z-index:60;background:var(--bg);padding:14px 28px;border-top:1px solid var(--rule);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3);letter-spacing:0.12em;">
-    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;text-align:center;">
-      <span><a href="https://discoverylabs.nl" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">{ui.footerDlnl}</a> · {ui.footerLandscape}</span>
+  <footer class="site-footer" style="position:relative;z-index:60;background:var(--bg);padding:14px 28px;border-top:1px solid var(--rule);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3);letter-spacing:0.12em;">
+    <div class="site-footer-row" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;text-align:center;">
+      <span><a href="https://discoverylabs.nl" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">{ui.footerDlnl}</a><span class="ft-opt"> · {ui.footerLandscape}</span></span>
       <span style="opacity:0.5;">·</span>
-      <span>{ui.footerPart} <a href="https://tue-flagship-advanced-materials.nl" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">{ui.footerFlagship}</a></span>
+      <span><span class="ft-opt">{ui.footerPart} </span><a href="https://tue-flagship-advanced-materials.nl" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">{ui.footerFlagship}</a></span>
       <span style="opacity:0.5;">·</span>
       <span><a href="https://github.com/yetiswang/sdl-map/issues/new?template=add-lab.yml" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">{ui.footerSuggest}</a></span>
       <span style="opacity:0.5;">·</span>
