@@ -3077,10 +3077,11 @@ function redraw(){
       // y∈[0,560] and nothing outside x∈[0,1000]; the sheet covers the bottom.
       const _offX = (_rectR.width - 1000 * _scrScaleR) / 2, _offY = (_rectR.height - 560 * _scrScaleR) / 2;
       let _visBottomPx = _rectR.height;
+      const _visTopPx = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--shell-top')) || 0;   // shell header overlays the map (map-mobile-sheet.js)
       const _ms = document.getElementById('msheet');
       if (_ms && getComputedStyle(_ms).display !== 'none') _visBottomPx = Math.min(_visBottomPx, _ms.getBoundingClientRect().top - _rectR.top);
       const _vx0 = -_offX / _scrScaleR, _vx1 = (_rectR.width - _offX) / _scrScaleR;
-      const _vy0 = -_offY / _scrScaleR, _vy1 = (_visBottomPx - _offY) / _scrScaleR;
+      const _vy0 = (_visTopPx - _offY) / _scrScaleR, _vy1 = (_visBottomPx - _offY) / _scrScaleR;
       const _inVis = (x, y, r) => x + r > _vx0 && x - r < _vx1 && y + r > _vy0 && y - r < _vy1;
       const ids = [];
       _visible.forEach(d => { if (!d._el.classList.contains('dim') && _inVis(d._x, d._y, d._visualRadius || 0)) ids.push(d.id); });

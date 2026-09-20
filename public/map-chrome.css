@@ -31,14 +31,14 @@
   }
   body .sdl-fab.sdl-fab svg, body .wm-reopen.wm-reopen svg, body #sdl-clear-floating svg { width: 18px !important; height: 18px !important; }
   /* 44 px pitch from the left edge: about · clear · export · data */
-  body.embed-mode .wm-reopen.wm-reopen       { top: 16px !important; left: 16px !important; }
-  body.embed-mode #sdl-clear-floating        { top: 16px !important; left: 60px !important; }
-  body.embed-mode #sdl-export-floating.sdl-fab { top: 16px !important; left: 104px !important; }
-  body.embed-mode #sdl-data-floating.sdl-fab   { top: 16px !important; left: 148px !important; }
+  body.embed-mode .wm-reopen.wm-reopen       { top: calc(16px + var(--shell-top, 0px)) !important; left: 16px !important; }
+  body.embed-mode #sdl-clear-floating        { top: calc(16px + var(--shell-top, 0px)) !important; left: 60px !important; }
+  body.embed-mode #sdl-export-floating.sdl-fab { top: calc(16px + var(--shell-top, 0px)) !important; left: 104px !important; }
+  body.embed-mode #sdl-data-floating.sdl-fab   { top: calc(16px + var(--shell-top, 0px)) !important; left: 148px !important; }
 
   /* The zoom column speaks the same design as the top-left row: five
      separate 36 px squares on the one surface, not one box with dividers. */
-  body .zoom-ctl.zoom-ctl { padding: 0; gap: 6px; top: 16px; right: 16px; background: none !important; border: 0 !important; box-shadow: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  body .zoom-ctl.zoom-ctl { padding: 0; gap: 6px; top: calc(16px + var(--shell-top, 0px)); right: 16px; background: none !important; border: 0 !important; box-shadow: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
   body .zoom-ctl.zoom-ctl button {
     width: 36px; height: 36px; border-radius: var(--r-soft, 8px);
     border: 1px solid var(--surface-edge, var(--rule));
@@ -52,7 +52,7 @@
   body .zoom-ctl.zoom-ctl button svg { width: 18px; height: 18px; }
   /* Bottom-right: the collapsible-sidebar tabs sit at mid-height on the
      right edge, and a region column under the zoom stack ran into them. */
-  body .region-nav.region-nav { top: auto; bottom: 16px; right: 16px; gap: 4px; }
+  body .region-nav.region-nav { top: auto; bottom: calc(16px + var(--shell-bottom, 0px)); right: 16px; gap: 4px; }
   body .region-nav.region-nav button {
     width: 44px; min-height: 32px; padding: 0;
     border-radius: var(--r-soft, 8px);
@@ -64,6 +64,21 @@
   .msheet { display: none !important; }
 }
 
+/* Shell bars (2026-09-20): the Astro header and footer are fixed glass over
+   the map; --shell-top / --shell-bottom are their overlap with this frame
+   (map-mobile-sheet.js). Legacy chrome that anchors to the frame's edges
+   moves in by the same amount. Top level, not inside a device block, and
+   `html body` so it outranks the embed styles map-i18n.js injects at runtime. */
+html body.embed-mode .kbd-hint { bottom: calc(14px + var(--shell-bottom, 0px)); }
+html body.embed-mode aside.left, html body.embed-mode aside.right { top: var(--shell-top, 0px) !important; bottom: var(--shell-bottom, 0px) !important; }
+@media (max-width: 900px) {
+  html body.embed-mode aside.left, html body.embed-mode aside.right { height: auto !important; }
+  html body.embed-mode .sheet { bottom: var(--shell-bottom, 0px); padding-bottom: max(0px, calc(env(safe-area-inset-bottom, 0px) - var(--shell-bottom, 0px))); }
+  html body.embed-mode .tip.tip { bottom: calc(76px + var(--shell-bottom, 0px)) !important; }
+}
+@media (max-width: 480px) { html body.embed-mode .tip.tip { bottom: calc(64px + var(--shell-bottom, 0px)) !important; } }
+@media (min-width: 901px) { html body.embed-mode .sheet { top: calc(var(--shell-top, 0px) + 16px); max-height: calc(100vh - var(--shell-top, 0px) - var(--shell-bottom, 0px) - 32px); } }
+
 /* ---------- phone / narrow: four controls + one sheet ------------------- */
 @media (max-width: 900px) {
   :root { --msheet-h: 112px; }
@@ -72,7 +87,7 @@
   body .mob-toggle.mob-toggle, body .region-nav.region-nav, .drawer-backdrop { display: none !important; }
   /* The one remaining map button sits just above the sheet's peek edge */
   body .zoom-ctl.zoom-ctl {
-    bottom: calc(var(--msheet-h) + 12px + env(safe-area-inset-bottom, 0px)) !important;
+    bottom: calc(var(--msheet-h) + 12px + var(--shell-bottom, 0px) + env(safe-area-inset-bottom, 0px)) !important;
     right: 12px !important;
     padding: 0 !important; border-radius: var(--r-soft, 8px) !important;
     box-shadow: var(--surface-shadow, none) !important;
@@ -90,7 +105,7 @@
   body.msheet-open .zoom-ctl.zoom-ctl { opacity: 0; pointer-events: none; }
 
   .msheet {
-    position: fixed; left: 0; right: 0; bottom: 0;
+    position: fixed; left: 0; right: 0; bottom: var(--shell-bottom, 0px);   /* above the shell's fixed footer */
     height: var(--msheet-h);
     z-index: 60;                          /* under the detail sheet (105) */
     display: grid; grid-template-rows: auto 1fr;
@@ -100,7 +115,7 @@
     border-top: 1px solid var(--surface-edge, var(--rule));
     border-radius: var(--r-loose, 14px) var(--r-loose, 14px) 0 0;
     box-shadow: var(--surface-shadow, 0 -6px 24px rgba(0, 0, 0, 0.28));
-    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-bottom: max(0px, calc(env(safe-area-inset-bottom, 0px) - var(--shell-bottom, 0px)));   /* the footer already clears the home indicator */
     transition: height .28s cubic-bezier(.4, 0, .2, 1), background-color var(--t-base, 200ms), box-shadow var(--t-base, 200ms);
     font-family: var(--font-sans);
     color: var(--ink);

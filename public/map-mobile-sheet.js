@@ -35,6 +35,36 @@
   var t = T[key] || T.en;
   var esc = function (s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
 
+  // ---- shell bars (2026-09-20) ------------------------------------------
+  // The Astro shell's header and footer are fixed glass over the map. Same
+  // origin, so measure how far each overlaps this frame and publish
+  // --shell-top / --shell-bottom on this document; the chrome offsets read
+  // them (map-chrome.css) and the sheet sizes itself to the band between.
+  var shellTop = 0, shellBottom = 0;
+  (function shellBars() {
+    var fe = window.frameElement; if (!fe) return;
+    var pd, hd, ft;
+    try { pd = fe.ownerDocument; hd = pd.querySelector('.site-header'); ft = pd.querySelector('.site-footer'); } catch (e) { return; }
+    if (!hd && !ft) return;
+    function measure() {
+      var fr = fe.getBoundingClientRect();
+      var t = hd ? Math.max(0, Math.min(fr.bottom, hd.getBoundingClientRect().bottom) - fr.top) : 0;
+      var b = ft ? Math.max(0, fr.bottom - Math.max(fr.top, ft.getBoundingClientRect().top)) : 0;
+      t = Math.round(t); b = Math.round(b);
+      if (t === shellTop && b === shellBottom) return;
+      shellTop = t; shellBottom = b;
+      document.documentElement.style.setProperty('--shell-top', t + 'px');
+      document.documentElement.style.setProperty('--shell-bottom', b + 'px');
+      window.dispatchEvent(new CustomEvent('sdl:shell-bars', { detail: { top: t, bottom: b } }));
+    }
+    measure();
+    try {
+      var RO = pd.defaultView.ResizeObserver;
+      if (RO) { var ro = new RO(measure); if (hd) ro.observe(hd); if (ft) ro.observe(ft); ro.observe(fe); }
+      pd.defaultView.addEventListener('resize', measure);
+    } catch (e) {}
+  })();
+
   // ---- DOM ---------------------------------------------------------------
   var sheet = document.createElement('section');
   sheet.className = 'msheet glass glass-mid glass-steady';   // one material through every state and gesture (glass.css)
@@ -108,9 +138,11 @@
   }
   function heightFor(s) {
     if (s === 'peek') return 112;
-    if (s === 'half') return Math.round(window.innerHeight * 0.52);
-    return Math.round(window.innerHeight * 0.86);
+    var band = window.innerHeight - shellTop - shellBottom;   // the map visible between the shell's bars
+    if (s === 'half') return Math.round(band * 0.52);
+    return Math.round(band * 0.86);
   }
+  window.addEventListener('sdl:shell-bars', function () { if (MQ.matches && sheet.dataset.ready) setState(sheet.dataset.state || 'peek', false); });
   function setState(s, remember, v0) {
     if (STATES.indexOf(s) < 0) s = 'peek';
     var first = !sheet.dataset.ready;
