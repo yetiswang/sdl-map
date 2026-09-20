@@ -1,0 +1,137 @@
+/* map-chrome.css — one vocabulary for everything that floats over the map,
+   and the phone bottom sheet. Loaded by map-legacy.html after tokens.css.
+   (2026-09-20 redesign; plan in the vault, 30-Projects/SDL-Map/.)
+
+   Specificity note: export.js and map-i18n.js inject their own <style>
+   blocks at runtime, AFTER this file, so plain class selectors here would
+   lose. Rules that must win double the class (`.x.x`) or add `body`.
+   Tokens only — colours, radii and spacing come from tokens.css / the
+   :root block in map-legacy.html. No glass, no glow: that pass is separate. */
+
+/* ---------- desktop: one surface, one radius, one size ------------------ */
+@media (min-width: 901px) {
+  /* map-i18n.js and export.js set several of these with !important at
+     runtime; the doubled selectors plus !important here settle it. */
+  body .sdl-fab.sdl-fab,
+  body .wm-reopen.wm-reopen,
+  body #sdl-clear-floating {
+    width: 36px !important; height: 36px !important;
+    border-radius: var(--r-soft, 8px) !important;
+    background: var(--surface-overlay) !important;
+    border: 1px solid var(--rule) !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+    color: var(--ink-2) !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  body .sdl-fab.sdl-fab:hover, body .wm-reopen.wm-reopen:hover, body #sdl-clear-floating:hover {
+    background: var(--bg-3) !important; color: var(--ink) !important;
+  }
+  body .sdl-fab.sdl-fab svg, body .wm-reopen.wm-reopen svg, body #sdl-clear-floating svg { width: 18px !important; height: 18px !important; }
+  /* 44 px pitch from the left edge: about · clear · export · data */
+  body.embed-mode .wm-reopen.wm-reopen       { top: 16px !important; left: 16px !important; }
+  body.embed-mode #sdl-clear-floating        { top: 16px !important; left: 60px !important; }
+  body.embed-mode #sdl-export-floating.sdl-fab { top: 16px !important; left: 104px !important; }
+  body.embed-mode #sdl-data-floating.sdl-fab   { top: 16px !important; left: 148px !important; }
+
+  body .zoom-ctl.zoom-ctl { padding: 4px; gap: 2px; border-radius: var(--r-soft, 8px); top: 16px; right: 16px; }
+  body .zoom-ctl.zoom-ctl button { width: 36px; height: 36px; border-radius: var(--r-tight, 4px); font-size: 17px; }
+  body .zoom-ctl.zoom-ctl button + button { border-top: 0; }
+  body .zoom-ctl.zoom-ctl #z-in { border-top: 1px solid var(--rule-2); border-radius: 0; }
+  /* Bottom-right: the collapsible-sidebar tabs sit at mid-height on the
+     right edge, and a region column under the zoom stack ran into them. */
+  body .region-nav.region-nav { top: auto; bottom: 16px; right: 16px; gap: 4px; }
+  body .region-nav.region-nav button {
+    width: 44px; min-height: 32px; padding: 0;
+    border-radius: var(--r-soft, 8px);
+    background: var(--surface-overlay); border: 1px solid var(--rule);
+    font-size: 10.5px; letter-spacing: 0.1em;
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+  }
+  .msheet { display: none !important; }
+}
+
+/* ---------- phone / narrow: four controls + one sheet ------------------- */
+@media (max-width: 900px) {
+  :root { --msheet-h: 112px; }
+  /* Everything the sheet absorbs */
+  body .sdl-fab.sdl-fab, body .wm-reopen.wm-reopen, body #sdl-clear-floating,
+  body .mob-toggle.mob-toggle, body .region-nav.region-nav, .drawer-backdrop { display: none !important; }
+  /* The one remaining map button sits just above the sheet's peek edge */
+  body .zoom-ctl.zoom-ctl {
+    bottom: calc(var(--msheet-h) + 12px + env(safe-area-inset-bottom, 0px)) !important;
+    right: 12px !important;
+    padding: 0 !important; border-radius: var(--r-soft, 8px) !important;
+    box-shadow: none !important;
+    transition: bottom .28s cubic-bezier(.4, 0, .2, 1);
+  }
+  body .zoom-ctl.zoom-ctl #z-reset { width: 44px !important; height: 44px !important; border-radius: var(--r-soft, 8px) !important; font-size: 18px !important; }
+  body.msheet-open .zoom-ctl.zoom-ctl { opacity: 0; pointer-events: none; }
+
+  .msheet {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    height: var(--msheet-h);
+    z-index: 60;                          /* under the detail sheet (105) */
+    display: grid; grid-template-rows: auto 1fr;
+    background: var(--surface-deep);
+    border-top: 1px solid var(--rule);
+    border-radius: var(--r-loose, 14px) var(--r-loose, 14px) 0 0;
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.28);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    transition: height .28s cubic-bezier(.4, 0, .2, 1);
+    font-family: var(--font-sans);
+    color: var(--ink);
+    touch-action: pan-y;
+  }
+  .msheet.is-dragging { transition: none; }
+  .msheet-head { padding: 6px 14px 8px; touch-action: none; user-select: none; -webkit-user-select: none; }
+  .msheet-bar { display: block; width: 40px; height: 4px; border-radius: 2px; background: var(--ink-3); opacity: .6; margin: 2px auto 8px; }
+  .msheet-row1 { display: flex; align-items: center; gap: 8px; min-height: 40px; }
+  .msheet-tab {
+    appearance: none; background: transparent; border: 1px solid transparent; color: var(--ink-2);
+    font: 500 14px/1 var(--font-sans); padding: 0 12px; min-height: 40px; border-radius: var(--r-soft, 8px);
+    display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+  }
+  .msheet-tab b { font-family: var(--font-mono); font-weight: 600; font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .msheet-tab .msheet-badge { font-family: var(--font-mono); font-size: 11px; padding: 1px 7px; border-radius: 10px; background: var(--accent); color: var(--bg); }
+  .msheet-tab .msheet-badge[hidden] { display: none; }
+  .msheet[data-state="peek"] .msheet-tab { border-color: transparent; }
+  .msheet:not([data-state="peek"]) .msheet-tab.is-on { border-color: var(--rule); background: var(--bg-2); color: var(--ink); }
+  .msheet-grip { margin-left: auto; width: 44px; height: 40px; appearance: none; background: transparent; border: 0; color: var(--ink-3); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: var(--r-soft, 8px); }
+  .msheet-grip svg { transition: transform .28s; }
+  .msheet:not([data-state="peek"]) .msheet-grip svg { transform: rotate(180deg); }
+  .msheet-row2 { display: flex; gap: 6px; margin-top: 4px; }
+  .msheet-chip {
+    flex: 1 1 0; min-height: 40px; appearance: none; cursor: pointer;
+    background: transparent; border: 1px solid var(--rule); color: var(--ink-2);
+    border-radius: var(--r-soft, 8px);
+    font: 600 10.5px/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase;
+  }
+  .msheet-chip.is-on { border-color: var(--accent); color: var(--accent); }
+
+  .msheet-body { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: 0 14px 16px; }
+  .msheet[data-state="peek"] .msheet-body { visibility: hidden; }
+  .msheet-pane[hidden] { display: none; }
+  .msheet-row {
+    width: 100%; display: grid; grid-template-columns: 12px 1fr auto; align-items: center; gap: 12px;
+    appearance: none; background: transparent; border: 0; border-bottom: 1px solid var(--rule-2);
+    color: var(--ink); text-align: left; padding: 12px 2px; min-height: 52px; cursor: pointer;
+  }
+  .msheet-row .ldot { width: 10px; height: 10px; border-radius: 50%; }
+  .msheet-rname { font-size: 15px; font-weight: 500; line-height: 1.25; }
+  .msheet-rmeta { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); letter-spacing: .04em; white-space: nowrap; }
+  .msheet-empty { padding: 26px 8px; text-align: center; color: var(--ink-3); font-size: 14px; }
+  /* Filter groups moved in from the two desktop asides keep their own styles */
+  #msheet-filters .section-h:first-child { margin-top: 12px; }
+  .msheet-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--rule); }
+  .msheet-action {
+    min-height: 44px; appearance: none; cursor: pointer;
+    background: var(--bg-2); border: 1px solid var(--rule); color: var(--ink);
+    border-radius: var(--r-soft, 8px); font: 500 14px/1 var(--font-sans);
+  }
+  .msheet-action:active { background: var(--bg-3); }
+  @media (prefers-reduced-motion: reduce) {
+    .msheet, body .zoom-ctl.zoom-ctl, .msheet-grip svg { transition: none !important; }
+  }
+}
