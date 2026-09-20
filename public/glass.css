@@ -19,19 +19,24 @@
     --surface-strong: var(--glass-bg-strong);   /* for descendants that must be read (menus) */
   }
   .glass.glass-strong { --surface: var(--glass-bg-strong); }
+  .glass.glass-mid { --surface: var(--glass-bg-mid); }
   /* Phones pay more per blurred pixel and show less of it. */
   body.is-touch .glass { --glass-blur: 12px; }
   /* Moving-map freeze: while the map repaints every frame (drag, pinch,
-     wheel, flight) or the sheet is being dragged, the glass goes solid and
-     the blur is off. It eases back the moment motion stops. */
-  body.interacting .glass, body.map-moving .glass, .glass.is-dragging {
+     wheel, flight) the small chrome goes solid with the blur off, and eases
+     back the moment motion stops. Surfaces marked glass-steady are exempt:
+     the phone sheet keeps one material through every gesture, as zhiyan's
+     glaze does. Frozen, its 10 % of sharp map ghosting through read as MORE
+     transparent than the blurred haze at rest, so touching the map or
+     dragging the sheet visibly changed it (Yuyang, 2026-09-20). */
+  body.interacting .glass:not(.glass-steady), body.map-moving .glass:not(.glass-steady) {
     --surface: var(--glass-bg-strong);
     --surface-blur: none;
     --surface-image: none;
   }
 }
 @media (prefers-reduced-transparency: reduce) {
-  .glass, .glass.glass-strong {
+  .glass, .glass.glass-strong, .glass.glass-mid {
     --surface: var(--surface-overlay);
     --surface-strong: var(--surface-overlay);
     --surface-image: none;
@@ -55,6 +60,6 @@
 /* Audit switch (scripts/qa/map-audit.mjs --perf): body.no-glass measures the
    same gestures with every surface solid, so the cost of the material is a
    number, not an impression. Not used by the site itself. */
-body.no-glass .glass, body.no-glass .glass.glass-strong {
+body.no-glass .glass, body.no-glass .glass.glass-strong, body.no-glass .glass.glass-mid {
   --surface: var(--surface-overlay); --surface-strong: var(--surface-overlay); --surface-image: none; --surface-blur: none; --surface-edge: var(--rule); --surface-shadow: none;
 }
