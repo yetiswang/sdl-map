@@ -1995,12 +1995,12 @@ window.SDL_CATEGORIES = {
     <div class="map-wrap" id="map-wrap">
       <canvas id="map-canvas"></canvas>
       <svg id="map" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet"></svg>
-      <div class="zoom-ctl glass">
-        <button id="v-globe" title="Globe view" aria-pressed="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3.6 9h16.8M3.6 15h16.8"/></svg></button>
-        <button id="v-flat" title="Flat map view" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 12h18M9 6.2c-1.5 3.8-1.5 8 0 11.6M15 6.2c1.5 3.8 1.5 8 0 11.6"/></svg></button>
-        <button id="z-in"  title="Zoom in">+</button>
-        <button id="z-out" title="Zoom out">\u2212</button>
-        <button id="z-reset" title="Reset view">\u27F2</button>
+      <div class="zoom-ctl">
+        <button id="v-globe" class="glass" title="Globe view" aria-pressed="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3.6 9h16.8M3.6 15h16.8"/></svg></button>
+        <button id="v-flat" class="glass" title="Flat map view" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 12h18M9 6.2c-1.5 3.8-1.5 8 0 11.6M15 6.2c1.5 3.8 1.5 8 0 11.6"/></svg></button>
+        <button id="z-in" class="glass" title="Zoom in"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        <button id="z-out" class="glass" title="Zoom out"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+        <button id="z-reset" class="glass" title="Reset view"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
       </div>
       <div class="zoom-hint glass" id="z-hint">Drag to pan \u00B7 scroll to zoom \u00B7 double-click to zoom in</div>
       <div class="region-nav">
@@ -2336,6 +2336,10 @@ window.SDL_CATEGORIES = {
     pulse.setAttribute('class','pulse');
     pulse.setAttribute('r', '6');   // v31: base radius set as SVG attr (iOS reliable)
     inner.appendChild(pulse);
+    // 2026-09-20 arrival ring: one sonar ping when the pin lands (map-chrome.css .arrive-ring)
+    const arr = document.createElementNS(ns,'circle');
+    arr.setAttribute('class','arrive-ring'); arr.setAttribute('r', 8); arr.setAttribute('pointer-events','none');
+    inner.appendChild(arr); d._arrEl = arr;
 
     // Transparent hit-area circle for touch — gives every pin a ≥22 px tap target
     // regardless of how small its visual radius is. Pointer events on parent <g>.
@@ -2426,6 +2430,7 @@ window.SDL_CATEGORIES = {
   const TREE = window.SDLClusters.buildHierarchy(DATA);
   const _dispState = new Map();   // node id → {node, mode:'steady'|'in'|'out', t0, from, to, pos, travel}
   let _arrivalT0 = 0;             // >0 while the once-per-session arrival cascade runs
+  let _arrivalTargetScale = 0;    // the scale the arrival flies to; the cluster cut is held at it during the flight
   let _clusterThr = null, _firstFrame = true, _lastPxPerKm = 1, _lastSpiderKm = 0;
   const _clusterObst = [];        // displayed discs {x,y,r} in SVG units — label placement avoids them
   let _inViewSig = '', _inViewIds = [], _inViewTimer = null;
@@ -2436,7 +2441,8 @@ window.SDL_CATEGORIES = {
     g.setAttribute('class', 'cluster'); g.setAttribute('data-cid', n.id); g.style.display = 'none';
     const hit = document.createElementNS(ns, 'circle'); hit.setAttribute('class', 'c-hit'); hit.setAttribute('fill', 'transparent'); hit.setAttribute('pointer-events', 'all');
     const disc = document.createElementNS(ns, 'circle'); disc.setAttribute('class', 'c-disc');
-    g.appendChild(hit); g.appendChild(disc);
+    const rip = document.createElementNS(ns, 'circle'); rip.setAttribute('class', 'c-ripple'); rip.setAttribute('pointer-events', 'none');
+    g.appendChild(hit); g.appendChild(rip); g.appendChild(disc); n._rip = rip;
     n._tierCounts = {};
     n.members.forEach(id => { const t = DATA_BY_ID.get(id).tier; n._tierCounts[t] = (n._tierCounts[t] || 0) + 1; });
     n._arcOrder = TIER_ORDER.filter(t => n._tierCounts[t]);
@@ -2720,6 +2726,8 @@ function redraw(){
     applyView();
     const k = view.scale / BASE_SCALE;
     window.__sdlViewK = k;   // read by scripts/qa/map-audit.mjs
+    // Arrival: the sphere is there at once, the continents resolve over 700 ms.
+    const _arrK = _arrivalT0 ? Math.min(1, Math.max(0, (performance.now() - _arrivalT0 - 150) / 700)) : 1;
     const r = view.scale;
     const isInteracting = document.body.classList.contains('interacting');
     const isTouch = isTouchMode();
@@ -2792,6 +2800,7 @@ function redraw(){
     const _gOuter = _hi ? geoHi.outer : countriesOuter;
 
     // Land fill
+    _ctx.globalAlpha = _arrK;
     _ctx.fillStyle = COL_LAND;
     _ctx.beginPath();
     _pathC(_gLand);
@@ -2800,7 +2809,7 @@ function redraw(){
     // Country borders (inner mesh)
     _ctx.strokeStyle = 'oklch(0.32 0.01 240)';
     _ctx.lineWidth = 0.5;
-    _ctx.globalAlpha = 0.9;
+    _ctx.globalAlpha = 0.9 * _arrK;
     _ctx.beginPath();
     _pathC(_gMesh);
     _ctx.stroke();
@@ -2874,10 +2883,12 @@ function redraw(){
     const _svgPerKm = (_pc && _pn) ? Math.hypot(_pn[0] - _pc[0], _pn[1] - _pc[1]) / 111.2 : (view.scale / 6371);
     const _pxPerKm = Math.max(1e-6, _svgPerKm * _scrScaleR);
     const CL_RADIUS_PX = isTouch ? 36 : 30;
-    _clusterThr = SDLClusters.deadBand(_clusterThr, SDLClusters.thresholdKm(CL_RADIUS_PX, _pxPerKm));
+    let _rawThr = SDLClusters.thresholdKm(CL_RADIUS_PX, _pxPerKm);
+    if (_arrivalT0 && _arrivalTargetScale) _rawThr *= view.scale / _arrivalTargetScale;   // hold the cut at the destination during the arrival flight
+    _clusterThr = SDLClusters.deadBand(_clusterThr, _rawThr);
     // Pins closer than this can never be separated by zoom on this device
     // (thr ∝ 1/k, so this is a per-device constant): fan them out instead.
-    const _spiderKm = _clusterThr * k / 40;   // fan-out from k ≈ 40 on both devices (was 60 on touch: too deep to reach comfortably)
+    const _spiderKm = _clusterThr * ((_arrivalT0 && _arrivalTargetScale) ? _arrivalTargetScale / BASE_SCALE : k) / 40;   // fan-out from k ≈ 40 on both devices
     _lastPxPerKm = _pxPerKm; _lastSpiderKm = _spiderKm;
     const _displayed = SDLClusters.cut(TREE, _clusterThr, _spiderKm);
     const _now = performance.now();
@@ -2917,12 +2928,12 @@ function redraw(){
         while (a && !_prevPos.has(a.id)) a = a.parent;
         if (a) from = _prevPos.get(a.id).slice();
       }
-      const t0 = _arriving ? _arrivalT0 + 250 + Math.min(n._arrRank || 0, 30) * 28 : _now;
+      const t0 = _arriving ? _arrivalT0 + 500 + Math.min(n._arrRank || 0, 30) * 28 : _now;
       _dispState.set(id, { node: n, mode: (_firstFrame && !_arriving) ? 'steady' : 'in', t0: t0, from: from, to: own, pos: from.slice(), travel: from !== own });
     });
     _firstFrame = false;
     let _animating = false;
-    const showLabels = (_arrivalT0 && _now < _arrivalT0 + 1150) ? false : (isTouch ? k >= 1.0 : k >= 3.0);   // names come last on arrival
+    const showLabels = (_arrivalT0 && _now < _arrivalT0 + 1900) ? false : (isTouch ? k >= 1.0 : k >= 3.0);   // names come last on arrival
     const _active = anyFilterActive();
     const _pinR   = SDLClusters.pinRadiusCss(isTouch, false) / _scrScaleR;
     const _pinRhl = SDLClusters.pinRadiusCss(isTouch, true)  / _scrScaleR;
@@ -2938,6 +2949,11 @@ function redraw(){
         e = SDLClusters.easeOutCubic(t);
         st.pos = [st.from[0] + (st.to[0] - st.from[0]) * e, st.from[1] + (st.to[1] - st.from[1]) * e];
         alpha = st.mode === 'in' ? e : 1 - e;
+        if (_arrivalT0 && st.mode === 'in' && !st.rippled && t > 0) {
+          st.rippled = true;
+          const rel = n.n === 1 ? n.entry._el : n._el;
+          rel.classList.add('arrive'); setTimeout(() => rel.classList.remove('arrive'), 900);
+        }
         if (t >= 1) {
           if (st.mode === 'in') { st.mode = 'steady'; st.pos = st.to.slice(); alpha = 1; }
           else _toDelete.push(id);
@@ -2977,6 +2993,7 @@ function redraw(){
         const coreR = hl ? _pinRhl : _pinR;
         const hitR = Math.max(_hitR, coreR + 2);
         d._coreEl.setAttribute('r', coreR); d._coreEl.setAttribute('stroke-width', _strokeW);
+        if (_arrivalT0 && d._arrEl) d._arrEl.setAttribute('r', coreR);
         d._hitEl.setAttribute('r', hitR);
         d._ringEl.setAttribute('r', coreR + 2.5 / _scrScaleR);
         d._x = x; d._y = y; d._dist = dist;
@@ -2998,7 +3015,7 @@ function redraw(){
         const r = SDLClusters.discDiameterCss(shownN || n.n, isTouch) / 2 / _scrScaleR;
         const sc = st.mode === 'in' ? 0.6 + 0.4 * e : (st.mode === 'out' ? (st.travel ? 1 - 0.5 * e : 1 - 0.4 * e) : 1);
         // DOM writes happen after the relaxation pass below.
-        _clusterDraw.push({ n, x: p[0], y: p[1], r, sc, alpha: (dimC ? 0.12 : 1) * limbFade * alpha, shownN, counts, steady: st.mode === 'steady' });
+        _clusterDraw.push({ n, x: p[0], y: p[1], r, sc, alpha: (dimC ? 0.12 : 1) * limbFade * alpha, shownN, counts, steady: st.mode === 'steady', e: st.mode === 'in' ? e : 1 });
       }
     });
     // Discs may still touch (a 20-member disc is wider than the cut radius):
@@ -3027,7 +3044,10 @@ function redraw(){
       el.style.opacity = cd.alpha;
       n._disc.setAttribute('r', cd.r); n._disc.setAttribute('stroke-width', 1 / _scrScaleR);
       n._hit.setAttribute('r', Math.max(cd.r, 22 / _scrScaleR));
-      n._txt.textContent = cd.shownN || n.n;
+      const _shownCount = cd.shownN || n.n;
+      // During the arrival the number counts up with the disc's entrance.
+      n._txt.textContent = (_arrivalT0 && cd.e < 1) ? Math.max(1, Math.round(_shownCount * cd.e)) : _shownCount;
+      if (_arrivalT0 && n._rip) n._rip.setAttribute('r', cd.r);
       n._txt.setAttribute('font-size', ((11 + Math.min(4, n.n / 6)) / _scrScaleR).toFixed(2));
       const ra = cd.r - 1.25 / _scrScaleR, circ = 2 * Math.PI * ra, tot = cd.shownN || n.n;
       let acc = 0;
@@ -3382,7 +3402,7 @@ function redraw(){
         l._el.style.display = '';
         l._el.setAttribute('x', p[0]);
         l._el.setAttribute('y', p[1]);
-        l._el.style.opacity = '1';
+        l._el.style.opacity = String(_arrK);
       });
       if(k >= 3.5){
         provinceLabels.forEach(l => {
@@ -3393,7 +3413,7 @@ function redraw(){
           l._el.style.display = '';
           l._el.setAttribute('x', p[0]);
           l._el.setAttribute('y', p[1]);
-          l._el.style.opacity = '1';
+          l._el.style.opacity = String(_arrK);
         });
       } else {
         provinceLabels.forEach(l => { l._el.style.display = 'none'; });
@@ -3987,7 +4007,7 @@ function redraw(){
   let _flyToPinRaf = null;
   // 2026-09-20 — generic short flight (rotate + scale), used by cluster taps.
   let _flyViewRaf = null;
-  function flyToView(targetRot, targetScale, duration){
+  function flyToView(targetRot, targetScale, duration, easeOut){
     if (REDUCED_MOTION) duration = 1;
     if (_flyViewRaf) cancelAnimationFrame(_flyViewRaf);
     stopZoomInertia();
@@ -3996,7 +4016,7 @@ function redraw(){
     if (dLon > 180) dLon -= 360; if (dLon < -180) dLon += 360;
     function step(now){
       const t = Math.min(1, (now - t0) / duration);
-      const e = t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+      const e = easeOut ? 1 - Math.pow(1 - t, 3) : (t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2);
       view.rotate[0] = startRot[0] + dLon * e;
       view.rotate[1] = startRot[1] + (targetRot[1] - startRot[1]) * e;
       view.scale = startScale * Math.pow(targetScale / startScale, e);
@@ -4346,12 +4366,19 @@ function redraw(){
       // first frame has long been drawn (behind the welcome card).
       _dispState.clear(); _firstFrame = true;
       _arrivalT0 = performance.now();
-      const target = view.scale;
-      view.scale = target * 0.94;
-      redrawRaf();
-      setTimeout(() => flyToView([...view.rotate], target, 700), 30);
-      setTimeout(() => document.body.classList.remove('arriving'), 900);
-      setTimeout(() => { _arrivalT0 = 0; redrawRaf(); }, 1500);
+      // The camera arrives: 34° further west and tilted, at 0.80×, flying in
+      // over 1.3 s with an ease-out while the continents resolve. Discs land
+      // from 0.5 s, each with one ring and a count-up; names at 1.9 s; the
+      // chrome (sheet rising) at 1.5 s. Cut held at the destination scale.
+      const target = view.scale, targetRot = [...view.rotate];
+      _arrivalTargetScale = target;
+      view.scale = target * 0.80;
+      view.rotate[0] = targetRot[0] + 34;
+      view.rotate[1] = targetRot[1] + 10;
+      applyView(); redrawRaf();
+      setTimeout(() => flyToView(targetRot, target, 1300, true), 30);
+      setTimeout(() => document.body.classList.remove('arriving'), 1500);
+      setTimeout(() => { _arrivalT0 = 0; _arrivalTargetScale = 0; redrawRaf(); }, 2600);
     }
     // First visit: the welcome card covers the map, so the arrival waits for
     // it to close. Returning visit: play at once.

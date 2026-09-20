@@ -36,10 +36,20 @@
   body.embed-mode #sdl-export-floating.sdl-fab { top: 16px !important; left: 104px !important; }
   body.embed-mode #sdl-data-floating.sdl-fab   { top: 16px !important; left: 148px !important; }
 
-  body .zoom-ctl.zoom-ctl { padding: 4px; gap: 2px; border-radius: var(--r-soft, 8px); top: 16px; right: 16px; }
-  body .zoom-ctl.zoom-ctl button { width: 36px; height: 36px; border-radius: var(--r-tight, 4px); font-size: 17px; }
-  body .zoom-ctl.zoom-ctl button + button { border-top: 0; }
-  body .zoom-ctl.zoom-ctl #z-in { border-top: 1px solid var(--rule-2); border-radius: 0; }
+  /* The zoom column speaks the same design as the top-left row: five
+     separate 36 px squares on the one surface, not one box with dividers. */
+  body .zoom-ctl.zoom-ctl { padding: 0; gap: 6px; top: 16px; right: 16px; background: none !important; border: 0 !important; box-shadow: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  body .zoom-ctl.zoom-ctl button {
+    width: 36px; height: 36px; border-radius: var(--r-soft, 8px);
+    border: 1px solid var(--surface-edge, var(--rule));
+    background-color: var(--surface, var(--surface-overlay)); background-image: var(--surface-image, none);
+    -webkit-backdrop-filter: var(--surface-blur, none); backdrop-filter: var(--surface-blur, none);
+    box-shadow: var(--surface-shadow, none); color: var(--ink-2);
+  }
+  body .zoom-ctl.zoom-ctl button + button { border-top: 1px solid var(--surface-edge, var(--rule)); }
+  body .zoom-ctl.zoom-ctl button:hover { color: var(--ink); border-color: var(--ink-3); background-color: var(--surface, var(--surface-overlay)); }
+  body .zoom-ctl.zoom-ctl button.active { color: var(--ink); border-color: var(--ink-3); background-color: var(--surface, var(--surface-overlay)); }
+  body .zoom-ctl.zoom-ctl button svg { width: 18px; height: 18px; }
   /* Bottom-right: the collapsible-sidebar tabs sit at mid-height on the
      right edge, and a region column under the zoom stack ran into them. */
   body .region-nav.region-nav { top: auto; bottom: 16px; right: 16px; gap: 4px; }
@@ -68,7 +78,15 @@
     box-shadow: var(--surface-shadow, none) !important;
     transition: bottom .28s cubic-bezier(.4, 0, .2, 1), background-color var(--t-base, 200ms), box-shadow var(--t-base, 200ms);
   }
-  body .zoom-ctl.zoom-ctl #z-reset { width: 44px !important; height: 44px !important; border-radius: var(--r-soft, 8px) !important; font-size: 18px !important; }
+  body .zoom-ctl.zoom-ctl { background: none !important; border: 0 !important; }
+  body .zoom-ctl.zoom-ctl #z-reset {
+    width: 44px !important; height: 44px !important; border-radius: var(--r-soft, 8px) !important;
+    border: 1px solid var(--surface-edge, var(--rule)) !important;
+    background-color: var(--surface, var(--surface-overlay)) !important; background-image: var(--surface-image, none) !important;
+    -webkit-backdrop-filter: var(--surface-blur, none) !important; backdrop-filter: var(--surface-blur, none) !important;
+    box-shadow: var(--surface-shadow, none) !important; color: var(--ink-2) !important;
+  }
+  body .zoom-ctl.zoom-ctl #z-reset svg { width: 20px; height: 20px; }
   body.msheet-open .zoom-ctl.zoom-ctl { opacity: 0; pointer-events: none; }
 
   .msheet {
@@ -177,7 +195,7 @@ body .sdl-fab.sdl-fab:focus-visible, body .wm-reopen.wm-reopen:focus-visible { o
    set by the map for 900 ms, once per session). Triple class out-specifies
    the runtime !important rules. */
 body.arriving .glass.glass.glass, body.arriving .region-nav.region-nav { opacity: 0 !important; pointer-events: none; }
-.msheet.msheet { transition: height .28s var(--ease-standard, cubic-bezier(.4, 0, .2, 1)), background-color var(--t-base, 200ms), box-shadow var(--t-base, 200ms), opacity var(--t-slow, 280ms) var(--ease-enter, ease-out); }
+.msheet.msheet { transition: height .28s var(--ease-standard, cubic-bezier(.4, 0, .2, 1)), background-color var(--t-base, 200ms), box-shadow var(--t-base, 200ms), opacity var(--t-slow, 280ms) var(--ease-enter, ease-out), transform var(--t-slow, 280ms) var(--ease-enter, ease-out); }
 .msheet.msheet.is-springing, .msheet.msheet.is-dragging { transition: background-color var(--t-base, 200ms), box-shadow var(--t-base, 200ms); }
 body.msheet-springing .zoom-ctl.zoom-ctl { transition: none !important; }
 /* Tips arrive where you point: fade + 4 px rise. */
@@ -193,3 +211,11 @@ body.msheet-springing .zoom-ctl.zoom-ctl { transition: none !important; }
   body .sdl-fab.sdl-fab, body .wm-reopen.wm-reopen, body #sdl-clear-floating { transition: none !important; animation: none !important; }
   body.arriving .glass.glass.glass, body.arriving .region-nav.region-nav { opacity: 1 !important; pointer-events: auto; }
 }
+
+/* Arrival rings: one sonar ping as each pin or disc lands (once per session). */
+.arrive-ring, .c-ripple { fill: none; stroke: currentColor; stroke-width: 1.5px; opacity: 0; pointer-events: none; transform-box: fill-box; transform-origin: center; vector-effect: non-scaling-stroke; }
+.c-ripple { stroke: var(--ink-3); }
+.marker.arrive .arrive-ring, .cluster.arrive .c-ripple { animation: sdl-arrive-ring 720ms var(--ease-exit, ease-out) 1 both; }
+@keyframes sdl-arrive-ring { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(2.8); opacity: 0; } }
+body.arriving .msheet.msheet.msheet { transform: translateY(28px); }
+@media (prefers-reduced-motion: reduce) { .arrive-ring, .c-ripple { animation: none !important; } body.arriving .msheet.msheet.msheet { transform: none; } }
