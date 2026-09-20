@@ -378,11 +378,23 @@ body.marker-hovered .kbd-hint{ opacity: 0.65; }
 /* v45.ae — hint is keyboard-only guidance; touch users have no arrow
    keys to cycle, so suppress on touch devices entirely. */
 body.is-touch .kbd-hint{ display: none !important; }
-.marker .ring{ fill:none; stroke:currentColor; stroke-width:1; opacity:0.4; }
-.marker .core{ fill:currentColor; }
+.marker .ring{ fill:none; stroke:currentColor; stroke-width:1; opacity:0.4; display:none; }
+.marker.hl .ring, .marker.kbd-focus .ring{ display:inline; }
+/* 2026-09-20 — one pin size law: constant CSS-px core with a canvas-colour
+   stroke (width written per frame in SVG units). */
+.marker .core{ fill:currentColor; stroke: var(--bg); }
+/* Cluster discs — density as SIZE, tier mix as a thin segmented ring. */
+.cluster{ cursor:pointer; pointer-events:all; }
+.cluster .c-hit{ fill:transparent; }
+.cluster .c-disc{ fill: var(--bg-2); stroke: var(--rule); }
+.cluster:hover .c-disc, .cluster.hl .c-disc{ stroke: var(--ink-3); }
+.cluster .c-arc{ fill:none; opacity:.95; }
+.cluster .c-n{ fill: var(--ink); font-family: var(--font-mono); font-weight:600; pointer-events:none; font-variant-numeric: tabular-nums; }
+.cluster.dim{ pointer-events:none; }
+.spider-leg{ stroke: var(--ink-3); stroke-width:1px; opacity:.55; vector-effect: non-scaling-stroke; pointer-events:none; }
 .marker.dim{ opacity:0.08; pointer-events:none; }
 .marker.dim .ring{ opacity:0; }
-.marker.dim .core{ r:2; }
+/* .marker.dim .core r:2 removed 2026-09-20 — dim pins keep the size law, opacity carries the state */
 
 .marker.hl{
   /* v34: SVG-native filter for iOS reliability. The CSS drop-shadow path
@@ -1825,6 +1837,7 @@ window.SDL_CATEGORIES = {
      in place before the main app reads them) -->
 <script src="/sdl-data.js"></script>
 <script src="/map-i18n.js"></script>
+<script src="/map-clusters.js"></script>
 <script src="/export.js" defer></script>
 
 <script>
@@ -2165,7 +2178,10 @@ window.SDL_CATEGORIES = {
   const gLand    = document.createElementNS(ns,'g');
   const gMarkers = document.createElementNS(ns,'g');
   const gLabels  = document.createElementNS(ns,'g');
-  svg.append(gGlobe, gGrat, gLand, gMarkers, gLabels);
+  // 2026-09-20 — spider legs under the pins, cluster discs above them, names on top.
+  const gSpider   = document.createElementNS(ns,'g'); gSpider.setAttribute('id','spider');
+  const gClusters = document.createElementNS(ns,'g'); gClusters.setAttribute('id','clusters');
+  svg.append(gGlobe, gGrat, gLand, gSpider, gMarkers, gClusters, gLabels);
 
   // Atmosphere halo
   const atmos = document.createElementNS(ns,'circle');
@@ -2340,6 +2356,7 @@ window.SDL_CATEGORIES = {
     core.setAttribute('r', investRadius(d.invest));
     core.setAttribute('pointer-events', 'none');
     inner.appendChild(core);
+    d._coreEl = core; d._hitEl = hit; d._ringEl = ring;   // 2026-09-20: per-frame size law writes these
 
     g.addEventListener('mouseenter', e => showTip(d, e));
     g.addEventListener('mousemove', e => moveTip(e));
@@ -2394,13 +2411,62 @@ window.SDL_CATEGORIES = {
     gMarkers.appendChild(g);
   });
 
+  // === 2026-09-20 — cluster hierarchy (geometry in public/map-clusters.js) ==
+  // Built once. Per frame, redraw() cuts the tree at a zoom-derived distance
+  // and reconciles the displayed set with `_dispState`, which carries the
+  // split/merge animation for every node that is on its way in or out.
+  const DATA_BY_ID = new Map(DATA.map(d => [d.id, d]));
+  const TREE = window.SDLClusters.buildHierarchy(DATA);
+  const _dispState = new Map();   // node id → {node, mode:'steady'|'in'|'out', t0, from, to, pos, travel}
+  let _clusterThr = null, _firstFrame = true, _lastPxPerKm = 1, _lastSpiderKm = 0;
+  const _clusterObst = [];        // displayed discs {x,y,r} in SVG units — label placement avoids them
+  const TIER_ORDER = ['national', 'academic', 'commercial', 'labos'];
+  TREE.nodes.forEach(n => {
+    const g = document.createElementNS(ns, 'g');
+    g.setAttribute('class', 'cluster'); g.setAttribute('data-cid', n.id); g.style.display = 'none';
+    const hit = document.createElementNS(ns, 'circle'); hit.setAttribute('class', 'c-hit'); hit.setAttribute('fill', 'transparent'); hit.setAttribute('pointer-events', 'all');
+    const disc = document.createElementNS(ns, 'circle'); disc.setAttribute('class', 'c-disc');
+    g.appendChild(hit); g.appendChild(disc);
+    n._tierCounts = {};
+    n.members.forEach(id => { const t = DATA_BY_ID.get(id).tier; n._tierCounts[t] = (n._tierCounts[t] || 0) + 1; });
+    n._arcOrder = TIER_ORDER.filter(t => n._tierCounts[t]);
+    n._arcs = {};
+    n._arcOrder.forEach(t => {
+      const a = document.createElementNS(ns, 'circle');
+      a.setAttribute('class', 'c-arc'); a.setAttribute('data-tier', t);
+      a.setAttribute('transform', 'rotate(-90)');           // dash starts at 12 o'clock
+      a.style.stroke = 'var(--c-' + t + ')';
+      g.appendChild(a); n._arcs[t] = a;
+    });
+    const txt = document.createElementNS(ns, 'text'); txt.setAttribute('class', 'c-n'); txt.setAttribute('text-anchor', 'middle'); txt.setAttribute('dy', '0.35em');
+    g.appendChild(txt);
+    n._el = g; n._disc = disc; n._hit = hit; n._txt = txt;
+    // What hover/click hand around instead of an entry. `_x/_y` are refreshed
+    // per frame so cursorDistToMarker() works on it.
+    n._pseudo = { _isCluster: true, node: n, id: n.id, _el: g, _x: null, _y: null };
+    gClusters.appendChild(g);
+  });
+
   // v45.q — the tip IS the truth. Whatever pin the tip is currently
   // showing for is what the user is looking at; clicking should always
   // open that pin regardless of cursor coordinates at the moment of
   // click or any drift between hover and commit. `_tipOwner` is the
   // tip's currently-shown pin (null when hidden).
   let _tipOwner = null;
+  function showClusterTip(c, e){
+    _tipOwner = c;
+    const n = c.node;
+    const names = n.members.slice(0, 3).map(id => DATA_BY_ID.get(id).name);
+    const more = n.n - names.length;
+    tip.innerHTML =
+      '<div class="t-head"><span class="t-name">' + n.n + ' initiatives</span></div>' +
+      '<div class="t-meta">' + names.join(' \u00B7 ') + (more > 0 ? ' \u00B7 +' + more + ' more' : '') + '</div>' +
+      '<div class="t-row"><span class="k">Click</span><span class="v">zoom in to separate</span></div>';
+    tip.classList.add('show');
+    moveTip(e);
+  }
   function showTip(d, e){
+    if (d && d._isCluster) { showClusterTip(d, e); return; }
     _tipOwner = d;
     const tierLabel = CATS.tier.options.find(o=>o.id===d.tier).label;
     const matLabel  = CATS.maturity.options.find(o=>o.id===d.maturity)?.label || d.maturity;
@@ -2521,11 +2587,7 @@ window.SDL_CATEGORIES = {
       if(!active || match) countryset.add(d.country);
       d._el.classList.toggle('dim', active && !match);
       d._el.classList.toggle('hl',  active && match);
-      // Scale up highlighted marker circles (no CSS transform to avoid drift)
-      const baseR = investRadius(d.invest);
-      const hl = active && match;
-      d._el.querySelector('.core').setAttribute('r', hl ? baseR * 1.5 : baseR);
-      d._el.querySelector('.ring').setAttribute('r', hl ? (baseR + 2.5) * 1.5 : baseR + 2.5);
+      // 2026-09-20: radii are written per frame by the cluster pass (one size law).
     });
 
     document.getElementById('count-total').textContent = DATA.length;
@@ -2576,8 +2638,13 @@ window.SDL_CATEGORIES = {
   }
 
   // Globe rotate + zoom
+  // 2026-09-20 — a phone shows the same k across ~40% of the desktop width, so
+  // its "Europe" frame runs Iceland to Turkey and London+Benelux collapse into
+  // one disc. Narrow touch viewports start (and fly) a third closer.
+  const PHONE_ZOOM_BOOST = 1.35;
+  function phoneBoost(){ return (isTouchMode() && window.innerWidth < 900) ? PHONE_ZOOM_BOOST : 1; }
   const view = {
-    scale: BASE_SCALE * 5.5,
+    scale: BASE_SCALE * 5.5 * phoneBoost(),
     rotate: [-5, -50, 0],
     min: BASE_SCALE,
     max: BASE_SCALE * 100,  // mobile v8: 12× → 100× for street-level deep pinch zoom
@@ -2773,188 +2840,198 @@ function redraw(){
 
     const center = [-view.rotate[0], -view.rotate[1]];
 
-    // v24 marker pass — projection, zoom-scaled radius, anti-overlap, label visibility
-    // v45.e — start every frame by hiding ALL labels + leaders. The visible
-    // loop turns them back on only for markers that pass the frame check.
-    // This kills the "stuck leader line residue" bug on mobile deep zoom
-    // where a marker would drop out of _visible between frames but its
-    // leader was last drawn and never cleared.
+    // === 2026-09-20 — cluster pass =========================================
+    // Replaces the v24-v45 marker pass (invest radius × zoom bell curve ×
+    // CSS-px floors, per-frame force push). One size law, clusters cut from a
+    // fixed hierarchy at a zoom-derived distance, and a 250 ms split/merge
+    // animation carried by `_dispState`. Labels still run below on `_visible`.
     DATA.forEach(d => {
       if (d._label) d._label.style.display = 'none';
       if (d._leader) d._leader.style.display = 'none';
-      if (d._el) d._el.style.display = 'none';
+      if (d._leg) d._leg.style.display = 'none';
+      d._el.style.display = 'none';
+      d._x = null; d._y = null;
     });
-    // Step 1: project all markers, mark visibility, compute base offsets
     const _visible = [];
-    // v45: expose to outer scope so pickMarkerFromEvent can use the post-anti-
-    // overlap, post-render positions for precise hover/click hit-testing.
     window.__sdlLastVisible = _visible;
-    DATA.forEach(d => {
-      const p = projection([d.lon, d.lat]);
-      const dist = gcDist(center, [d.lon, d.lat]);
-      // v45.al — much wider inFrame margin (220 → 600 SVG-units, ≈230
-      // CSS-px on 390-wide mobile). User reported edge pins still pop
-      // out at 220. At deep zoom one pin halo can occupy a lot of viewBox
-      // space, so be very permissive on which pins enter the render
-      // pipeline; visual clipping is handled by SVG overflow, not us.
-      const inFrame = p && p[0] > -600 && p[0] < 1600 && p[1] > -600 && p[1] < 1160;
-      if ((isFlat() || dist < 88) && inFrame) {
-        // Start each frame with the original radial offset (initialised at marker create)
-        d._renderOff = [d._off[0], d._off[1]];
-        d._proj = p;
-        d._dist = dist;
-        _visible.push(d);
-      } else {
-        d._el.style.display = 'none';
-        if (d._label) d._label.style.display = 'none';
-      }
-    });
-    // Step 2: anti-overlap pass — push apart clustered markers
-    // (Runs at any zoom; the separation distance scales with marker size.)
-    const baseR = 8;   // SVG units — typical marker visual radius
-    // v26: growth=1.0 at the default starting zoom (k≈5.5), grows only when user zooms in further.
-    // Previously sqrt(k) gave 2.34× pins at default — way too big, hit areas blocked drag.
-    const k0 = view.scale / BASE_SCALE / 5.5;   // normalized: 1.0 at default, 2.0 at 2× default
-    // v45 — decouple label scale from dot scale.
-    //   zoomGrowth: drives label font size, anchor offsets, hit-test threshold.
-    //               Capped at 4.0 so labels stay legible at extreme zoom.
-    //   dotGrowth:  bell curve. Grows from 1.0 → ~1.8 around 2× zoom (helps
-    //               clickability + visibility), then SHRINKS smoothly back
-    //               toward ~0.55 at full zoom so city/country labels breathe
-    //               and dots don't dominate the close-up reading view.
-    //               Smooth exp blend → no perceptible step.
-    const zoomGrowth = Math.max(1.0, Math.min(4.0, Math.sqrt(k / 5.5) + 0.3));
-    const _dotRaw   = Math.max(1.0, Math.min(1.8, Math.sqrt(k / 5.5) + 0.3));
-    const _peakK    = 11;
-    const _dotDecay = Math.exp(-Math.max(0, k - _peakK) / 25);
-    const rawDotGrowth = Math.max(0.55, _dotRaw * _dotDecay + 0.55 * (1 - _dotDecay));
-    // v45.e — at deep zoom on touch, ramp the floor UP so dots stay tap-friendly.
-    // At default zoom, floor is 0.85; at k≥30 (very deep), floor 1.3.
-    const touchFloor = isTouch
-      ? DOT_TOUCH_FLOOR + Math.max(0, (k - 11) / 25) * 0.6
-      : 0;
-    const dotGrowth = isTouch ? Math.max(touchFloor, rawDotGrowth) : rawDotGrowth;
-    // v45 — desktop keeps dots at TRUE projected lat/lon (zoom naturally
-    // separates them; cursor precision handles close clusters).
-    //
-    // v45.f / v45.i — anti-overlap, scoped to two cases:
-    //   1. TOUCH at MEDIUM+ ZOOM (k > 3.5): ramp the min separation from
-    //      20 CSS px → 44 CSS px as zoom goes 3.5 → 10. At low zoom on
-    //      mobile (k ≤ 3.5) pins stay at their TRUE projected lat/lon —
-    //      otherwise the 44px floor at default zoom pushes European /
-    //      Boston / Bay clusters far from their physical positions and
-    //      the map reads as "floating dots" instead of a geographic map.
-    //   2. DESKTOP at HIGH ZOOM (k > 8): 28 CSS px min so close clusters
-    //      stay clickable. Low/medium zoom on desktop keeps dots at their
-    //      true projected lat/lon.
-    const highZoomDesktop = !isTouch && k > 8;
-    const mediumZoomTouch = isTouch && k > 3.5;
-    if (mediumZoomTouch || highZoomDesktop) {
-      const rect = svg.getBoundingClientRect();
-      const scrScale = Math.min(rect.width / 1000, rect.height / 560);
-      if (scrScale > 0 && _visible.length > 1) {
-        // v45.p — touch ramps min separation with zoom (geographic at low,
-        // tap-friendly at high). Desktop stays at fixed 28px floor for k>8.
-        let minCssPx;
-        if (mediumZoomTouch) {
-          const t = Math.min(1, (k - 3.5) / 6.5);  // 0 at k=3.5, 1 at k=10+
-          minCssPx = 20 + t * 24;                  // 20 → 44 CSS px
-        } else {
-          minCssPx = 28;
-        }
-        const minSvg = (minCssPx / scrScale) * 0.85;
-        const minSvg2 = minSvg * minSvg;
-        for (let pass = 0; pass < 8; pass++) {
-          let movedAny = false;
-          for (let i = 0; i < _visible.length; i++) {
-            const a = _visible[i];
-            const ax = a._proj[0] + a._renderOff[0];
-            const ay = a._proj[1] + a._renderOff[1];
-            for (let j = i + 1; j < _visible.length; j++) {
-              const b = _visible[j];
-              const bx = b._proj[0] + b._renderOff[0];
-              const by = b._proj[1] + b._renderOff[1];
-              const dx = ax - bx;
-              const dy = ay - by;
-              const d2 = dx*dx + dy*dy;
-              if (d2 < minSvg2 && d2 > 0.0001) {
-                const dist = Math.sqrt(d2);
-                const push = (minSvg - dist) * 0.5;
-                const ux = dx / dist;
-                const uy = dy / dist;
-                a._renderOff[0] += ux * push;
-                a._renderOff[1] += uy * push;
-                b._renderOff[0] -= ux * push;
-                b._renderOff[1] -= uy * push;
-                movedAny = true;
-              }
-            }
-          }
-          if (!movedAny) break;
-        }
-      }
-    }
-    // Step 3: render each visible marker with scaled size + position + label
-    // v45: labels stay visible during interaction (no blink on pan/pinch). The
-    // k >= 3.0 floor stays — at very far-out zoom labels would be sub-pixel.
-    const showLabels = isTouch ? k >= 1.0 : k >= 3.0;
-    // v45.r — CSS-px-aware halo + core sizing. The viewBox-to-screen scale
-    // (≈0.39 on a 390-wide phone) means SVG-internal radii render as much
-    // smaller CSS-px on small screens. Per-pin we resize both the visible
-    // halo (the user's tap target) and the visible core dot so they match
-    // a stable design intent across viewports: ≥22 CSS-px halo radius on
-    // touch (44 CSS-px diameter = Apple HIG tap-target minimum) and ≥14
-    // CSS-px on desktop; core dot ≥5 / 3 CSS-px so the visible shape is
-    // never a sub-pixel speck. The rendered halo radius is stashed on
-    // `d._haloRadius` and used by pickMarkerFromEvent — so visible pin
-    // shape == hit area == hover area, by construction.
     const _rectR = svg.getBoundingClientRect();
     const _scrScaleR = Math.min(_rectR.width / 1000, _rectR.height / 560) || 0.39;
-    // v45.r — bumped after user "still too small" feedback. Halo 22 → 26
-    // CSS-px radius (52 dia tap target, comfortably above Apple HIG 44).
-    // Core dot 5 → 7 CSS-px radius (14 dia, clearly visible vs the prior
-    // ~5px speck). Desktop bumped less since mouse precision is finer.
-    const _minHaloSvgFinal = (isTouch ? 26 : 16) / _scrScaleR;
-    const _minCoreSvgFinal = (isTouch ? 7  : 4)  / _scrScaleR;
-    _visible.forEach(d => {
-      const x = d._proj[0] + d._renderOff[0];
-      const y = d._proj[1] + d._renderOff[1];
-      d._el.style.display = '';
-      d._el.setAttribute('transform','translate('+x+','+y+') scale('+dotGrowth+')');
-      // v45.am — limbFade with a minimum-visibility floor for dark mode.
-      // The old smooth fade produced opacity 0.1-0.3 near the limb, which
-      // reads as "invisible" against dark-mode background even though the
-      // pin is technically rendered. New curve: floor at 0.55 until the
-      // true cull point (dist 89), then drop to 0. Pins stay perceptible
-      // in both themes; the limb-fade aesthetic is sacrificed for
-      // consistent visibility.
-      // v46: no limb on a flat projection — every pin renders at full opacity.
-      const limbFade = isFlat()
-        ? 1
-        : (d._dist >= 89 ? 0 : Math.max(0.55, Math.min(1, (89 - d._dist) / 7)));
-      const isDim = d._el.classList.contains('dim');
-      d._el.style.opacity = isDim ? limbFade * 0.08 : limbFade;
-      d._x = x; d._y = y;
-      const _invR = investRadius(d.invest);
-      // Pre-transform circle radii (final on-screen size = r × dotGrowth × scrScale)
-      const _hitR  = Math.max(_invR + 2.5, _minHaloSvgFinal / dotGrowth);   // tap target
-      const _coreR = Math.max(_invR,        _minCoreSvgFinal / dotGrowth);  // visible dot
-      const _ringR = Math.max(_invR + 2.5,  _minCoreSvgFinal / dotGrowth + 1);
-      const _hitEl  = d._el.querySelector('.hit');
-      const _coreEl = d._el.querySelector('.core');
-      const _ringEl = d._el.querySelector('.ring');
-      if (_hitEl)  _hitEl.setAttribute('r', _hitR);
-      if (_coreEl) _coreEl.setAttribute('r', _coreR);
-      if (_ringEl) _ringEl.setAttribute('r', _ringR);
-      d._haloRadius   = _hitR * dotGrowth;   // post-transform SVG units, for hit-test
-      d._visualRadius = _coreR * dotGrowth;
-      d._el.querySelector('.m-inner').removeAttribute('transform');
-      if (d._label) {
-        // v45: defer label positioning to placeLabels(). Stash render flags only.
-        d._labelOn = showLabels && !isDim;
-        d._labelFade = limbFade;
+    // px per km at the view centre: project the centre and a point 1° north.
+    // Works for both projections without knowing their scale factors.
+    const _pc = projection(center);
+    const _pn = projection([center[0], Math.min(89.5, center[1] + 1)]);
+    const _svgPerKm = (_pc && _pn) ? Math.hypot(_pn[0] - _pc[0], _pn[1] - _pc[1]) / 111.2 : (view.scale / 6371);
+    const _pxPerKm = Math.max(1e-6, _svgPerKm * _scrScaleR);
+    const CL_RADIUS_PX = isTouch ? 36 : 30;
+    _clusterThr = SDLClusters.deadBand(_clusterThr, SDLClusters.thresholdKm(CL_RADIUS_PX, _pxPerKm));
+    // Pins closer than this can never be separated by zoom on this device
+    // (thr ∝ 1/k, so this is a per-device constant): fan them out instead.
+    const _spiderKm = _clusterThr * k / (isTouch ? 60 : 40);
+    _lastPxPerKm = _pxPerKm; _lastSpiderKm = _spiderKm;
+    const _displayed = SDLClusters.cut(TREE, _clusterThr, _spiderKm);
+    const _now = performance.now();
+    const ANIM_MS = 250;
+    const _newSet = new Map();
+    _displayed.forEach(n => _newSet.set(n.id, n));
+    const _prevPos = new Map();
+    _dispState.forEach((st, id) => { if (st.mode !== 'out') _prevPos.set(id, st.pos); });
+    const _inPlace = new Set();
+    // Leaving nodes: travel into the ancestor that replaces them (merge) or
+    // fade where they stand (split).
+    _dispState.forEach((st, id) => {
+      if (_newSet.has(id)) {
+        if (st.mode === 'out') { st.mode = 'in'; st.from = st.pos.slice(); st.to = [st.node.lon, st.node.lat]; st.t0 = _now; st.travel = true; }
+        return;
+      }
+      if (st.mode === 'out') return;
+      let a = st.node.parent;
+      while (a && !_newSet.has(a.id)) a = a.parent;
+      st.mode = 'out'; st.t0 = _now; st.from = st.pos.slice();
+      st.to = a ? [a.lon, a.lat] : st.pos.slice();
+      st.travel = !!a;
+      if (a) _inPlace.add(a.id);
+    });
+    // Entering nodes: emerge from the ancestor that was on screen (split) or
+    // appear in place (merge, first frame).
+    _newSet.forEach((n, id) => {
+      if (_dispState.has(id)) return;
+      const own = [n.lon, n.lat];
+      let from = own;
+      if (!_firstFrame && !_inPlace.has(id)) {
+        let a = n.parent;
+        while (a && !_prevPos.has(a.id)) a = a.parent;
+        if (a) from = _prevPos.get(a.id).slice();
+      }
+      _dispState.set(id, { node: n, mode: _firstFrame ? 'steady' : 'in', t0: _now, from: from, to: own, pos: from.slice(), travel: from !== own });
+    });
+    _firstFrame = false;
+    let _animating = false;
+    const showLabels = isTouch ? k >= 1.0 : k >= 3.0;
+    const _active = anyFilterActive();
+    const _pinR   = SDLClusters.pinRadiusCss(isTouch, false) / _scrScaleR;
+    const _pinRhl = SDLClusters.pinRadiusCss(isTouch, true)  / _scrScaleR;
+    const _hitR   = (isTouch ? 24 : 16) / _scrScaleR;
+    const _strokeW = 2 / _scrScaleR;
+    const _toDelete = [];
+    const _clusterDraw = [];
+    _dispState.forEach((st, id) => {
+      const n = st.node;
+      let alpha = 1, e = 1;
+      if (st.mode !== 'steady') {
+        const t = Math.min(1, (_now - st.t0) / ANIM_MS);
+        e = SDLClusters.easeOutCubic(t);
+        st.pos = [st.from[0] + (st.to[0] - st.from[0]) * e, st.from[1] + (st.to[1] - st.from[1]) * e];
+        alpha = st.mode === 'in' ? e : 1 - e;
+        if (t >= 1) {
+          if (st.mode === 'in') { st.mode = 'steady'; st.pos = st.to.slice(); alpha = 1; }
+          else _toDelete.push(id);
+        } else _animating = true;
+      } else st.pos = [n.lon, n.lat];
+      const p = projection(st.pos);
+      const dist = gcDist(center, st.pos);
+      const inFrame = p && p[0] > -600 && p[0] < 1600 && p[1] > -600 && p[1] < 1160;
+      const onGlobe = (isFlat() || dist < 88) && inFrame && !(st.mode === 'out' && alpha <= 0.02);
+      const limbFade = isFlat() ? 1 : (dist >= 89 ? 0 : Math.max(0.55, Math.min(1, (89 - dist) / 7)));
+      if (n.n === 1) {
+        const d = n.entry;
+        if (!onGlobe) { d._el.style.display = 'none'; return; }
+        let x = p[0], y = p[1];
+        const tr = SDLClusters.tightRoot(n, _spiderKm);
+        if (tr !== n) {
+          // Tight group: ring around the group centroid, leg back to it.
+          const sib = tr.members, i = sib.indexOf(d.id), cnt = sib.length;
+          const ringCss = Math.max(22, (cnt * 19) / (2 * Math.PI)) + 8;
+          const rr = (ringCss / _scrScaleR) * (st.mode === 'in' ? e : 1);
+          const ang = -Math.PI / 2 + (i / cnt) * Math.PI * 2;
+          const cx = x, cy = y;
+          x = cx + Math.cos(ang) * rr; y = cy + Math.sin(ang) * rr;
+          if (!d._leg) { d._leg = document.createElementNS(ns, 'line'); d._leg.setAttribute('class', 'spider-leg'); gSpider.appendChild(d._leg); }
+          d._leg.setAttribute('x1', cx); d._leg.setAttribute('y1', cy); d._leg.setAttribute('x2', x); d._leg.setAttribute('y2', y);
+          d._leg.style.display = ''; d._leg.style.opacity = limbFade * alpha;
+        }
+        const isDim = d._el.classList.contains('dim');
+        const hl = d._el.classList.contains('hl');
+        d._el.style.display = '';
+        d._el.setAttribute('transform', 'translate(' + x + ',' + y + ')');
+        d._el.style.opacity = (isDim ? limbFade * 0.08 : limbFade) * alpha;
+        const coreR = hl ? _pinRhl : _pinR;
+        const hitR = Math.max(_hitR, coreR + 2);
+        d._coreEl.setAttribute('r', coreR); d._coreEl.setAttribute('stroke-width', _strokeW);
+        d._hitEl.setAttribute('r', hitR);
+        d._ringEl.setAttribute('r', coreR + 2.5 / _scrScaleR);
+        d._x = x; d._y = y; d._dist = dist;
+        d._haloRadius = hitR; d._visualRadius = coreR;
+        if (st.mode !== 'out') _visible.push(d);
+        d._labelOn = showLabels && !isDim && st.mode !== 'out';
+        d._labelFade = limbFade * alpha;
+      } else {
+        const el = n._el;
+        if (!onGlobe) { el.style.display = 'none'; n._pseudo._x = null; return; }
+        let shownN = n.n, counts = n._tierCounts;
+        if (_active) {
+          shownN = 0; counts = {};
+          n.members.forEach(id => { const m = DATA_BY_ID.get(id); if (isMatch(m)) { shownN++; counts[m.tier] = (counts[m.tier] || 0) + 1; } });
+        }
+        const dimC = _active && shownN === 0;
+        el.classList.toggle('dim', dimC);
+        el.classList.toggle('hl', _active && shownN > 0);
+        const r = SDLClusters.discDiameterCss(shownN || n.n, isTouch) / 2 / _scrScaleR;
+        const sc = st.mode === 'in' ? 0.6 + 0.4 * e : (st.mode === 'out' ? (st.travel ? 1 - 0.5 * e : 1 - 0.4 * e) : 1);
+        // DOM writes happen after the relaxation pass below.
+        _clusterDraw.push({ n, x: p[0], y: p[1], r, sc, alpha: (dimC ? 0.12 : 1) * limbFade * alpha, shownN, counts, steady: st.mode === 'steady' });
       }
     });
+    // Discs may still touch (a 20-member disc is wider than the cut radius):
+    // nudge overlapping pairs apart in screen space, a few px at most, only
+    // for settled discs so an animating one keeps its path. Deterministic —
+    // recomputed from projected positions every frame, nothing accumulates.
+    for (let pass = 0; pass < 3; pass++) {
+      let moved = false;
+      for (let i = 0; i < _clusterDraw.length; i++) for (let j = i + 1; j < _clusterDraw.length; j++) {
+        const a = _clusterDraw[i], b = _clusterDraw[j];
+        if (!a.steady || !b.steady) continue;
+        const dx = b.x - a.x, dy = b.y - a.y, dist = Math.hypot(dx, dy) || 0.001;
+        const min = (a.r + b.r) * 0.92;
+        if (dist < min) {
+          const push = (min - dist) / 2, ux = dx / dist, uy = dy / dist;
+          a.x -= ux * push; a.y -= uy * push; b.x += ux * push; b.y += uy * push; moved = true;
+        }
+      }
+      if (!moved) break;
+    }
+    _clusterObst.length = 0;
+    _clusterDraw.forEach(cd => {
+      const n = cd.n, el = n._el;
+      el.style.display = '';
+      el.setAttribute('transform', 'translate(' + cd.x + ',' + cd.y + ') scale(' + cd.sc + ')');
+      el.style.opacity = cd.alpha;
+      n._disc.setAttribute('r', cd.r); n._disc.setAttribute('stroke-width', 1 / _scrScaleR);
+      n._hit.setAttribute('r', Math.max(cd.r, 22 / _scrScaleR));
+      n._txt.textContent = cd.shownN || n.n;
+      n._txt.setAttribute('font-size', ((11 + Math.min(4, n.n / 6)) / _scrScaleR).toFixed(2));
+      const ra = cd.r - 1.25 / _scrScaleR, circ = 2 * Math.PI * ra, tot = cd.shownN || n.n;
+      let acc = 0;
+      n._arcOrder.forEach(tier => {
+        const c = cd.counts[tier] || 0, len = circ * c / tot, arc = n._arcs[tier];
+        arc.setAttribute('r', ra); arc.setAttribute('stroke-width', 2.5 / _scrScaleR);
+        arc.setAttribute('stroke-dasharray', len.toFixed(3) + ' ' + Math.max(0, circ - len).toFixed(3));
+        arc.setAttribute('stroke-dashoffset', (-acc).toFixed(3));
+        arc.style.display = c ? '' : 'none';
+        acc += len;
+      });
+      n._x = cd.x; n._y = cd.y; n._r = cd.r * cd.sc;
+      n._pseudo._x = cd.x; n._pseudo._y = cd.y;
+      _clusterObst.push({ x: cd.x, y: cd.y, r: cd.r * cd.sc });
+    });
+    _toDelete.forEach(id => {
+      const st = _dispState.get(id);
+      if (st) { const n = st.node; if (n.n === 1) { n.entry._el.style.display = 'none'; if (n.entry._leg) n.entry._leg.style.display = 'none'; } else { n._el.style.display = 'none'; n._pseudo._x = null; } }
+      _dispState.delete(id);
+    });
+    if (_animating) redrawRaf();
+    // Kept for the label pass below (font growth with zoom; dots no longer scale).
+    const dotGrowth = 1;
+    const zoomGrowth = Math.max(1.0, Math.min(4.0, Math.sqrt(k / 5.5) + 0.3));
     // v45 — 8-anchor label placement: each label tries 8 candidate positions
     // (S preferred, then E/W, then N, then corners). The candidate with fewest
     // overlaps vs already-placed labels wins. Greedy in invest-desc / x-asc
@@ -2999,7 +3076,7 @@ function redraw(){
       }
       // Anchor offset uses dotGrowth (matches visual marker size, label sits
       // just outside the dot at every zoom level).
-      const markerR = 8 * dotGrowth + 4;
+      const markerR = (SDLClusters.pinRadiusCss(isTouch, false) + 3) / scrScale2;
       // v45 — 16 anchor candidates: 8 close ring + 8 far ring. The far ring
       // (at 2.4× marker radius + extra font padding) lets dense clusters
       // (Boston/Bay/Europe/China) push residual labels out to a second tier
@@ -3045,19 +3122,7 @@ function redraw(){
       // zoom on a 390px phone). Budget: one label per ~36k CSS px² on
       // desktop, ~42k on touch/narrow, clamped 6..28; touch gets a lower
       // ladder at far zoom because names are unreadable there anyway.
-      const _mapAreaCss = rect2.width * rect2.height;
-      const _areaBudget = Math.max(6, Math.min(28, Math.round(_mapAreaCss / (useChunky ? 42000 : 36000))));
-      let _targetN;
-      if (useChunky) {
-        if (k < 1.5)      _targetN = 0;
-        else if (k < 2.5) _targetN = Math.min(4, _areaBudget);
-        else if (k < 4.0) _targetN = Math.min(8, _areaBudget);
-        else              _targetN = _areaBudget;
-      } else {
-        if (k < 1.5)      _targetN = Math.min(12, _areaBudget);
-        else if (k < 2.5) _targetN = Math.min(18, _areaBudget);
-        else              _targetN = _areaBudget;
-      }
+      const _targetN = SDLClusters.labelBudget(rect2.width * rect2.height, k, useChunky);
       // Hysteresis as a tie-break bonus (a label shown last frame ranks a
       // little higher), never as extra cap — the cap must be able to shrink.
       const _rank = d => _salience(d) + (d._labelWasShown ? 0.5 : 0);
@@ -3113,6 +3178,13 @@ function redraw(){
               pinOverlap++;
               if (pinOverlap >= 2) break;
             }
+          }
+          // 2026-09-20 — cluster discs are obstacles too (a name over a count is unreadable).
+          for (const o of _clusterObst) {
+            const cx = Math.max(bx, Math.min(o.x, bx + w));
+            const cy = Math.max(by, Math.min(o.y, by + h));
+            const ddx = o.x - cx, ddy = o.y - cy;
+            if (ddx*ddx + ddy*ddy < o.r*o.r) { pinOverlap += 2; break; }
           }
           const score = overlaps * 10 + pinOverlap * 6 + i;
           if (score < bestScore) {
@@ -3442,6 +3514,11 @@ function redraw(){
       : DRAG_THRESHOLD_PX;
   }
   function routePickedMarker(picked, e){
+    if (picked && picked._isCluster) {      // 2026-09-20: a disc zooms, it does not open a card
+      hideTip(); setHoveredPicked(null);
+      zoomToCluster(picked.node);
+      return;
+    }
     showTip(picked, e);
     // v45.m — also seat _hoveredPicked so the arrow-key cycle has an
     // anchor immediately after a click/tap (previously only hover seeded it,
@@ -3640,6 +3717,15 @@ function redraw(){
     const offY = (rect.height -  560 * scale) / 2;
     const sx = (e.clientX - rect.left - offX) / scale;
     const sy = (e.clientY - rect.top  - offY) / scale;
+    // 2026-09-20 — cluster discs first: a disc is one unambiguous target.
+    let bestC = null, bestCd = Infinity;
+    _dispState.forEach(st => {
+      const n = st.node;
+      if (n.n < 2 || st.mode === 'out' || n._x == null || n._el.style.display === 'none' || n._el.classList.contains('dim')) return;
+      const dx = sx - n._x, dy = sy - n._y, d2 = dx*dx + dy*dy;
+      if (d2 <= n._r * n._r && d2 < bestCd) { bestCd = d2; bestC = n; }
+    });
+    if (bestC) return bestC._pseudo;
     // v45.r — hit-test against ACTUAL VISIBLE HALO per pin. Visible pin
     // shape IS the hit area; hover and click use the same mechanism by
     // construction. When pins are well separated (most of the time, at
@@ -3846,6 +3932,34 @@ function redraw(){
   // Only fires when the pin is outside the visible viewBox (i.e. arrow
   // navigation crossed an edge or jumped to the back of the globe).
   let _flyToPinRaf = null;
+  // 2026-09-20 — generic short flight (rotate + scale), used by cluster taps.
+  let _flyViewRaf = null;
+  function flyToView(targetRot, targetScale, duration){
+    if (_flyViewRaf) cancelAnimationFrame(_flyViewRaf);
+    stopZoomInertia();
+    const startRot = [...view.rotate], startScale = view.scale, t0 = performance.now();
+    let dLon = targetRot[0] - startRot[0];
+    if (dLon > 180) dLon -= 360; if (dLon < -180) dLon += 360;
+    function step(now){
+      const t = Math.min(1, (now - t0) / duration);
+      const e = t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+      view.rotate[0] = startRot[0] + dLon * e;
+      view.rotate[1] = startRot[1] + (targetRot[1] - startRot[1]) * e;
+      view.scale = startScale * Math.pow(targetScale / startScale, e);
+      applyView(); redrawRaf();
+      if (t < 1) _flyViewRaf = requestAnimationFrame(step); else _flyViewRaf = null;
+    }
+    _flyViewRaf = requestAnimationFrame(step);
+  }
+  // Zoom just past the point where this disc splits (threshold 20% under its
+  // effective merge distance; the dead band is 6%), centred on the disc.
+  function zoomToCluster(n){
+    const eff = (n.mergeKm < _lastSpiderKm) ? _lastSpiderKm : n.mergeKm;
+    const targetThr = Math.max(0.5, eff * 0.8);
+    const R = isTouchMode() ? 36 : 30;
+    const targetScale = clampScale(view.scale * ((R / targetThr) / _lastPxPerKm));
+    flyToView([-n.lon, -n.lat, 0], targetScale, 520);
+  }
   function flyToPin(d){
     const p = projectLive(d);
     const inFrame = p && p[0] > 80 && p[0] < 920 && p[1] > 60 && p[1] < 500;
@@ -4068,8 +4182,9 @@ function redraw(){
 
   let flyAnim = null;
   function flyTo(region) {
-    const target = REGIONS[region];
-    if (!target) return;
+    const base = REGIONS[region];
+    if (!base) return;
+    const target = { rotate: base.rotate, scale: base.scale * phoneBoost() };
     if (flyAnim) cancelAnimationFrame(flyAnim);
 
     const start = { rotate: [...view.rotate], scale: view.scale };

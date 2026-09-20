@@ -124,8 +124,10 @@
   }
 
   // Cluster disc: density carried by SIZE (zhiyan rule), capped at 20 so a
-  // 40-member Boston does not eat the north-east.
-  function discDiameterCss(n, isTouch) { return 26 + 1.6 * Math.min(n, 20) + (isTouch ? 2 : 0); }
+  // 40-member Boston does not eat the north-east. Kept under the cut radius
+  // (2 × 30/36 px) for most n so neighbouring discs rarely touch; the render
+  // pass relaxes the few that do.
+  function discDiameterCss(n, isTouch) { return 24 + 1.2 * Math.min(n, 20) + (isTouch ? 2 : 0); }
 
   // Leaf pin: constant per device; ×1.3 when highlighted by a filter.
   function pinRadiusCss(isTouch, hl) { return (isTouch ? 6.5 : 5) * (hl ? 1.3 : 1); }

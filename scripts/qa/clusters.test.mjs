@@ -90,8 +90,8 @@ test('thresholdKm and deadBand', () => {
 });
 
 test('size laws', () => {
-  assert.ok(Math.abs(C.discDiameterCss(2, false) - 29.2) < 1e-9);
-  assert.ok(Math.abs(C.discDiameterCss(20, false) - 58) < 1e-9);
+  assert.ok(Math.abs(C.discDiameterCss(2, false) - 26.4) < 1e-9);
+  assert.ok(Math.abs(C.discDiameterCss(20, false) - 48) < 1e-9);
   assert.equal(C.discDiameterCss(50, false), C.discDiameterCss(20, false)); // capped
   assert.equal(C.discDiameterCss(2, true), C.discDiameterCss(2, false) + 2);
   assert.equal(C.pinRadiusCss(false, false), 5);
