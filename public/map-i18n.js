@@ -92,15 +92,15 @@
       viewCtl: { 'v-globe': '地球视图', 'v-flat': '平面地图' },
       ctlTips: { 'z-in': '放大', 'z-out': '缩小', 'z-reset': '重置视图', 'theme-toggle': '切换明暗主题', 'mob-filters': '筛选地图 — 类型、成熟度、领域、国家', 'mob-selected': '高亮列表 — 当前匹配的项目', wmReopen: '关于此图' },
       eyebrow: '荷兰国家材料发现实验室 · 实时追踪',
-      brandH1Pre: '全球自驱动实验室',
-      brandH1Post: '版图',
+      brandH1Pre: '全球自主实验室',
+      brandH1Post: '图谱',
       modal: {
         eyebrow: '关于这张图',
         titlePre: '全球',
-        titleDim: '自驱动实验室',
-        titlePost: '版图',
+        titleDim: '自主实验室',
+        titlePost: '图谱',
         intro:
-          '欢迎来到「全球自驱动实验室版图」。你看到的，是我根据公开资料整理的一张全球自驱动实验室地图，覆盖国家计划、学术团队、商业公司，以及开放的实验室操作系统。完整代码已在 <a href="https://github.com/yetiswang/sdl-map" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">github.com/yetiswang/sdl-map</a> 开源，非常欢迎你来纠错或补充——可以提 issue，也可以在 GitHub 上联系我。',
+          '欢迎来到「全球自主实验室图谱」。你看到的，是我根据公开资料整理的一张全球自主实验室地图，覆盖国家计划、学术团队、商业公司，以及开放的实验室操作系统。完整代码已在 <a href="https://github.com/yetiswang/sdl-map" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">github.com/yetiswang/sdl-map</a> 开源，非常欢迎你来纠错或补充——可以提 issue，也可以在 GitHub 上联系我。',
         howTo: '怎么用',
         controls: [
           { k: '筛选', v: '点击侧边栏里的类型按钮（国家 / 学术 / 商业 / LabOS），把视图缩小到你关心的部分。' },
@@ -180,15 +180,15 @@
       viewCtl: { 'v-globe': '地球視圖', 'v-flat': '平面地圖' },
       ctlTips: { 'z-in': '放大', 'z-out': '縮小', 'z-reset': '重置視圖', 'theme-toggle': '切換明暗主題', 'mob-filters': '篩選地圖 — 類型、成熟度、領域、國家', 'mob-selected': '高亮列表 — 當前匹配的項目', wmReopen: '關於此圖' },
       eyebrow: '荷蘭國家材料發現實驗室 · 即時追蹤',
-      brandH1Pre: '全球自驅動實驗室',
-      brandH1Post: '版圖',
+      brandH1Pre: '全球自主實驗室',
+      brandH1Post: '圖譜',
       modal: {
         eyebrow: '關於這張圖',
         titlePre: '全球',
-        titleDim: '自驅動實驗室',
-        titlePost: '版圖',
+        titleDim: '自主實驗室',
+        titlePost: '圖譜',
         intro:
-          '歡迎來到「全球自驅動實驗室版圖」。你看到的，是我根據公開資料整理的一張全球自驅動實驗室地圖，涵蓋國家計畫、學術團隊、商業公司，以及開放的實驗室作業系統。完整原始碼已在 <a href="https://github.com/yetiswang/sdl-map" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">github.com/yetiswang/sdl-map</a> 開源，非常歡迎你來指正或補充——可以開 issue，也可以在 GitHub 上聯絡我。',
+          '歡迎來到「全球自主實驗室圖譜」。你看到的，是我根據公開資料整理的一張全球自主實驗室地圖，涵蓋國家計畫、學術團隊、商業公司，以及開放的實驗室作業系統。完整原始碼已在 <a href="https://github.com/yetiswang/sdl-map" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">github.com/yetiswang/sdl-map</a> 開源，非常歡迎你來指正或補充——可以開 issue，也可以在 GitHub 上聯絡我。',
         howTo: '怎麼用',
         controls: [
           { k: '篩選', v: '點側邊欄裡的類型按鈕（國家 / 學術 / 商業 / LabOS），把視圖收斂到你關心的部分。' },

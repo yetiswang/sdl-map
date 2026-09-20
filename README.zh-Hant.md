@@ -1,10 +1,10 @@
 <div align="center">
-  <img src="public/sdl_favicon.png" alt="SDL 版圖" width="120">
+  <img src="public/sdl_favicon.png" alt="SDL 圖譜" width="120">
 
-  <h1>全球自驅動實驗室版圖</h1>
+  <h1>全球自主實驗室圖譜</h1>
 
   <p align="center">
-    一張手工策展的地圖，呈現全球自驅動實驗室工作的分佈：國家計畫、學術團隊、商業供應商，以及實驗室作業系統平台。
+    一張手工策展的地圖，呈現全球自主實驗室工作的分佈：國家計畫、學術團隊、商業供應商，以及實驗室作業系統平台。
   </p>
 
   <p align="center">
@@ -26,11 +26,11 @@
   </p>
 
   <a href="https://sdl-map.discoverylabs.nl/">
-    <img src="public/sdl-landscape-card.png" alt="全球自驅動實驗室版圖:互動式地圖、成長時間軸、動態追蹤、五種語言" width="850">
+    <img src="public/sdl-landscape-card.png" alt="全球自主實驗室圖譜:互動式地圖、成長時間軸、動態追蹤、五種語言" width="850">
   </a>
 </div>
 
-> 自驅動實驗室（SDL）把 AI 驅動的假設生成、自動化合成與線上表徵閉合成一個迴路。這份清單記錄正在做這件事的人、計畫與平台。它呈現的是我讀到的版圖，不是搜尋引擎索引出來的結果。條目反映截至 2026 年 9 月的公開資訊，透過 [互動式地圖](https://sdl-map.discoverylabs.nl/) 持續修訂。
+> 自主實驗室（SDL）把 AI 驅動的假設生成、自動化合成與線上表徵閉合成一個迴路。這份清單記錄正在做這件事的人、計畫與平台。它呈現的是我讀到的圖譜，不是搜尋引擎索引出來的結果。條目反映截至 2026 年 9 月的公開資訊，透過 [互動式地圖](https://sdl-map.discoverylabs.nl/) 持續修訂。
 
 ## 📚 目錄
 

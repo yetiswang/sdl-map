@@ -196,12 +196,32 @@ a{ color:inherit; text-decoration:none; }
   .site-header .nav-cluster.open {
     display:flex; flex-direction:column; align-items:stretch; gap:10px;
     position:fixed; top:54px; right:8px; padding:14px;
-    /* inherits the header's glass properties (custom properties inherit) */
-    background-color:var(--surface, var(--bg-2)); background-image:var(--surface-image, none);
+    /* A menu is read, so it takes the strong glass (inherited from the
+       header's custom properties), not the see-through one. */
+    background-color:var(--surface-strong, var(--bg-2)); background-image:var(--surface-image, none);
     -webkit-backdrop-filter:var(--surface-blur, none); backdrop-filter:var(--surface-blur, none);
     border:1px solid var(--surface-edge, var(--rule)); border-radius:10px;
     box-shadow:var(--surface-shadow, 0 8px 28px oklch(0 0 0 / 0.30)); min-width:200px;
     z-index:200;
+    /* Opens from the burger: the panel settles down-and-in, rows follow 35 ms apart. */
+    transform-origin: top right;
+    animation: nav-drawer-in var(--t-base, 200ms) var(--ease-enter, cubic-bezier(0,0,.2,1)) both;
+  }
+  .site-header .nav-cluster.open > * { animation: nav-row-in var(--t-slow, 280ms) var(--ease-enter, cubic-bezier(0,0,.2,1)) both; }
+  .site-header .nav-cluster.open > *:nth-child(1) { animation-delay: 35ms; }
+  .site-header .nav-cluster.open > *:nth-child(2) { animation-delay: 70ms; }
+  .site-header .nav-cluster.open > *:nth-child(3) { animation-delay: 105ms; }
+  .site-header .nav-cluster.open > *:nth-child(4) { animation-delay: 140ms; }
+  .site-header .nav-cluster.open > *:nth-child(5) { animation-delay: 175ms; }
+  .site-header .nav-cluster.open > *:nth-child(6) { animation-delay: 210ms; }
+  .site-header .nav-cluster.open > *:nth-child(7) { animation-delay: 245ms; }
+  .site-header .nav-cluster.open.closing { animation: nav-drawer-out var(--t-fast, 120ms) var(--ease-exit, cubic-bezier(.4,0,1,1)) both; }
+  .site-header .nav-cluster.open.closing > * { animation: none; }
+  @keyframes nav-drawer-in { from { opacity:0; transform: translateY(-6px) scale(.98); } to { opacity:1; transform:none; } }
+  @keyframes nav-drawer-out { from { opacity:1; transform:none; } to { opacity:0; transform: translateY(-4px) scale(.99); } }
+  @keyframes nav-row-in { from { opacity:0; transform: translateY(-4px); } to { opacity:1; transform:none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .site-header .nav-cluster.open, .site-header .nav-cluster.open > *, .site-header .nav-cluster.open.closing { animation: none !important; }
   }
   /* The nav element carries an inline align-items:center for the desktop row;
      inline styles survive media queries, so without !important the column
@@ -357,17 +377,26 @@ a{ color:inherit; text-decoration:none; }
         var btn = document.getElementById('nav-hamburger');
         var cluster = document.getElementById('nav-cluster');
         if (!btn || !cluster) { setTimeout(wireHamburger, 100); return; }
+        var closeTimer = null;
+        function setOpen(open){
+          if (open) {
+            clearTimeout(closeTimer);
+            cluster.classList.remove('closing');
+            cluster.classList.add('open');
+          } else if (cluster.classList.contains('open') && !cluster.classList.contains('closing')) {
+            // play the short exit, then hide
+            cluster.classList.add('closing');
+            closeTimer = setTimeout(function(){ cluster.classList.remove('open', 'closing'); }, 150);
+          }
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
         btn.addEventListener('click', function(e){
           e.stopPropagation();
-          var open = cluster.classList.toggle('open');
-          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          setOpen(!(cluster.classList.contains('open') && !cluster.classList.contains('closing')));
         });
         // Close on outside click
         document.addEventListener('click', function(e){
-          if (!cluster.contains(e.target) && !btn.contains(e.target)) {
-            cluster.classList.remove('open');
-            btn.setAttribute('aria-expanded', 'false');
-          }
+          if (!cluster.contains(e.target) && !btn.contains(e.target)) setOpen(false);
         });
       }
       wireHamburger();
