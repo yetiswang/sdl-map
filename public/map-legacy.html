@@ -1910,10 +1910,24 @@ window.SDL_CATEGORIES = {
       // Defer the topojson decode (~100ms on a 756KB topology) to an idle
       // slot so it can't steal a frame from early interaction.
       const build = () => {
+        const mesh = topojson.mesh(w, w.objects.countries, (a, b) => a !== b);
+        const outer = topojson.mesh(w, w.objects.countries, (a, b) => a === b);
+        // v47 — lon/lat boxes per country and per border line, so a moving
+        // frame can draw only what is in view (see _cullHi in redraw).
+        const boxOf = (coords) => { let x0 = 180, y0 = 90, x1 = -180, y1 = -90; const walk = (c) => { if (typeof c[0] === 'number') { if (c[0] < x0) x0 = c[0]; if (c[0] > x1) x1 = c[0]; if (c[1] < y0) y0 = c[1]; if (c[1] > y1) y1 = c[1]; } else for (const d of c) walk(d); }; walk(coords); return [x0, y0, x1, y1]; };
+        const lines = (m) => m.coordinates.map((line) => ({ line, b: boxOf(line) }));
         geoHi = {
           land: topojson.feature(w, w.objects.land),
-          mesh: topojson.mesh(w, w.objects.countries, (a, b) => a !== b),
-          outer: topojson.mesh(w, w.objects.countries, (a, b) => a === b),
+          mesh, outer,
+          // Per polygon, not per country: France, the UK, Norway, Denmark or
+          // the US own islands across the world, so their boxes would keep
+          // the whole country in every frame. Natural Earth splits at the
+          // antimeridian, so Russia's mainland has a box of its own too.
+          feats: topojson.feature(w, w.objects.countries).features.flatMap((f) => {
+            const g = f.geometry; const polys = g.type === 'Polygon' ? [g.coordinates] : g.coordinates;
+            return polys.map((rings) => ({ f: { type: 'Feature', properties: f.properties, geometry: { type: 'Polygon', coordinates: rings } }, b: boxOf(rings) }));
+          }),
+          meshL: lines(mesh), outerL: lines(outer),
         };
         redrawRaf();   // repaint crisp as soon as it's available
       };
@@ -2710,7 +2724,41 @@ window.SDL_CATEGORIES = {
 
 // v46.b — motion-detection state for the hi/lo geometry choice in redraw().
 let _lastViewSig = '', _lastViewMove = 0, _settleTimer = null, _lastMovingCls = false;
+// v47 — geometry by zoom while the view changes (see redraw): 50m from
+// HI_MOVE_K in; three consecutive moving frames slower than HI_SLOW_MS on
+// 50m fall back to 110m for 1.5 s. __sdlGeoStats is a QA hook (scripts/qa).
+const HI_MOVE_K = 1.4, HI_SLOW_MS = 24;
+let _hiSlow = 0, _hiCooldownUntil = 0, _hiCooldownMs = 1500;
+window.__sdlGeoStats = { hi: 0, lo: 0, cooldowns: 0, k: 0, drawn: 0, last: [] };
+// v47 — the 50m subset in view. Countries and border lines carry lon/lat
+// boxes; a box is in view when one of nine inverse-projected canvas points
+// falls inside it, or one of a 5×5 grid over the box projects onto the
+// canvas (with margin). Features that span more than half the world are
+// always drawn. Filled as ONE path, so shared borders leave no seams; the
+// interior borders are stroked on top anyway. The settled frame still draws
+// the full atlas, so any sliver this misses lasts only as long as the gesture.
+function _cullHi(){
+  const M = 24;
+  const inCanvas = (p) => { const xy = projection(p); return !!xy && xy[0] > -M && xy[0] < W + M && xy[1] > -M && xy[1] < H + M; };
+  const inv = [[W/2, H/2], [0, 0], [W, 0], [0, H], [W, H], [W/2, 0], [W/2, H], [0, H/2], [W, H/2]].map((pt) => projection.invert(pt)).filter((p) => p && isFinite(p[0]) && isFinite(p[1]));
+  let vb = null;   // lon/lat box of the view, only trustworthy when every canvas point is on the map
+  if (inv.length === 9) { vb = [180, 90, -180, -90]; for (const p of inv) { if (p[0] < vb[0]) vb[0] = p[0]; if (p[0] > vb[2]) vb[2] = p[0]; if (p[1] < vb[1]) vb[1] = p[1]; if (p[1] > vb[3]) vb[3] = p[1]; } const px = (vb[2] - vb[0]) * 0.15 + 2, py = (vb[3] - vb[1]) * 0.15 + 2; vb = [vb[0] - px, vb[1] - py, vb[2] + px, vb[3] + py]; if (vb[2] - vb[0] > 300) vb = null; }
+  const vis = (b) => {
+    if (b[2] - b[0] > 180) return true;
+    if (vb && (b[2] < vb[0] || b[0] > vb[2] || b[3] < vb[1] || b[1] > vb[3])) return false;
+    for (const p of inv) if (p[0] >= b[0] && p[0] <= b[2] && p[1] >= b[1] && p[1] <= b[3]) return true;
+    for (let i = 0; i <= 4; i++) for (let j = 0; j <= 4; j++) if (inCanvas([b[0] + (b[2] - b[0]) * i / 4, b[1] + (b[3] - b[1]) * j / 4])) return true;
+    return false;
+  };
+  const feats = [], mesh = [], outer = [];
+  for (const e of geoHi.feats) if (vis(e.b)) feats.push(e.f);
+  for (const e of geoHi.meshL) if (vis(e.b)) mesh.push(e.line);
+  for (const e of geoHi.outerL) if (vis(e.b)) outer.push(e.line);
+  if (window.__sdlGeoStats) window.__sdlGeoStats.drawn = feats.length;
+  return { land: { type: 'FeatureCollection', features: feats }, mesh: { type: 'MultiLineString', coordinates: mesh }, outer: { type: 'MultiLineString', coordinates: outer } };
+}
 function redraw(){
+    const _t0 = performance.now();
     // v45.aj — defensive sanity guard. If any code path corrupted view
     // state into NaN (e.g. an iOS-Safari edge case in zoomAnchored), the
     // whole projection returns NaN and every pin fails the inFrame check
@@ -2794,10 +2842,22 @@ function redraw(){
     if (_moving && _settleTimer === null) {
       _settleTimer = setTimeout(() => { _settleTimer = null; redrawRaf(); }, 200);
     }
-    const _hi = geoHi && !isInteracting && !_moving;
-    const _gLand  = _hi ? geoHi.land  : landFeat;
-    const _gMesh  = _hi ? geoHi.mesh  : countriesMesh;
-    const _gOuter = _hi ? geoHi.outer : countriesOuter;
+    // v47 — geometry by zoom, not by motion. Measured: the 50m atlas costs
+    // ~10× the 110m one only at the world view, where its extra detail is
+    // below a pixel anyway; from about 1.4× in it costs the same, and the
+    // motion swap was visibly coarsening coastlines under the finger
+    // (Yuyang, 2026-09-20). While the view changes: 110m below HI_MOVE_K,
+    // 50m from there on, with a self-check below so a weak device never
+    // pays for it twice.
+    const _changing = isInteracting || _moving;
+    const _kNow = view.scale / BASE_SCALE;
+    const _hiMoving = _kNow >= HI_MOVE_K && _nowT >= _hiCooldownUntil;
+    const _hi = geoHi && (!_changing || _hiMoving);
+    if (_changing) { const _g = window.__sdlGeoStats; if (_g) { _g.k = +_kNow.toFixed(2); if (_hi) _g.hi++; else _g.lo++; } }
+    const _hiSet = _hi ? (_changing && geoHi.feats ? _cullHi() : geoHi) : null;   // moving: only what is in view
+    const _gLand  = _hi ? _hiSet.land  : landFeat;
+    const _gMesh  = _hi ? _hiSet.mesh  : countriesMesh;
+    const _gOuter = _hi ? _hiSet.outer : countriesOuter;
 
     // Land fill
     _ctx.globalAlpha = _arrK;
@@ -2821,6 +2881,15 @@ function redraw(){
     _pathC(_gOuter);
     _ctx.stroke();
     _ctx.globalAlpha = 1;
+
+    if (_changing) {
+      const _dt = performance.now() - _t0;
+      const _g = window.__sdlGeoStats; if (_g) { _g.last.push(+_dt.toFixed(1)); if (_g.last.length > 90) _g.last.shift(); }
+      if (_hi) {
+        if (_dt > HI_SLOW_MS) { if (++_hiSlow >= 3) { _hiCooldownUntil = performance.now() + _hiCooldownMs; _hiCooldownMs = Math.min(30000, _hiCooldownMs * 2); _hiSlow = 0; if (_g) _g.cooldowns++; } }
+        else _hiSlow = 0;
+      }
+    }
 
     // China provinces (only at high zoom, dashed)
     if (china && k >= 2.2) {
