@@ -2870,7 +2870,7 @@ function redraw(){
     _clusterThr = SDLClusters.deadBand(_clusterThr, SDLClusters.thresholdKm(CL_RADIUS_PX, _pxPerKm));
     // Pins closer than this can never be separated by zoom on this device
     // (thr ∝ 1/k, so this is a per-device constant): fan them out instead.
-    const _spiderKm = _clusterThr * k / (isTouch ? 60 : 40);
+    const _spiderKm = _clusterThr * k / 40;   // fan-out from k ≈ 40 on both devices (was 60 on touch: too deep to reach comfortably)
     _lastPxPerKm = _pxPerKm; _lastSpiderKm = _spiderKm;
     const _displayed = SDLClusters.cut(TREE, _clusterThr, _spiderKm);
     const _now = performance.now();
@@ -2944,15 +2944,19 @@ function redraw(){
         if (tr !== n) {
           // Tight group: ring around the group centroid, leg back to it.
           const sib = tr.members, i = sib.indexOf(d.id), cnt = sib.length;
-          const ringCss = Math.max(22, (cnt * 19) / (2 * Math.PI)) + 8;
+          // Pitch along the ring = one tap target (44 px touch, 30 desktop).
+          const pitch = isTouch ? 44 : 30;
+          const ringCss = Math.max(isTouch ? 30 : 22, (cnt * pitch) / (2 * Math.PI)) + 6;
           const rr = (ringCss / _scrScaleR) * (st.mode === 'in' ? e : 1);
           const ang = -Math.PI / 2 + (i / cnt) * Math.PI * 2;
+          d._spiderAng = ang;
           const cx = x, cy = y;
           x = cx + Math.cos(ang) * rr; y = cy + Math.sin(ang) * rr;
           if (!d._leg) { d._leg = document.createElementNS(ns, 'line'); d._leg.setAttribute('class', 'spider-leg'); gSpider.appendChild(d._leg); }
           d._leg.setAttribute('x1', cx); d._leg.setAttribute('y1', cy); d._leg.setAttribute('x2', x); d._leg.setAttribute('y2', y);
           d._leg.style.display = ''; d._leg.style.opacity = limbFade * alpha;
         }
+        if (tr === n) d._spiderAng = null;
         const isDim = d._el.classList.contains('dim');
         const hl = d._el.classList.contains('hl');
         d._el.style.display = '';
@@ -3079,18 +3083,13 @@ function redraw(){
       // Desktop/narrow keep their growing-with-zoom behaviour.
       const narrowViewport = rect2.width < 900;
       const useChunky = isTouch || narrowViewport;
-      const targetCssPx = isTouch ? 7 : (narrowViewport ? 7 : 11);
-      const maxCssPx    = isTouch ? 16 : (narrowViewport ? 16 : 18);
+      // 2026-09-20 — 7 CSS px with a 3 px halo was unreadable on a phone
+      // (the stroke swallowed the glyphs). Touch reads at 11 px, grows to 14.
+      const targetCssPx = isTouch ? 11 : (narrowViewport ? 11 : 11);
+      const maxCssPx    = isTouch ? 14 : (narrowViewport ? 14 : 18);
       const labelBaseFs = targetCssPx / scrScale2;
       const fsCap       = maxCssPx / scrScale2;
-      let fs;
-      if (isTouch && k > 5) {
-        // Shrink curve: 7 CSS-px at k=5 → 5 CSS-px floor by k=12.
-        const shrink = Math.max(5 / 7, 1 - (k - 5) * 0.03);
-        fs = labelBaseFs * shrink;
-      } else {
-        fs = Math.min(fsCap, Math.max(labelBaseFs, labelBaseFs * zoomGrowth));
-      }
+      const fs = Math.min(fsCap, Math.max(labelBaseFs, labelBaseFs * zoomGrowth));
       // Anchor offset uses dotGrowth (matches visual marker size, label sits
       // just outside the dot at every zoom level).
       const markerR = (SDLClusters.pinRadiusCss(isTouch, false) + 3) / scrScale2;
@@ -3148,7 +3147,10 @@ function redraw(){
         .sort((a, b) => (_rank(b) - _rank(a)) ||
                         ((a._dist || 0) - (b._dist || 0)) ||
                         (a._x - b._x));
-      ranked = ranked.slice(0, _targetN);
+      // 2026-09-20 — fanned-out (spider) members are always named, radially,
+      // outside the budget: the fan exists so they can be told apart.
+      const _spiderOnes = ranked.filter(d => d._spiderAng != null);
+      ranked = ranked.filter(d => d._spiderAng == null).slice(0, _targetN).concat(_spiderOnes);
       // Track for next-frame hysteresis (set after placement below).
       const placed = [];
       // v45.x — clear hysteresis flag at frame start; the placement pass
@@ -3163,6 +3165,18 @@ function redraw(){
         const _nameForWidth = (useChunky && d._labelShort) ? d._labelShort : d.name;
         const w = _nameForWidth.length * fs * 0.55 + 4;
         const h = fs * 1.15;
+        if (d._spiderAng != null) {
+          // Radial: the label continues the leg outward, so neighbours on the
+          // ring never meet. No candidate search, no collision test.
+          const c = Math.cos(d._spiderAng), sn = Math.sin(d._spiderAng);
+          const off = markerR + 3 + (Math.abs(c) < 0.25 ? 4 : 0);   // top/bottom labels sit a little further out
+          const ax = d._x + c * off, ay = d._y + sn * off;
+          const ta = c > 0.25 ? 'start' : (c < -0.25 ? 'end' : 'middle');
+          let bx = ta === 'start' ? ax : (ta === 'end' ? ax - w : ax - w / 2);
+          const by = (ta === 'middle') ? (sn < 0 ? ay - h * 0.95 : ay + h * 0.15) : ay - h * 0.55;
+          placed.push({ x: bx, y: by, w, h, ta, owner: d, radial: true });
+          continue;
+        }
         let best = null, bestScore = Infinity;
         for (let i = 0; i < anchors.length; i++) {
           const a = anchors[i];
@@ -3201,7 +3215,7 @@ function redraw(){
             const cx = Math.max(bx, Math.min(o.x, bx + w));
             const cy = Math.max(by, Math.min(o.y, by + h));
             const ddx = o.x - cx, ddy = o.y - cy;
-            if (ddx*ddx + ddy*ddy < o.r*o.r) { pinOverlap += 2; break; }
+            if (ddx*ddx + ddy*ddy < (o.r + 2)*(o.r + 2)) { pinOverlap += 3; break; }
           }
           const score = overlaps * 10 + pinOverlap * 6 + i;
           if (score < bestScore) {
@@ -3239,13 +3253,13 @@ function redraw(){
               if (ovX < ovY) {
                 const sign = (aCx >= bCx) ? 1 : -1;
                 const push = (ovX + 1) * 0.5;
-                a.x += sign * push;
-                b.x -= sign * push;
+                a.x += sign * push * (a.radial ? 0.5 : 1);
+                b.x -= sign * push * (b.radial ? 0.5 : 1);
               } else {
                 const sign = (aCy >= bCy) ? 1 : -1;
                 const push = (ovY + 1) * 0.5;
-                a.y += sign * push;
-                b.y -= sign * push;
+                a.y += sign * push * (a.radial ? 0.5 : 1);
+                b.y -= sign * push * (b.radial ? 0.5 : 1);
               }
               movedAny = true;
             }
@@ -3267,7 +3281,7 @@ function redraw(){
         d._label.setAttribute('y', yVal);
         d._label.setAttribute('text-anchor', p.ta);
         d._label.setAttribute('font-size', fs + 'px');
-        d._label.setAttribute('stroke-width', (3 / scrScale2).toFixed(2));
+        d._label.setAttribute('stroke-width', ((useChunky ? 2 : 2.5) / scrScale2).toFixed(2));
         // v45.u — swap to short label form when chunky sizing is active
         // (touch or narrow viewport). Keeps dense clusters legible without
         // forcing long names off-screen via aggressive label relaxation.
@@ -4496,18 +4510,26 @@ function setupBottomSheet(){
     sheet.style.transform = '';   // clear any stuck inline transform from prior swipe
     sheet.classList.add('open');
     document.body.classList.add('sheet-open');
+    _sheetOpenedAt = performance.now();
     // Mark the selected marker
     document.querySelectorAll('.marker.selected').forEach(m => m.classList.remove('selected'));
     const markerEl = document.querySelector(`.marker[data-id="${d.id}"]`);
     if (markerEl) markerEl.classList.add('selected');
   }
-  function closeSheet(){
+  // 2026-09-20 — on touch the card opens on pointerup, then the browser
+  // fires its synthetic click ~100 ms later, hit-tested afresh: it lands on
+  // the drawer backdrop that `sheet-open` has just displayed, whose handler
+  // closes the card. Every pin tap on a phone was being undone. A close that
+  // arrives from a click within 500 ms of opening is that ghost click.
+  let _sheetOpenedAt = 0;
+  function closeSheet(ev){
+    if (ev && ev.type === 'click' && performance.now() - _sheetOpenedAt < 500) return;
     sheet.classList.remove('open');
     document.body.classList.remove('sheet-open');
     document.querySelectorAll('.marker.selected').forEach(m => m.classList.remove('selected'));
   }
 
-  closeBtn?.addEventListener('click', closeSheet);
+  closeBtn?.addEventListener('click', () => closeSheet());   // explicit close: never treated as a ghost click
   backdrop?.addEventListener('click', closeSheet);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
 
@@ -4553,7 +4575,7 @@ function setupBottomSheet(){
     // Click outside any pin closes the card (Maps-like behaviour).
     // Skip if click is on a UI control (zoom, region nav, filter chip).
     if (e.target.closest('.zoom-ctl, .region-nav, aside, header, footer, .menu-btn, button')) return;
-    if (document.body.classList.contains('sheet-open')) closeSheet();
+    if (document.body.classList.contains('sheet-open')) closeSheet(e);
   });
 
   // Hide the desktop tip immediately on mobile so it doesn't flash

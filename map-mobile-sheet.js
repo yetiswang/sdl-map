@@ -26,11 +26,11 @@
   var lang = window.SDL_LANG || 'en';
   var key = lang === 'zh' ? (window.SDL_ZH_SCRIPT === 'Hant' ? 'zh-Hant' : 'zh-Hans') : lang;
   var T = {
-    en: { inView: 'in view', filters: 'Filters', eu: 'Europe', us: 'N. America', ea: 'East Asia', about: 'About', exportMap: 'Export map', data: 'Data & sharing', flat: 'Flat map', globe: 'Globe', clear: 'Clear filters', empty: 'Nothing in view. Zoom out or pan.', expand: 'Expand panel', collapse: 'Collapse panel' },
-    'zh-Hans': { inView: '视野内', filters: '筛选', eu: '欧洲', us: '北美', ea: '东亚', about: '关于', exportMap: '导出地图', data: '数据与分享', flat: '平面地图', globe: '地球仪', clear: '清除筛选', empty: '视野内没有项目，请缩小或平移。', expand: '展开面板', collapse: '收起面板' },
-    'zh-Hant': { inView: '視野內', filters: '篩選', eu: '歐洲', us: '北美', ea: '東亞', about: '關於', exportMap: '匯出地圖', data: '資料與分享', flat: '平面地圖', globe: '地球儀', clear: '清除篩選', empty: '視野內沒有項目，請縮小或平移。', expand: '展開面板', collapse: '收起面板' },
-    ja: { inView: '表示中', filters: 'フィルタ', eu: 'ヨーロッパ', us: '北米', ea: '東アジア', about: '概要', exportMap: '地図を書き出す', data: 'データと共有', flat: '平面図', globe: '地球儀', clear: 'フィルタを解除', empty: '表示範囲に項目がありません。縮小または移動してください。', expand: 'パネルを開く', collapse: 'パネルを閉じる' },
-    ko: { inView: '표시 중', filters: '필터', eu: '유럽', us: '북미', ea: '동아시아', about: '소개', exportMap: '지도 내보내기', data: '데이터 및 공유', flat: '평면 지도', globe: '지구본', clear: '필터 지우기', empty: '표시 범위에 항목이 없습니다. 축소하거나 이동하세요.', expand: '패널 열기', collapse: '패널 닫기' },
+    en: { inView: 'in view', filters: 'Filters', eu: 'Europe', us: 'Americas', ea: 'East Asia', about: 'About this map', exportMap: 'Export map', data: 'Data & sharing', flat: 'Flat map', globe: 'Globe', view: 'Globe / flat', clear: 'Clear filters', suggest: 'Suggest a lab', empty: 'Nothing in view. Zoom out or pan.', expand: 'Expand panel', collapse: 'Collapse panel' },
+    'zh-Hans': { inView: '视野内', filters: '筛选', eu: '欧洲', us: '美洲', ea: '东亚', about: '关于本图', exportMap: '导出地图', data: '数据与分享', flat: '平面地图', globe: '地球仪', view: '地球仪 / 平面', clear: '清除筛选', suggest: '推荐实验室', empty: '视野内没有项目，请缩小或平移。', expand: '展开面板', collapse: '收起面板' },
+    'zh-Hant': { inView: '視野內', filters: '篩選', eu: '歐洲', us: '美洲', ea: '東亞', about: '關於本圖', exportMap: '匯出地圖', data: '資料與分享', flat: '平面地圖', globe: '地球儀', view: '地球儀 / 平面', clear: '清除篩選', suggest: '推薦實驗室', empty: '視野內沒有項目，請縮小或平移。', expand: '展開面板', collapse: '收起面板' },
+    ja: { inView: '表示中', filters: 'フィルタ', eu: 'ヨーロッパ', us: '米州', ea: '東アジア', about: 'この地図について', exportMap: '地図を書き出す', data: 'データと共有', flat: '平面図', globe: '地球儀', view: '地球儀 / 平面', clear: 'フィルタを解除', suggest: 'ラボを提案', empty: '表示範囲に項目がありません。縮小または移動してください。', expand: 'パネルを開く', collapse: 'パネルを閉じる' },
+    ko: { inView: '표시 중', filters: '필터', eu: '유럽', us: '미주', ea: '동아시아', about: '이 지도에 대해', exportMap: '지도 내보내기', data: '데이터 및 공유', flat: '평면 지도', globe: '지구본', view: '지구본 / 평면', clear: '필터 지우기', suggest: '연구실 제안', empty: '표시 범위에 항목이 없습니다. 축소하거나 이동하세요.', expand: '패널 열기', collapse: '패널 닫기' },
   };
   var t = T[key] || T.en;
   var esc = function (s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
@@ -55,6 +55,10 @@
         '<button type="button" class="msheet-chip" data-region="eu">' + esc(t.eu) + '</button>' +
         '<button type="button" class="msheet-chip" data-region="us">' + esc(t.us) + '</button>' +
         '<button type="button" class="msheet-chip" data-region="ea">' + esc(t.ea) + '</button>' +
+        '<span class="msheet-sep" aria-hidden="true"></span>' +
+        '<button type="button" class="msheet-ico" data-act="about" aria-label="' + esc(t.about) + '" title="' + esc(t.about) + '"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></button>' +
+        '<button type="button" class="msheet-ico" data-act="data" aria-label="' + esc(t.data) + '" title="' + esc(t.data) + '"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5"/><path d="M4 19h16"/></svg></button>' +
+        '<button type="button" class="msheet-ico" data-act="view" aria-label="' + esc(t.view) + '" title="' + esc(t.view) + '"><svg class="ico-globe" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3.6 9h16.8M3.6 15h16.8"/></svg><svg class="ico-flat" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 12h18M9 6.2c-1.5 3.8-1.5 8 0 11.6M15 6.2c1.5 3.8 1.5 8 0 11.6"/></svg></button>' +
       '</div>' +
     '</div>' +
     '<div class="msheet-body" id="msheet-body">' +
@@ -72,10 +76,8 @@
   var actions = document.createElement('div');
   actions.className = 'msheet-actions';
   actions.innerHTML =
-    '<button type="button" class="msheet-action" data-act="about">' + esc(t.about) + '</button>' +
-    '<button type="button" class="msheet-action" data-act="view">' + esc(t.flat) + '</button>' +
     '<button type="button" class="msheet-action" data-act="export">' + esc(t.exportMap) + '</button>' +
-    '<button type="button" class="msheet-action" data-act="data">' + esc(t.data) + '</button>' +
+    '<a class="msheet-action" href="https://github.com/yetiswang/sdl-map/issues/new?template=add-lab.yml" target="_blank" rel="noopener">' + esc(t.suggest) + ' ↗</a>' +
     '<button type="button" class="msheet-action" data-act="clear">' + esc(t.clear) + '</button>';
 
   // ---- state -------------------------------------------------------------
@@ -154,9 +156,13 @@
     var flat = document.getElementById('v-flat');
     return (flat && flat.classList.contains('active')) ? t.globe : t.flat;
   }
-  actions.addEventListener('click', function (e) {
-    var b = e.target.closest('.msheet-action');
-    if (!b) return;
+  function syncViewIcon() {
+    var flat = document.getElementById('v-flat');
+    sheet.classList.toggle('is-flat', !!(flat && flat.classList.contains('active')));
+  }
+  function onAction(e) {
+    var b = e.target.closest('.msheet-action, .msheet-ico');
+    if (!b || !b.dataset.act) return;
     var act = b.dataset.act;
     if (act === 'about') { var w = document.getElementById('wmReopen'); if (w) w.click(); }
     else if (act === 'export') { if (window.__sdlExportOpen) window.__sdlExportOpen(); }
@@ -165,10 +171,13 @@
       var flat = document.getElementById('v-flat');
       var isFlat = flat && flat.classList.contains('active');
       if (window.__sdlSetMapMode) window.__sdlSetMapMode(isFlat ? 'globe' : 'flat');
-      b.textContent = viewLabel();
+      syncViewIcon();
     }
     else if (act === 'clear') { var r = document.getElementById('reset'); if (r) r.click(); }
-  });
+  }
+  actions.addEventListener('click', onAction);
+  sheet.querySelector('.msheet-row2').addEventListener('click', onAction);
+  syncViewIcon();
 
   // ---- filters: borrow the desktop chip groups on narrow viewports -------
   var moved = [];
@@ -184,7 +193,6 @@
       });
     });
     filtersPane.appendChild(actions);
-    actions.querySelector('[data-act="view"]').textContent = viewLabel();
     refreshBadge();
   }
   function moveFiltersOut() {
