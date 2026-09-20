@@ -37,7 +37,7 @@
 
   // ---- DOM ---------------------------------------------------------------
   var sheet = document.createElement('section');
-  sheet.className = 'msheet';
+  sheet.className = 'msheet glass';
   sheet.id = 'msheet';
   sheet.dataset.state = 'peek';
   sheet.setAttribute('aria-label', t.inView);
@@ -90,6 +90,7 @@
   function setState(s, remember) {
     if (STATES.indexOf(s) < 0) s = 'peek';
     sheet.dataset.state = s;
+    sheet.classList.toggle('glass-strong', s !== 'peek');   // reading surfaces are less transparent
     sheet.style.height = '';
     document.documentElement.style.setProperty('--msheet-h', heightFor(s) + 'px');
     document.body.classList.toggle('msheet-open', s !== 'peek');
@@ -235,6 +236,22 @@
     if (d && window.__sheet && window.__sheet.openSheet) window.__sheet.openSheet(d);
   });
   window.addEventListener('sdl:view', function (e) { if (MQ.matches) renderList(e.detail && e.detail.ids); });
+
+  // ---- glass on chrome that other scripts create at runtime -------------
+  // export.js makes the two floating buttons, map-i18n.js the clear button and
+  // the welcome pill, export.js the dialog cards. Class them as they appear.
+  (function glassChrome() {
+    var STATIC = ['.sdl-fab', '.wm-reopen', '#sdl-clear-floating'];
+    var tries = 0;
+    function tag() {
+      var missing = 0;
+      STATIC.forEach(function (sel) { var els = document.querySelectorAll(sel); if (!els.length) missing++; els.forEach(function (el) { el.classList.add('glass'); }); });
+      document.querySelectorAll('.exp-card').forEach(function (el) { el.classList.add('glass', 'glass-strong'); });
+      if (missing && ++tries < 60) setTimeout(tag, 120);
+    }
+    tag();
+    new MutationObserver(function () { document.querySelectorAll('.exp-card:not(.glass)').forEach(function (el) { el.classList.add('glass', 'glass-strong'); }); }).observe(document.body, { childList: true, subtree: true });
+  })();
 
   // ---- wiring ------------------------------------------------------------
   function apply() {

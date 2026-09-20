@@ -7,6 +7,7 @@
 <link rel="icon" type="image/png" href="sdl_favicon.png">
 
 <link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/glass.css">
 <link rel="stylesheet" href="/map-chrome.css">
 <link rel="stylesheet" href="/fonts.css">
 
@@ -1990,20 +1991,20 @@ window.SDL_CATEGORIES = {
     <div class="map-wrap" id="map-wrap">
       <canvas id="map-canvas"></canvas>
       <svg id="map" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet"></svg>
-      <div class="zoom-ctl">
+      <div class="zoom-ctl glass">
         <button id="v-globe" title="Globe view" aria-pressed="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3.6 9h16.8M3.6 15h16.8"/></svg></button>
         <button id="v-flat" title="Flat map view" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 12h18M9 6.2c-1.5 3.8-1.5 8 0 11.6M15 6.2c1.5 3.8 1.5 8 0 11.6"/></svg></button>
         <button id="z-in"  title="Zoom in">+</button>
         <button id="z-out" title="Zoom out">\u2212</button>
         <button id="z-reset" title="Reset view">\u27F2</button>
       </div>
-      <div class="zoom-hint" id="z-hint">Drag to pan \u00B7 scroll to zoom \u00B7 double-click to zoom in</div>
+      <div class="zoom-hint glass" id="z-hint">Drag to pan \u00B7 scroll to zoom \u00B7 double-click to zoom in</div>
       <div class="region-nav">
-        <button id="r-eu" title="Fly to Europe">EU</button>
-        <button id="r-us" title="Fly to United States">US</button>
-        <button id="r-ea" title="Fly to East Asia">EA</button>
+        <button id="r-eu" class="glass" title="Fly to Europe">EU</button>
+        <button id="r-us" class="glass" title="Fly to United States">US</button>
+        <button id="r-ea" class="glass" title="Fly to East Asia">EA</button>
       </div>
-      <div class="tip" id="tip"></div>
+      <div class="tip glass glass-strong" id="tip"></div>
       <div class="filter-callout" id="filter-callout"></div>
     </div>
 
@@ -2015,7 +2016,7 @@ window.SDL_CATEGORIES = {
     </aside>
 
     
-  <div class="sheet" id="sdl-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-name">
+  <div class="sheet glass glass-strong" id="sdl-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-name">
     <div class="sheet-handle"></div>
     <button class="sheet-close" id="sheet-close" aria-label="Close">×</button>
     <div class="sheet-body" id="sheet-body"></div>
@@ -2697,7 +2698,7 @@ window.SDL_CATEGORIES = {
   window.redrawRaf = redrawRaf;
 
 // v46.b — motion-detection state for the hi/lo geometry choice in redraw().
-let _lastViewSig = '', _lastViewMove = 0, _settleTimer = null;
+let _lastViewSig = '', _lastViewMove = 0, _settleTimer = null, _lastMovingCls = false;
 function redraw(){
     // v45.aj — defensive sanity guard. If any code path corrupted view
     // state into NaN (e.g. an iOS-Safari edge case in zoomAnchored), the
@@ -2776,6 +2777,7 @@ function redraw(){
     const _nowT = performance.now();
     if (_viewSig !== _lastViewSig) { _lastViewSig = _viewSig; _lastViewMove = _nowT; }
     const _moving = (_nowT - _lastViewMove) < 160;
+    if (_moving !== _lastMovingCls) { _lastMovingCls = _moving; document.body.classList.toggle('map-moving', _moving); }   // glass freeze (glass.css)
     if (_moving && _settleTimer === null) {
       _settleTimer = setTimeout(() => { _settleTimer = null; redrawRaf(); }, 200);
     }
@@ -4869,7 +4871,7 @@ function prewarmInteracting(){
    never reached the marker click handler. The map relies on touch-action:none
    (CSS, line 317) + its own touch handlers; no JS guard needed for it. */
 (function gestureGuard(){
-  const scrollableSel = 'aside.left, aside.right, .sheet, .sheet-body, .wm-howto, .wm-backdrop';
+  const scrollableSel = 'aside.left, aside.right, .sheet, .sheet-body, .wm-howto, .wm-backdrop, .msheet, .msheet-body, .exp-card';   // 2026-09-20: the phone sheet scrolls too
   const mapSel = '#map, svg#map, .marker, .sdl-label';
   function insideMap(target){
     return !!(target && target.closest && target.closest(mapSel));
@@ -4949,7 +4951,7 @@ function prewarmInteracting(){
     const wrap = document.createElement('div');
     wrap.innerHTML = `
       <div id="wmBackdrop" class="wm-backdrop" role="dialog" aria-modal="true" aria-labelledby="wmTitle" hidden>
-        <div class="wm-card">
+        <div class="wm-card glass glass-strong">
           <button type="button" class="wm-x" id="wmXClose" aria-label="Close" title="Close">
             <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
               <line x1="6" y1="6" x2="18" y2="18" />
