@@ -879,7 +879,7 @@ footer .ident a.author:hover { color: var(--ink); border-bottom-color: var(--ink
   .zoom-ctl #z-reset { font-size: 20px !important; }
   .region-nav {
     top: auto !important;
-    bottom: 282px !important;       /* above the 5-button zoom-ctl (v46) */
+    bottom: 92px !important;        /* 2026-09-20: above the reset-only zoom-ctl, clear of the 50%-height edge tabs */
     right: 16px !important;
     gap: 6px;
   }
@@ -942,7 +942,7 @@ footer .ident a.author:hover { color: var(--ink); border-bottom-color: var(--ink
   .brand .eyebrow { display: none; }
   .map-wrap { min-height: calc(100dvh - 52px); }
   .zoom-ctl button { width: 44px !important; height: 44px !important; }
-  .region-nav { bottom: 274px !important; }  /* v46: 5-button cluster */
+  .region-nav { bottom: 92px !important; }   /* 2026-09-20: reset-only zoom column below it */
   .region-nav button { padding: 8px 10px !important; font-size: 11px !important; }
 }
 
@@ -1165,10 +1165,13 @@ aside.left, aside.right, .sheet, .sheet-body, .wm-howto {
   fill: var(--ink);
   /* v45.n — white halo removed; rely on font weight + subtle text-shadow
      for separation against land/ocean. paint-order kept harmless. */
-  paint-order: stroke;
-  stroke: none;
-  stroke-width: 0;
-  /* very soft contrast aura via SVG paint-order; no visible border */
+  /* 2026-09-20 — canvas-colour halo so a name stays legible over a
+     neighbouring pin or a border. Width is set per frame as an attribute
+     (3 CSS px converted to SVG units) — a CSS stroke-width would override it. */
+  paint-order: stroke fill;
+  stroke: var(--bg);
+  stroke-linejoin: round;
+  stroke-linecap: round;
   pointer-events: visiblePainted;
   cursor: pointer;
   letter-spacing: 0.005em;
@@ -1395,9 +1398,13 @@ aside.left, aside.right, .sheet, .sheet-body, .wm-howto {
     font-size: var(--t-head) !important;
     border-radius: var(--r-tight);
   }
-  .zoom-ctl #z-reset { font-size: 16px !important; }
+  .zoom-ctl #z-reset { font-size: 16px !important; border-top: 0 !important; }
+  /* 2026-09-20 — phones keep ONE zoom button. Pinch and double-tap already
+     zoom; globe/flat moves into the bottom sheet in the next phase. Five
+     46px buttons stacked on the right edge were 53% of the map height. */
+  .zoom-ctl #v-globe, .zoom-ctl #v-flat, .zoom-ctl #z-in, .zoom-ctl #z-out { display: none !important; }
   .region-nav {
-    bottom: 274px !important;   /* v46: above the 5-button zoom cluster */
+    bottom: 92px !important;    /* 2026-09-20: above the reset-only zoom-ctl; clear of the edge tabs at 50% height */
     right: var(--s-4) !important;
     gap: var(--s-1);
   }
@@ -2575,6 +2582,18 @@ window.SDL_CATEGORIES = {
     min: BASE_SCALE,
     max: BASE_SCALE * 100,  // mobile v8: 12× → 100× for street-level deep pinch zoom
   };
+  // 2026-09-20 — on a phone the world view must still fill the width. At k=1
+  // the globe is ~100 CSS px wide on a 390px screen with 80 labels fighting
+  // over it; k=2 puts the globe edge to edge, and that is as far out as a
+  // phone can go.
+  function minScaleForViewport(){
+    return (isTouchMode() && window.innerWidth < 900) ? BASE_SCALE * 2.0 : BASE_SCALE;
+  }
+  view.min = minScaleForViewport();
+  window.addEventListener('resize', () => {
+    view.min = minScaleForViewport();
+    if (view.scale < view.min) { view.scale = view.min; redrawRaf(); }
+  });
   const zHint = document.getElementById('z-hint');
 
   function gcDist(a, b){
@@ -2623,6 +2642,7 @@ function redraw(){
     projection.precision(0.5);   // full quality always — canvas is cheap
     applyView();
     const k = view.scale / BASE_SCALE;
+    window.__sdlViewK = k;   // read by scripts/qa/map-audit.mjs
     const r = view.scale;
     const isInteracting = document.body.classList.contains('interacting');
     const isTouch = isTouchMode();
@@ -3018,24 +3038,35 @@ function redraw(){
       function _salience(d){
         return (TIER_PRIORITY[d.tier] || 0) * 1000 + Math.sqrt((d.invest || 0) + 1);
       }
-      const _chunkyMul = useChunky ? 0.6 : 1.0;
+      // 2026-09-20 — label budget by map AREA, not by pin count. The old
+      // ladder ended at "everything" for k ≥ 4 (which is the default view),
+      // and its hysteresis added every label shown last frame to the cap, so
+      // once labels were on they never went off again (80 labels at world
+      // zoom on a 390px phone). Budget: one label per ~36k CSS px² on
+      // desktop, ~42k on touch/narrow, clamped 6..28; touch gets a lower
+      // ladder at far zoom because names are unreadable there anyway.
+      const _mapAreaCss = rect2.width * rect2.height;
+      const _areaBudget = Math.max(6, Math.min(28, Math.round(_mapAreaCss / (useChunky ? 42000 : 36000))));
       let _targetN;
-      if (k < 1.5)      _targetN = Math.round(12 * _chunkyMul);   // ≈7 on phone — national-tier headlines
-      else if (k < 2.5) _targetN = Math.round(25 * _chunkyMul);   // ≈15 on phone — + top commercial
-      else if (k < 4.0) _targetN = Math.round(45 * _chunkyMul);   // ≈27 on phone — + academic top half
-      else              _targetN = _visible.length;               // everything
+      if (useChunky) {
+        if (k < 1.5)      _targetN = 0;
+        else if (k < 2.5) _targetN = Math.min(4, _areaBudget);
+        else if (k < 4.0) _targetN = Math.min(8, _areaBudget);
+        else              _targetN = _areaBudget;
+      } else {
+        if (k < 1.5)      _targetN = Math.min(12, _areaBudget);
+        else if (k < 2.5) _targetN = Math.min(18, _areaBudget);
+        else              _targetN = _areaBudget;
+      }
+      // Hysteresis as a tie-break bonus (a label shown last frame ranks a
+      // little higher), never as extra cap — the cap must be able to shrink.
+      const _rank = d => _salience(d) + (d._labelWasShown ? 0.5 : 0);
       let ranked = _visible
         .filter(d => d._label && d._labelOn)
-        .sort((a, b) => (_salience(b) - _salience(a)) ||
+        .sort((a, b) => (_rank(b) - _rank(a)) ||
                         ((a._dist || 0) - (b._dist || 0)) ||
                         (a._x - b._x));
-      // Hysteresis: when a label was shown last frame, give it a one-step
-      // grace period in the cap so flicker is suppressed at zoom-tier
-      // transitions (Google Maps does the same).
-      const _shownLast = new Set();
-      ranked.forEach(d => { if (d._labelWasShown) _shownLast.add(d); });
-      const _qualifying = new Set(ranked.slice(0, _targetN + _shownLast.size));
-      ranked = ranked.filter(d => _qualifying.has(d));
+      ranked = ranked.slice(0, _targetN);
       // Track for next-frame hysteresis (set after placement below).
       const placed = [];
       // v45.x — clear hysteresis flag at frame start; the placement pass
@@ -3147,6 +3178,7 @@ function redraw(){
         d._label.setAttribute('y', yVal);
         d._label.setAttribute('text-anchor', p.ta);
         d._label.setAttribute('font-size', fs + 'px');
+        d._label.setAttribute('stroke-width', (3 / scrScale2).toFixed(2));
         // v45.u — swap to short label form when chunky sizing is active
         // (touch or narrow viewport). Keeps dense clusters legible without
         // forcing long names off-screen via aggressive label relaxation.
