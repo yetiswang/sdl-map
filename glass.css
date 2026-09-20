@@ -16,6 +16,7 @@
     --surface-blur: blur(var(--glass-blur)) saturate(var(--glass-sat));
     --surface-edge: var(--glass-edge);
     --surface-shadow: inset 0 1px 0 var(--glass-edge), inset 0 -1px 0 var(--glass-edge-low), var(--glass-shadow);
+    --surface-strong: var(--glass-bg-strong);   /* for descendants that must be read (menus) */
   }
   .glass.glass-strong { --surface: var(--glass-bg-strong); }
   /* Phones pay more per blurred pixel and show less of it. */
@@ -32,6 +33,7 @@
 @media (prefers-reduced-transparency: reduce) {
   .glass, .glass.glass-strong {
     --surface: var(--surface-overlay);
+    --surface-strong: var(--surface-overlay);
     --surface-image: none;
     --surface-blur: none;
     --surface-edge: var(--rule);
@@ -54,5 +56,5 @@
    same gestures with every surface solid, so the cost of the material is a
    number, not an impression. Not used by the site itself. */
 body.no-glass .glass, body.no-glass .glass.glass-strong {
-  --surface: var(--surface-overlay); --surface-image: none; --surface-blur: none; --surface-edge: var(--rule); --surface-shadow: none;
+  --surface: var(--surface-overlay); --surface-strong: var(--surface-overlay); --surface-image: none; --surface-blur: none; --surface-edge: var(--rule); --surface-shadow: none;
 }

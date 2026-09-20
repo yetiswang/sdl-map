@@ -3052,9 +3052,19 @@ function redraw(){
     // 2026-09-20 — publish what is in view for the phone sheet: displayed
     // leaves plus the members of displayed discs, filtered when filters are on.
     {
+      // "In view" means the visible frame, not the render margin. The viewBox
+      // is fitted with `meet`, so a portrait phone shows far above and below
+      // y∈[0,560] and nothing outside x∈[0,1000]; the sheet covers the bottom.
+      const _offX = (_rectR.width - 1000 * _scrScaleR) / 2, _offY = (_rectR.height - 560 * _scrScaleR) / 2;
+      let _visBottomPx = _rectR.height;
+      const _ms = document.getElementById('msheet');
+      if (_ms && getComputedStyle(_ms).display !== 'none') _visBottomPx = Math.min(_visBottomPx, _ms.getBoundingClientRect().top - _rectR.top);
+      const _vx0 = -_offX / _scrScaleR, _vx1 = (_rectR.width - _offX) / _scrScaleR;
+      const _vy0 = -_offY / _scrScaleR, _vy1 = (_visBottomPx - _offY) / _scrScaleR;
+      const _inVis = (x, y, r) => x + r > _vx0 && x - r < _vx1 && y + r > _vy0 && y - r < _vy1;
       const ids = [];
-      _visible.forEach(d => { if (!d._el.classList.contains('dim')) ids.push(d.id); });
-      _clusterDraw.forEach(cd => cd.n.members.forEach(id => { if (!_active || isMatch(DATA_BY_ID.get(id))) ids.push(id); }));
+      _visible.forEach(d => { if (!d._el.classList.contains('dim') && _inVis(d._x, d._y, d._visualRadius || 0)) ids.push(d.id); });
+      _clusterDraw.forEach(cd => { if (!_inVis(cd.x, cd.y, cd.r * cd.sc * 0.5)) return; cd.n.members.forEach(id => { if (!_active || isMatch(DATA_BY_ID.get(id))) ids.push(id); }); });
       const sig = ids.join(',');
       if (sig !== _inViewSig) {
         _inViewSig = sig; _inViewIds = ids;
