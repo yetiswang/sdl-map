@@ -19,8 +19,13 @@
     --surface-strong: var(--glass-bg-strong);   /* for descendants that must be read (menus) */
   }
   .glass.glass-strong { --surface: var(--glass-bg-strong); }
+  /* glass-mid: the shell's header and footer and the phone sheet. Lighter
+     than the map beneath (the 0.14 tint vanished into the dark ocean and
+     measured the same as a solid bar) and more open than glass-strong. */
   .glass.glass-mid { --surface: var(--glass-bg-mid); }
-  /* Phones pay more per blurred pixel and show less of it. */
+  /* Phones pay more per blurred pixel and show less of it. A media query,
+     not body.is-touch, so the shell's bars and the map's chrome agree. */
+  @media (pointer: coarse) { .glass { --glass-blur: 12px; } }
   body.is-touch .glass { --glass-blur: 12px; }
   /* Moving-map freeze: while the map repaints every frame (drag, pinch,
      wheel, flight) the small chrome goes solid with the blur off, and eases
