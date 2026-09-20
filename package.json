@@ -10,13 +10,16 @@
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
-    "analytics": "python3.13 scripts/analytics.py"
+    "analytics": "python3.13 scripts/analytics.py",
+    "qa": "node scripts/qa/map-audit.mjs",
+    "test": "node --test scripts/qa/"
   },
   "dependencies": {
     "astro": "^6.4.4"
   },
   "devDependencies": {
     "fflate": "^0.8.3",
-    "pagefind": "^1.5.2"
+    "pagefind": "^1.5.2",
+    "playwright-core": "^1.63.0"
   }
 }
