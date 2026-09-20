@@ -49,3 +49,10 @@
   transition: background-color var(--t-base, 200ms) var(--ease-standard, ease), box-shadow var(--t-base, 200ms) var(--ease-standard, ease), border-color var(--t-base, 200ms) var(--ease-standard, ease);
 }
 @media (prefers-reduced-motion: reduce) { .glass.glass { transition: none; } }
+
+/* Audit switch (scripts/qa/map-audit.mjs --perf): body.no-glass measures the
+   same gestures with every surface solid, so the cost of the material is a
+   number, not an impression. Not used by the site itself. */
+body.no-glass .glass, body.no-glass .glass.glass-strong {
+  --surface: var(--surface-overlay); --surface-image: none; --surface-blur: none; --surface-edge: var(--rule); --surface-shadow: none;
+}

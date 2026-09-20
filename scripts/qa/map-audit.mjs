@@ -27,6 +27,7 @@ const BASE = (args.base || 'http://127.0.0.1:4321').replace(/\/$/, '');
 const LABEL = args.label || new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-');
 const OUT = resolve('scripts/qa/out', LABEL);
 const ONLY = args.device || null; // 'phone' | 'desktop'
+const PERF = !!args.perf;         // --perf: frame-time + contrast pass instead of the view sweep
 await mkdir(OUT, { recursive: true });
 
 const DEVICES = {
@@ -79,6 +80,43 @@ const MEASURE = () => {
   };
 };
 
+// Contrast of a glass surface's text against what is actually behind it:
+// average the map canvas under the element, composite the surface colour over
+// it, compare with the text colour. Runs inside the iframe.
+const CONTRAST = (sel, textSel) => {
+  const el = document.querySelector(sel); const tx = document.querySelector(textSel || sel);
+  if (!el || !tx) return null;
+  const cv = document.getElementById('map-canvas'); const r = el.getBoundingClientRect(); const cr = cv.getBoundingClientRect();
+  const dpr = cv.width / cr.width;
+  const x = Math.max(0, Math.round((r.left - cr.left) * dpr)), y = Math.max(0, Math.round((r.top - cr.top) * dpr));
+  const w = Math.max(1, Math.min(cv.width - x, Math.round(r.width * dpr))), h = Math.max(1, Math.min(cv.height - y, Math.round(r.height * dpr)));
+  let px; try { px = cv.getContext('2d').getImageData(x, y, w, h).data; } catch (e) { return { error: String(e) }; }
+  let R = 0, G = 0, B = 0, n = 0; for (let i = 0; i < px.length; i += 16) { R += px[i]; G += px[i + 1]; B += px[i + 2]; n++; }
+  const bgCanvas = getComputedStyle(document.body).backgroundColor.match(/[\d.]+/g).map(Number);
+  // canvas is transparent where nothing is drawn → composite over the body colour
+  let A = 0; for (let i = 3; i < px.length; i += 16) A += px[i]; A = A / n / 255;
+  const under = [R / n * A + bgCanvas[0] * (1 - A), G / n * A + bgCanvas[1] * (1 - A), B / n * A + bgCanvas[2] * (1 - A)];
+  const parse = (c) => { const m = c.match(/[\d.]+/g); if (!m) return null; if (c.startsWith('oklch')) { const cvs = document.createElement('canvas').getContext('2d'); cvs.fillStyle = c; cvs.fillRect(0, 0, 1, 1); const d = cvs.getImageData(0, 0, 1, 1).data; return [d[0], d[1], d[2], d[3] / 255]; } const v = m.map(Number); return [v[0], v[1], v[2], v.length > 3 ? v[3] : 1]; };
+  const sc = getComputedStyle(el), surf = parse(sc.backgroundColor) || [0, 0, 0, 0];
+  const over = [0, 1, 2].map((i) => surf[i] * surf[3] + under[i] * (1 - surf[3]));
+  const txt = parse(getComputedStyle(tx).color) || [255, 255, 255, 1];
+  const lum = (c) => { const f = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }; return 0.2126 * f(c[0]) + 0.7152 * f(c[1]) + 0.0722 * f(c[2]); };
+  const L1 = lum(txt), L2 = lum(over); const ratio = (Math.max(L1, L2) + 0.05) / (Math.min(L1, L2) + 0.05);
+  return { ratio: Math.round(ratio * 100) / 100, surfaceAlpha: surf[3], under: under.map(Math.round), blur: sc.backdropFilter || sc.webkitBackdropFilter };
+};
+// Frame intervals while the map is driven through zooms and a flight.
+const PERF_RUN = async (ms) => {
+  const deltas = []; let last = performance.now(); let stop = false;
+  const tick = (t) => { deltas.push(t - last); last = t; if (!stop) requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+  const zin = document.getElementById('z-in'), zout = document.getElementById('z-out');
+  const t0 = performance.now(); let i = 0;
+  await new Promise((res) => { const iv = setInterval(() => { (i++ % 6 < 3 ? zin : zout).click(); if (i % 9 === 0) document.getElementById('r-' + ['eu', 'us', 'ea'][(i / 9) % 3 | 0])?.click(); if (performance.now() - t0 > ms) { clearInterval(iv); res(); } }, 120); });
+  stop = true; await new Promise((r) => setTimeout(r, 50));
+  const d = deltas.slice(5).sort((a, b) => a - b); const q = (p) => d[Math.min(d.length - 1, Math.floor(p * d.length))];
+  return { frames: d.length, median: Math.round(q(0.5) * 10) / 10, p95: Math.round(q(0.95) * 10) / 10, max: Math.round(d[d.length - 1] * 10) / 10, over33ms: d.filter((x) => x > 33).length };
+};
+
 async function frameOf(page) {
   for (let i = 0; i < 100; i++) {
     const f = page.frames().find((fr) => fr.url().includes('map-legacy'));
@@ -113,6 +151,32 @@ try {
     await frame.evaluate((sel) => { window.__QA_CONTROL_SEL = sel; document.getElementById('wmClose')?.click(); }, CONTROL_SEL);
     await page.waitForTimeout(900);
     report.devices[dev] = {};
+    if (PERF) {
+      const f0 = frame;
+      const contrast = await f0.evaluate((sels) => Object.fromEntries(sels.map(([k, a, b]) => [k, (window.__qaContrast || (() => null))(a, b)])), []);
+      await f0.evaluate(`window.__qaContrast = ${CONTRAST.toString()}; window.__qaPerf = ${PERF_RUN.toString()};`);
+      const targets = dev === 'phone'
+        ? [['sheetHead', '#msheet', '#msheet-n'], ['reset', '.zoom-ctl', '#z-reset'], ['chip', '.msheet-chip', '.msheet-chip']]
+        : [['zoomCtl', '.zoom-ctl', '#z-reset'], ['region', '#r-eu', '#r-eu'], ['fab', '#sdl-export-floating', '#sdl-export-floating']];
+      report.devices[dev].contrast = await f0.evaluate((ts) => Object.fromEntries(ts.map(([k, a, b]) => [k, window.__qaContrast(a, b)])), targets);
+      // desktop: open a tip and measure it too
+      if (dev === 'desktop') {
+        const pin = await f0.evaluate(() => { const d = (window.__sdlLastVisible || []).find((x) => x._el && x._el.style.display !== 'none' && x._x > 300 && x._x < 700); if (!d) return null; const r = d._el.querySelector('.core').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
+        if (pin) { const ib = await (await page.$('#sdl-iframe')).boundingBox(); await page.mouse.move(ib.x + pin.x, ib.y + pin.y); await page.waitForTimeout(350); report.devices[dev].contrast.tip = await f0.evaluate(() => window.__qaContrast('.tip', '.tip .t-name')); await page.mouse.move(ib.x + 40, ib.y + 40); }
+      }
+      report.devices[dev].perf = {};
+      for (const mode of ['glass', 'solid']) {
+        await f0.evaluate((m) => document.body.classList.toggle('no-glass', m === 'solid'), mode);
+        await page.waitForTimeout(300);
+        report.devices[dev].perf[mode] = await f0.evaluate((ms) => window.__qaPerf(ms), 3000);
+        await f0.evaluate(() => document.getElementById('r-eu')?.click()); await page.waitForTimeout(1800);
+      }
+      const c = report.devices[dev].contrast, pf = report.devices[dev].perf;
+      console.log(`${dev.padEnd(7)} contrast ${Object.entries(c).map(([k, v]) => k + '=' + (v && v.ratio != null ? v.ratio : '?')).join(' ')}`);
+      console.log(`${dev.padEnd(7)} frames  glass: med ${pf.glass.median}ms p95 ${pf.glass.p95}ms max ${pf.glass.max}ms >33ms ${pf.glass.over33ms}/${pf.glass.frames}   solid: med ${pf.solid.median}ms p95 ${pf.solid.p95}ms max ${pf.solid.max}ms >33ms ${pf.solid.over33ms}/${pf.solid.frames}`);
+      await ctx.close();
+      continue;
+    }
     for (const [view, act] of Object.entries(VIEWS)) {
       if (view !== 'default') { await page.reload({ waitUntil: 'load' }); const f2 = await frameOf(page); await f2.evaluate((sel) => { window.__QA_CONTROL_SEL = sel; document.getElementById('wmClose')?.click(); }, CONTROL_SEL); await page.waitForTimeout(700); }
       const f = await frameOf(page);

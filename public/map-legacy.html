@@ -4329,13 +4329,41 @@ function redraw(){
     try { seen = sessionStorage.getItem('sdl-arrived') === '1'; } catch (e) {}
     if (seen || REDUCED_MOTION) { document.body.classList.remove('arriving'); return; }
     try { sessionStorage.setItem('sdl-arrived', '1'); } catch (e) {}
-    document.body.classList.add('arriving');
-    _arrivalT0 = performance.now();
-    const target = view.scale;
-    view.scale = target * 0.94;
-    setTimeout(() => flyToView([...view.rotate], target, 700), 30);
-    setTimeout(() => document.body.classList.remove('arriving'), 900);
-    setTimeout(() => { _arrivalT0 = 0; redrawRaf(); }, 1500);
+    function start(){
+      if (start.done) return; start.done = true;
+      document.body.classList.add('arriving');
+      // Re-enter every displayed node so the cascade plays even when the
+      // first frame has long been drawn (behind the welcome card).
+      _dispState.clear(); _firstFrame = true;
+      _arrivalT0 = performance.now();
+      const target = view.scale;
+      view.scale = target * 0.94;
+      redrawRaf();
+      setTimeout(() => flyToView([...view.rotate], target, 700), 30);
+      setTimeout(() => document.body.classList.remove('arriving'), 900);
+      setTimeout(() => { _arrivalT0 = 0; redrawRaf(); }, 1500);
+    }
+    // First visit: the welcome card covers the map, so the arrival waits for
+    // it to close. Returning visit: play at once.
+    let welcomeSeen = false;
+    try { welcomeSeen = localStorage.getItem('sdlmap.welcomeSeen') === '1'; } catch (e) {}
+    if (welcomeSeen) { start(); return; }
+    let waited = 0;
+    const poll = setInterval(() => {
+      waited += 150;
+      const bd = document.getElementById('wmBackdrop');
+      if (bd) {
+        clearInterval(poll);
+        const wasOpen = () => bd.dataset.wasOpen === '1';
+        const mo = new MutationObserver(() => {
+          if (bd.classList.contains('is-open')) bd.dataset.wasOpen = '1';
+          else if (wasOpen()) { mo.disconnect(); start(); }
+        });
+        mo.observe(bd, { attributes: true, attributeFilter: ['class', 'hidden'] });
+        if (bd.classList.contains('is-open')) bd.dataset.wasOpen = '1';
+        setTimeout(() => { if (!wasOpen()) { mo.disconnect(); start(); } }, 2500);   // card never opened → go
+      } else if (waited > 4000) { clearInterval(poll); start(); }
+    }, 150);
   })();
   redraw();
   render();
