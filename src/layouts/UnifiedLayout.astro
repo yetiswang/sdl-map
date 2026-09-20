@@ -94,6 +94,7 @@ function altUrl(toLang: string, script?: string | null): string {
 
 <!-- Self-hosted fonts + shared design tokens (no third-party CDN). -->
 <link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/glass.css">
 <link rel="stylesheet" href="/fonts.css">
 
 <!-- Apply theme + ZH script preference BEFORE the iframe starts loading.
@@ -123,6 +124,9 @@ function altUrl(toLang: string, script?: string | null): string {
 <style is:global>
 /* design tokens now in /tokens.css (shared with the iframe map) */
 html, body{ margin:0; padding:0; background:var(--bg); color:var(--ink); font-family:var(--font-sans); }
+/* Sticky glazed header (2026-09-20): content pages scroll under it; on the map
+   page nothing scrolls, so it simply sits on the map's own background. */
+.site-header { background-color: var(--surface, var(--bg)); }
 /* Use 100svh (small viewport height — the visible area when the mobile URL
    bar is shown) instead of 100vh (the largest area when the URL bar is
    hidden). With 100vh, body extends below the visible viewport on mobile
@@ -192,8 +196,11 @@ a{ color:inherit; text-decoration:none; }
   .site-header .nav-cluster.open {
     display:flex; flex-direction:column; align-items:stretch; gap:10px;
     position:fixed; top:54px; right:8px; padding:14px;
-    background:var(--bg-2); border:1px solid var(--rule); border-radius:10px;
-    box-shadow:0 8px 28px oklch(0 0 0 / 0.30); min-width:200px;
+    /* inherits the header's glass properties (custom properties inherit) */
+    background-color:var(--surface, var(--bg-2)); background-image:var(--surface-image, none);
+    -webkit-backdrop-filter:var(--surface-blur, none); backdrop-filter:var(--surface-blur, none);
+    border:1px solid var(--surface-edge, var(--rule)); border-radius:10px;
+    box-shadow:var(--surface-shadow, 0 8px 28px oklch(0 0 0 / 0.30)); min-width:200px;
     z-index:200;
   }
   /* The nav element carries an inline align-items:center for the desktop row;
@@ -230,7 +237,7 @@ a{ color:inherit; text-decoration:none; }
 </head>
 <body>
   <!-- ===== HEADER ===== -->
-  <header class="site-header" style="position:relative;z-index:60;background:var(--bg);display:flex;align-items:flex-end;justify-content:space-between;padding:18px 28px 14px;border-bottom:1px solid var(--rule);gap:40px;flex-wrap:wrap;">
+  <header class="site-header glass" style="position:sticky;top:0;z-index:60;display:flex;align-items:flex-end;justify-content:space-between;padding:18px 28px 14px;border-bottom:1px solid var(--rule);gap:40px;flex-wrap:wrap;">
     <div style="display:flex;align-items:center;gap:20px;min-width:0;">
       <a href="https://www.tue.nl/" target="_blank" rel="noopener" aria-label="TU Eindhoven" class="tue-logo" style="display:flex;align-items:center;flex-shrink:0;">
         <img src="/img/tue-logo.png" alt="TU Eindhoven" style="height:36px;width:auto;display:block;">

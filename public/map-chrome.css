@@ -17,16 +17,18 @@
   body #sdl-clear-floating {
     width: 36px !important; height: 36px !important;
     border-radius: var(--r-soft, 8px) !important;
-    background: var(--surface-overlay) !important;
-    border: 1px solid var(--rule) !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+    /* Surfaces read the glass properties (glass.css) with the solid slab as fallback */
+    background-color: var(--surface, var(--surface-overlay)) !important;
+    background-image: var(--surface-image, none) !important;
+    border: 1px solid var(--surface-edge, var(--rule)) !important;
+    box-shadow: var(--surface-shadow, none) !important;
+    backdrop-filter: var(--surface-blur, none) !important; -webkit-backdrop-filter: var(--surface-blur, none) !important;
     color: var(--ink-2) !important;
     transform: none !important;
     opacity: 1 !important;
   }
   body .sdl-fab.sdl-fab:hover, body .wm-reopen.wm-reopen:hover, body #sdl-clear-floating:hover {
-    background: var(--bg-3) !important; color: var(--ink) !important;
+    color: var(--ink) !important; border-color: var(--ink-3) !important;
   }
   body .sdl-fab.sdl-fab svg, body .wm-reopen.wm-reopen svg, body #sdl-clear-floating svg { width: 18px !important; height: 18px !important; }
   /* 44 px pitch from the left edge: about · clear · export · data */
@@ -45,9 +47,10 @@
   body .region-nav.region-nav button {
     width: 44px; min-height: 32px; padding: 0;
     border-radius: var(--r-soft, 8px);
-    background: var(--surface-overlay); border: 1px solid var(--rule);
+    background-color: var(--surface, var(--surface-overlay)); background-image: var(--surface-image, none);
+    border: 1px solid var(--surface-edge, var(--rule)); box-shadow: var(--surface-shadow, none);
+    backdrop-filter: var(--surface-blur, none); -webkit-backdrop-filter: var(--surface-blur, none);
     font-size: 10.5px; letter-spacing: 0.1em;
-    backdrop-filter: none; -webkit-backdrop-filter: none;
   }
   .msheet { display: none !important; }
 }
@@ -63,8 +66,8 @@
     bottom: calc(var(--msheet-h) + 12px + env(safe-area-inset-bottom, 0px)) !important;
     right: 12px !important;
     padding: 0 !important; border-radius: var(--r-soft, 8px) !important;
-    box-shadow: none !important;
-    transition: bottom .28s cubic-bezier(.4, 0, .2, 1);
+    box-shadow: var(--surface-shadow, none) !important;
+    transition: bottom .28s cubic-bezier(.4, 0, .2, 1), background-color var(--t-base, 200ms), box-shadow var(--t-base, 200ms);
   }
   body .zoom-ctl.zoom-ctl #z-reset { width: 44px !important; height: 44px !important; border-radius: var(--r-soft, 8px) !important; font-size: 18px !important; }
   body.msheet-open .zoom-ctl.zoom-ctl { opacity: 0; pointer-events: none; }
@@ -74,17 +77,19 @@
     height: var(--msheet-h);
     z-index: 60;                          /* under the detail sheet (105) */
     display: grid; grid-template-rows: auto 1fr;
-    background: var(--surface-deep);
-    border-top: 1px solid var(--rule);
+    background-color: var(--surface, var(--surface-deep));
+    background-image: var(--surface-image, none);
+    -webkit-backdrop-filter: var(--surface-blur, none); backdrop-filter: var(--surface-blur, none);
+    border-top: 1px solid var(--surface-edge, var(--rule));
     border-radius: var(--r-loose, 14px) var(--r-loose, 14px) 0 0;
-    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.28);
+    box-shadow: var(--surface-shadow, 0 -6px 24px rgba(0, 0, 0, 0.28));
     padding-bottom: env(safe-area-inset-bottom, 0px);
-    transition: height .28s cubic-bezier(.4, 0, .2, 1);
+    transition: height .28s cubic-bezier(.4, 0, .2, 1), background-color var(--t-base, 200ms), box-shadow var(--t-base, 200ms);
     font-family: var(--font-sans);
     color: var(--ink);
     touch-action: pan-y;
   }
-  .msheet.is-dragging { transition: none; }
+  .msheet.msheet.is-dragging { transition: none; }
   /* A grid row of 1fr still grows to its content unless the item may shrink;
      without min-height:0 the list ran below the viewport and nothing scrolled. */
   .msheet { overflow: hidden; }
@@ -126,7 +131,7 @@
   .msheet.is-flat .ico-flat { display: inline; }
   .msheet.is-flat .ico-globe { display: none; }
 
-  .msheet-body { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: 0 14px 16px; }
+  .msheet-body { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; touch-action: pan-y; padding: 0 14px 16px; }
   .msheet[data-state="peek"] .msheet-body { visibility: hidden; }
   .msheet-pane[hidden] { display: none; }
   .msheet-row {
@@ -152,3 +157,6 @@
     .msheet, body .zoom-ctl.zoom-ctl, .msheet-grip svg { transition: none !important; }
   }
 }
+
+/* The keyboard hint and the zoom hint share the bottom centre; only one may show. */
+body.marker-hovered .zoom-hint { opacity: 0 !important; }

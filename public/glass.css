@@ -1,0 +1,51 @@
+/* glass.css — Vitrine: the one material for chrome that floats over the live
+   map. Shared by the Astro shell (sticky header) and the iframe map.
+   Spec: vault 30-Projects/SDL-Map/2026-09-20-liquid-glass-motion-spec.md.
+
+   How it works: a surface opts in with class="glass" (or "glass glass-strong"
+   when its whole job is to be read). Inside @supports the class sets five
+   custom properties; the consumer rules below read them with the solid
+   surface as fallback, so where backdrop-filter is missing, or the reader asked
+   for reduced transparency, or the map is moving, every surface is simply the
+   opaque slab it was before this file existed. Tokens live in tokens.css. */
+
+@supports ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
+  .glass {
+    --surface: var(--glass-bg);
+    --surface-image: linear-gradient(to bottom, var(--glass-sheen), transparent 40%);
+    --surface-blur: blur(var(--glass-blur)) saturate(var(--glass-sat));
+    --surface-edge: var(--glass-edge);
+    --surface-shadow: inset 0 1px 0 var(--glass-edge), inset 0 -1px 0 var(--glass-edge-low), var(--glass-shadow);
+  }
+  .glass.glass-strong { --surface: var(--glass-bg-strong); }
+  /* Phones pay more per blurred pixel and show less of it. */
+  body.is-touch .glass { --glass-blur: 12px; }
+  /* Moving-map freeze: while the map repaints every frame (drag, pinch,
+     wheel, flight) or the sheet is being dragged, the glass goes solid and
+     the blur is off. It eases back the moment motion stops. */
+  body.interacting .glass, body.map-moving .glass, .glass.is-dragging {
+    --surface: var(--glass-bg-strong);
+    --surface-blur: none;
+    --surface-image: none;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glass, .glass.glass-strong {
+    --surface: var(--surface-overlay);
+    --surface-image: none;
+    --surface-blur: none;
+    --surface-edge: var(--rule);
+    --surface-shadow: none;
+  }
+}
+/* Consumers. Doubled class so single-class rules elsewhere lose. */
+.glass.glass {
+  background-color: var(--surface, var(--surface-overlay));
+  background-image: var(--surface-image, none);
+  -webkit-backdrop-filter: var(--surface-blur, none);
+  backdrop-filter: var(--surface-blur, none);
+  border-color: var(--surface-edge, var(--rule));
+  box-shadow: var(--surface-shadow, none);
+  transition: background-color var(--t-base, 200ms) var(--ease-standard, ease), box-shadow var(--t-base, 200ms) var(--ease-standard, ease), border-color var(--t-base, 200ms) var(--ease-standard, ease);
+}
+@media (prefers-reduced-motion: reduce) { .glass.glass { transition: none; } }
