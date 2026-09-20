@@ -12,7 +12,7 @@
     "astro": "astro",
     "analytics": "python3.13 scripts/analytics.py",
     "qa": "node scripts/qa/map-audit.mjs",
-    "test": "node --test scripts/qa/"
+    "test": "node --test scripts/qa/*.test.mjs"
   },
   "dependencies": {
     "astro": "^6.4.4"
