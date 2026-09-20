@@ -7,6 +7,7 @@
 <link rel="icon" type="image/png" href="sdl_favicon.png">
 
 <link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/map-chrome.css">
 <link rel="stylesheet" href="/fonts.css">
 
 <script src="/vendor/d3.min.js"></script>
@@ -1839,6 +1840,7 @@ window.SDL_CATEGORIES = {
 <script src="/map-i18n.js"></script>
 <script src="/map-clusters.js"></script>
 <script src="/export.js" defer></script>
+<script src="/map-mobile-sheet.js" defer></script>
 
 <script>
 (async function(){
@@ -2420,6 +2422,8 @@ window.SDL_CATEGORIES = {
   const _dispState = new Map();   // node id → {node, mode:'steady'|'in'|'out', t0, from, to, pos, travel}
   let _clusterThr = null, _firstFrame = true, _lastPxPerKm = 1, _lastSpiderKm = 0;
   const _clusterObst = [];        // displayed discs {x,y,r} in SVG units — label placement avoids them
+  let _inViewSig = '', _inViewIds = [], _inViewTimer = null;
+  window.__sdlInView = () => _inViewIds;
   const TIER_ORDER = ['national', 'academic', 'commercial', 'labos'];
   TREE.nodes.forEach(n => {
     const g = document.createElementNS(ns, 'g');
@@ -3029,6 +3033,19 @@ function redraw(){
       _dispState.delete(id);
     });
     if (_animating) redrawRaf();
+    // 2026-09-20 — publish what is in view for the phone sheet: displayed
+    // leaves plus the members of displayed discs, filtered when filters are on.
+    {
+      const ids = [];
+      _visible.forEach(d => { if (!d._el.classList.contains('dim')) ids.push(d.id); });
+      _clusterDraw.forEach(cd => cd.n.members.forEach(id => { if (!_active || isMatch(DATA_BY_ID.get(id))) ids.push(id); }));
+      const sig = ids.join(',');
+      if (sig !== _inViewSig) {
+        _inViewSig = sig; _inViewIds = ids;
+        clearTimeout(_inViewTimer);
+        _inViewTimer = setTimeout(() => window.dispatchEvent(new CustomEvent('sdl:view', { detail: { ids: _inViewIds } })), 120);
+      }
+    }
     // Kept for the label pass below (font growth with zoom; dots no longer scale).
     const dotGrowth = 1;
     const zoomGrowth = Math.max(1.0, Math.min(4.0, Math.sqrt(k / 5.5) + 0.3));
