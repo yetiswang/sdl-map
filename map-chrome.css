@@ -24,7 +24,6 @@
     box-shadow: var(--surface-shadow, none) !important;
     backdrop-filter: var(--surface-blur, none) !important; -webkit-backdrop-filter: var(--surface-blur, none) !important;
     color: var(--ink-2) !important;
-    transform: none !important;
     opacity: 1 !important;
   }
   body .sdl-fab.sdl-fab:hover, body .wm-reopen.wm-reopen:hover, body #sdl-clear-floating:hover {
@@ -160,3 +159,37 @@
 
 /* The keyboard hint and the zoom hint share the bottom centre; only one may show. */
 body.marker-hovered .zoom-hint { opacity: 0 !important; }
+
+/* ---------- motion (2026-09-20): answers an action, explains a change --------- */
+/* Control response: press, hover lift (pointer devices), focus ring. */
+.zoom-ctl button, .region-nav button, .msheet-ico, .msheet-chip, .msheet-action, .msheet-tab, .msheet-grip,
+body .sdl-fab.sdl-fab, body .wm-reopen.wm-reopen, body #sdl-clear-floating {
+  transition: transform var(--t-fast, 120ms) var(--ease-standard, ease), color var(--t-base, 200ms), border-color var(--t-base, 200ms), background-color var(--t-base, 200ms), opacity var(--t-slow, 280ms) var(--ease-enter, ease-out);
+}
+.zoom-ctl button:active, .region-nav button:active, .msheet-ico:active, .msheet-chip:active, .msheet-action:active, .msheet-tab:active,
+body .sdl-fab.sdl-fab:active, body .wm-reopen.wm-reopen:active, body #sdl-clear-floating:active { transform: scale(0.96) !important; }
+@media (hover: hover) {
+  .region-nav button:hover, body .sdl-fab.sdl-fab:hover, body .wm-reopen.wm-reopen:hover, body #sdl-clear-floating:hover { transform: translateY(-1px) !important; }
+}
+.zoom-ctl button:focus-visible, .region-nav button:focus-visible, .msheet-ico:focus-visible, .msheet-chip:focus-visible, .msheet-action:focus-visible, .msheet-tab:focus-visible, .msheet-grip:focus-visible,
+body .sdl-fab.sdl-fab:focus-visible, body .wm-reopen.wm-reopen:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+/* Arrival: chrome holds back until the map has assembled (body.arriving is
+   set by the map for 900 ms, once per session). Triple class out-specifies
+   the runtime !important rules. */
+body.arriving .glass.glass.glass, body.arriving .region-nav.region-nav { opacity: 0 !important; pointer-events: none; }
+.msheet.msheet { transition: height .28s var(--ease-standard, cubic-bezier(.4, 0, .2, 1)), background-color var(--t-base, 200ms), box-shadow var(--t-base, 200ms), opacity var(--t-slow, 280ms) var(--ease-enter, ease-out); }
+.msheet.msheet.is-springing, .msheet.msheet.is-dragging { transition: background-color var(--t-base, 200ms), box-shadow var(--t-base, 200ms); }
+body.msheet-springing .zoom-ctl.zoom-ctl { transition: none !important; }
+/* Tips arrive where you point: fade + 4 px rise. */
+.tip.tip { transition: opacity var(--t-fast, 120ms) var(--ease-standard, ease), transform var(--t-fast, 120ms) var(--ease-standard, ease); transform: translateY(4px); }
+.tip.tip.show { transform: none; }
+/* Phone detail sheet: rows follow the sheet in, 30 ms apart. */
+@keyframes sdl-row-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (max-width: 900px) {
+  .sheet.open .sheet-row { animation: sdl-row-in var(--t-slow, 280ms) var(--ease-enter, ease-out) both; animation-delay: calc(var(--i, 0) * 30ms); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .zoom-ctl button, .region-nav button, .msheet-ico, .msheet-chip, .msheet-action, .msheet-tab, .msheet-grip, .msheet.msheet, .tip.tip, .sheet, .sheet-row,
+  body .sdl-fab.sdl-fab, body .wm-reopen.wm-reopen, body #sdl-clear-floating { transition: none !important; animation: none !important; }
+  body.arriving .glass.glass.glass, body.arriving .region-nav.region-nav { opacity: 1 !important; pointer-events: auto; }
+}
