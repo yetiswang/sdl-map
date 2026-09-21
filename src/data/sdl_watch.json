@@ -1,5 +1,31 @@
 [
   {
+    "id": "anthropic-mhs-2026",
+    "date": "2026-08-27",
+    "kind": "milestone",
+    "title": "Anthropic previews the Model Hardware Standard (MHS) — one interface for AI agents to operate laboratory instruments",
+    "summary": "Anthropic opened a research preview of the Model Hardware Standard, a shared, model-agnostic specification through which an AI agent reads sensors, drives actuators and operates instruments such as microscopes, liquid handlers and robotic arms, several in parallel. It began as a collaboration with HHMI Janelia Research Campus and launches with a first cohort of laboratories and manufacturers: Tecan is adding MHS to its Fluent liquid handlers, Automata to its LINQ platform, QIAGEN is prototyping it on QIAsymphony Connect, Universal Robots and Doosan Robotics on their arms, AWS through Strands Robots, MBF Bioscience for ScanImage microscopes, with Danaher exploring. Reported tests include a BCA protein assay at Genentech coordinated across a liquid handler, an arm and a plate reader (human experts stepped in when the agent misread bubble errors as software faults), and laser stabilisation on QuEra's quantum computers from 58% to 99.3%. Anthropic says it will open-source the specification after the preview's safety evaluations. For self-driving labs this is the agent-to-instrument layer that vendor APIs and SiLA 2 have left fragmented, arriving from a model vendor rather than an instrument maker; three weeks later Anthropic also announced an AI-run biology laboratory of its own.",
+    "sources": [
+      {
+        "label": "Anthropic announcement",
+        "url": "https://www.anthropic.com/news/model-hardware-standard-research-preview"
+      },
+      {
+        "label": "CNBC",
+        "url": "https://www.cnbc.com/2026/08/27/anthropic-pushes-into-physical-world-with-new-standard-to-help-ai-agents-operate-machines.html"
+      },
+      {
+        "label": "R&D World",
+        "url": "https://www.rdworldonline.com/anthropic-wants-claude-to-run-life-sciences-rd-now-it-is-wiring-ai-agents-into-the-lab/"
+      },
+      {
+        "label": "SiliconANGLE (biology lab, 18 Sep)",
+        "url": "https://siliconangle.com/2026/09/18/anthropic-opens-ai-powered-biology-research-lab"
+      }
+    ],
+    "related": "tecan"
+  },
+  {
     "id": "chem-reasoning-sdl-debate-2026",
     "date": "2026-08-26",
     "kind": "milestone",
