@@ -37,6 +37,7 @@ Dark is the default; `[data-theme="light"]` overrides the same token names. All 
 - **No third-party runtime origins.** d3, topojson, the world/China geo data, and the fonts are all vendored under `public/vendor/` and `public/fonts/`. The site must work behind a firewall and inside China.
 - **i18n at build where possible.** UI strings come from `src/i18n/`. The Simplified→Traditional dictionary is built once at build time (UnifiedLayout frontmatter), not per page load.
 - **Tokens are shared.** Any new colour/type/surface goes in `public/tokens.css`, used by both the shell and the iframe. No inline hex/oklch in components.
+- **Locale pages are wrappers, bodies are shared (2026-09-21).** `src/pages/{,zh/,ja/,ko/}timeline.astro` are twelve-line wrappers around `src/components/TimelineBody.astro`; a fix lands once. This rule exists because the phone-width fix of 2026-09-20 reached only the English copy, and zh/ja/ko stayed 91 px wider than the phone for a day. **Still per-locale copies, same risk:** `list.astro`, `watch.astro` (thin already), `entry/[id].astro` ×4. When one of them next needs a fix, extract its body first, then fix.
 
 ## Anti-patterns (do not introduce)
 Glassmorphism as decoration (see § Glass for the one permitted material), neon glows, card-with-left-border-accent callouts, multiple competing border styles in one view, decorative gradients, motion without meaning, Google Fonts or any CDN dependency, a second copy of the SDL data.
