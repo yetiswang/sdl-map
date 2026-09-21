@@ -313,3 +313,61 @@ body.msheet-springing .zoom-ctl.zoom-ctl { transition: none !important; }
 @keyframes sdl-arrive-ring { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(2.8); opacity: 0; } }
 body.arriving .msheet.msheet.msheet { transform: translateY(28px); }
 @media (prefers-reduced-motion: reduce) { .arrive-ring, .c-ripple { animation: none !important; } body.arriving .msheet.msheet.msheet { transform: none; } }
+
+/* ---- Story mode + idle cinematic (map-story.js, 2026-09-21) ------------------
+   Play sits with the top-left controls on desktop and top-left on phones; for a
+   visitor who has never played it is a labelled pill. The caption is a strong
+   glass card; the progress pill carries year and count. While the story runs
+   the rest of the chrome fades to a whisper and stops taking input. */
+body #sdl-story-play.sdl-fab { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+body #sdl-story-play .story-lbl { display: none; font-family: var(--font-sans); font-size: 13px; font-weight: 500; color: var(--ink); white-space: nowrap; }
+body #sdl-story-play.is-pill { width: auto !important; padding: 0 14px 0 10px !important; }
+body #sdl-story-play.is-pill .story-lbl { display: inline; }
+body #sdl-story-play .story-ico-stop { display: none; }
+body #sdl-story-play.is-on .story-ico-play { display: none; }
+body #sdl-story-play.is-on .story-ico-stop { display: inline; }
+body #sdl-story-play.is-on { color: var(--ink) !important; border-color: var(--ink-3) !important; }
+@media (min-width: 901px) {
+  body.embed-mode #sdl-story-play.sdl-fab { position: fixed; top: calc(16px + var(--shell-top, 0px)) !important; left: 192px !important; z-index: 70; }
+  body:not(.embed-mode) #sdl-story-play.sdl-fab { position: fixed; top: calc(var(--header-h, 92px) + 16px); left: 192px; z-index: 70; }
+}
+@media (max-width: 900px) {
+  /* Phones hide the old floating buttons (.sdl-fab) in favour of the sheet; Play is the exception. */
+  body #sdl-story-play.sdl-fab { display: inline-flex !important; position: fixed; top: calc(12px + var(--shell-top, 0px)); left: 12px; z-index: 70; width: 40px; height: 40px; border-radius: var(--r-soft, 8px); }
+  body #sdl-story-play.is-pill { height: 40px; }
+}
+.story-cap {
+  position: fixed; left: 50%; transform: translate(-50%, 10px); z-index: 80;
+  bottom: calc(76px + var(--shell-bottom, 0px));
+  width: min(560px, calc(100vw - 32px)); padding: 16px 20px 18px;
+  border: 1px solid var(--surface-edge, var(--rule)); border-radius: 12px;
+  color: var(--ink); font-family: var(--font-sans); text-align: left;
+  opacity: 0; visibility: hidden; pointer-events: none;
+}
+.story-cap.glass.glass { transition: opacity var(--t-slow, 280ms) var(--ease-standard, ease), transform var(--t-slow, 280ms) var(--ease-standard, ease), visibility 0s linear var(--t-slow, 280ms), background-color var(--t-base, 200ms), box-shadow var(--t-base, 200ms), border-color var(--t-base, 200ms); }
+.story-cap.glass.glass.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); transition: opacity var(--t-slow, 280ms) var(--ease-standard, ease), transform var(--t-slow, 280ms) var(--ease-standard, ease), visibility 0s linear 0s, background-color var(--t-base, 200ms), box-shadow var(--t-base, 200ms), border-color var(--t-base, 200ms); }
+.story-year { font-family: var(--font-mono); font-size: 28px; font-weight: 600; letter-spacing: .02em; color: var(--accent); line-height: 1; margin-bottom: 8px; font-variant-numeric: tabular-nums; }
+.story-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.story-line { font-size: 14px; line-height: 1.45; color: var(--ink-2); }
+.story-prog {
+  position: fixed; left: 50%; transform: translateX(-50%); z-index: 80;
+  bottom: calc(24px + var(--shell-bottom, 0px));
+  padding: 6px 12px; border: 1px solid var(--surface-edge, var(--rule)); border-radius: 999px;
+  font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .08em; color: var(--ink-2);
+  white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity var(--t-base, 200ms);
+}
+.story-prog:not(:empty) { opacity: 1; }
+body.story-on .story-prog:not(:empty) { opacity: 1; }
+@media (max-width: 900px) {
+  .story-cap { bottom: calc(var(--shell-bottom, 0px) + 64px); padding: 14px 16px 16px; }
+  .story-year { font-size: 24px; }
+  .story-prog { bottom: calc(var(--shell-bottom, 0px) + 18px); }
+}
+/* The rest of the chrome steps back while the story runs (and during the idle
+   spin). Names on the map stay. */
+body.story-on .zoom-ctl, body.story-on .region-nav, body.story-on .dpanel, body.story-on .mob-toggle, body.story-on .kbd-hint, body.story-on .msheet,
+body.story-on .sdl-fab:not(.story-ctl), body.story-on .wm-reopen, body.story-on #sdl-clear-floating, body.story-on #reset {
+  opacity: 0.12 !important; pointer-events: none !important; transition: opacity 400ms var(--ease-standard, ease) !important;
+}
+body.story-on .tip, body.story-on .kbd-hint { display: none !important; }
+@media (prefers-reduced-motion: reduce) { .story-cap.glass.glass, .story-prog { transition: none !important; } }

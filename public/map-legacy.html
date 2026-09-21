@@ -1845,6 +1845,7 @@ window.SDL_CATEGORIES = {
 <script src="/map-clusters.js"></script>
 <script src="/export.js" defer></script>
 <script src="/map-mobile-sheet.js" defer></script>
+<script src="/map-story.js" defer></script>
 
 <script>
 (async function(){
@@ -2448,7 +2449,37 @@ window.SDL_CATEGORIES = {
   // and reconciles the displayed set with `_dispState`, which carries the
   // split/merge animation for every node that is on its way in or out.
   const DATA_BY_ID = new Map(DATA.map(d => [d.id, d]));
-  const TREE = window.SDLClusters.buildHierarchy(DATA);
+  // 2026-09-21 story mode: the tree can be rebuilt for a subset (entries
+  // revealed so far). Cluster ids are derived from their members so a cluster
+  // that survives a rebuild keeps its id, its animation state and its SVG.
+  function buildTree(entries){
+    const t = window.SDLClusters.buildHierarchy(entries);
+    t.nodes.forEach(n => { n.id = 'c:' + n.members.slice().sort().join('|'); });
+    t.byId = new Map(); t.leaves.concat(t.nodes).forEach(n => t.byId.set(n.id, n));
+    return t;
+  }
+  let TREE = buildTree(DATA);
+  let _storyRank = null;          // null = all entries; otherwise the first N in start order are on the map
+  const _storyOrder = DATA.slice().sort((a, b) => (a.start - b.start) || a.name.localeCompare(b.name));
+  function setStoryRank(n){
+    const next = (n == null) ? null : Math.max(0, Math.min(DATA.length, n | 0));
+    if (next === _storyRank) return;
+    _storyRank = next;
+    const subset = next == null ? DATA : _storyOrder.slice(0, next);
+    const fresh = buildTree(subset);
+    // Adopt: states whose node still exists point at the new node and carry
+    // their elements across; the rest will animate out on the next pass.
+    _dispState.forEach((st, id) => {
+      const nn = fresh.byId.get(id);
+      if (!nn) return;
+      const on = st.node;
+      if (on !== nn && on.n > 1) { ['_el','_disc','_hit','_txt','_rip','_arcs','_arcOrder','_tierCounts','_pseudo','_arrRank'].forEach(k => { nn[k] = on[k]; }); if (nn._pseudo) nn._pseudo.node = nn; }
+      st.node = nn;
+    });
+    TREE = fresh;
+    fresh.nodes.forEach(ensureClusterEl);
+    redrawRaf();
+  }
   const _dispState = new Map();   // node id → {node, mode:'steady'|'in'|'out', t0, from, to, pos, travel}
   let _arrivalT0 = 0;             // >0 while the once-per-session arrival cascade runs
   let _arrivalTargetScale = 0;    // the scale the arrival flies to; the cluster cut is held at it during the flight
@@ -2457,7 +2488,10 @@ window.SDL_CATEGORIES = {
   let _inViewSig = '', _inViewIds = [], _inViewTimer = null;
   window.__sdlInView = () => _inViewIds;
   const TIER_ORDER = ['national', 'academic', 'commercial', 'labos'];
-  TREE.nodes.forEach(n => {
+  // Cluster elements are made on demand: at init for the full tree, and for
+  // every new composite cluster a story-mode rebuild produces.
+  function ensureClusterEl(n){
+    if (n._el) return;
     const g = document.createElementNS(ns, 'g');
     g.setAttribute('class', 'cluster'); g.setAttribute('data-cid', n.id); g.style.display = 'none';
     const hit = document.createElementNS(ns, 'circle'); hit.setAttribute('class', 'c-hit'); hit.setAttribute('fill', 'transparent'); hit.setAttribute('pointer-events', 'all');
@@ -2482,7 +2516,8 @@ window.SDL_CATEGORIES = {
     // per frame so cursorDistToMarker() works on it.
     n._pseudo = { _isCluster: true, node: n, id: n.id, _el: g, _x: null, _y: null };
     gClusters.appendChild(g);
-  });
+  }
+  TREE.nodes.forEach(ensureClusterEl);
 
   // v45.q — the tip IS the truth. Whatever pin the tip is currently
   // showing for is what the user is looking at; clicking should always
@@ -3040,10 +3075,10 @@ function redraw(){
         e = SDLClusters.easeOutCubic(t);
         st.pos = [st.from[0] + (st.to[0] - st.from[0]) * e, st.from[1] + (st.to[1] - st.from[1]) * e];
         alpha = st.mode === 'in' ? e : 1 - e;
-        if (_arrivalT0 && st.mode === 'in' && !st.rippled && t > 0) {
+        if ((_arrivalT0 || _storyRank != null) && st.mode === 'in' && !st.rippled && t > 0) {
           st.rippled = true;
           const rel = n.n === 1 ? n.entry._el : n._el;
-          rel.classList.add('arrive'); setTimeout(() => rel.classList.remove('arrive'), 900);
+          if (rel) { rel.classList.add('arrive'); setTimeout(() => rel.classList.remove('arrive'), 900); }
         }
         if (t >= 1) {
           if (st.mode === 'in') { st.mode = 'steady'; st.pos = st.to.slice(); alpha = 1; }
@@ -3150,8 +3185,8 @@ function redraw(){
       n._hit.setAttribute('r', Math.max(cd.r, 22 / _scrScaleR));
       const _shownCount = cd.shownN || n.n;
       // During the arrival the number counts up with the disc's entrance.
-      n._txt.textContent = (_arrivalT0 && cd.e < 1) ? Math.max(1, Math.round(_shownCount * cd.e)) : _shownCount;
-      if (_arrivalT0 && n._rip) n._rip.setAttribute('r', cd.r);
+      n._txt.textContent = ((_arrivalT0 || _storyRank != null) && cd.e < 1) ? Math.max(1, Math.round(_shownCount * cd.e)) : _shownCount;
+      if ((_arrivalT0 || _storyRank != null) && n._rip) n._rip.setAttribute('r', cd.r);
       n._txt.setAttribute('font-size', ((11 + Math.min(4, n.n / 6)) / _scrScaleR).toFixed(2));
       const ra = cd.r - 1.25 / _scrScaleR, circ = 2 * Math.PI * ra, tot = cd.shownN || n.n;
       let acc = 0;
@@ -3169,7 +3204,7 @@ function redraw(){
     });
     _toDelete.forEach(id => {
       const st = _dispState.get(id);
-      if (st) { const n = st.node; if (n.n === 1) { n.entry._el.style.display = 'none'; } else { n._el.style.display = 'none'; n._pseudo._x = null; } }
+      if (st) { const n = st.node; if (n.n === 1) { n.entry._el.style.display = 'none'; } else if (n._el) { n._el.style.display = 'none'; if (n._pseudo) n._pseudo._x = null; if (TREE.byId.get(id) !== n) { n._el.remove(); } } }
       _dispState.delete(id);
     });
     if (_animating) redrawRaf();
@@ -4095,6 +4130,40 @@ function redraw(){
     }
     _flyViewRaf = requestAnimationFrame(step);
   }
+  // 2026-09-21 — slow globe spin for the idle cinematic: 4°/s (one turn in
+  // 90 s), stepped at 30 fps, globe mode only. map-story.js starts and stops it.
+  let _spinRaf = 0, _spinLast = 0, _spinRate = 4;
+  function spin(on, degPerSec){
+    if (!on) { if (_spinRaf) cancelAnimationFrame(_spinRaf); _spinRaf = 0; return; }
+    if (degPerSec) _spinRate = degPerSec;
+    if (_spinRaf) return;
+    _spinLast = performance.now();
+    const step = (now) => {
+      const dt = now - _spinLast;
+      if (dt >= 33) { _spinLast = now; if (!isFlat()) { view.rotate[0] += _spinRate * dt / 1000; if (view.rotate[0] > 180) view.rotate[0] -= 360; if (view.rotate[0] < -180) view.rotate[0] += 360; applyView(); redrawRaf(); } }
+      _spinRaf = requestAnimationFrame(step);
+    };
+    _spinRaf = requestAnimationFrame(step);
+  }
+  // Public hooks for map-story.js (story mode + idle cinematic).
+  window.__sdlStoryAPI = {
+    order: _storyOrder, total: DATA.length,
+    setRank: setStoryRank, getRank: () => _storyRank,
+    flyTo: (lon, lat, k, ms) => flyToView([-lon, -lat], BASE_SCALE * k, ms, true),
+    flyToView: (rot, scale, ms) => flyToView(rot, scale, ms, true),
+    getView: () => ({ rotate: view.rotate.slice(), scale: view.scale }),
+    worldScale: () => Math.max(view.min || BASE_SCALE, BASE_SCALE),
+    k: () => view.scale / BASE_SCALE,
+    mode: () => (isFlat() ? 'flat' : 'globe'), setMode: (m) => setMapMode(m),
+    spin,
+    uiOpen: () => {
+      if (document.querySelector('.sheet.open, aside.open, .dpanel.is-open')) return true;
+      const vis = (el) => { if (!el) return false; const cs = getComputedStyle(el); return cs.display !== 'none' && cs.visibility !== 'hidden' && cs.opacity !== '0'; };
+      if (vis(document.getElementById('wmBackdrop'))) return true;
+      return [...document.querySelectorAll('.exp-backdrop')].some(vis);
+    },
+    reduced: REDUCED_MOTION, touch: isTouchMode,
+  };
   // Zoom just past the point where this disc splits (threshold 20% under its
   // effective merge distance; the dead band is 6%), centred on the disc.
   function zoomToCluster(n){
