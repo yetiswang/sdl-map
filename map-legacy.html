@@ -3195,7 +3195,7 @@ function redraw(){
       if (sig !== _inViewSig) {
         _inViewSig = sig; _inViewIds = ids;
         clearTimeout(_inViewTimer);
-        _inViewTimer = setTimeout(() => window.dispatchEvent(new CustomEvent('sdl:view', { detail: { ids: _inViewIds } })), 120);
+        _inViewTimer = setTimeout(() => window.dispatchEvent(new CustomEvent('sdl:view', { detail: { ids: _inViewIds, total: _active ? DATA.filter(isMatch).length : DATA.length, filtered: !!_active } })), 120);
       }
     }
     // Kept for the label pass below (font growth with zoom; dots no longer scale).
