@@ -308,9 +308,26 @@
     panelHead.setAttribute('aria-label', open ? t.collapse : t.expand);
     if (remember !== false) { try { sessionStorage.setItem('sdl-dpanel-open', open ? '1' : '0'); } catch (e) {} }
   }
-  panelHead.addEventListener('click', function () { setPanelOpen(!panel.classList.contains('is-open')); });
   var savedOpen = null; try { savedOpen = sessionStorage.getItem('sdl-dpanel-open'); } catch (e) {}
-  setPanelOpen(savedOpen === '1', false);
+  // Hover-expand (2026-09-21): on a pointer that can hover, the panel opens
+  // while the pointer is over it and closes when it leaves; a click pins it
+  // open (remembered for the session) and a second click unpins. Touch and
+  // keyboard keep the click toggle.
+  var HOVER = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var panelPinned = savedOpen === '1', panelHoverT = null;
+  setPanelOpen(panelPinned, false);
+  // A click within the hover delay must not be undone by the pending timer,
+  // and an unpin must hold until the pointer has left (panelArmed).
+  var panelArmed = true;
+  panelHead.addEventListener('click', function () {
+    clearTimeout(panelHoverT);
+    if (HOVER) { panelPinned = !panelPinned; if (!panelPinned) panelArmed = false; setPanelOpen(panelPinned, true); }
+    else setPanelOpen(!panel.classList.contains('is-open'));
+  });
+  if (HOVER) {
+    panel.addEventListener('pointerenter', function () { clearTimeout(panelHoverT); if (!panelArmed) return; panelHoverT = setTimeout(function () { setPanelOpen(true, false); }, 120); });
+    panel.addEventListener('pointerleave', function () { clearTimeout(panelHoverT); panelArmed = true; if (!panelPinned) panelHoverT = setTimeout(function () { setPanelOpen(false, false); }, 260); });
+  }
 
   function rowsHtml(rows) {
     if (!rows.length) return '<div class="msheet-empty">' + esc(t.empty) + '</div>';
@@ -348,6 +365,37 @@
   listPane.addEventListener('click', onRowClick);
   panelBody.addEventListener('click', onRowClick);
   window.addEventListener('sdl:view', function (e) { var dt = e.detail || {}; renderList(dt.ids, { total: dt.total, filtered: dt.filtered }); });
+
+  // ---- desktop FILTERS drawer: hover-expand (2026-09-21) ------------------
+  // The legacy tab click toggles the drawer (and would close a hover-opened
+  // one). On hover-capable pointers the tab's click is taken over here: it
+  // pins / unpins; hover opens and leaving closes unless pinned. A click on
+  // the empty map (legacy) still closes it, which also unpins.
+  (function hoverDrawer() {
+    if (!HOVER) return;
+    var tab = document.getElementById('mob-filters'), aside = document.querySelector('aside.left');
+    if (!tab || !aside) return;
+    var pinned = false, hT = null, armed = true;   // armed: hover may open (false after an unpin until the pointer leaves)
+    var isOpen = function () { return aside.classList.contains('open'); };
+    var open = function () { if (MQ.matches || isOpen()) return; aside.classList.add('open'); document.body.classList.add('left-open'); };
+    var close = function () { if (!isOpen()) return; aside.classList.remove('open'); document.body.classList.remove('left-open'); document.body.classList.remove('drawer-open'); };
+    var enter = function () { clearTimeout(hT); if (!armed) return; hT = setTimeout(open, 120); };
+    var leave = function () { clearTimeout(hT); armed = true; if (!pinned) hT = setTimeout(close, 260); };
+    [tab, aside].forEach(function (el) { el.addEventListener('pointerenter', enter); el.addEventListener('pointerleave', leave); });
+    // Capture + stopImmediatePropagation: the legacy code has a toggle bound
+    // directly to the tab as well as one on the document; both must yield.
+    ['pointerdown', 'click'].forEach(function (evt) {
+      tab.addEventListener(evt, function (e) {
+        if (MQ.matches) return;               // phones keep the legacy tap
+        e.stopImmediatePropagation(); e.preventDefault();
+        clearTimeout(hT);
+        if (evt !== 'click') return;
+        pinned = !pinned;
+        if (pinned) open(); else { armed = false; close(); }
+      }, true);
+    });
+    new MutationObserver(function () { if (!isOpen()) pinned = false; }).observe(aside, { attributes: true, attributeFilter: ['class'] });
+  })();
 
   // ---- glass on chrome that other scripts create at runtime -------------
   // export.js makes the two floating buttons, map-i18n.js the clear button and

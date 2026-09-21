@@ -64,7 +64,9 @@
   .dpanel {
     position: fixed; right: 16px; bottom: calc(16px + var(--shell-bottom, 0px)); z-index: 45;
     width: 330px; max-height: 60svh;
-    display: grid; grid-template-rows: auto 1fr; align-content: start;
+    /* Head at the BOTTOM, list growing upward: on hover the head stays under
+       the pointer while the rows unfold above it. */
+    display: grid; grid-template-rows: 1fr auto; align-content: end;
     border: 1px solid var(--surface-edge, var(--rule)); border-radius: 12px;
     color: var(--ink); font-family: var(--font-sans);
     opacity: 0; visibility: hidden; pointer-events: none;
@@ -73,19 +75,23 @@
     overflow: hidden;
   }
   .dpanel.is-useful { opacity: 1; visibility: visible; pointer-events: auto; transform: none; transition-delay: 0s; }
-  .dpanel:not(.is-open) { grid-template-rows: auto 0fr; }
+  .dpanel:not(.is-open) { grid-template-rows: 0fr auto; }
   .dpanel-head {
+    order: 2;
     appearance: none; background: transparent; border: 0; color: var(--ink); cursor: pointer;
     display: flex; align-items: center; gap: 8px; padding: 10px 12px 10px 14px; text-align: left;
     font-family: var(--font-sans); font-size: 13px; color: var(--ink-2);
   }
   .dpanel-head b { font-family: var(--font-mono); font-weight: 600; font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums; }
   .dpanel-head .dpanel-chev { margin-left: auto; color: var(--ink-3); display: inline-flex; transition: transform var(--t-slow, 280ms) var(--ease-standard, ease); }
-  .dpanel.is-open .dpanel-head .dpanel-chev { transform: rotate(180deg); }
+  .dpanel.is-open .dpanel-head .dpanel-chev { transform: rotate(180deg); }   /* up when closed (the list grows upward), down when open */
   .dpanel-head:hover { color: var(--ink); }
   .dpanel-head:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 12px; }
-  .dpanel-body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 0 8px 8px; }
-  .dpanel:not(.is-open) .dpanel-body { visibility: hidden; }
+  .dpanel-body { order: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 8px 8px 0; border-bottom: 1px solid var(--rule-2); }
+  .dpanel:not(.is-open) .dpanel-body { visibility: hidden; transition: visibility 0s linear var(--t-slow, 280ms); }   /* hide after the collapse, not before */
+  .dpanel.is-open .dpanel-body { transition: visibility 0s linear 0s; }
+  /* The pull tab rides the drawer's edge; slide with it (hover-expand, 2026-09-21). */
+  body .mob-toggle.mob-toggle.left { transition: left var(--t-slow, 280ms) var(--ease-standard, ease), transform var(--t-fast, 120ms) var(--ease-standard, ease), color var(--t-fast, 120ms); }
   .dpanel .msheet-row {
     appearance: none; background: transparent; border: 0; border-bottom: 1px solid var(--rule-2);
     width: 100%; display: grid; grid-template-columns: 8px 1fr auto; gap: 10px; align-items: center;
@@ -230,7 +236,7 @@ html body.embed-mode aside.left, html body.embed-mode aside.right { top: var(--s
   }
   .msheet-action:active { background: var(--bg-3); }
   @media (prefers-reduced-motion: reduce) {
-    .msheet, body .zoom-ctl.zoom-ctl, .msheet-grip svg { transition: none !important; }
+    .msheet, body .zoom-ctl.zoom-ctl, .msheet-grip svg, .dpanel, .dpanel-body, aside.left, body .mob-toggle.mob-toggle.left { transition: none !important; }
   }
 }
 
