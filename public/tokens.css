@@ -17,6 +17,10 @@
   --land:       oklch(0.24 0.01 240);
   --land-edge:  oklch(0.32 0.01 240);
   --graticule:  oklch(0.26 0.01 240);
+  /* Canvas borders (map-legacy redraw). Dark raised 2026-09-21: 0.32 on 0.24 land read as almost nothing. */
+  --map-border:   oklch(0.44 0.012 240);
+  --map-coast:    oklch(0.54 0.012 240);
+  --map-province: oklch(0.42 0.012 240);
 
   /* Tier marker colours (national / academic / commercial / lab-OS) */
   --c-national:   oklch(0.78 0.14 85);
@@ -69,6 +73,9 @@
   --land:       oklch(0.93  0.005 85);
   --land-edge:  oklch(0.78  0.005 85);
   --graticule:  oklch(0.88  0.005 85);
+  --map-border:   oklch(0.32 0.01 240);   /* light: unchanged from the previous hard-coded strokes */
+  --map-coast:    oklch(0.40 0.01 240);
+  --map-province: oklch(0.30 0.01 240);
 
   /* Slightly deeper marker colours to keep contrast on warm-white bg */
   --c-national:   oklch(0.58 0.18 85);
