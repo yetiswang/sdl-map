@@ -36,26 +36,48 @@
       hant: { play: '播放圖譜故事', stop: '停止', of: '/' },
     };
     var T = hant ? S.hant : (zh ? S.zh : S.en);
-    // Seven beats: entry id, zoom, and one line each. zh-Hant is derived.
+    // Eight stops (2026-09-21, Yuyang's cut after cross-checking Canty &
+    // Abolhasani, Nat. Rev. Chem. 2026): credit goes to the earliest layers;
+    // recent labs appear only as numbers. Every line is a dated fact from the
+    // entry's listed sources or the review; `src` is printed under the caption.
+    // Text: [title, line, source]. The close computes its counts from DATA.
     var BEATS = [
-      { id: 'ares_afrl',     year: 2016, k: 4.5, en: ['ARES · Dayton', 'The first closed loop: a program plans, a robot runs, the result feeds the next plan.'], zh: ['ARES · 代顿', '第一个闭环：程序规划，机器人执行，结果反哺下一轮规划。'] },
-      { id: 'cronin',        year: 2018, k: 5.5, en: ['Chemputer · Glasgow', 'Chemistry written as code a machine can execute.'], zh: ['Chemputer · 格拉斯哥', '把化学写成机器可以执行的代码。'] },
-      { id: 'cooper',        year: 2020, k: 5.5, en: ['Mobile Robot Chemist · Liverpool', 'A robot walks the lab and works eight days unattended.'], zh: ['移动机器人化学家 · 利物浦', '机器人在实验室里走动，连续八天无人值守地工作。'] },
-      { id: 'maosic_cuhksz', year: 2020, k: 4.5, en: ['MAOSIC · Shenzhen', "China's first cloud lab: experiments sent from anywhere, run by machines."], zh: ['MAOSIC · 深圳', '中国第一个云实验室：实验从任何地方提交，由机器完成。'] },
-      { id: 'alab',          year: 2023, k: 3.2, en: ['A-Lab · Berkeley, with Coscientist · Pittsburgh', 'Powders and language in one year: a lab that makes new solids, and a model that plans experiments.'], zh: ['A-Lab · 伯克利，与 Coscientist · 匹兹堡', '粉体与语言同年登场：一个能合成新固体的实验室，一个能规划实验的模型。'] },
-      { id: 'bigmap',        year: 2023, k: 4.5, en: ['FINALES · Europe', 'Labs in several countries run one experiment together.'], zh: ['FINALES · 欧洲', '几个国家的实验室一起运行同一个实验。'] },
-      { id: null,            year: 2026, k: 1,   en: ['2024 to 2026 · The wave', 'Forty-one new sites in two years, on every tier. The map is still being drawn.'], zh: ['2024 至 2026 · 浪潮', '两年内新增四十一个站点，覆盖每一层级。这张图谱仍在绘制中。'] },
+      { id: 'hamilton', year: 1980, k: 4.5,
+        en: ['Hamilton · Reno', 'Liquid-handling robots, and by the 1980s Hamilton and Tecan modules running Simplex optimisations. The review\'s timeline opens here.', 'hamiltoncompany.com · Canty & Abolhasani, Nat. Rev. Chem. 2026'],
+        zh: ['Hamilton · 里诺', '移液机器人；到 1980 年代，Hamilton 与 Tecan 的模块已在运行单纯形优化。综述的时间线从这里开始。', 'hamiltoncompany.com · Canty & Abolhasani, Nat. Rev. Chem. 2026'],
+        hant: ['Hamilton · 里諾', '移液機器人；到 1980 年代，Hamilton 與 Tecan 的模組已在運行單純形最佳化。綜述的時間線從這裡開始。', 'hamiltoncompany.com · Canty & Abolhasani, Nat. Rev. Chem. 2026'] },
+      { id: 'ecl', year: 2015, k: 5,
+        en: ['Emerald Cloud Lab · South San Francisco', 'A laboratory used through a browser, one of the cloud labs the review places in the 2010s.', 'emeraldcloudlab.com · Canty & Abolhasani 2026'],
+        zh: ['Emerald Cloud Lab · 南旧金山', '通过浏览器使用的实验室，综述归入 2010 年代的云实验室之一。', 'emeraldcloudlab.com · Canty & Abolhasani 2026'],
+        hant: ['Emerald Cloud Lab · 南舊金山', '透過瀏覽器使用的實驗室，綜述歸入 2010 年代的雲實驗室之一。', 'emeraldcloudlab.com · Canty & Abolhasani 2026'] },
+      { id: 'ares_afrl', year: 2016, k: 4.5,
+        en: ['ARES · Dayton', 'A closed loop on carbon nanotube growth; Table 1 of the review begins here. Closed-loop research itself is older: Adam in 2009, Eve in 2015.', 'doi.org/10.1038/npjcompumats.2016.31 · Table 1, Canty & Abolhasani 2026'],
+        zh: ['ARES · 代顿', '碳纳米管生长的闭环；综述的表 1 由此开始。闭环研究本身更早：2009 年的 Adam，2015 年的 Eve。', 'doi.org/10.1038/npjcompumats.2016.31 · Table 1, Canty & Abolhasani 2026'],
+        hant: ['ARES · 代頓', '碳奈米管生長的閉環；綜述的表 1 由此開始。閉環研究本身更早：2009 年的 Adam，2015 年的 Eve。', 'doi.org/10.1038/npjcompumats.2016.31 · Table 1, Canty & Abolhasani 2026'] },
+      { id: 'matter', year: 2017, k: 4.5,
+        en: ['Matter Lab · Toronto', 'ChemOS, an operating system for self-driving labs, and the Mission Innovation workshop that named materials acceleration platforms.', 'doi.org/10.1126/scirobotics.aat5559 · mission-innovation.net'],
+        zh: ['Matter Lab · 多伦多', 'ChemOS，一套自主实验室的操作系统；以及为“材料加速平台”命名的 Mission Innovation 研讨会。', 'doi.org/10.1126/scirobotics.aat5559 · mission-innovation.net'],
+        hant: ['Matter Lab · 多倫多', 'ChemOS，一套自主實驗室的作業系統；以及為「材料加速平台」命名的 Mission Innovation 研討會。', 'doi.org/10.1126/scirobotics.aat5559 · mission-innovation.net'] },
+      { id: 'dpt', year: 2018, k: 4.5,
+        en: ['DP Technology 深势科技 · Beijing', 'Bohrium: simulation, models and more than 1,800 instruments on one platform.', 'dp.tech · bohrium.dp.tech'],
+        zh: ['深势科技 · 北京', '玻尔平台：模拟、模型与一千八百多台仪器汇于一处。', 'dp.tech · bohrium.dp.tech'],
+        hant: ['深勢科技 · 北京', '玻爾平台：模擬、模型與一千八百多台儀器匯於一處。', 'dp.tech · bohrium.dp.tech'] },
+      { id: 'cooper', year: 2020, k: 5.5,
+        en: ['Cooper Group · Liverpool', 'The Mobile Robot Chemist: a robot that moves between stations and worked eight days unattended, in the Materials Innovation Factory opened in 2017.', 'liverpool.ac.uk/cooper-group · Table 1, Canty & Abolhasani 2026'],
+        zh: ['Cooper 课题组 · 利物浦', '移动机器人化学家：在工作站之间移动、连续八天无人值守地工作的机器人，位于 2017 年启用的材料创新工厂。', 'liverpool.ac.uk/cooper-group · Table 1, Canty & Abolhasani 2026'],
+        hant: ['Cooper 課題組 · 利物浦', '移動機器人化學家：在工作站之間移動、連續八天無人值守地工作的機器人，位於 2017 年啟用的材料創新工廠。', 'liverpool.ac.uk/cooper-group · Table 1, Canty & Abolhasani 2026'] },
+      { id: 'capex', year: 2022, k: 5,
+        en: ['CAPeX · Lyngby', 'A thirteen-year national centre for Power-to-X materials, five universities.', 'dg.dk · dtu.dk'],
+        zh: ['CAPeX · 灵比', '为期十三年的国家级 Power-to-X 材料中心，五所大学。', 'dg.dk · dtu.dk'],
+        hant: ['CAPeX · 靈比', '為期十三年的國家級 Power-to-X 材料中心，五所大學。', 'dg.dk · dtu.dk'] },
+      { id: null, year: 2026, k: 1,
+        en: ['The map, 2026', '{n} sites in {c} countries: {a} before 2014, {b} by 2019, {c2} more by 2023, {d} more since. The map is still being drawn.', 'sdl-map dataset, September 2026'],
+        zh: ['图谱，2026', '{c} 个国家，{n} 个站点：2014 年前 {a} 个，2019 年前 {b} 个，2023 年前再加 {c2} 个，此后又 {d} 个。这张图谱仍在绘制中。', 'sdl-map 数据集，2026 年 9 月'],
+        hant: ['圖譜，2026', '{c} 個國家，{n} 個站點：2014 年前 {a} 個，2019 年前 {b} 個，2023 年前再加 {c2} 個，此後又 {d} 個。這張圖譜仍在繪製中。', 'sdl-map 資料集，2026 年 9 月'] },
     ];
-    var HANT = [
-      ['ARES · 代頓', '第一個閉環：程式規劃，機器人執行，結果反哺下一輪規劃。'],
-      ['Chemputer · 格拉斯哥', '把化學寫成機器可以執行的程式碼。'],
-      ['移動機器人化學家 · 利物浦', '機器人在實驗室裡走動，連續八天無人值守地工作。'],
-      ['MAOSIC · 深圳', '中國第一個雲實驗室：實驗從任何地方提交，由機器完成。'],
-      ['A-Lab · 柏克萊，與 Coscientist · 匹茲堡', '粉體與語言同年登場：一個能合成新固體的實驗室，一個能規劃實驗的模型。'],
-      ['FINALES · 歐洲', '幾個國家的實驗室一起運行同一個實驗。'],
-      ['2024 至 2026 · 浪潮', '兩年內新增四十一個站點，覆蓋每一層級。這張圖譜仍在繪製中。'],
-    ];
-    var beatText = function (b) { var i = BEATS.indexOf(b); return hant ? HANT[i] : (zh ? b.zh : b.en); };
+    var COUNTS = (function () { var all = API.order, a = 0, b = 0, c2 = 0, d = 0, cs = {}; all.forEach(function (x) { cs[x.country] = 1; if (x.start < 2014) a++; else if (x.start <= 2019) b++; else if (x.start <= 2023) c2++; else d++; }); return { n: all.length, c: Object.keys(cs).length, a: a, b: b, c2: c2, d: d }; })();
+    var fill = function (str) { return String(str).replace(/\{(n|c2|c|a|b|d)\}/g, function (_, k) { return COUNTS[k]; }); };
+    var beatText = function (b) { var t = hant ? b.hant : (zh ? b.zh : b.en); return t.map(fill); };
 
     // ---- DOM: play button, caption, progress -------------------------------
     var seen = false; try { seen = localStorage.getItem('sdlmap.storySeen') === '1'; } catch (e) {}
@@ -69,12 +91,12 @@
     app.appendChild(btn);
     var cap = document.createElement('div');
     cap.id = 'story-cap'; cap.className = 'story-cap glass glass-strong story-ctl'; cap.setAttribute('aria-live', 'polite');
-    cap.innerHTML = '<div class="story-year"></div><div class="story-title"></div><div class="story-line"></div>';
+    cap.innerHTML = '<div class="story-year"></div><div class="story-title"></div><div class="story-line"></div><div class="story-src"></div>';
     app.appendChild(cap);
     var prog = document.createElement('div');
     prog.id = 'story-prog'; prog.className = 'story-prog glass story-ctl'; prog.setAttribute('aria-hidden', 'true');
     app.appendChild(prog);
-    var yearEl = cap.querySelector('.story-year'), titleEl = cap.querySelector('.story-title'), lineEl = cap.querySelector('.story-line');
+    var yearEl = cap.querySelector('.story-year'), titleEl = cap.querySelector('.story-title'), lineEl = cap.querySelector('.story-line'), srcEl = cap.querySelector('.story-src');
 
     // ---- schedule ----------------------------------------------------------
     var ORDER = API.order, N = API.total;
@@ -96,7 +118,7 @@
     var capLog = [];
     function showCap(b, year) {
       var t = beatText(b);
-      yearEl.textContent = year; titleEl.textContent = t[0]; lineEl.textContent = t[1];
+      yearEl.textContent = year; titleEl.textContent = t[0]; lineEl.textContent = t[1]; srcEl.textContent = t[2] || '';
       cap.classList.add('show');
       capLog.push(year + ' ' + t[0]);
     }
