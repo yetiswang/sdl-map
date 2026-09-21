@@ -271,10 +271,14 @@ a{ color:inherit; text-decoration:none; }
   .site-header .nav-cluster.open {
     display:flex; flex-direction:column; align-items:stretch; gap:10px;
     position:fixed; top:54px; right:8px; padding:14px;
-    /* A menu is read, so it takes the strong glass (inherited from the
-       header's custom properties), not the see-through one. */
-    background-color:var(--surface-strong, var(--bg-2)); background-image:var(--surface-image, none);
-    -webkit-backdrop-filter:var(--surface-blur, none); backdrop-filter:var(--surface-blur, none);
+    /* Same material as the bar it opens from (2026-09-21, Yuyang: the drawer
+       read as a different, darker slab next to the smoke header). It inherits
+       the header's glass custom properties, so theme and reduced-transparency
+       fallbacks follow automatically. */
+    background-color:var(--surface, var(--bg-2)); background-image:var(--surface-image, none);
+    /* Deeper blur than the bar (same tint): the drawer can open over the
+       welcome card or a detail sheet, and type behind it must become a wash. */
+    -webkit-backdrop-filter:var(--surface-blur-menu, var(--surface-blur, none)); backdrop-filter:var(--surface-blur-menu, var(--surface-blur, none));
     border:1px solid var(--surface-edge, var(--rule)); border-radius:10px;
     box-shadow:var(--surface-shadow, 0 8px 28px oklch(0 0 0 / 0.30)); min-width:200px;
     z-index:200;
@@ -292,11 +296,18 @@ a{ color:inherit; text-decoration:none; }
   .site-header .nav-cluster.open > *:nth-child(7) { animation-delay: 245ms; }
   .site-header .nav-cluster.open.closing { animation: nav-drawer-out var(--t-fast, 120ms) var(--ease-exit, cubic-bezier(.4,0,1,1)) both; }
   .site-header .nav-cluster.open.closing > * { animation: none; }
+  /* Scrim under the open drawer (over the page and the map, under the bars):
+     it settles the background so the glass has something calm to sit on, and
+     a tap on it closes the menu without reaching the map. */
+  body.nav-open::after { content:''; position:fixed; inset:0; z-index:59; pointer-events:auto;
+    background: oklch(0 0 0 / 0.28); animation: scrim-in var(--t-base, 200ms) var(--ease-enter, cubic-bezier(0,0,.2,1)) both; }
+  :root[data-theme="light"] body.nav-open::after { background: oklch(0.25 0.02 240 / 0.16); }
+  @keyframes scrim-in { from { opacity:0; } to { opacity:1; } }
   @keyframes nav-drawer-in { from { opacity:0; transform: translateY(-6px) scale(.98); } to { opacity:1; transform:none; } }
   @keyframes nav-drawer-out { from { opacity:1; transform:none; } to { opacity:0; transform: translateY(-4px) scale(.99); } }
   @keyframes nav-row-in { from { opacity:0; transform: translateY(-4px); } to { opacity:1; transform:none; } }
   @media (prefers-reduced-motion: reduce) {
-    .site-header .nav-cluster.open, .site-header .nav-cluster.open > *, .site-header .nav-cluster.open.closing { animation: none !important; }
+    .site-header .nav-cluster.open, .site-header .nav-cluster.open > *, .site-header .nav-cluster.open.closing, body.nav-open::after { animation: none !important; }
   }
   /* The nav element carries an inline align-items:center for the desktop row;
      inline styles survive media queries, so without !important the column
@@ -332,7 +343,7 @@ a{ color:inherit; text-decoration:none; }
 </head>
 <body>
   <!-- ===== HEADER ===== -->
-  <header class="site-header glass glass-mid" style="position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:flex-end;justify-content:space-between;padding:18px 28px 14px;border-bottom-width:1px;border-bottom-style:solid;gap:40px;flex-wrap:wrap;">
+  <header class="site-header glass glass-mid glass-bar" style="position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:flex-end;justify-content:space-between;padding:18px 28px 14px;border-bottom-width:1px;border-bottom-style:solid;gap:40px;flex-wrap:wrap;">
     <div style="display:flex;align-items:center;gap:20px;min-width:0;">
       <a href="https://www.tue.nl/" target="_blank" rel="noopener" aria-label="TU Eindhoven" class="tue-logo" style="display:flex;align-items:center;flex-shrink:0;">
         <img src="/img/tue-logo.png" alt="TU Eindhoven" style="height:36px;width:auto;display:block;">
@@ -470,9 +481,11 @@ a{ color:inherit; text-decoration:none; }
             clearTimeout(closeTimer);
             cluster.classList.remove('closing');
             cluster.classList.add('open');
+            document.body.classList.add('nav-open');
           } else if (cluster.classList.contains('open') && !cluster.classList.contains('closing')) {
             // play the short exit, then hide
             cluster.classList.add('closing');
+            document.body.classList.remove('nav-open');
             closeTimer = setTimeout(function(){ cluster.classList.remove('open', 'closing'); }, 150);
           }
           btn.setAttribute('aria-expanded', open ? 'true' : 'false');
