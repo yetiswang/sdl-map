@@ -339,10 +339,7 @@ aside.left{ grid-area:left; }
    routed centrally via pickMarkerFromEvent (precise nearest-by-screen-distance,
    fixes wrong-marker selection in clusters). */
 .marker{ cursor:pointer; transition: opacity .2s; pointer-events:none; }
-/* v45 leader line — drawn from dot to displaced label when the label couldn't
-   fit at any anchor close to its marker. Subtle so it doesn't add clutter. */
-.sdl-leader{ stroke: var(--ink-3); stroke-width: 0.5; opacity: 0.45;
-  pointer-events: none; vector-effect: non-scaling-stroke; }
+/* 2026-09-21 — no leader lines: a label sits beside its dot or is hidden. */
 /* v45.j — labels are now clickable. Routes to their owning marker via
    pickMarkerFromEvent extension. Same cursor + hover hint as markers. */
 .sdl-label{ pointer-events: visiblePainted; cursor: pointer; }
@@ -393,7 +390,11 @@ body.is-touch .kbd-hint{ display: none !important; }
 .cluster .c-arc{ fill:none; opacity:.95; }
 .cluster .c-n{ fill: var(--ink); font-family: var(--font-mono); font-weight:600; pointer-events:none; font-variant-numeric: tabular-nums; }
 .cluster.dim{ pointer-events:none; }
-.spider-leg{ stroke: var(--ink-3); stroke-width:1px; opacity:.55; vector-effect: non-scaling-stroke; pointer-events:none; }
+/* 2026-09-21 — a co-located group fans out on ONE quiet ring (pins on its
+   circumference, a small mark at the true spot) instead of a leg per pin:
+   the legs crossed each other and the labels at small radii. */
+.spider-ring{ fill: none; stroke: var(--ink-3); stroke-width: 0.75px; opacity: .38; vector-effect: non-scaling-stroke; pointer-events: none; }
+.spider-core{ fill: var(--ink-3); opacity: .6; pointer-events: none; }
 .marker.dim{ opacity:0.08; pointer-events:none; }
 .marker.dim .ring{ opacity:0; }
 /* .marker.dim .core r:2 removed 2026-09-20 — dim pins keep the size law, opacity carries the state */
@@ -2212,6 +2213,8 @@ window.SDL_CATEGORIES = {
   const gLabels  = document.createElementNS(ns,'g');
   // 2026-09-20 — spider legs under the pins, cluster discs above them, names on top.
   const gSpider   = document.createElementNS(ns,'g'); gSpider.setAttribute('id','spider');
+  const _spiderRings = new Map();   // tight-group key → { ring, core, pass }
+  let _ringPass = 0;
   const gClusters = document.createElementNS(ns,'g'); gClusters.setAttribute('id','clusters');
   svg.append(gGlobe, gGrat, gLand, gSpider, gMarkers, gClusters, gLabels);
 
@@ -2404,13 +2407,6 @@ window.SDL_CATEGORIES = {
     // clusters where halos overlap. The SVG click handler with v45.ah
     // halo-first pickMarkerFromEvent is the authoritative path and gives
     // deterministic results: cursor-inside-halo wins, always.
-
-    // v45: leader line — drawn BEFORE the label so the label paints on top.
-    const leader = document.createElementNS(ns,'line');
-    leader.setAttribute('class','sdl-leader');
-    leader.style.display = 'none';
-    d._leader = leader;
-    gLabels.appendChild(leader);
 
     // v24: SDL name label
     const mLabel = document.createElementNS(ns,'text');
@@ -2963,8 +2959,6 @@ function redraw(){
     // animation carried by `_dispState`. Labels still run below on `_visible`.
     DATA.forEach(d => {
       if (d._label) d._label.style.display = 'none';
-      if (d._leader) d._leader.style.display = 'none';
-      if (d._leg) d._leg.style.display = 'none';
       d._el.style.display = 'none';
       d._x = null; d._y = null;
     });
@@ -2987,6 +2981,7 @@ function redraw(){
     const _spiderKm = _clusterThr * ((_arrivalT0 && _arrivalTargetScale) ? _arrivalTargetScale / BASE_SCALE : k) / 40;   // fan-out from k ≈ 40 on both devices
     _lastPxPerKm = _pxPerKm; _lastSpiderKm = _spiderKm;
     const _displayed = SDLClusters.cut(TREE, _clusterThr, _spiderKm);
+    _ringPass++;
     const _now = performance.now();
     const ANIM_MS = REDUCED_MOTION ? 1 : 250;
     const _newSet = new Map();
@@ -3076,9 +3071,22 @@ function redraw(){
           d._spiderAng = ang;
           const cx = x, cy = y;
           x = cx + Math.cos(ang) * rr; y = cy + Math.sin(ang) * rr;
-          if (!d._leg) { d._leg = document.createElementNS(ns, 'line'); d._leg.setAttribute('class', 'spider-leg'); gSpider.appendChild(d._leg); }
-          d._leg.setAttribute('x1', cx); d._leg.setAttribute('y1', cy); d._leg.setAttribute('x2', x); d._leg.setAttribute('y2', y);
-          d._leg.style.display = ''; d._leg.style.opacity = limbFade * alpha;
+          // One ring per group, drawn once per pass (the first member draws it).
+          const rk = sib.join('|');
+          let rg = _spiderRings.get(rk);
+          if (!rg) {
+            rg = { ring: document.createElementNS(ns, 'circle'), core: document.createElementNS(ns, 'circle'), pass: 0 };
+            rg.ring.setAttribute('class', 'spider-ring'); rg.core.setAttribute('class', 'spider-core');
+            gSpider.appendChild(rg.ring); gSpider.appendChild(rg.core);
+            _spiderRings.set(rk, rg);
+          }
+          if (rg.pass !== _ringPass) {
+            rg.pass = _ringPass;
+            rg.ring.setAttribute('cx', cx); rg.ring.setAttribute('cy', cy); rg.ring.setAttribute('r', rr);
+            rg.core.setAttribute('cx', cx); rg.core.setAttribute('cy', cy); rg.core.setAttribute('r', 1.5 / _scrScaleR);
+            rg.ring.style.display = ''; rg.core.style.display = '';
+            rg.ring.style.opacity = limbFade * alpha; rg.core.style.opacity = limbFade * alpha;
+          }
         }
         if (tr === n) d._spiderAng = null;
         const isDim = d._el.classList.contains('dim');
@@ -3161,7 +3169,7 @@ function redraw(){
     });
     _toDelete.forEach(id => {
       const st = _dispState.get(id);
-      if (st) { const n = st.node; if (n.n === 1) { n.entry._el.style.display = 'none'; if (n.entry._leg) n.entry._leg.style.display = 'none'; } else { n._el.style.display = 'none'; n._pseudo._x = null; } }
+      if (st) { const n = st.node; if (n.n === 1) { n.entry._el.style.display = 'none'; } else { n._el.style.display = 'none'; n._pseudo._x = null; } }
       _dispState.delete(id);
     });
     if (_animating) redrawRaf();
@@ -3171,6 +3179,7 @@ function redraw(){
       // "In view" means the visible frame, not the render margin. The viewBox
       // is fitted with `meet`, so a portrait phone shows far above and below
       // y∈[0,560] and nothing outside x∈[0,1000]; the sheet covers the bottom.
+      _spiderRings.forEach((rg) => { if (rg.pass !== _ringPass && rg.ring.style.display !== 'none') { rg.ring.style.display = 'none'; rg.core.style.display = 'none'; } });
       const _offX = (_rectR.width - 1000 * _scrScaleR) / 2, _offY = (_rectR.height - 560 * _scrScaleR) / 2;
       let _visBottomPx = _rectR.height;
       const _visTopPx = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--shell-top')) || 0;   // shell header overlays the map (map-mobile-sheet.js)
@@ -3296,7 +3305,6 @@ function redraw(){
       // below sets it for labels that actually render.
       _visible.forEach(d => {
         if (d._label) d._label.style.display = 'none';
-        if (d._leader) d._leader.style.display = 'none';
         d._labelWasShown = false;
       });
       for (const d of ranked) {
@@ -3429,54 +3437,19 @@ function redraw(){
         if (d._label.textContent !== _wantText) d._label.textContent = _wantText;
         d._label.style.opacity = d._labelFade;
         d._lbox = { x: p.x, y: p.y, w: p.w, h: p.h };
-        // Leader line: draw when label center is far enough from the dot that
-        // the visual link is no longer obvious. Threshold scales with fs so
-        // big labels at high zoom still get a leader when truly displaced.
-        // v45.v — UPPER bound: if leader would exceed maxLeaderDist (≈ 5 × fs
-        // or 120 SVG-units on narrow viewports), HIDE the label instead of
-        // drawing a tract-line across the map. Cleaner at low zoom + chunky
-        // labels where dense clusters push labels far through relaxation.
-        const maxLeaderDist = Math.max(fs * 5, 120);
-        if (d._leader) {
-          const lcx = p.x + p.w / 2;
-          const lcy = p.y + p.h / 2;
-          const dist = Math.hypot(lcx - d._x, lcy - d._y);
-          if (dist > maxLeaderDist) {
-            // Label would be too far from its pin; suppress both label + leader.
-            d._label.style.display = 'none';
-            d._leader.style.display = 'none';
-            continue;
-          }
-          if (dist > markerR * 2 + fs * 0.4) {
-            // Stop the line at the label's bbox edge (not the center) so it
-            // doesn't visually pierce the text.
-            const ang = Math.atan2(lcy - d._y, lcx - d._x);
-            const halfW = p.w / 2, halfH = p.h / 2;
-            // Compute closest bbox-edge point along the ray from dot to label center
-            const tx = halfW / Math.max(Math.abs(Math.cos(ang)), 0.01);
-            const ty = halfH / Math.max(Math.abs(Math.sin(ang)), 0.01);
-            const t  = Math.min(tx, ty);
-            const ex = lcx - Math.cos(ang) * t;
-            const ey = lcy - Math.sin(ang) * t;
-            // Start from just outside the dot edge so the line doesn't sit on top of it
-            const startT = (markerR + 1);
-            const sx = d._x + Math.cos(ang) * startT;
-            const sy = d._y + Math.sin(ang) * startT;
-            d._leader.setAttribute('x1', sx);
-            d._leader.setAttribute('y1', sy);
-            d._leader.setAttribute('x2', ex);
-            d._leader.setAttribute('y2', ey);
-            d._leader.style.display = 'inline';
-            d._leader.style.opacity = d._labelFade;
-          } else {
-            d._leader.style.display = 'none';
-          }
+        // 2026-09-21 — no leader lines. A label lives beside its dot or not at
+        // all: relaxation may nudge it, but once its box sits more than a line
+        // height off the dot it is hidden rather than tethered. Radial (spider)
+        // labels are anchored at the dot's edge by construction.
+        if (!p.radial) {
+          const gapX = Math.max(p.x - d._x, d._x - (p.x + p.w), 0);
+          const gapY = Math.max(p.y - d._y, d._y - (p.y + p.h), 0);
+          if (Math.hypot(gapX, gapY) > markerR + fs * 1.1) { d._label.style.display = 'none'; continue; }
         }
       }
     } else {
       _visible.forEach(d => {
         if (d._label) d._label.style.display = 'none';
-        if (d._leader) d._leader.style.display = 'none';
       });
     }
 
