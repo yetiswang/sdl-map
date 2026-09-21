@@ -2116,6 +2116,10 @@ window.SDL_CATEGORIES = {
   // d3 path generator with canvas context (renders to ctx when called)
   const _pathC = d3.geoPath(projection, _ctx);
   let _dpr = window.devicePixelRatio || 1;
+  // The canvas's visible rectangle in projection units. On a portrait phone
+  // it reaches far above y=0 and below y=560 (the viewBox is only the middle
+  // band); anything that tests visibility must use this, not 1000×560.
+  let _visBox = [0, 0, 1000, 560];
   function _resizeCanvas(){
     const rect = _canvas.parentElement.getBoundingClientRect();
     _dpr = window.devicePixelRatio || 1;
@@ -2127,6 +2131,7 @@ window.SDL_CATEGORIES = {
     const offsetX = (_canvas.width  - 1000 * s) / 2;
     const offsetY = (_canvas.height -  560 * s) / 2;
     _ctx.setTransform(s, 0, 0, s, offsetX, offsetY);
+    _visBox = [-offsetX / s, -offsetY / s, (_canvas.width - offsetX) / s, (_canvas.height - offsetY) / s];
   }
   _resizeCanvas();
   window.addEventListener('resize', _resizeCanvas);
@@ -2141,6 +2146,9 @@ window.SDL_CATEGORIES = {
   let COL_BG        = _cs.getPropertyValue('--bg').trim() || '#111';
   let COL_OCEAN_MID = _cs.getPropertyValue('--globe-gradient-mid').trim() || 'oklch(0.22 0.015 240)';
   let COL_OCEAN_END = _cs.getPropertyValue('--globe-gradient-end').trim() || 'oklch(0.14 0.01 240)';
+  let COL_BORDER    = _cs.getPropertyValue('--map-border').trim() || 'oklch(0.32 0.01 240)';
+  let COL_COAST     = _cs.getPropertyValue('--map-coast').trim() || 'oklch(0.40 0.01 240)';
+  let COL_PROVINCE  = _cs.getPropertyValue('--map-province').trim() || 'oklch(0.30 0.01 240)';
   function refreshThemeColors(){
     _cs = getComputedStyle(document.documentElement);
     COL_LAND      = _cs.getPropertyValue('--land').trim() || COL_LAND;
@@ -2150,6 +2158,9 @@ window.SDL_CATEGORIES = {
     COL_BG        = _cs.getPropertyValue('--bg').trim() || COL_BG;
     COL_OCEAN_MID = _cs.getPropertyValue('--globe-gradient-mid').trim() || COL_OCEAN_MID;
     COL_OCEAN_END = _cs.getPropertyValue('--globe-gradient-end').trim() || COL_OCEAN_END;
+    COL_BORDER    = _cs.getPropertyValue('--map-border').trim() || COL_BORDER;
+    COL_COAST     = _cs.getPropertyValue('--map-coast').trim() || COL_COAST;
+    COL_PROVINCE  = _cs.getPropertyValue('--map-province').trim() || COL_PROVINCE;
   }
   window.__sdlRefreshTheme = refreshThemeColors;
   // Helper: draw a feature via canvas-path generator
@@ -2705,6 +2716,7 @@ window.SDL_CATEGORIES = {
   let _rafId = null;
   let _rafDirty = false;
   let _lastRedrawAt = 0;
+  window.__sdlRedraw = () => redrawRaf();   // QA hook (scripts/qa)
   function redrawRaf(){
     _rafDirty = true;
     if (_rafId !== null) return;
@@ -2729,7 +2741,20 @@ let _lastViewSig = '', _lastViewMove = 0, _settleTimer = null, _lastMovingCls = 
 // 50m fall back to 110m for 1.5 s. __sdlGeoStats is a QA hook (scripts/qa).
 const HI_MOVE_K = 1.4, HI_SLOW_MS = 24;
 let _hiSlow = 0, _hiCooldownUntil = 0, _hiCooldownMs = 1500;
-window.__sdlGeoStats = { hi: 0, lo: 0, cooldowns: 0, k: 0, drawn: 0, last: [] };
+window.__sdlGeoStats = { hi: 0, lo: 0, cooldowns: 0, k: 0, drawn: 0, last: [], forceChanging: false };
+// ?diag=1 — a small live readout of the moving-frame stats, for reading real
+// device numbers off a phone. Off unless asked for.
+if (/[?&]diag=1/.test(location.search + (() => { try { return window.frameElement ? window.frameElement.ownerDocument.location.search : ''; } catch (e) { return ''; } })())) {   // ?diag=1 on the site URL reaches the frame too
+  const el = document.createElement('div');
+  el.id = 'sdl-diag';
+  el.style.cssText = 'position:fixed;left:8px;top:50%;z-index:9999;font:11px/1.4 ui-monospace,monospace;color:#fff;background:rgba(0,0,0,.72);padding:6px 8px;border-radius:6px;pointer-events:none;white-space:pre';
+  document.addEventListener('DOMContentLoaded', () => document.body.appendChild(el));
+  setInterval(() => {
+    const g = window.__sdlGeoStats; if (!g || !el.isConnected) return;
+    const a = g.last.slice(-30).sort((x, y) => x - y); const med = a.length ? a[Math.floor(a.length / 2)] : 0; const max = a.length ? a[a.length - 1] : 0;
+    el.textContent = 'moving frames  50m ' + g.hi + '  110m ' + g.lo + '\nfallbacks ' + g.cooldowns + (_hiCooldownUntil === Infinity ? ' (off for session)' : '') + '\nk ' + g.k + '  drawn ' + g.drawn + '\nredraw ms  med ' + med.toFixed(1) + '  max ' + max.toFixed(1) + '\n' + (navigator.hardwareConcurrency || '?') + ' cores  dpr ' + devicePixelRatio;
+  }, 500);
+}
 // v47 — the 50m subset in view. Countries and border lines carry lon/lat
 // boxes; a box is in view when one of nine inverse-projected canvas points
 // falls inside it, or one of a 5×5 grid over the box projects onto the
@@ -2739,8 +2764,10 @@ window.__sdlGeoStats = { hi: 0, lo: 0, cooldowns: 0, k: 0, drawn: 0, last: [] };
 // the full atlas, so any sliver this misses lasts only as long as the gesture.
 function _cullHi(){
   const M = 24;
-  const inCanvas = (p) => { const xy = projection(p); return !!xy && xy[0] > -M && xy[0] < W + M && xy[1] > -M && xy[1] < H + M; };
-  const inv = [[W/2, H/2], [0, 0], [W, 0], [0, H], [W, H], [W/2, 0], [W/2, H], [0, H/2], [W, H/2]].map((pt) => projection.invert(pt)).filter((p) => p && isFinite(p[0]) && isFinite(p[1]));
+  const [X0, Y0, X1, Y1] = _visBox;   // what the canvas actually shows, in projection units
+  const inCanvas = (p) => { const xy = projection(p); return !!xy && xy[0] > X0 - M && xy[0] < X1 + M && xy[1] > Y0 - M && xy[1] < Y1 + M; };
+  const XM = (X0 + X1) / 2, YM = (Y0 + Y1) / 2;
+  const inv = [[XM, YM], [X0, Y0], [X1, Y0], [X0, Y1], [X1, Y1], [XM, Y0], [XM, Y1], [X0, YM], [X1, YM]].map((pt) => projection.invert(pt)).filter((p) => p && isFinite(p[0]) && isFinite(p[1]) && Math.abs(p[1]) <= 90);
   let vb = null;   // lon/lat box of the view, only trustworthy when every canvas point is on the map
   if (inv.length === 9) { vb = [180, 90, -180, -90]; for (const p of inv) { if (p[0] < vb[0]) vb[0] = p[0]; if (p[0] > vb[2]) vb[2] = p[0]; if (p[1] < vb[1]) vb[1] = p[1]; if (p[1] > vb[3]) vb[3] = p[1]; } const px = (vb[2] - vb[0]) * 0.15 + 2, py = (vb[3] - vb[1]) * 0.15 + 2; vb = [vb[0] - px, vb[1] - py, vb[2] + px, vb[3] + py]; if (vb[2] - vb[0] > 300) vb = null; }
   const vis = (b) => {
@@ -2819,12 +2846,9 @@ function redraw(){
     _ctx.lineWidth = 0.5;
     _ctx.globalAlpha = 0.5;
     _ctx.beginPath();
-    if (isInteracting) {
-      if (!window._coarseGrat) window._coarseGrat = d3.geoGraticule().step([30, 30]);
-      _pathC(window._coarseGrat());
-    } else {
-      _pathC(gratGen());
-    }
+    // v47 — the same 15° grid moving and settled; the 30° grid during drags
+    // was the last thing that visibly redrew when a gesture ended.
+    _pathC(gratGen());
     _ctx.stroke();
     _ctx.globalAlpha = 1;
 
@@ -2849,7 +2873,7 @@ function redraw(){
     // (Yuyang, 2026-09-20). While the view changes: 110m below HI_MOVE_K,
     // 50m from there on, with a self-check below so a weak device never
     // pays for it twice.
-    const _changing = isInteracting || _moving;
+    const _changing = isInteracting || _moving || !!(window.__sdlGeoStats && window.__sdlGeoStats.forceChanging);   // forceChanging: QA knob (scripts/qa)
     const _kNow = view.scale / BASE_SCALE;
     const _hiMoving = _kNow >= HI_MOVE_K && _nowT >= _hiCooldownUntil;
     const _hi = geoHi && (!_changing || _hiMoving);
@@ -2866,16 +2890,16 @@ function redraw(){
     _pathC(_gLand);
     _ctx.fill();
 
-    // Country borders (inner mesh)
-    _ctx.strokeStyle = 'oklch(0.32 0.01 240)';
-    _ctx.lineWidth = 0.5;
+    // Country borders (inner mesh) — themed tokens (2026-09-21)
+    _ctx.strokeStyle = COL_BORDER;
+    _ctx.lineWidth = 0.55;
     _ctx.globalAlpha = 0.9 * _arrK;
     _ctx.beginPath();
     _pathC(_gMesh);
     _ctx.stroke();
 
     // Outer borders (slightly thicker)
-    _ctx.strokeStyle = 'oklch(0.40 0.01 240)';
+    _ctx.strokeStyle = COL_COAST;
     _ctx.lineWidth = 0.7;
     _ctx.beginPath();
     _pathC(_gOuter);
@@ -2886,14 +2910,17 @@ function redraw(){
       const _dt = performance.now() - _t0;
       const _g = window.__sdlGeoStats; if (_g) { _g.last.push(+_dt.toFixed(1)); if (_g.last.length > 90) _g.last.shift(); }
       if (_hi) {
-        if (_dt > HI_SLOW_MS) { if (++_hiSlow >= 3) { _hiCooldownUntil = performance.now() + _hiCooldownMs; _hiCooldownMs = Math.min(30000, _hiCooldownMs * 2); _hiSlow = 0; if (_g) _g.cooldowns++; } }
+        // Two failures and the device keeps 110m while moving for the whole
+        // session: alternating geometry between gestures is the one thing
+        // worse than coarse borders.
+        if (_dt > HI_SLOW_MS) { if (++_hiSlow >= 3) { _hiCooldownUntil = (_g && _g.cooldowns >= 1) ? Infinity : performance.now() + _hiCooldownMs; _hiSlow = 0; if (_g) _g.cooldowns++; } }
         else _hiSlow = 0;
       }
     }
 
     // China provinces (only at high zoom, dashed)
     if (china && k >= 2.2) {
-      _ctx.strokeStyle = 'oklch(0.30 0.01 240)';
+      _ctx.strokeStyle = COL_PROVINCE;
       _ctx.lineWidth = 0.4;
       _ctx.setLineDash([2, 2]);
       _ctx.beginPath();
