@@ -55,6 +55,8 @@
   --t-base:   200ms;
   --t-slow:   280ms;
   --t-flight: 450ms;
+  --t-unfold: 460ms;                         /* panels and drawers unfolding on hover: slower, calmer than a control */
+  --ease-unfold: cubic-bezier(.22, 1, .36, 1);  /* eases out long, no overshoot */
   --ease-standard: cubic-bezier(.4, 0, .2, 1);
   --ease-enter:    cubic-bezier(0, 0, .2, 1);
   --ease-exit:     cubic-bezier(.4, 0, 1, 1);
