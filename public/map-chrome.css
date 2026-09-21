@@ -71,10 +71,26 @@
     color: var(--ink); font-family: var(--font-sans);
     opacity: 0; visibility: hidden; pointer-events: none;
     transform: translateY(8px) scale(0.985); transform-origin: 100% 100%;
-    transition: opacity var(--t-base, 200ms) var(--ease-standard, ease), transform var(--t-base, 200ms) var(--ease-standard, ease), grid-template-rows var(--t-slow, 280ms) var(--ease-standard, ease), visibility 0s linear var(--t-base, 200ms);
     overflow: hidden;
+    /* Keep the open panel below the zoom column: its five buttons end at
+       --shell-top + 220 px; 12 px of air on top of that. */
+    max-height: min(60svh, calc(100svh - var(--shell-top, 0px) - var(--shell-bottom, 0px) - 248px));
   }
-  .dpanel.is-useful { opacity: 1; visibility: visible; pointer-events: auto; transform: none; transition-delay: 0s; }
+  /* glass.css sets a transition list of its own on every .glass surface (colour,
+     shadow, edge) at (0,2,0), which REPLACED the panel's and drawer's own
+     transitions, so both snapped. These lists outrank it and include its
+     properties. The unfold is slower and calmer than a control response. */
+  .dpanel.glass.glass {
+    transition: opacity var(--t-base, 200ms) var(--ease-standard, ease), transform var(--t-base, 200ms) var(--ease-standard, ease),
+      grid-template-rows var(--t-unfold, 460ms) var(--ease-unfold, ease), visibility 0s linear var(--t-base, 200ms),
+      background-color var(--t-base, 200ms) var(--ease-standard, ease), box-shadow var(--t-base, 200ms) var(--ease-standard, ease), border-color var(--t-base, 200ms) var(--ease-standard, ease);
+  }
+  .dpanel.glass.glass.is-useful {
+    opacity: 1; visibility: visible; pointer-events: auto; transform: none;
+    transition: opacity var(--t-base, 200ms) var(--ease-standard, ease), transform var(--t-base, 200ms) var(--ease-standard, ease),
+      grid-template-rows var(--t-unfold, 460ms) var(--ease-unfold, ease), visibility 0s linear 0s,
+      background-color var(--t-base, 200ms) var(--ease-standard, ease), box-shadow var(--t-base, 200ms) var(--ease-standard, ease), border-color var(--t-base, 200ms) var(--ease-standard, ease);
+  }
   .dpanel:not(.is-open) { grid-template-rows: 0fr auto; }
   .dpanel-head {
     order: 2;
@@ -88,10 +104,20 @@
   .dpanel-head:hover { color: var(--ink); }
   .dpanel-head:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 12px; }
   .dpanel-body { order: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 8px 8px 0; border-bottom: 1px solid var(--rule-2); }
-  .dpanel:not(.is-open) .dpanel-body { visibility: hidden; transition: visibility 0s linear var(--t-slow, 280ms); }   /* hide after the collapse, not before */
+  .dpanel:not(.is-open) .dpanel-body { visibility: hidden; transition: visibility 0s linear var(--t-unfold, 460ms); }   /* hide after the collapse, not before */
   .dpanel.is-open .dpanel-body { transition: visibility 0s linear 0s; }
   /* The pull tab rides the drawer's edge; slide with it (hover-expand, 2026-09-21). */
-  body .mob-toggle.mob-toggle.left { transition: left var(--t-slow, 280ms) var(--ease-standard, ease), transform var(--t-fast, 120ms) var(--ease-standard, ease), color var(--t-fast, 120ms); }
+  body .mob-toggle.mob-toggle.left { transition: left var(--t-unfold, 460ms) var(--ease-unfold, ease), transform var(--t-fast, 120ms) var(--ease-standard, ease), color var(--t-fast, 120ms), background-color var(--t-base, 200ms), box-shadow var(--t-base, 200ms), border-color var(--t-base, 200ms); }
+  aside.left.glass.glass {
+    transition: transform var(--t-unfold, 460ms) var(--ease-unfold, ease), visibility 0s linear var(--t-unfold, 460ms),
+      background-color var(--t-base, 200ms) var(--ease-standard, ease), box-shadow var(--t-base, 200ms) var(--ease-standard, ease), border-color var(--t-base, 200ms) var(--ease-standard, ease);
+  }
+  aside.left.glass.glass.open {
+    transition: transform var(--t-unfold, 460ms) var(--ease-unfold, ease), visibility 0s linear 0s,
+      background-color var(--t-base, 200ms) var(--ease-standard, ease), box-shadow var(--t-base, 200ms) var(--ease-standard, ease), border-color var(--t-base, 200ms) var(--ease-standard, ease);
+  }
+  /* Tips lost their fade to the same override. */
+  .tip.tip.glass { transition: opacity var(--t-fast, 120ms) var(--ease-standard, ease), transform var(--t-fast, 120ms) var(--ease-standard, ease), background-color var(--t-base, 200ms), box-shadow var(--t-base, 200ms), border-color var(--t-base, 200ms); }
   .dpanel .msheet-row {
     appearance: none; background: transparent; border: 0; border-bottom: 1px solid var(--rule-2);
     width: 100%; display: grid; grid-template-columns: 8px 1fr auto; gap: 10px; align-items: center;
