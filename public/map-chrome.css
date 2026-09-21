@@ -349,6 +349,8 @@ body #sdl-story-play.is-on { color: var(--ink) !important; border-color: var(--i
 .story-year { font-family: var(--font-mono); font-size: 28px; font-weight: 600; letter-spacing: .02em; color: var(--accent); line-height: 1; margin-bottom: 8px; font-variant-numeric: tabular-nums; }
 .story-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
 .story-line { font-size: 14px; line-height: 1.45; color: var(--ink-2); }
+.story-src { margin-top: 8px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .04em; color: var(--ink-3); word-break: break-all; }
+.story-src:empty { display: none; }
 .story-prog {
   position: fixed; left: 50%; transform: translateX(-50%); z-index: 80;
   bottom: calc(24px + var(--shell-bottom, 0px));
