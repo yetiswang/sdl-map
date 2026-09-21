@@ -153,7 +153,10 @@ html body.embed-mode aside.left, html body.embed-mode aside.right { top: var(--s
   html body.embed-mode .tip.tip { bottom: calc(76px + var(--shell-bottom, 0px)) !important; }
 }
 @media (max-width: 480px) { html body.embed-mode .tip.tip { bottom: calc(64px + var(--shell-bottom, 0px)) !important; } }
-@media (min-width: 901px) { html body.embed-mode .sheet { top: calc(var(--shell-top, 0px) + 16px); max-height: calc(100vh - var(--shell-top, 0px) - var(--shell-bottom, 0px) - 32px); } }
+/* Desktop detail card: beside the zoom column, not over it (the column is 36 px
+   wide at right 16 px), and ending above the in-view panel's peek bar
+   (39 px at bottom 16 px), so opening an entry hides no control. 2026-09-21. */
+@media (min-width: 901px) { html body.embed-mode .sheet { top: calc(var(--shell-top, 0px) + 16px); right: 68px; max-height: calc(100vh - var(--shell-top, 0px) - var(--shell-bottom, 0px) - 16px - 71px); } }
 
 /* ---------- phone / narrow: four controls + one sheet ------------------- */
 @media (max-width: 900px) {
