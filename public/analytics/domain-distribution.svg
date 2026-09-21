@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-09-15T12:51:34.414554</dc:date>
+    <dc:date>2026-09-21T18:34:39.783353</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -100,7 +100,7 @@ L 521.768635 61.860257
 L 521.768635 81.120771 
 L 82.90625 81.120771 
 z
-" clip-path="url(#pc9c23b1131)" style="fill: #c9cdd3"/>
+" clip-path="url(#p341aed0151)" style="fill: #c9cdd3"/>
    </g>
    <g id="patch_4">
     <path d="M 82.90625 92.925602 
@@ -108,7 +108,7 @@ L 331.990307 92.925602
 L 331.990307 112.186116 
 L 82.90625 112.186116 
 z
-" clip-path="url(#pc9c23b1131)" style="fill: #c9cdd3"/>
+" clip-path="url(#p341aed0151)" style="fill: #c9cdd3"/>
    </g>
    <g id="patch_5">
     <path d="M 82.90625 123.990947 
@@ -116,7 +116,7 @@ L 308.268015 123.990947
 L 308.268015 143.251461 
 L 82.90625 143.251461 
 z
-" clip-path="url(#pc9c23b1131)" style="fill: #c9cdd3"/>
+" clip-path="url(#p341aed0151)" style="fill: #c9cdd3"/>
    </g>
    <g id="patch_6">
     <path d="M 82.90625 155.056292 
@@ -124,7 +124,7 @@ L 213.378851 155.056292
 L 213.378851 174.316806 
 L 82.90625 174.316806 
 z
-" clip-path="url(#pc9c23b1131)" style="fill: #c9cdd3"/>
+" clip-path="url(#p341aed0151)" style="fill: #c9cdd3"/>
    </g>
    <g id="patch_7">
     <path d="M 82.90625 186.121637 
@@ -132,7 +132,7 @@ L 189.65656 186.121637
 L 189.65656 205.382151 
 L 82.90625 205.382151 
 z
-" clip-path="url(#pc9c23b1131)" style="fill: #c9cdd3"/>
+" clip-path="url(#p341aed0151)" style="fill: #c9cdd3"/>
    </g>
    <g id="patch_8">
     <path d="M 82.90625 217.186982 
@@ -140,7 +140,7 @@ L 177.795414 217.186982
 L 177.795414 236.447496 
 L 82.90625 236.447496 
 z
-" clip-path="url(#pc9c23b1131)" style="fill: #c9cdd3"/>
+" clip-path="url(#p341aed0151)" style="fill: #c9cdd3"/>
    </g>
    <g id="patch_9">
     <path d="M 82.90625 248.252327 
@@ -148,7 +148,7 @@ L 154.073123 248.252327
 L 154.073123 267.51284 
 L 82.90625 267.51284 
 z
-" clip-path="url(#pc9c23b1131)" style="fill: #c9cdd3"/>
+" clip-path="url(#p341aed0151)" style="fill: #c9cdd3"/>
    </g>
    <g id="patch_10">
     <path d="M 82.90625 279.317671 
@@ -156,7 +156,7 @@ L 154.073123 279.317671
 L 154.073123 298.578185 
 L 82.90625 298.578185 
 z
-" clip-path="url(#pc9c23b1131)" style="fill: #c9cdd3"/>
+" clip-path="url(#p341aed0151)" style="fill: #c9cdd3"/>
    </g>
    <g id="patch_11">
     <path d="M 82.90625 310.383016 
@@ -164,7 +164,7 @@ L 94.767396 310.383016
 L 94.767396 329.64353 
 L 82.90625 329.64353 
 z
-" clip-path="url(#pc9c23b1131)" style="fill: #c9cdd3"/>
+" clip-path="url(#p341aed0151)" style="fill: #c9cdd3"/>
    </g>
    <g id="text_10">
     <text style="font-size: 9px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="528.351571" y="73.845983" transform="rotate(-0 528.351571 73.845983)">37</text>
@@ -201,11 +201,11 @@ z
    </g>
   </g>
   <g id="text_21">
-   <text style="font-size: 7.5px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end; fill: #8a8f96" x="566.30625" y="363.156694" transform="rotate(-0 566.30625 363.156694)">sdl-map.discoverylabs.nl · 118 initiatives · 2026-09-15</text>
+   <text style="font-size: 7.5px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end; fill: #8a8f96" x="566.30625" y="363.156694" transform="rotate(-0 566.30625 363.156694)">sdl-map.discoverylabs.nl · 118 initiatives · 2026-09-21</text>
   </g>
  </g>
  <defs>
-  <clipPath id="pc9c23b1131">
+  <clipPath id="p341aed0151">
    <rect x="82.90625" y="48.471094" width="478.36" height="294.5616"/>
   </clipPath>
  </defs>

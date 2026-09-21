@@ -1,0 +1,36 @@
+---
+import aboutAll from '../i18n/about.json';
+import uiAll from '../i18n/ui.json';
+import PageHead from './PageHead.astro';
+interface Props { lang: string }
+const { lang } = Astro.props;
+const a = (aboutAll as any)[lang] || (aboutAll as any).en;
+const ui = (uiAll as any)[lang] || (uiAll as any).en;
+const prefix = lang === 'en' ? '/' : `/${lang}/`;
+---
+<main class="about" data-pagefind-body>
+  <PageHead title={a.title} desc={a.lead} />
+  <p>{a.what}</p>
+  <p>{a.who} <a href="https://discoverylabs.nl" target="_blank" rel="noopener">{a.linkDlnl} ↗</a></p>
+  <h2>{a.ruleHead}</h2>
+  <ol>
+    {a.rules.map((r: string) => <li>{r}</li>)}
+  </ol>
+  <p>{a.cadence}</p>
+  <p class="author">{a.author}</p>
+  <div class="links">
+    <a href="https://github.com/yetiswang/sdl-map/issues/new?template=add-lab.yml" target="_blank" rel="noopener">{a.linkSuggest} ↗</a>
+    <a href={`${prefix}list/#downloads`}>{a.linkData}</a>
+  </div>
+</main>
+<style>
+  .about { max-width: 720px; margin: 0 auto; padding: 24px 28px 48px; font-size: 15px; line-height: 1.65; color: var(--ink-2); }
+  .about p { margin: 0 0 16px; }
+  .about h2 { margin: 28px 0 10px; font-size: 13px; font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.16em;
+              text-transform: uppercase; color: var(--ink-3); }
+  .about ol { margin: 0 0 20px; padding-left: 22px; }
+  .about li { margin: 0 0 8px; }
+  .about a { color: var(--ink); border-bottom: 1px dotted var(--ink-3); }
+  .about .author { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.02em; color: var(--ink-3); }
+  .about .links { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 8px; font-size: 13.5px; }
+</style>

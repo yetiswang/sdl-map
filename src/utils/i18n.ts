@@ -26,7 +26,7 @@ export function entityOrg(id: string, fallback: string, lang: string): string {
 
 // Map of UI strings for zh-Hans → zh-Hant conversion (used by client-side toggle)
 export const zhHantMap: Record<string, string> = {
-  "荷兰国家材料发现实验室 · 实时追踪": "荷蘭國家材料發現實驗室 · 實時追蹤",
+  "自主科学 · 图谱与动态": "自主科學 · 圖譜與動態",
   "全球自驱动实验室": "全球自驅動實驗室",
   "版图": "版圖",
   "项目": "項目",

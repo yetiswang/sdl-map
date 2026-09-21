@@ -1,0 +1,15 @@
+---
+import UnifiedLayout from '../layouts/UnifiedLayout.astro';
+import AboutBody from '../components/AboutBody.astro';
+import uiAll from '../i18n/ui.json';
+import aboutAll from '../i18n/about.json';
+
+const lang = 'en';
+const ui = uiAll[lang];
+const about = aboutAll[lang];
+const aboutNode = { '@type': 'AboutPage', name: about.title, description: about.lead, mainEntity: { '@id': 'https://sdl-map.discoverylabs.nl/#website' } };
+---
+
+<UnifiedLayout title={`${ui.about} · ${ui.brandH1} ${ui.brandDim}`} description={about.lead} lang={lang} activeView="about" jsonLd={[aboutNode]}>
+  <AboutBody lang={lang} />
+</UnifiedLayout>

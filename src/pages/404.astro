@@ -1,0 +1,21 @@
+---
+import UnifiedLayout from '../layouts/UnifiedLayout.astro';
+import uiAll from '../i18n/ui.json';
+const lang = 'en';
+const ui = uiAll[lang];
+---
+
+<UnifiedLayout title={`${ui.nfTitle} · ${ui.brandH1} ${ui.brandDim}`} description={ui.nfBody} lang={lang} activeView="map" indexable={false}>
+  <main style="max-width:720px;margin:0 auto;padding:48px 28px;">
+    <p style="margin:0 0 10px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.18em;color:var(--ink-3);">404</p>
+    <h1 style="margin:0 0 12px;font-size:26px;font-weight:650;color:var(--ink);">{ui.nfTitle}</h1>
+    <p style="margin:0 0 22px;font-size:15px;line-height:1.6;color:var(--ink-2);">{ui.nfBody}</p>
+    <nav style="display:flex;flex-wrap:wrap;gap:10px 22px;font-size:14px;">
+      <a href="/" style="color:var(--ink);border-bottom:1px dotted var(--ink-3);">{ui.map}</a>
+      <a href="/list/" style="color:var(--ink);border-bottom:1px dotted var(--ink-3);">{ui.list}</a>
+      <a href="/timeline/" style="color:var(--ink);border-bottom:1px dotted var(--ink-3);">{ui.timeline}</a>
+      <a href="/watch/" style="color:var(--ink);border-bottom:1px dotted var(--ink-3);">{ui.watch}</a>
+      <a href="/about/" style="color:var(--ink);border-bottom:1px dotted var(--ink-3);">{ui.about}</a>
+    </nav>
+  </main>
+</UnifiedLayout>

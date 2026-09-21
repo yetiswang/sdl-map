@@ -3,18 +3,22 @@ import uiAll from '../i18n/ui.json';
 import countries from '../i18n/countries.json';
 import chinaNames from '../i18n/china-names.json';
 import data from '../data/sdl_data.json';
+import { gitDate } from '../utils/dates';
 
 export interface Props {
   title: string;
   description?: string;
   lang: string;
   ogImage?: string;
-  activeView?: 'map' | 'list' | 'timeline' | 'watch';
+  activeView?: 'map' | 'list' | 'timeline' | 'watch' | 'about';
+  /** Extra schema.org nodes merged into the page's JSON-LD @graph. */
+  jsonLd?: Record<string, unknown>[];
+  /** false → robots noindex, no canonical, no hreflang (404 page). */
+  indexable?: boolean;
 }
 
 const {
-  title, description = 'A curated interactive map of Self-Driving Laboratories worldwide.',
-  lang = 'en', ogImage, activeView = 'map',
+  title, description, lang = 'en', ogImage, activeView = 'map', jsonLd = [], indexable = true,
 } = Astro.props;
 
 const siteUrl = 'https://sdl-map.discoverylabs.nl';
@@ -27,6 +31,61 @@ const statsCountries = new Set((data as any[]).map((d) => d.country)).size;
 const statsOperational = (data as any[]).filter(
   (d) => d.maturity === 'operational' || d.maturity === 'industrial'
 ).length;
+
+// ---- SEO contract (2026-09-21; DESIGN.md § SEO) ----------------------------
+// One canonical per page, hreflang across the four served locales with en as
+// x-default, the share card on every page, and a schema.org graph: WebSite +
+// Organization + Person everywhere, Dataset on the map and list pages, plus
+// whatever the page passes in (Organization/Place per entry, AboutPage).
+const fill = (t: string) => t.replace('{n}', String(statsTotal)).replace('{c}', String(statsCountries));
+const metaDescription = description ?? fill(ui.siteDesc);
+const pathname = Astro.url.pathname;                                   // e.g. /zh/list/
+const basePath = pathname.replace(/^\/(zh|ja|ko)(\/|$)/, '/');        // e.g. /list/
+const canonical = siteUrl + pathname;
+const alternates: [string, string][] = [
+  ['en', basePath], ['zh-Hans', '/zh' + basePath], ['ja', '/ja' + basePath], ['ko', '/ko' + basePath],
+];
+const ogLocale = ({ en: 'en_US', zh: 'zh_CN', ja: 'ja_JP', ko: 'ko_KR' } as Record<string, string>)[lang] || 'en_US';
+const card = ogImage || `${siteUrl}/sdl-landscape-card.png`;
+const siteName = 'Global Self-Driving Lab Landscape';
+const isHome = activeView === 'map' && basePath === '/';
+const BrandTag = isHome ? 'h1' : 'p';                                   // one h1 per page; inner pages own theirs
+const dataDate = gitDate('src/data/sdl_data.json');
+
+const orgNode = {
+  '@type': 'Organization', '@id': 'https://discoverylabs.nl/#organization',
+  name: 'DiscoveryLabNL', url: 'https://discoverylabs.nl',
+  parentOrganization: { '@type': 'Organization', name: 'TU/e Flagship Advanced Materials', url: 'https://tue-flagship-advanced-materials.nl' },
+};
+const personNode = {
+  '@type': 'Person', '@id': 'https://yuyang.nl/#person', name: 'Yuyang Wang', url: 'https://yuyang.nl',
+  affiliation: { '@type': 'Organization', name: 'Eindhoven University of Technology', url: 'https://www.tue.nl' },
+};
+const websiteNode = {
+  '@type': 'WebSite', '@id': `${siteUrl}/#website`, name: siteName,
+  alternateName: ['SDL Landscape', '全球自主实验室图谱'], url: `${siteUrl}/`,
+  description: fill((uiAll as any).en.siteDesc), inLanguage: ['en', 'zh-Hans', 'ja', 'ko'],
+  publisher: { '@id': orgNode['@id'] }, author: { '@id': personNode['@id'] },
+  license: 'https://github.com/yetiswang/sdl-map/blob/main/LICENSE',
+};
+const datasetNode = {
+  '@type': 'Dataset', '@id': `${siteUrl}/#dataset`, name: `${siteName} dataset`,
+  description: `${statsTotal} self-driving lab initiatives in ${statsCountries} countries: national programmes, academic groups, commercial platforms and lab-OS vendors, each with location, tier, domain, maturity, first public year, investment where disclosed, a one-line summary and sources.`,
+  url: `${siteUrl}/list/`, sameAs: 'https://github.com/yetiswang/sdl-map',
+  license: 'https://opensource.org/licenses/MIT', isAccessibleForFree: true,
+  creator: { '@id': personNode['@id'] }, publisher: { '@id': orgNode['@id'] },
+  keywords: ['self-driving laboratory', 'autonomous experimentation', 'materials discovery', 'laboratory automation', 'AI for science', 'research infrastructure'],
+  temporalCoverage: `1980/${dataDate.slice(0, 4)}`, spatialCoverage: 'Worldwide', dateModified: dataDate,
+  distribution: [
+    { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: `${siteUrl}/sdl-data.csv` },
+    { '@type': 'DataDownload', encodingFormat: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', contentUrl: `${siteUrl}/sdl-data.xlsx` },
+    { '@type': 'DataDownload', encodingFormat: 'text/plain', contentUrl: `${siteUrl}/sdl-data.txt` },
+  ],
+};
+const graph: Record<string, unknown>[] = [websiteNode, orgNode, personNode];
+if (isHome || activeView === 'list') graph.push(datasetNode);
+graph.push(...jsonLd);
+const ldJson = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
 
 // Simplified→Traditional dictionary, built ONCE at build time (was reconstructed
 // on every /zh/ page load from three sources). Single source = ui.json +
@@ -80,17 +139,28 @@ function altUrl(toLang: string, script?: string | null): string {
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>{title}</title>
-<meta name="description" content={description} />
+<meta name="description" content={metaDescription} />
+{!indexable && <meta name="robots" content="noindex" />}
+{indexable && <link rel="canonical" href={canonical} />}
+{indexable && alternates.map(([hl, p]) => <link rel="alternate" hreflang={hl} href={siteUrl + p} />)}
+{indexable && <link rel="alternate" hreflang="x-default" href={siteUrl + basePath} />}
+<link rel="alternate" type="application/rss+xml" title={`${siteName} · Watch`} href="/watch.xml" />
 <link rel="icon" type="image/png" href="/sdl_favicon.png">
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content={ogLocale} />
 <meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
+<meta property="og:description" content={metaDescription} />
 <meta property="og:type" content="website" />
-<meta property="og:url" content={siteUrl + Astro.url.pathname} />
-{ogImage && <meta property="og:image" content={ogImage} />}
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={card} />
+<meta property="og:image:width" content="2400" />
+<meta property="og:image:height" content="1254" />
+<meta property="og:image:alt" content={`${siteName}: interactive world map, growth timeline, watch feed`} />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
-{ogImage && <meta name="twitter:image" content={ogImage} />}
+<meta name="twitter:description" content={metaDescription} />
+<meta name="twitter:image" content={card} />
+<script type="application/ld+json" is:inline set:html={ldJson}></script>
 
 <!-- Self-hosted fonts + shared design tokens (no third-party CDN). -->
 <link rel="stylesheet" href="/tokens.css">
@@ -269,9 +339,9 @@ a{ color:inherit; text-decoration:none; }
       </a>
       <div style="min-width:0;">
         <div class="brand-eyebrow" style="font-family:var(--font-mono);font-size:10px;color:var(--ink-3);letter-spacing:0.22em;text-transform:uppercase;margin-bottom:4px;">{ui.brandEyebrow}</div>
-        <h1 class="brand-h1" style="font-family:var(--font-sans);font-weight:600;font-size:24px;letter-spacing:-0.01em;margin:0;color:var(--ink);line-height:1.2;">
+        <BrandTag class="brand-h1" style="font-family:var(--font-sans);font-weight:600;font-size:24px;letter-spacing:-0.01em;margin:0;color:var(--ink);line-height:1.2;">
           <a href={prefix}>{ui.brandH1}</a> <span class="brand-h1-dim" style="color:var(--ink-3);font-weight:400;">{ui.brandDim}</span>
-        </h1>
+        </BrandTag>
       </div>
     </div>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
@@ -327,9 +397,11 @@ a{ color:inherit; text-decoration:none; }
   <!-- ===== FOOTER ===== -->
   <footer class="site-footer glass glass-mid" style="position:fixed;left:0;right:0;bottom:0;z-index:60;padding:14px 28px calc(14px + env(safe-area-inset-bottom, 0px));border-top-width:1px;border-top-style:solid;font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3);letter-spacing:0.12em;">
     <div class="site-footer-row" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;text-align:center;">
-      <span><a href="https://discoverylabs.nl" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">{ui.footerDlnl}</a><span class="ft-opt"> · {ui.footerLandscape}</span></span>
+      <span><span class="ft-opt">{ui.footerProjectPre}</span><a href="https://discoverylabs.nl" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">{ui.footerDlnl}</a><span class="ft-opt">{ui.footerProjectPost}</span></span>
       <span style="opacity:0.5;">·</span>
       <span><span class="ft-opt">{ui.footerPart} </span><a href="https://tue-flagship-advanced-materials.nl" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">{ui.footerFlagship}</a></span>
+      <span style="opacity:0.5;">·</span>
+      <span><a href={`${prefix}about/`} style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">{ui.about}</a></span>
       <span style="opacity:0.5;">·</span>
       <span><a href="https://github.com/yetiswang/sdl-map/issues/new?template=add-lab.yml" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">{ui.footerSuggest}</a></span>
       <span style="opacity:0.5;">·</span>

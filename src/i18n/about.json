@@ -1,0 +1,74 @@
+{
+  "en": {
+    "title": "About",
+    "lead": "Autonomous science, mapped and watched. A hand-curated reference to where self-driving laboratories are being built, who builds them, and what changes week by week.",
+    "what": "The map places every initiative we can verify from public sources on a globe: national programmes, academic groups, commercial platforms and lab-OS vendors, each with its first public year, domain, maturity, scale, investment where disclosed, and the sources behind the entry. The list makes the same data searchable, the timeline shows how the field grew since 1980, and the watch records talent moves, new labs, funding and policy as they happen.",
+    "who": "The landscape is maintained by DiscoveryLabNL, a Dutch initiative for a national AI-driven materials-discovery infrastructure, hosted within the TU/e Flagship Advanced Materials at Eindhoven University of Technology. We built it to understand the field we are entering, and we publish it because everyone planning a self-driving lab needs the same overview.",
+    "ruleHead": "What gets in",
+    "rules": [
+      "A public, verifiable source: a paper, a programme page, a press release or a funding record. It is linked on every entry.",
+      "Closed-loop intent: the initiative plans, runs or analyses experiments with automation and AI in the loop, or builds the software and hardware that lets others do so.",
+      "One entry per initiative, placed at its home campus or headquarters; consortia at their coordinating site.",
+      "Institutions and programmes, not individuals, and no claims about performance beyond what the sources state."
+    ],
+    "cadence": "Entries are added as they are verified; the watch is updated weekly. To suggest a lab or correct an entry, open an issue on GitHub. The dataset is MIT-licensed and downloadable as CSV, Excel and plain text; please cite the map when you reuse it.",
+    "author": "Curated by Yuyang Wang, research infrastructure manager at the Institute for Complex Molecular Systems, Eindhoven University of Technology.",
+    "linkSuggest": "Suggest a lab or a correction",
+    "linkData": "Download the dataset",
+    "linkDlnl": "DiscoveryLabNL"
+  },
+  "zh": {
+    "title": "关于",
+    "lead": "自主科学，入图并追踪。一份人工编制的参考图谱：自主实验室建在哪里、由谁建设，以及每一周发生了什么变化。",
+    "what": "地图把每一个可以从公开来源核实的项目放到地球仪上：国家计划、学术团队、商业平台与实验室操作系统供应商，每一项都附有首次公开年份、领域、成熟度、规模、已披露的投资，以及该条目所依据的来源。列表让同一份数据可以检索，时间轴展示这一领域自 1980 年以来的增长，动态则记录人才流动、新建实验室、资金与政策。",
+    "who": "本图谱由 DiscoveryLabNL 维护。DiscoveryLabNL 是荷兰面向国家级 AI 驱动材料发现基础设施的倡议，隶属埃因霍温理工大学先进材料旗舰计划。我们建立它是为了理解自己正在进入的领域，公开它是因为每一个筹划自主实验室的人都需要同一份全景。",
+    "ruleHead": "收录标准",
+    "rules": [
+      "公开、可核实的来源：论文、项目页面、新闻稿或资助记录，每个条目都附链接。",
+      "闭环意图：该项目以自动化与 AI 参与实验的规划、执行或分析，或为他人提供这样做的软件与硬件。",
+      "每个项目一个条目，定位于其主校区或总部；联盟定位于协调机构所在地。",
+      "只收录机构与计划，不收录个人；不做超出来源所述的性能判断。"
+    ],
+    "cadence": "条目在核实后加入；动态每周更新。如需推荐实验室或更正条目，请在 GitHub 提交 issue。数据集采用 MIT 许可，可下载 CSV、Excel 与纯文本；再利用时请引用本图谱。",
+    "author": "编制：王昱扬，埃因霍温理工大学复杂分子系统研究所科研基础设施经理。",
+    "linkSuggest": "推荐实验室或提交更正",
+    "linkData": "下载数据集",
+    "linkDlnl": "DiscoveryLabNL"
+  },
+  "ja": {
+    "title": "このサイトについて",
+    "lead": "自律科学を地図に、動向を追う。自動実験室がどこで、誰によって築かれ、週ごとに何が変わったかをまとめた、手作業で編纂したリファレンスです。",
+    "what": "地図には、公開情報で確認できるすべてのイニシアチブを地球儀上に配置しています。国家プログラム、学術グループ、商用プラットフォーム、ラボOSベンダーのそれぞれに、初公開年、分野、成熟度、規模、公表されている投資額、そして根拠となる出典を添えています。リストでは同じデータを検索でき、タイムラインは 1980 年以降の分野の成長を示し、ウォッチは人材の移動、新設ラボ、資金、政策を随時記録します。",
+    "who": "このランドスケープは DiscoveryLabNL が運営しています。DiscoveryLabNL はオランダにおける AI 駆動の材料探索国家インフラを目指すイニシアチブで、アイントホーフェン工科大学の先端材料フラッグシップの一部です。私たち自身がこれから入る分野を理解するために作り、自動実験室を計画するすべての人に同じ全体像が必要だと考えて公開しています。",
+    "ruleHead": "掲載基準",
+    "rules": [
+      "公開され検証可能な出典：論文、プログラムのページ、プレスリリース、または資金記録。各項目にリンクを付けています。",
+      "クローズドループの意図：自動化と AI を組み込んで実験を計画・実行・解析する、あるいはそれを可能にするソフトウェアやハードウェアを提供している。",
+      "1 イニシアチブにつき 1 項目。所在地は本拠キャンパスまたは本社、コンソーシアムは調整機関の所在地。",
+      "対象は機関とプログラムであり個人ではない。性能について出典以上の主張はしない。"
+    ],
+    "cadence": "項目は確認でき次第追加し、ウォッチは毎週更新します。ラボの推薦や修正は GitHub の issue からお寄せください。データセットは MIT ライセンスで、CSV・Excel・テキスト形式でダウンロードできます。再利用の際は本マップを引用してください。",
+    "author": "編纂：王昱揚（アイントホーフェン工科大学 複雑分子システム研究所 研究インフラマネージャー）。",
+    "linkSuggest": "ラボの推薦・修正はこちら",
+    "linkData": "データセットをダウンロード",
+    "linkDlnl": "DiscoveryLabNL"
+  },
+  "ko": {
+    "title": "소개",
+    "lead": "자율 과학을 지도로, 동향을 추적. 자율실험실이 어디에, 누구에 의해 세워지고 있으며 매주 무엇이 달라지는지를 손으로 정리한 레퍼런스입니다.",
+    "what": "지도는 공개 출처로 확인할 수 있는 모든 이니셔티브를 지구본 위에 놓습니다. 국가 프로그램, 학술 그룹, 상용 플랫폼, 랩 OS 공급사 각각에 첫 공개 연도, 분야, 성숙도, 규모, 공개된 투자 규모, 그리고 근거가 된 출처를 붙였습니다. 목록은 같은 데이터를 검색하게 하고, 타임라인은 1980년 이후 분야의 성장을 보여주며, 동향은 인재 이동, 신규 연구소, 자금, 정책을 그때그때 기록합니다.",
+    "who": "이 랜드스케이프는 DiscoveryLabNL이 운영합니다. DiscoveryLabNL은 네덜란드의 국가 AI 기반 소재 발견 인프라를 위한 이니셔티브로, 에인트호번 공과대학 첨단소재 플래그십에 속해 있습니다. 우리가 들어서는 분야를 이해하기 위해 만들었고, 자율실험실을 계획하는 모든 사람에게 같은 전경이 필요하다고 보아 공개합니다.",
+    "ruleHead": "수록 기준",
+    "rules": [
+      "공개되고 검증 가능한 출처: 논문, 프로그램 페이지, 보도자료 또는 자금 기록. 모든 항목에 링크를 답니다.",
+      "폐루프 의도: 자동화와 AI를 실험의 계획·수행·분석에 결합하거나, 다른 이들이 그렇게 할 수 있는 소프트웨어와 하드웨어를 만드는 이니셔티브.",
+      "이니셔티브당 하나의 항목. 위치는 본거지 캠퍼스 또는 본사, 컨소시엄은 조정 기관 소재지.",
+      "개인이 아닌 기관과 프로그램을 다루며, 출처가 밝힌 것 이상의 성능 주장은 하지 않습니다."
+    ],
+    "cadence": "항목은 확인되는 대로 추가되고, 동향은 매주 갱신됩니다. 연구소 제안이나 항목 수정은 GitHub 이슈로 보내 주세요. 데이터셋은 MIT 라이선스이며 CSV, Excel, 텍스트로 내려받을 수 있습니다. 재사용 시 이 지도를 인용해 주세요.",
+    "author": "큐레이션: 왕욱양, 에인트호번 공과대학 복합분자시스템연구소 연구 인프라 매니저.",
+    "linkSuggest": "연구소 제안 또는 수정 요청",
+    "linkData": "데이터셋 내려받기",
+    "linkDlnl": "DiscoveryLabNL"
+  }
+}

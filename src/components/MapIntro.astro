@@ -1,0 +1,31 @@
+---
+// Crawlable, screen-reader-readable description of the map page. The map
+// itself is a canvas inside an iframe, so without this the home page carries
+// no indexable text. Visually hidden, same facts as the visible map: counts,
+// what a pin is, where the other views are.
+import data from '../data/sdl_data.json';
+import uiAll from '../i18n/ui.json';
+interface Props { lang: string }
+const { lang } = Astro.props;
+const ui = (uiAll as any)[lang] || (uiAll as any).en;
+const prefix = lang === 'en' ? '/' : `/${lang}/`;
+const n = (data as any[]).length;
+const c = new Set((data as any[]).map(d => d.country)).size;
+const text = String(ui.mapIntro).replace('{n}', String(n)).replace('{c}', String(c));
+---
+<section class="map-intro" aria-label={ui.mapIntroHead}>
+  <h2>{ui.mapIntroHead}</h2>
+  <p>{text}</p>
+  <ul>
+    <li><a href={`${prefix}list/`}>{ui.list}</a></li>
+    <li><a href={`${prefix}timeline/`}>{ui.timeline}</a></li>
+    <li><a href={`${prefix}watch/`}>{ui.watch}</a></li>
+    <li><a href={`${prefix}about/`}>{ui.about}</a></li>
+    <li><a href="/sdl-data.csv">{ui.downloadData}</a></li>
+  </ul>
+</section>
+<style>
+  /* Off-screen, not display:none, so assistive tech and crawlers both read it. */
+  .map-intro { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+               clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+</style>

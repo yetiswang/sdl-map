@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
 <title>Global SDL Landscape · Map</title>
+<meta name="robots" content="noindex" />
 <link rel="icon" type="image/png" href="sdl_favicon.png">
 
 <link rel="stylesheet" href="/tokens.css">
@@ -1038,6 +1039,7 @@ body.interacting .land { opacity: 0.92; }
 .sheet-head .s-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
 .sheet-head .s-name { font-size: 22px; font-weight: 600; line-height: 1.2; color: var(--ink); flex: 1; min-width: 0; }
 .sheet-meta { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); letter-spacing: 0.1em; text-transform: uppercase; margin: 6px 0 14px; }
+.sheet-blurb { margin: -4px 0 14px; font-size: 13.5px; line-height: 1.55; color: var(--ink-2); }
 .sheet-row { display: flex; justify-content: space-between; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--rule-2); }
 .sheet-row .k { color: var(--ink-3); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; flex-shrink: 0; }
 .sheet-row .v { color: var(--ink); text-align: right; font-size: 14px; }
@@ -1981,7 +1983,7 @@ window.SDL_CATEGORIES = {
           <img src="img/tue-logo.png" alt="TU Eindhoven">
         </a>
         <div class="brand">
-          <div class="eyebrow">DiscoveryLabNL \u00B7 live tracker</div>
+          <div class="eyebrow">Autonomous science, mapped and watched</div>
           <h1>Global Self-Driving Lab <span class="dim">Landscape</span></h1>
         </div>
       </div>
@@ -4732,6 +4734,7 @@ function setupBottomSheet(){
         <span class="s-name" id="sheet-name">${d.flag || ''} ${d.name}</span>
       </div>
       <div class="sheet-meta">${tierLabel} · ${d.city}, ${d.country}</div>
+      ${d.blurb ? `<p class="sheet-blurb">${String(d.blurb).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</p>` : ''}
       <div class="sheet-row" style="--i:0"><span class="k">Org</span><span class="v">${d.org || '—'}</span></div>
       <div class="sheet-row" style="--i:1"><span class="k">Domain</span><span class="v">${domLabel}</span></div>
       <div class="sheet-row" style="--i:2"><span class="k">Maturity</span><span class="v">${matLabel}</span></div>

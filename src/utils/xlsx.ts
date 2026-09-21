@@ -51,7 +51,7 @@ export function buildXLSX(): Uint8Array {
   const numericCols = new Set(COLUMNS.map((c, i) => (isNumericColumn(c) ? i : -1)).filter(i => i >= 0));
   const dataRows: (string | number)[][] = [[...COLUMNS], ...data.map(e => toRow(e))];
   const widths = COLUMNS.map(c =>
-    ({ id: 14, name: 34, org: 34, city: 16, country: 14, url: 40, sources: 60, invest_label: 22 } as Record<string, number>)[c] ?? 12);
+    ({ id: 14, name: 34, org: 34, city: 16, country: 14, url: 40, sources: 60, invest_label: 22, blurb: 80 } as Record<string, number>)[c] ?? 12);
   const aboutRows: (string | number)[][] = [
     [m.title],
     [`${m.count} initiatives across ${m.countries} countries`],

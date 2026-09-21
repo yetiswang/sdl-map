@@ -68,7 +68,7 @@ const yearGroups = Object.keys(byYear).map(Number).sort((a, b) => b - a).map(y =
 const ariaLabel = `${ui.growthTitle}: ${baseline} by ${CHART_START - 1}, rising to ${total} by ${maxYear}`;
 ---
 
-<UnifiedLayout title={`${ui.timeline} · ${ui.brandH1}`} description={ui.timelineIntro} lang={lang} activeView="timeline">
+<UnifiedLayout title={`${ui.timeline} · ${ui.brandH1} ${ui.brandDim}`} description={ui.timelineIntro} lang={lang} activeView="timeline">
   <main class="tl-main" data-pagefind-body>
     <PageHead title={ui.timeline} desc={ui.timelineIntro} />
 

@@ -20,9 +20,34 @@ const detailFields = [
   { label: ui.maturity, value: entry.maturity },
   ...(entry.investLabel ? [{ label: ui.investment, value: entry.investLabel }] : []),
 ];
+// SEO (2026-09-21): a real description per entry and a schema.org node so the
+// 118 × 4 entry pages stop sharing one sentence. Blurbs are English for now.
+const place = `${entry.city}, ${countryName(entry.country, lang)}`;
+const blurb: string = (entry as any).blurb || '';
+const description = blurb
+  ? `${entry.name} · ${place}. ${blurb}`
+  : `${entry.name} (${entry.org}), ${place}: ${tierLabels[entry.tier]}, ${entry.domain}, ${entry.maturity}.`;
+const siteUrl = 'https://sdl-map.discoverylabs.nl';
+const entryNode = {
+  '@type': 'Organization', '@id': `${siteUrl}${prefix}entry/${entry.id}/#entity`,
+  name: entry.name, url: entry.url || undefined, description: blurb || undefined,
+  foundingDate: entry.start > 0 ? String(entry.start) : undefined,
+  location: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: entry.city, addressCountry: entry.country },
+              geo: { '@type': 'GeoCoordinates', latitude: Number(entry.lat), longitude: Number(entry.lon) } },
+  sameAs: (entry.sources || []).filter((u: string) => u !== entry.url),
+  subjectOf: { '@id': `${siteUrl}/#dataset` },
+};
+const crumbs = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: `${ui.brandH1} ${ui.brandDim}`, item: `${siteUrl}${prefix}` },
+    { '@type': 'ListItem', position: 2, name: ui.list, item: `${siteUrl}${prefix}list/` },
+    { '@type': 'ListItem', position: 3, name: entry.name, item: `${siteUrl}${prefix}entry/${entry.id}/` },
+  ],
+};
 ---
 
-<UnifiedLayout title={`${entry.name} · ${ui.brandH1} ${ui.brandDim}`} lang={lang}>
+<UnifiedLayout title={`${entry.name} · ${ui.brandH1} ${ui.brandDim}`} description={description} lang={lang} activeView="list" jsonLd={[entryNode, crumbs]}>
   <main style="max-width:720px;margin:0 auto;padding:32px 28px;" data-pagefind-body>
     <a href={`${prefix}list/`} style="font-size:13px;color:var(--ink-3);font-family:var(--font-mono);">{ui.back}</a>
     <div style="margin-top:20px;padding:24px;background:var(--bg-2);border:1px solid var(--rule);border-radius:12px;">
@@ -33,6 +58,7 @@ const detailFields = [
       </div>
       <h1 style="margin:0 0 6px;font-size:26px;font-weight:700;">{entityName(entry.id, entry.name, lang)}</h1>
       <p style="margin:0 0 16px;color:var(--ink-2);font-size:15px;">{entityOrg(entry.id, entry.org, lang)}</p>
+      {blurb && <p class="entry-blurb" lang="en" style="margin:0 0 18px;font-size:15px;line-height:1.6;color:var(--ink);">{blurb} <span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-3);"> · {ui.entryBlurbNote}</span></p>}
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:16px 0;">
         {detailFields.map(f => (
           <div style="padding:12px;background:var(--bg);border-radius:8px;">

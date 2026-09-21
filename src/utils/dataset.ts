@@ -8,7 +8,7 @@ export type Entry = (typeof data)[number];
 export const COLUMNS = [
   'id', 'name', 'org', 'city', 'country', 'lat', 'lon',
   'tier', 'domain', 'maturity', 'charact', 'ai', 'scale',
-  'invest_musd', 'invest_label', 'start', 'url', 'sources',
+  'invest_musd', 'invest_label', 'start', 'url', 'sources', 'blurb',
 ] as const;
 
 const NUMERIC = new Set(['lat', 'lon', 'invest_musd', 'start']);
@@ -29,6 +29,7 @@ export function toRow(e: Entry): (string | number)[] {
     e.start > 0 ? e.start : '',
     e.url,
     (e.sources || []).join(' ; '),
+    (e as any).blurb || '',
   ];
 }
 
@@ -81,6 +82,7 @@ export function toTXT(): string {
         !blank(e.investLabel) ? `investment: ${e.investLabel}` : '',
       ].filter(Boolean);
       out.push(`  ${facts.join(' · ')}`);
+      if ((e as any).blurb) out.push(`  ${(e as any).blurb}`);
       out.push(`  ${e.url}`);
       out.push('');
     }

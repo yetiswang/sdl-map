@@ -1,6 +1,6 @@
 {
   "en": {
-    "brandEyebrow": "DiscoveryLabNL · live tracker",
+    "brandEyebrow": "Autonomous science, mapped and watched",
     "brandH1": "Global Self-Driving Lab",
     "brandDim": "Landscape",
     "initiatives": "Initiatives",
@@ -17,7 +17,7 @@
     "footerLandscape": "Self-Driving Labs Landscape",
     "footerPart": "part of",
     "footerFlagship": "TU/e Flagship Advanced Materials",
-    "footerBy": "by",
+    "footerBy": "curated by",
     "footerAuthor": "Yuyang Wang",
     "langLabel": "中文",
     "back": "← Back",
@@ -64,10 +64,19 @@
     "navTipMap": "Interactive world map of SDL initiatives",
     "navTipList": "All initiatives as searchable cards",
     "navTipTimeline": "Landscape growth by start year",
-    "navTipWatch": "Curated landscape news feed"
+    "navTipWatch": "Curated landscape news feed",
+    "siteDesc": "Autonomous science, mapped and watched: {n} self-driving lab initiatives in {c} countries on an interactive map and timeline, a weekly watch feed, and open data.",
+    "footerProjectPre": "A ",
+    "footerProjectPost": " project",
+    "about": "About",
+    "nfTitle": "Page not found",
+    "nfBody": "This address does not exist on the site. The map, the list, the timeline and the watch are one step away.",
+    "mapIntroHead": "What is on this map",
+    "mapIntro": "{n} initiatives in {c} countries: national programmes, academic groups, commercial platforms and lab-OS vendors, each placed on a globe with its first public year, domain, maturity and sources. Browse the list, the timeline and the weekly watch, or download the data.",
+    "entryBlurbNote": "Summary in English"
   },
   "zh-Hant": {
-    "brandEyebrow": "荷蘭國家材料發現實驗室 · 實時追蹤",
+    "brandEyebrow": "自主科學 · 圖譜與動態",
     "brandH1": "全球自主實驗室",
     "brandDim": "圖譜",
     "initiatives": "項目",
@@ -131,10 +140,19 @@
     "navTipMap": "自主實驗室互動世界地圖",
     "navTipList": "全部項目卡片，可搜索",
     "navTipTimeline": "按啟動年份的發展時間線",
-    "navTipWatch": "精選領域動態"
+    "navTipWatch": "精選領域動態",
+    "siteDesc": "自主科學，入圖並追蹤：{c} 個國家的 {n} 個自主實驗室項目，互動式地圖與時間軸、每週動態，以及開放資料。",
+    "footerProjectPre": "",
+    "footerProjectPost": "項目",
+    "about": "關於",
+    "nfTitle": "頁面不存在",
+    "nfBody": "該地址不在本站。地圖、列表、時間軸與動態就在一步之外。",
+    "mapIntroHead": "這張圖上有什麼",
+    "mapIntro": "{c} 個國家的 {n} 個項目：國家計畫、學術團隊、商業平台與實驗室作業系統供應商，每一項都標注首次公開年份、領域、成熟度與來源。可瀏覽列表、時間軸與每週動態，或下載資料。",
+    "entryBlurbNote": "英文簡介"
   },
   "ja": {
-    "brandEyebrow": "オランダ国家材料発見研究所 · ライブ追跡",
+    "brandEyebrow": "自律科学 · 地図と動向",
     "brandH1": "グローバル自動実験室",
     "brandDim": "ランドスケープ",
     "initiatives": "プロジェクト",
@@ -198,10 +216,19 @@
     "navTipMap": "SDLイニシアチブの世界地図",
     "navTipList": "全プロジェクトの検索可能なカード",
     "navTipTimeline": "開始年別の成長タイムライン",
-    "navTipWatch": "厳選ニュースフィード"
+    "navTipWatch": "厳選ニュースフィード",
+    "siteDesc": "自律科学を地図に、動向を追う：{c} か国 {n} 件の自動実験室イニシアチブを、インタラクティブな地図とタイムライン、週次ウォッチ、オープンデータで。",
+    "footerProjectPre": "",
+    "footerProjectPost": "のプロジェクト",
+    "about": "このサイトについて",
+    "nfTitle": "ページが見つかりません",
+    "nfBody": "このアドレスは存在しません。地図・リスト・タイムライン・ウォッチへどうぞ。",
+    "mapIntroHead": "この地図にあるもの",
+    "mapIntro": "{c} か国 {n} 件：国家プログラム、学術グループ、商用プラットフォーム、ラボOSベンダーを、初公開年・分野・成熟度・出典とともに地球儀上に配置。リスト、タイムライン、週次ウォッチ、データのダウンロードへ。",
+    "entryBlurbNote": "英語の概要"
   },
   "ko": {
-    "brandEyebrow": "네덜란드 국가재료발견연구소 · 실시간 추적",
+    "brandEyebrow": "자율 과학 · 지도와 동향",
     "brandH1": "글로벌 자율실험실",
     "brandDim": "랜드스케이프",
     "initiatives": "프로젝트",
@@ -265,10 +292,19 @@
     "navTipMap": "SDL 이니셔티브 세계 지도",
     "navTipList": "검색 가능한 전체 카드 목록",
     "navTipTimeline": "시작 연도별 성장 타임라인",
-    "navTipWatch": "엄선된 소식 피드"
+    "navTipWatch": "엄선된 소식 피드",
+    "siteDesc": "자율 과학을 지도로, 동향을 추적: {c}개국 {n}개 자율실험실 이니셔티브를 인터랙티브 지도와 타임라인, 주간 동향, 오픈 데이터로.",
+    "footerProjectPre": "",
+    "footerProjectPost": " 프로젝트",
+    "about": "소개",
+    "nfTitle": "페이지를 찾을 수 없습니다",
+    "nfBody": "이 주소는 존재하지 않습니다. 지도, 목록, 타임라인, 동향으로 이동하세요.",
+    "mapIntroHead": "이 지도에 있는 것",
+    "mapIntro": "{c}개국 {n}개: 국가 프로그램, 학술 그룹, 상용 플랫폼, 랩 OS 공급사를 첫 공개 연도·분야·성숙도·출처와 함께 지구본 위에 배치. 목록, 타임라인, 주간 동향, 데이터 다운로드로 이동.",
+    "entryBlurbNote": "영문 요약"
   },
   "zh": {
-    "brandEyebrow": "荷兰国家材料发现实验室 · 实时追踪",
+    "brandEyebrow": "自主科学 · 图谱与动态",
     "brandH1": "全球自主实验室",
     "brandDim": "图谱",
     "initiatives": "项目",
@@ -332,6 +368,15 @@
     "navTipMap": "自主实验室互动世界地图",
     "navTipList": "全部项目卡片，可搜索",
     "navTipTimeline": "按启动年份的发展时间线",
-    "navTipWatch": "精选领域动态"
+    "navTipWatch": "精选领域动态",
+    "siteDesc": "自主科学，入图并追踪：{c} 个国家的 {n} 个自主实验室项目，交互式地图与时间轴、每周动态，以及开放数据。",
+    "footerProjectPre": "",
+    "footerProjectPost": "项目",
+    "about": "关于",
+    "nfTitle": "页面不存在",
+    "nfBody": "该地址不在本站。地图、列表、时间轴与动态就在一步之外。",
+    "mapIntroHead": "这张图上有什么",
+    "mapIntro": "{c} 个国家的 {n} 个项目：国家计划、学术团队、商业平台与实验室操作系统供应商，每一项都标注首次公开年份、领域、成熟度与来源。可浏览列表、时间轴与每周动态，或下载数据。",
+    "entryBlurbNote": "英文简介"
   }
 }
