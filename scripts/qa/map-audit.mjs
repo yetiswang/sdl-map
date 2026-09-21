@@ -38,7 +38,7 @@ const DEVICES = {
   desktop: { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 },
 };
 
-const CONTROL_SEL = '.zoom-ctl button, .region-nav button, .mob-toggle, .sdl-fab, .wm-reopen, #sdl-clear-floating, .msheet-grip, .msheet-chip, .msheet-action';
+const CONTROL_SEL = '.zoom-ctl button, .region-nav button, .mob-toggle, .sdl-fab, .wm-reopen, #sdl-clear-floating, .msheet-grip, .msheet-chip, .msheet-action, .dpanel-head';
 
 // Runs inside the iframe document.
 const MEASURE = () => {

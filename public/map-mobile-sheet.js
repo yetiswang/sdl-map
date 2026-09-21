@@ -283,14 +283,38 @@
   var byId = {};
   DATA.forEach(function (d) { byId[d.id] = d; });
   var TIER_ORDER = { national: 0, academic: 1, commercial: 2, labos: 3 };
-  var lastIds = [];
-  function renderList(ids) {
-    lastIds = ids || [];
-    nEl.textContent = lastIds.length;
-    var rows = lastIds.map(function (id) { return byId[id]; }).filter(Boolean)
-      .sort(function (a, b) { return (TIER_ORDER[a.tier] - TIER_ORDER[b.tier]) || a.name.localeCompare(b.name); });
-    if (!rows.length) { listPane.innerHTML = '<div class="msheet-empty">' + esc(t.empty) + '</div>'; return; }
-    listPane.innerHTML = rows.map(function (d) {
+  var lastIds = [], lastMeta = { total: DATA.length, filtered: false };
+
+  // ---- desktop in-view panel (2026-09-21) --------------------------------
+  // The same "what is on screen" list as the phone sheet, in the corner
+  // zhiyan uses: bottom-right, peek = count, open = rows. Shown only when the
+  // viewport holds a subset of the entries or a filter is active, so the
+  // whole-world view stays clean. It replaces the old right drawer, which
+  // listed filter matches regardless of the view.
+  var panel = document.createElement('section');
+  panel.className = 'dpanel glass glass-mid glass-steady';
+  panel.id = 'dpanel';
+  panel.setAttribute('aria-label', t.inView);
+  panel.innerHTML =
+    '<button type="button" class="dpanel-head" id="dpanel-head" aria-expanded="false" aria-controls="dpanel-body"><b id="dpanel-n">0</b> ' + esc(t.inView) +
+      '<span class="dpanel-chev" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3.5 10l4.5-4.5 4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+    '</button>' +
+    '<div class="dpanel-body" id="dpanel-body"></div>';
+  app.appendChild(panel);
+  var panelBody = panel.querySelector('#dpanel-body'), panelN = panel.querySelector('#dpanel-n'), panelHead = panel.querySelector('#dpanel-head');
+  function setPanelOpen(open, remember) {
+    panel.classList.toggle('is-open', !!open);
+    panelHead.setAttribute('aria-expanded', String(!!open));
+    panelHead.setAttribute('aria-label', open ? t.collapse : t.expand);
+    if (remember !== false) { try { sessionStorage.setItem('sdl-dpanel-open', open ? '1' : '0'); } catch (e) {} }
+  }
+  panelHead.addEventListener('click', function () { setPanelOpen(!panel.classList.contains('is-open')); });
+  var savedOpen = null; try { savedOpen = sessionStorage.getItem('sdl-dpanel-open'); } catch (e) {}
+  setPanelOpen(savedOpen === '1', false);
+
+  function rowsHtml(rows) {
+    if (!rows.length) return '<div class="msheet-empty">' + esc(t.empty) + '</div>';
+    return rows.map(function (d) {
       return '<button type="button" class="msheet-row" data-id="' + esc(d.id) + '">' +
         '<span class="ldot" style="background:var(--c-' + esc(d.tier) + ')"></span>' +
         '<span class="msheet-rname">' + esc(d.name) + '</span>' +
@@ -298,19 +322,38 @@
       '</button>';
     }).join('');
   }
-  listPane.addEventListener('click', function (e) {
+  function renderList(ids, meta) {
+    lastIds = ids || [];
+    if (meta) lastMeta = meta;
+    var rows = lastIds.map(function (id) { return byId[id]; }).filter(Boolean)
+      .sort(function (a, b) { return (TIER_ORDER[a.tier] - TIER_ORDER[b.tier]) || a.name.localeCompare(b.name); });
+    var html = rowsHtml(rows);
+    if (MQ.matches) { nEl.textContent = lastIds.length; listPane.innerHTML = html; }
+    else {
+      panelN.textContent = lastIds.length; panelBody.innerHTML = html;
+      // Useful once zoomed past the whole-globe view (k > 1.4: on the globe three
+      // entries always sit behind the sphere, so a count test alone never
+      // rests) or whenever a filter is active.
+      var k = window.__sdlViewK || 1;
+      var useful = !!lastMeta.filtered || (k > 1.4 && lastIds.length < (lastMeta.total || DATA.length));
+      panel.classList.toggle('is-useful', useful);
+    }
+  }
+  function onRowClick(e) {
     var row = e.target.closest('.msheet-row');
     if (!row) return;
     var d = byId[row.dataset.id];
     if (d && window.__sheet && window.__sheet.openSheet) window.__sheet.openSheet(d);
-  });
-  window.addEventListener('sdl:view', function (e) { if (MQ.matches) renderList(e.detail && e.detail.ids); });
+  }
+  listPane.addEventListener('click', onRowClick);
+  panelBody.addEventListener('click', onRowClick);
+  window.addEventListener('sdl:view', function (e) { var dt = e.detail || {}; renderList(dt.ids, { total: dt.total, filtered: dt.filtered }); });
 
   // ---- glass on chrome that other scripts create at runtime -------------
   // export.js makes the two floating buttons, map-i18n.js the clear button and
   // the welcome pill, export.js the dialog cards. Class them as they appear.
   (function glassChrome() {
-    var STATIC = ['.sdl-fab', '.wm-reopen', '#sdl-clear-floating'];
+    var STATIC = ['.sdl-fab', '.wm-reopen', '#sdl-clear-floating', 'aside.left', '.mob-toggle', '.tip', '.kbd-hint', '.region-nav button', '.zoom-ctl button'];   // one material for everything over the map (2026-09-21)
     var tries = 0;
     function tag() {
       var missing = 0;
@@ -334,6 +377,7 @@
       moveFiltersOut();
       document.body.classList.remove('msheet-open');
       document.documentElement.style.removeProperty('--msheet-h');
+      if (window.__sdlInView) renderList(window.__sdlInView(), lastMeta);
     }
   }
   if (MQ.addEventListener) MQ.addEventListener('change', apply); else MQ.addListener(apply);

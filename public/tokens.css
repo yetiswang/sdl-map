@@ -40,7 +40,7 @@
 
   /* Vitrine glass — the material for chrome that floats over the live map
      (DESIGN.md § Glass). Solid fallbacks are the --surface-* tokens above. */
-  --glass-bg:        oklch(0.14 0.01 240 / 0.60);
+  --glass-bg:        oklch(0.30 0.012 240 / 0.56);  /* ONE material for all chrome over the map (2026-09-21): smoke, lighter than the map */
   --glass-bg-strong: oklch(0.14 0.01 240 / 0.90);
   --glass-bg-mid:    oklch(0.30 0.012 240 / 0.56);  /* bars + sheet: smoke, lighter than the map so it reads as glass over it */
   --glass-blur:      16px;
@@ -90,7 +90,7 @@
   --globe-gradient-end: oklch(0.82 0.005 85);
 
   /* Vitrine on paper: a wet highlight on white — stronger sheen, lighter shadow */
-  --glass-bg:        oklch(0.985 0.005 85 / 0.64);
+  --glass-bg:        oklch(0.97 0.006 85 / 0.60);
   --glass-bg-strong: oklch(0.985 0.005 85 / 0.92);
   --glass-bg-mid:    oklch(0.97 0.006 85 / 0.60);
   --glass-blur:      16px;

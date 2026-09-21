@@ -52,7 +52,51 @@
   body .zoom-ctl.zoom-ctl button svg { width: 18px; height: 18px; }
   /* Bottom-right: the collapsible-sidebar tabs sit at mid-height on the
      right edge, and a region column under the zoom stack ran into them. */
-  body .region-nav.region-nav { top: auto; bottom: calc(16px + var(--shell-bottom, 0px)); right: 16px; gap: 4px; }
+  /* Region column moves to the bottom-left (2026-09-21): the bottom-right
+     corner belongs to the in-view panel, as on zhiyan. */
+  body .region-nav.region-nav { top: auto; bottom: calc(16px + var(--shell-bottom, 0px)); right: auto; left: 16px; gap: 4px; }
+  /* The right drawer ("Selected": entries matching the filters) is retired on
+     desktop; the in-view panel lists what is on screen, filtered. */
+  body aside.right, body #mob-selected { display: none !important; }
+  /* Desktop in-view panel (map-mobile-sheet.js builds it). Same glass as the
+     bars and the phone sheet; appears only when the viewport shows a subset
+     or a filter is active; peek = count, open = list. */
+  .dpanel {
+    position: fixed; right: 16px; bottom: calc(16px + var(--shell-bottom, 0px)); z-index: 45;
+    width: 330px; max-height: 60svh;
+    display: grid; grid-template-rows: auto 1fr; align-content: start;
+    border: 1px solid var(--surface-edge, var(--rule)); border-radius: 12px;
+    color: var(--ink); font-family: var(--font-sans);
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transform: translateY(8px) scale(0.985); transform-origin: 100% 100%;
+    transition: opacity var(--t-base, 200ms) var(--ease-standard, ease), transform var(--t-base, 200ms) var(--ease-standard, ease), grid-template-rows var(--t-slow, 280ms) var(--ease-standard, ease), visibility 0s linear var(--t-base, 200ms);
+    overflow: hidden;
+  }
+  .dpanel.is-useful { opacity: 1; visibility: visible; pointer-events: auto; transform: none; transition-delay: 0s; }
+  .dpanel:not(.is-open) { grid-template-rows: auto 0fr; }
+  .dpanel-head {
+    appearance: none; background: transparent; border: 0; color: var(--ink); cursor: pointer;
+    display: flex; align-items: center; gap: 8px; padding: 10px 12px 10px 14px; text-align: left;
+    font-family: var(--font-sans); font-size: 13px; color: var(--ink-2);
+  }
+  .dpanel-head b { font-family: var(--font-mono); font-weight: 600; font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .dpanel-head .dpanel-chev { margin-left: auto; color: var(--ink-3); display: inline-flex; transition: transform var(--t-slow, 280ms) var(--ease-standard, ease); }
+  .dpanel.is-open .dpanel-head .dpanel-chev { transform: rotate(180deg); }
+  .dpanel-head:hover { color: var(--ink); }
+  .dpanel-head:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 12px; }
+  .dpanel-body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 0 8px 8px; }
+  .dpanel:not(.is-open) .dpanel-body { visibility: hidden; }
+  .dpanel .msheet-row {
+    appearance: none; background: transparent; border: 0; border-bottom: 1px solid var(--rule-2);
+    width: 100%; display: grid; grid-template-columns: 8px 1fr auto; gap: 10px; align-items: center;
+    padding: 9px 6px; text-align: left; color: var(--ink); cursor: pointer; font-family: var(--font-sans);
+  }
+  .dpanel .msheet-row:last-child { border-bottom: 0; }
+  .dpanel .msheet-row:hover { background: var(--surface-strong, var(--bg-2)); border-radius: 6px; }
+  .dpanel .msheet-row .ldot { width: 8px; height: 8px; border-radius: 50%; }
+  .dpanel .msheet-rname { font-size: 13px; font-weight: 500; line-height: 1.25; }
+  .dpanel .msheet-rmeta { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-3); letter-spacing: .04em; white-space: nowrap; }
+  .dpanel .msheet-empty { padding: 18px 8px; color: var(--ink-3); font-size: 13px; text-align: center; }
   body .region-nav.region-nav button {
     width: 44px; min-height: 32px; padding: 0;
     border-radius: var(--r-soft, 8px);
@@ -84,7 +128,7 @@ html body.embed-mode aside.left, html body.embed-mode aside.right { top: var(--s
   :root { --msheet-h: 112px; }
   /* Everything the sheet absorbs */
   body .sdl-fab.sdl-fab, body .wm-reopen.wm-reopen, body #sdl-clear-floating,
-  body .mob-toggle.mob-toggle, body .region-nav.region-nav, .drawer-backdrop { display: none !important; }
+  body .mob-toggle.mob-toggle, body .region-nav.region-nav, .drawer-backdrop, .dpanel { display: none !important; }
   /* The one remaining map button sits just above the sheet's peek edge */
   body .zoom-ctl.zoom-ctl {
     bottom: calc(var(--msheet-h) + 12px + var(--shell-bottom, 0px) + env(safe-area-inset-bottom, 0px)) !important;
