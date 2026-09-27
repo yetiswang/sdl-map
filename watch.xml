@@ -86,5 +86,15 @@ Sources — Cusp AI (Medium): https://medium.com/@CuspAI/launching-our-ai-materi
 
 Sources — Nature: https://www.nature.com/articles/d41586-026-02143-x · NYT: https://www.nytimes.com/2026/07/09/science/nobel-winning-us-chemist-will-move-to-china-to-lead-ai-institute.html · Tsinghua: https://www.tsinghua.edu.cn/en/info/1244/14984.htm</description>
     </item>
+    <item>
+      <title>MaterialsCommons launches: a €28M EU federated digital infrastructure for materials R&amp;D, with a framework for self-driving labs</title>
+      <link>https://sdl-map.discoverylabs.nl/watch/#eu-materialscommons-2026</link>
+      <guid isPermaLink="true">https://sdl-map.discoverylabs.nl/watch/#eu-materialscommons-2026</guid>
+      <pubDate>Fri, 03 Jul 2026 12:00:00 GMT</pubDate>
+      <category>milestone</category>
+      <description>MaterialsCommons ('Federated Digital Infrastructure for European Advanced Materials Research and Development', Horizon Europe Innovation Action, grant 101293545, about €28M) started on 1 June 2026 and runs to May 2030. It is coordinated by the Fraunhofer-Gesellschaft (Peter Gumbsch, Fraunhofer IWM), with EMMC and DTU as vice-coordinators, and brings together 26 research institutions and more than 30 industrial partners across 14 countries. The project connects existing European digital resources into a single entry point for materials data, workflows and tools, built on three core technologies: semantic interoperability, interoperable workflows for experiments and simulations, and federated dataspaces. Its targets include a TRL6 prototype handling 10,000 queries a day and integrating over 90% of widely used data sources, fully automated workflows, and a framework for self-driving labs that combines AI and machine learning to raise experimental throughput and shorten design-to-validation cycles. In its use cases the consortium aims to accelerate materials and component development by up to tenfold. HaDEA presented the project on 3 July 2026.
+
+Sources — HaDEA (Q&amp;A with Peter Gumbsch): https://hadea.ec.europa.eu/news/materialscommons-bringing-europes-materials-data-together-2026-07-03_en · CORDIS (project 101293545): https://cordis.europa.eu/project/id/101293545 · MaterialsCommons: https://www.materialscommons.eu/</description>
+    </item>
   </channel>
 </rss>
