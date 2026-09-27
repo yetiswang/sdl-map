@@ -5,7 +5,17 @@
     <link>https://sdl-map.discoverylabs.nl/watch/</link>
     <description>Noteworthy signals from the self-driving-lab and AI-for-materials landscape: talent moves, new labs, funding, and policy. Curated by DiscoveryLabNL.</description>
     <language>en</language>
-    <lastBuildDate>Thu, 27 Aug 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 22 Sep 2026 12:00:00 GMT</lastBuildDate>
+    <item>
+      <title>EU opens a €29M 'Automated Scientific Discovery' call: the first Horizon Europe topic dedicated to self-driving labs (RAISE pilot)</title>
+      <link>https://sdl-map.discoverylabs.nl/watch/#eu-raise-asd-2026</link>
+      <guid isPermaLink="true">https://sdl-map.discoverylabs.nl/watch/#eu-raise-asd-2026</guid>
+      <pubDate>Tue, 22 Sep 2026 12:00:00 GMT</pubDate>
+      <category>funding</category>
+      <description>The European Commission opened HORIZON-RAISE-2027-01-01 'Automated Scientific Discovery (RAISE pilot)', a Research and Innovation Action with €29M for about three projects of €10M each, single-stage deadline 2 February 2027. The topic funds labs that already have an advanced level of automation and digitalisation to build the intelligence layer that lets their instruments plan, run and analyse experiments semi- or fully autonomously in closed loop, with human oversight for accuracy, safety and ethics, ideally networked with other labs and without a complete redesign of existing equipment. Proposals must include data management for collecting, processing and sharing experimental data across labs; research targets include agentic AI connected to instruments and robotics, and resource optimisation that cuts energy, reagent and material use. The call sits inside RAISE, the Resource for AI Science in Europe, the EU's virtual institute for AI in science launched in Copenhagen in November 2025, with €107M from Horizon Europe for its 2026–27 pilot.
+
+Sources — EU Funding &amp; Tenders portal (topic HORIZON-RAISE-2027-01-01): https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-RAISE-2027-01-01 · European Commission: RAISE: https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/european-ai-science-strategy/raise-resource-ai-science-europe_en · Science|Business: https://sciencebusiness.net/news/ai/horizon-calls-2026-27-lay-groundwork-new-ai-science-strategy</description>
+    </item>
     <item>
       <title>Anthropic previews the Model Hardware Standard (MHS) — one interface for AI agents to operate laboratory instruments</title>
       <link>https://sdl-map.discoverylabs.nl/watch/#anthropic-mhs-2026</link>
