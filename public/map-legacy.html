@@ -1094,6 +1094,13 @@ body.interacting .land { opacity: 0.92; }
 .coach[data-side="left"] .coach-arrow { display: block; left: -6px; margin-top: -5px; border-right: 0; border-top: 0; }
 .coach[data-side="right"] .coach-arrow { display: block; right: -6px; margin-top: -5px; border-left: 0; border-bottom: 0; }
 body.coach-on:not(.coach-step3) #sdl-story-play { visibility: hidden; }
+.coach-spot { position: fixed; z-index: 299; pointer-events: none;
+  box-shadow: 0 0 0 200vmax oklch(0.10 0.01 240 / 0.55), inset 0 0 0 1px oklch(1 0 0 / 0.35);
+  transition: left var(--t-slow, 280ms) var(--ease-standard, ease), top var(--t-slow, 280ms) var(--ease-standard, ease),
+              width var(--t-slow, 280ms) var(--ease-standard, ease), height var(--t-slow, 280ms) var(--ease-standard, ease),
+              border-radius var(--t-slow, 280ms); }
+.coach-spot[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) { .coach-spot { transition: none; } }
 body.story-on .coach { display: none; }
 .wm-tour { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; color: var(--ink-2); border-bottom: 1px dotted var(--ink-3); }
 .wm-tour:hover { color: var(--ink); }

@@ -109,6 +109,17 @@
     tip.id = 'sdl-coach'; tip.className = 'coach glass glass-strong'; tip.setAttribute('role', 'dialog'); tip.setAttribute('aria-live', 'polite'); tip.hidden = true;
     tip.innerHTML = '<span class="coach-arrow" aria-hidden="true"></span><div class="coach-step"></div><p class="coach-text"></p><div class="coach-acts"></div>';
     document.body.appendChild(tip);
+    // Spotlight (2026-10-06, Yuyang): dim everything except the control the
+    // step is about. A transparent box over the anchor casts one huge shadow;
+    // pointer-events stay off, so the map underneath remains usable.
+    var spot = document.createElement('div');
+    spot.className = 'coach-spot'; spot.setAttribute('aria-hidden', 'true'); spot.hidden = true;
+    document.body.appendChild(spot);
+    function setSpot(r, pad, round) {
+      if (!r) { spot.style.cssText = 'left:50%;top:50%;width:0;height:0;border-radius:0;'; return; }
+      var x = r.left - pad, y = r.top - pad, w = r.width + pad * 2, h = r.height + pad * 2;
+      spot.style.cssText = 'left:' + Math.round(x) + 'px;top:' + Math.round(y) + 'px;width:' + Math.round(w) + 'px;height:' + Math.round(h) + 'px;border-radius:' + (round ? '999px' : '10px') + ';';
+    }
     var stepEl = tip.querySelector('.coach-step'), textEl = tip.querySelector('.coach-text'), acts = tip.querySelector('.coach-acts'), arrow = tip.querySelector('.coach-arrow');
 
     var st = { on: false, anchor: null, watch: 0, ro: null, step: 0 };
@@ -121,6 +132,8 @@
       var tw = tip.offsetWidth, th = tip.offsetHeight, m = 12, x, y, side = 'none';
       if (a && visible(a)) {
         var r = a.getBoundingClientRect();
+        var small = r.width < 40 && r.height < 40;
+        setSpot(r, small ? 14 : 8, small);
         var cx = r.left + r.width / 2;
         if (st.prefer === 'west' && !isPhone() && r.left - tw - 18 > 0) { side = 'right'; x = r.left - tw - 14; y = r.top + r.height / 2 - th / 2; }
         else if (r.bottom + th + 18 < innerHeight - (isPhone() ? 120 : 16)) { side = 'top'; y = r.bottom + 14; }
@@ -132,6 +145,7 @@
         if (side === 'top' || side === 'bottom') arrow.style.left = Math.max(14, Math.min(tw - 14, cx - x)) + 'px', arrow.style.top = '';
         else arrow.style.top = Math.max(14, Math.min(th - 14, r.top + r.height / 2 - y)) + 'px', arrow.style.left = '';
       } else {
+        setSpot(null);
         x = innerWidth / 2 - tw / 2; y = isPhone() ? 72 : 88;
       }
       tip.dataset.side = side;
@@ -150,7 +164,7 @@
         el.textContent = b.label; el.addEventListener('click', function (e) { e.stopPropagation(); b.fn(); });
         acts.appendChild(el);
       });
-      tip.hidden = false; tip.classList.remove('in'); void tip.offsetWidth; tip.classList.add('in');
+      tip.hidden = false; spot.hidden = false; tip.classList.remove('in'); void tip.offsetWidth; tip.classList.add('in');
       place();
     }
     function stopWatch() { if (st.watch) clearInterval(st.watch); st.watch = 0; if (st.mo) { st.mo.disconnect(); st.mo = null; } }
@@ -186,9 +200,9 @@
 
     // ---- step 2: filter
     function filterAnchor() {
-      if (isPhone()) return document.getElementById('msheet-tab-filters');
+      if (isPhone()) { var pane = document.getElementById('msheet-filters'); return (pane && !pane.hidden && visible(pane)) ? pane : document.getElementById('msheet-tab-filters'); }
       var aside = document.querySelector('aside.left');
-      if (aside && aside.classList.contains('open')) return aside.querySelector('.chips') || aside;
+      if (aside && aside.classList.contains('open')) return aside;
       return document.getElementById('mob-filters') || aside;
     }
     function nActive() { var f = window.__sdlGetFilters ? window.__sdlGetFilters() : {}; return Object.keys(f).reduce(function (a, k) { return a + (f[k] ? f[k].length : 0); }, 0); }
@@ -224,7 +238,7 @@
           var bd = document.getElementById('exp-data-backdrop');
           var b = document.getElementById('sdl-data-floating') || document.querySelector('#msheet [data-act="data"]');
           if (b) b.click();
-          tip.hidden = true;
+          tip.hidden = true; spot.hidden = true;
           st.watch = setInterval(function () {
             if (!bd || !bd.classList.contains('open')) { stopWatch(); step5(); }
           }, 300);
@@ -249,7 +263,7 @@
       loop(); step1();
     }
     function finish() {
-      stopWatch(); st.on = false; tip.hidden = true; tip.classList.remove('in');
+      stopWatch(); st.on = false; tip.hidden = true; spot.hidden = true; tip.classList.remove('in');
       document.body.classList.remove('coach-on', 'coach-step3');
       if (st.raf) cancelAnimationFrame(st.raf);
       try { localStorage.setItem(KEY, '1'); } catch (e) {}
