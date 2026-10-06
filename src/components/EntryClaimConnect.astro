@@ -1,0 +1,47 @@
+---
+// Claim & Connect block for the static entry pages (2026-10-06). Shared by the
+// four per-locale entry/[id].astro copies so a fix lands once (DESIGN.md §
+// Architecture invariants). Introductions run from the map card, which owns
+// the request dialog; the entry page offers update/claim and shows what the
+// lab has stated.
+interface Props { entry: any; ui: any; lang: string; }
+const { entry, ui, lang } = Astro.props;
+const REPO = 'https://github.com/yetiswang/sdl-map';
+const issue = (kind: 'update' | 'claim') => REPO + '/issues/new?' + new URLSearchParams({
+  template: 'update-lab.yml',
+  title: (kind === 'claim' ? '[Claim] ' : '[Update] ') + entry.name,
+  entry_id: entry.id,
+  entry_name: entry.name,
+}).toString();
+const o = entry.open || {};
+const vocab = (id: string) => (ui.ccVocab && ui.ccVocab[id]) || id;
+const stack: string[] = [...(o.stack?.hardware || []), ...(o.stack?.software || [])];
+const groups = [
+  { label: ui.ccOpenTo, items: (o.offers || []).map(vocab) },
+  { label: ui.ccSeeks, items: (o.seeks || []).map(vocab) },
+  { label: ui.ccStack, items: stack },
+].filter(g => g.items.length);
+const locale = lang === 'en' ? 'en-GB' : lang === 'zh' ? 'zh-CN' : lang;
+const since = entry.claimed?.since && /^\d{4}-\d{2}$/.test(entry.claimed.since)
+  ? new Date(entry.claimed.since + '-01T00:00:00Z').toLocaleDateString(locale, { month: 'short', year: 'numeric', timeZone: 'UTC' })
+  : '';
+const lbl = 'font-size:11px;color:var(--ink-3);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em;margin:14px 0 6px;';
+---
+{groups.length > 0 && (
+  <div style="margin-top:20px;">
+    {groups.map(g => (
+      <>
+        <div style={lbl}>{g.label}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          {g.items.map((it: string) => <span style="font-size:12.5px;color:var(--ink-2);border:1px solid var(--rule);border-radius:999px;padding:3px 10px;">{it}</span>)}
+        </div>
+      </>
+    ))}
+    {o.note && <p style="margin:10px 0 0;font-size:13px;color:var(--ink-2);line-height:1.5;">{o.note}</p>}
+  </div>
+)}
+<div style="margin-top:20px;padding-top:14px;border-top:1px solid var(--rule);font-size:13px;color:var(--ink-3);line-height:1.7;">
+  <a href={issue('update')} target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">{ui.ccUpdate}</a>
+  {!entry.claimed && <><span style="margin:0 6px;color:var(--ink-4);">·</span><a href={issue('claim')} target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">{ui.ccClaim}</a></>}
+  {entry.claimed && <div style="margin-top:6px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);">{ui.ccMaintained}{since && ` · ${since}`}</div>}
+</div>

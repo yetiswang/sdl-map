@@ -9,6 +9,7 @@ export const COLUMNS = [
   'id', 'name', 'org', 'city', 'country', 'lat', 'lon',
   'tier', 'domain', 'maturity', 'charact', 'ai', 'scale',
   'invest_musd', 'invest_label', 'start', 'url', 'sources', 'blurb',
+  'open_offers', 'open_seeks', 'stack', 'maintained_with_lab',
 ] as const;
 
 const NUMERIC = new Set(['lat', 'lon', 'invest_musd', 'start']);
@@ -30,6 +31,10 @@ export function toRow(e: Entry): (string | number)[] {
     e.url,
     (e.sources || []).join(' ; '),
     (e as any).blurb || '',
+    ((e as any).open?.offers || []).join(' ; '),
+    ((e as any).open?.seeks || []).join(' ; '),
+    [...((e as any).open?.stack?.hardware || []), ...((e as any).open?.stack?.software || [])].join(' ; '),
+    (e as any).claimed?.since || '',
   ];
 }
 

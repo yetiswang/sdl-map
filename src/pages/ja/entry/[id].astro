@@ -3,6 +3,7 @@ import UnifiedLayout from '../../../layouts/UnifiedLayout.astro';
 import data from '../../../data/sdl_data.json';
 import uiAll from '../../../i18n/ui.json';
 import { countryName } from '../../../utils/i18n';
+import EntryClaimConnect from '../../../components/EntryClaimConnect.astro';
 
 export function getStaticPaths() {
   return data.map(e => ({ params: { id: e.id }, props: { entry: e } }));
@@ -76,6 +77,7 @@ const crumbs = {
           </ul>
         </div>
       )}
+      <EntryClaimConnect entry={entry} ui={ui} lang={lang} />
     </div>
   </main>
 </UnifiedLayout>

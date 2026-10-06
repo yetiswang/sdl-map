@@ -417,7 +417,11 @@
     "sources": [
       "https://www.liverpool.ac.uk/cooper-group/"
     ],
-    "start": 2017
+    "start": 2017,
+    "claimed": {
+      "since": "2026-08",
+      "via": "email (corrections)"
+    }
   },
   {
     "id": "helma",
@@ -1129,7 +1133,11 @@
       "https://ir.bruker.com/press-releases/press-release-details/2024/Bruker-Announces-Closing-of-Chemspeed-Technologies-AG-Acquisition/default.aspx",
       "https://www.sciy.com/"
     ],
-    "start": 1998
+    "start": 1998,
+    "claimed": {
+      "since": "2026-09",
+      "via": "email"
+    }
   },
   {
     "id": "fraun",
@@ -1843,7 +1851,11 @@
       "https://grenova.com/paa-automation/",
       "https://grenova.com/paa-joins-grenovas-parent-company-to-advance-lab-automation/"
     ],
-    "start": 1992
+    "start": 1992,
+    "claimed": {
+      "since": "2026-09",
+      "via": "email"
+    }
   },
   {
     "id": "nsf_aimi",
@@ -2329,7 +2341,11 @@
       "https://www.solvechemistry.com/",
       "https://www.linkedin.com/company/solve-chemistry/"
     ],
-    "start": 2024
+    "start": 2024,
+    "claimed": {
+      "since": "2026-08",
+      "via": "email"
+    }
   },
   {
     "id": "matter",
@@ -2355,7 +2371,11 @@
       "https://www.science.org/doi/10.1126/scirobotics.aat5559",
       "https://pubs.acs.org/acscii/article/4/2/144/733253/The-Matter-Simulation-R-evolution"
     ],
-    "start": 2017
+    "start": 2017,
+    "claimed": {
+      "since": "2026-08",
+      "via": "email"
+    }
   },
   {
     "id": "imdea",
@@ -2379,7 +2399,11 @@
     "sources": [
       "https://www.youtube.com/watch?v=tWub0OgBGhE"
     ],
-    "start": 2022
+    "start": 2022,
+    "claimed": {
+      "since": "2026-08",
+      "via": "email"
+    }
   },
   {
     "id": "ewha_imms",
@@ -2404,7 +2428,11 @@
       "https://imms.ewha.ac.kr/en/news/83",
       "https://www.hankyung.com/article/2026072665561"
     ],
-    "start": 2025
+    "start": 2025,
+    "claimed": {
+      "since": "2026-08",
+      "via": "GitHub submission"
+    }
   },
   {
     "id": "iprd",
@@ -2429,7 +2457,11 @@
       "https://doi.org/10.1002/ange.202214511",
       "https://doi.org/10.1016/j.cej.2022.138443"
     ],
-    "start": 2012
+    "start": 2012,
+    "claimed": {
+      "since": "2026-07",
+      "via": "GitHub submission"
+    }
   },
   {
     "id": "swiss_cat+",
@@ -2455,7 +2487,11 @@
       "https://ch.linkedin.com/company/swisscatpluseast",
       "https://www.chimia.ch/chimia/article/view/2023_154"
     ],
-    "start": 2020
+    "start": 2020,
+    "claimed": {
+      "since": "2026-07",
+      "via": "GitHub submission"
+    }
   },
   {
     "id": "odacell",
@@ -2481,7 +2517,11 @@
       "https://urn.kb.se/resolve?urn=urn:nbn:se:uu:diva-578031",
       "https://doi.org/10.5281/zenodo.14191482"
     ],
-    "start": 2022
+    "start": 2022,
+    "claimed": {
+      "since": "2026-08",
+      "via": "GitHub pull request"
+    }
   },
   {
     "id": "empa_aurora",
@@ -2507,7 +2547,11 @@
       "https://pubs.rsc.org/doi/d5dd00567a",
       "https://zenodo.org/records/15481956"
     ],
-    "start": 2022
+    "start": 2022,
+    "claimed": {
+      "since": "2026-08",
+      "via": "GitHub submission"
+    }
   },
   {
     "id": "empa_ophelia",
@@ -2532,7 +2576,11 @@
       "https://doi.org/10.1038/s41929-024-01172-x",
       "https://www.empa.ch/web/s604/parallel-co2-electrolysis"
     ],
-    "start": 2024
+    "start": 2024,
+    "claimed": {
+      "since": "2026-08",
+      "via": "GitHub submission"
+    }
   },
   {
     "id": "ares_afrl",
@@ -2682,7 +2730,11 @@
       "https://ai4science.sg/",
       "https://www.a-star.edu.sg/imre/research-departments/electronic-materials-department/accelerated-catalyst-development-platform-(acdp)"
     ],
-    "start": 2018
+    "start": 2018,
+    "claimed": {
+      "since": "2026-08",
+      "via": "GitHub submission"
+    }
   },
   {
     "id": "chemtech",
@@ -2707,7 +2759,11 @@
       "https://raeng.org.uk/programmes-and-prizes/programmes/uk-grants-and-prizes/support-for-research/research-awardees/research-fellowships-awardees/2024-2029/dr-connor-taylor/",
       "https://pmc.ncbi.nlm.nih.gov/articles/PMC10214532/"
     ],
-    "start": 2025
+    "start": 2025,
+    "claimed": {
+      "since": "2026-08",
+      "via": "GitHub submission"
+    }
   },
   {
     "id": "maitena",
@@ -2733,7 +2789,11 @@
       "https://doi.org/10.1039/d4dd00381k",
       "https://doi.org/10.1107/S1600576724006885"
     ],
-    "start": 2024
+    "start": 2024,
+    "claimed": {
+      "since": "2026-09",
+      "via": "GitHub submission"
+    }
   },
   {
     "id": "qpillars",
@@ -2757,7 +2817,11 @@
     "sources": [
       "https://sila-standard.com/interview-with-iacob-marian-from-qpillars/"
     ],
-    "start": 2024
+    "start": 2024,
+    "claimed": {
+      "since": "2026-08",
+      "via": "GitHub submission"
+    }
   },
   {
     "id": "szsynbio",

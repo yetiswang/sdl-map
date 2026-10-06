@@ -159,6 +159,7 @@
     if (f.domain && f.domain.length && f.domain.length <= 2) parts.push(joinNatural(labels('domain', f.domain)));
     if (f.maturity && f.maturity.length && f.maturity.length <= 2) parts.push(joinNatural(labels('maturity', f.maturity)).toLowerCase());
     if (f.charact && f.charact.length === 1) parts.push(labels('charact', f.charact)[0].toLowerCase() + ' characterisation');
+    if (f.open && f.open.length === 1) parts.push('open to ' + labels('open', f.open)[0].toLowerCase());
     var suffix = '';
     if (f.country && f.country.length) {
       var cs = f.country.map(function (c) { return (THE_COUNTRIES[c] ? 'the ' : '') + c; });

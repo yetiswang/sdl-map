@@ -1,0 +1,83 @@
+name: "Update or claim an entry"
+description: "Correct an existing entry, say what your lab offers and seeks, or claim it as yours."
+title: "[Update] "
+labels: ["lab-update"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for keeping the map current. **Every changed fact needs a public source** (a lab page, paper, press release or official announcement). Changes are reviewed by the curator before they appear on [sdl-map.discoverylabs.nl](https://sdl-map.discoverylabs.nl/).
+
+        **Please do not post personal contact details here**; this issue is public. To claim an entry, also send a short note from an address on your lab's or company's domain, using the "email the curator" link on the entry's card. The map only records that an entry is maintained with the lab, never who you are.
+  - type: input
+    id: entry_id
+    attributes:
+      label: Entry id
+      description: Filled in for you when you start from the map.
+      placeholder: "e.g. atinary"
+    validations:
+      required: true
+  - type: input
+    id: entry_name
+    attributes:
+      label: Entry name
+      placeholder: "e.g. Atinary"
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What would you like to do?
+      options:
+        - Correct or update facts
+        - Claim this entry (I work at this lab or company)
+        - Add what we offer and seek
+        - Flag a rename or closure
+    validations:
+      required: true
+  - type: textarea
+    id: changes
+    attributes:
+      label: What should change
+      description: Field by field, current value → new value.
+      placeholder: |
+        maturity: prototype → operational
+        scale: single → multi-lab
+  - type: checkboxes
+    id: offers
+    attributes:
+      label: Open to (what the lab offers)
+      options:
+        - label: Collaboration
+        - label: Lab access
+        - label: Software / platform
+        - label: Data sharing
+        - label: Training
+        - label: Visits
+  - type: checkboxes
+    id: seeks
+    attributes:
+      label: Seeks
+      options:
+        - label: Academic partners
+        - label: Industry partners
+        - label: Use-cases
+        - label: Datasets
+        - label: Hardware
+        - label: Software
+        - label: Consortium partners
+  - type: input
+    id: stack
+    attributes:
+      label: Stack (optional)
+      description: Main hardware, software and standards in the loop.
+      placeholder: "e.g. Chemspeed, Bruker NMR, SiLA 2"
+  - type: textarea
+    id: sources
+    attributes:
+      label: Public sources
+      description: One URL per line, for every changed fact.
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        Self-descriptions are kept factual: superlatives and unsourced numbers are removed during review. The blurb stays curator-edited.

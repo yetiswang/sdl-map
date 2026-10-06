@@ -94,3 +94,11 @@ The site is a reference, so it has to be findable and citable. The contract live
 - **Feed autodiscovery** `<link rel="alternate" type="application/rss+xml" href="/watch.xml">` on every page; `404.astro` (noindex, no canonical) instead of the GitHub Pages default.
 - **Entry blurbs** (`blurb` field, English, moved from the README one-liners on 2026-09-21) render on entry pages with `lang="en"` and a language note on zh/ja/ko, in the map's detail card, and as the last column of the CSV/XLSX/TXT downloads. Translating them is open work.
 - **Not in the repo, owner tasks:** Google Search Console domain property for discoverylabs.nl (no DNS verification record as of 2026-09-21), Bing Webmaster, Baidu 站长 for `/zh/`, Naver Search Advisor for `/ko/`.
+
+## Claim & Connect (2026-10-06)
+Owner-maintained entries and curated introductions, without accounts or a feed. Spec: vault `30-Projects/SDL-Map/2026-10-06-claim-and-connect-design`.
+- **Data:** optional `claimed: {since: "YYYY-MM", via}` and `open: {offers[], seeks[], stack{hardware[], software[]}, note, updated}` in `sdl_data.json`. `offers`/`seeks` use fixed vocabularies (in `public/claim-connect.js`, `ui.json` → `ccVocab`) and come from owners only; the curator may seed `stack` from public sources.
+- **Card:** an "Open to / Seeks / Stack" block (mono labels as `.sheet-links`, quiet pills: no tier accents, no glass), then the action area: *Request an introduction* (claimed entries or entries with `offers`), *Update this entry* · *This is my lab* (pre-filled `update-lab.yml` issue), and an email fallback. Claimed entries show "Maintained with the lab · Mon YYYY". Same block on the static entry pages via `src/components/EntryClaimConnect.astro`.
+- **Filter:** "Open to" chip group (multi-valued, matched by `vals()`), hidden until at least one entry states `offers`.
+- **Introductions:** dialog in the export-dialog vocabulary; builds an email to the curator mailbox (`CURATOR_EMAIL` in `claim-connect.js`). No personal data is stored on the site or posted to GitHub. Curator-side ranking: `scripts/connect/match_request.py` (double opt-in; private log outside the repo).
+- **QA:** `node scripts/qa/cc-shots.mjs` (cards, dialog, entry page) and `node scripts/qa/cc-demo-shot.mjs` (illustrative `open` values injected in the browser only).

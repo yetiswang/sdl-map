@@ -73,7 +73,27 @@
     "nfBody": "This address does not exist on the site. The map, the list, the timeline and the watch are one step away.",
     "mapIntroHead": "What is on this map",
     "mapIntro": "{n} initiatives in {c} countries: national programmes, academic groups, commercial platforms and lab-OS vendors, each placed on a globe with its first public year, domain, maturity and sources. Browse the list, the timeline and the weekly watch, or download the data.",
-    "entryBlurbNote": "Summary in English"
+    "entryBlurbNote": "Summary in English",
+    "ccOpenTo": "Open to",
+    "ccSeeks": "Seeks",
+    "ccStack": "Stack",
+    "ccUpdate": "Update this entry",
+    "ccClaim": "This is my lab",
+    "ccMaintained": "Maintained with the lab",
+    "ccVocab": {
+      "collaboration": "Collaboration",
+      "lab-access": "Lab access",
+      "software": "Software / platform",
+      "data": "Data sharing",
+      "training": "Training",
+      "visits": "Visits",
+      "academic-partners": "Academic partners",
+      "industry-partners": "Industry partners",
+      "use-cases": "Use-cases",
+      "datasets": "Datasets",
+      "hardware": "Hardware",
+      "consortium": "Consortium partners"
+    }
   },
   "zh-Hant": {
     "brandEyebrow": "自主科學 · 圖譜與動態",
@@ -149,7 +169,27 @@
     "nfBody": "該地址不在本站。地圖、列表、時間軸與動態就在一步之外。",
     "mapIntroHead": "這張圖上有什麼",
     "mapIntro": "{c} 個國家的 {n} 個項目：國家計畫、學術團隊、商業平台與實驗室作業系統供應商，每一項都標注首次公開年份、領域、成熟度與來源。可瀏覽列表、時間軸與每週動態，或下載資料。",
-    "entryBlurbNote": "英文簡介"
+    "entryBlurbNote": "英文簡介",
+    "ccOpenTo": "可提供",
+    "ccSeeks": "尋求",
+    "ccStack": "技術棧",
+    "ccUpdate": "更新此條目",
+    "ccClaim": "這是我的實驗室",
+    "ccMaintained": "由實驗室共同維護",
+    "ccVocab": {
+      "collaboration": "研究合作",
+      "lab-access": "實驗室開放使用",
+      "software": "軟體 / 平台",
+      "data": "數據共享",
+      "training": "培訓",
+      "visits": "參觀交流",
+      "academic-partners": "學術夥伴",
+      "industry-partners": "產業夥伴",
+      "use-cases": "應用場景",
+      "datasets": "數據集",
+      "hardware": "硬體",
+      "consortium": "聯合申請夥伴"
+    }
   },
   "ja": {
     "brandEyebrow": "自律科学 · 地図と動向",
@@ -225,7 +265,27 @@
     "nfBody": "このアドレスは存在しません。地図・リスト・タイムライン・ウォッチへどうぞ。",
     "mapIntroHead": "この地図にあるもの",
     "mapIntro": "{c} か国 {n} 件：国家プログラム、学術グループ、商用プラットフォーム、ラボOSベンダーを、初公開年・分野・成熟度・出典とともに地球儀上に配置。リスト、タイムライン、週次ウォッチ、データのダウンロードへ。",
-    "entryBlurbNote": "英語の概要"
+    "entryBlurbNote": "英語の概要",
+    "ccOpenTo": "提供できること",
+    "ccSeeks": "求めていること",
+    "ccStack": "技術スタック",
+    "ccUpdate": "この項目を更新",
+    "ccClaim": "自分のラボです",
+    "ccMaintained": "ラボと共同で更新",
+    "ccVocab": {
+      "collaboration": "共同研究",
+      "lab-access": "ラボ利用",
+      "software": "ソフトウェア / プラットフォーム",
+      "data": "データ共有",
+      "training": "トレーニング",
+      "visits": "見学",
+      "academic-partners": "学術パートナー",
+      "industry-partners": "産業パートナー",
+      "use-cases": "ユースケース",
+      "datasets": "データセット",
+      "hardware": "ハードウェア",
+      "consortium": "コンソーシアム"
+    }
   },
   "ko": {
     "brandEyebrow": "자율 과학 · 지도와 동향",
@@ -301,7 +361,27 @@
     "nfBody": "이 주소는 존재하지 않습니다. 지도, 목록, 타임라인, 동향으로 이동하세요.",
     "mapIntroHead": "이 지도에 있는 것",
     "mapIntro": "{c}개국 {n}개: 국가 프로그램, 학술 그룹, 상용 플랫폼, 랩 OS 공급사를 첫 공개 연도·분야·성숙도·출처와 함께 지구본 위에 배치. 목록, 타임라인, 주간 동향, 데이터 다운로드로 이동.",
-    "entryBlurbNote": "영문 요약"
+    "entryBlurbNote": "영문 요약",
+    "ccOpenTo": "제공 가능",
+    "ccSeeks": "찾는 것",
+    "ccStack": "기술 스택",
+    "ccUpdate": "항목 업데이트",
+    "ccClaim": "우리 연구실입니다",
+    "ccMaintained": "연구실과 함께 관리",
+    "ccVocab": {
+      "collaboration": "연구 협력",
+      "lab-access": "실험실 이용",
+      "software": "소프트웨어 / 플랫폼",
+      "data": "데이터 공유",
+      "training": "교육",
+      "visits": "방문",
+      "academic-partners": "학계 파트너",
+      "industry-partners": "산업 파트너",
+      "use-cases": "활용 사례",
+      "datasets": "데이터셋",
+      "hardware": "하드웨어",
+      "consortium": "컨소시엄 파트너"
+    }
   },
   "zh": {
     "brandEyebrow": "自主科学 · 图谱与动态",
@@ -377,6 +457,26 @@
     "nfBody": "该地址不在本站。地图、列表、时间轴与动态就在一步之外。",
     "mapIntroHead": "这张图上有什么",
     "mapIntro": "{c} 个国家的 {n} 个项目：国家计划、学术团队、商业平台与实验室操作系统供应商，每一项都标注首次公开年份、领域、成熟度与来源。可浏览列表、时间轴与每周动态，或下载数据。",
-    "entryBlurbNote": "英文简介"
+    "entryBlurbNote": "英文简介",
+    "ccOpenTo": "可提供",
+    "ccSeeks": "寻求",
+    "ccStack": "技术栈",
+    "ccUpdate": "更新此条目",
+    "ccClaim": "这是我的实验室",
+    "ccMaintained": "由实验室共同维护",
+    "ccVocab": {
+      "collaboration": "研究合作",
+      "lab-access": "实验室开放使用",
+      "software": "软件 / 平台",
+      "data": "数据共享",
+      "training": "培训",
+      "visits": "参观交流",
+      "academic-partners": "学术伙伴",
+      "industry-partners": "产业伙伴",
+      "use-cases": "应用场景",
+      "datasets": "数据集",
+      "hardware": "硬件",
+      "consortium": "联合申请伙伴"
+    }
   }
 }

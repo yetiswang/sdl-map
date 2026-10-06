@@ -246,6 +246,8 @@ Open `http://localhost:8000/` (loads `index.html`). Edit in place, commit, and p
 
 Corrections, additions, and rename/closure flags are welcome. Open an issue or PR — or, if you'd rather not touch Git, use the **[submission form](https://github.com/yetiswang/sdl-map/issues/new?template=add-lab.yml)**: a structured template, fill in the fields and submit. For each new entry, include:
 
+**Already on the map?** Use *Update this entry* or *This is my lab* on the entry's card (or the **[update form](https://github.com/yetiswang/sdl-map/issues/new?template=update-lab.yml)**) to correct facts, say what your lab offers and seeks, and keep it current. Entries maintained with their lab are marked as such; introductions between entries are routed through the curator with consent on both sides, and no personal data is published.
+
 - **Name + org + location** (with coordinates).
 - **Primary URL** (must resolve, not redirect to parking).
 - **Tier** (national / academic / commercial / labos), **domain**, **maturity**, **charact**, **ai**.
