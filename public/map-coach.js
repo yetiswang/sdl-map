@@ -14,7 +14,7 @@
  * About card replays it. State: localStorage sdlmap.tourDone (this browser
  * only, no tracking). QA: ?tour=1 forces it.
  * Material: tips use the Vitrine glass like the other tips over the map
- * (DESIGN.md § Glass); no backdrop, the map stays usable.
+ * (DESIGN.md § Glass); a spotlight dims all but the step's control, click-through.
  */
 (function () {
   'use strict';
