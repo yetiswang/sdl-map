@@ -10,9 +10,9 @@
    the site (updates go to public GitHub issues without contact details;
    introduction requests go by email to the curator, never to GitHub). */
 (function () {
-  // ⚠ The curator mailbox must exist before this ships publicly
-  // (2026-10-06: discoverylabs.nl has no MX record yet).
-  var CURATOR_EMAIL = 'connect@discoverylabs.nl';
+  // Curator mailbox (2026-10-06: the curator's TU/e address for now;
+  // discoverylabs.nl has no MX record — move to a project address when it exists).
+  var CURATOR_EMAIL = 'y.wang8@tue.nl';
   var REPO = 'https://github.com/yetiswang/sdl-map';
 
   var OFFERS = ['collaboration', 'lab-access', 'software', 'data', 'training', 'visits'];
