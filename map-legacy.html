@@ -1066,6 +1066,33 @@ body.interacting .land { opacity: 0.92; }
 .sheet-links ul.sources a:hover { color: var(--ink); border-bottom-style: solid; }
 .sheet-links .note { color: var(--ink-3); font-size: 11.5px; font-style: italic; margin-top: 6px; }
 
+/* Claim & Connect (2026-10-06): owner-stated "open to" block + actions.
+   Same label voice as .sheet-links; chips are quiet pills (no tier accents,
+   no glass — DESIGN.md § Glass). */
+.chips[hidden], .section-h[hidden] { display: none !important; }
+.sheet-open { margin-top: 14px; }
+.sheet-open .lbl { display: block; color: var(--ink-3); font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; margin: 10px 0 6px; }
+.sheet-open .lbl:first-child { margin-top: 0; }
+.cc-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.cc-chip { font-size: 12px; color: var(--ink-2); border: 1px solid var(--rule); border-radius: 999px; padding: 3px 9px; line-height: 1.3; }
+.cc-note { margin: 8px 0 0; font-size: 12.5px; color: var(--ink-2); line-height: 1.5; }
+.sheet-cc { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--rule); }
+.sheet-row + .sheet-cc { margin-top: 12px; padding-top: 4px; border-top: 0; }  /* the last row already draws the rule */
+.cc-intro {
+  display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+  background: var(--bg-2); border: 1px solid var(--ink-3); color: var(--ink);
+  font: 600 13px var(--font-sans); padding: 8px 12px; border-radius: 6px; margin-bottom: 10px;
+  transition: background var(--t-fast), border-color var(--t-fast);
+}
+.cc-intro:hover { background: var(--surface-hover); }
+.cc-intro:focus-visible, .cc-links a:focus-visible { outline: 2px solid var(--ink-3); outline-offset: 2px; }
+.cc-links { font-size: 12.5px; color: var(--ink-3); line-height: 1.7; }
+.cc-links a { color: var(--ink-2); text-decoration: none; border-bottom: 1px dotted var(--ink-3); }
+.cc-links a:hover { color: var(--ink); border-bottom-style: solid; }
+.cc-links a.cc-mail { color: var(--ink-3); }
+.cc-links .sep { margin: 0 6px; color: var(--ink-4); }
+.cc-claimed { margin-top: 8px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+
 /* v35 desktop card: same DOM, repositioned as a right-side card on wide viewports
    instead of bottom sheet. Sits above the legend without crowding it. */
 @media (min-width: 901px) {
@@ -1844,6 +1871,7 @@ window.SDL_CATEGORIES = {
      in place before the main app reads them) -->
 <script src="/sdl-data.js"></script>
 <script src="/map-i18n.js"></script>
+<script src="/claim-connect.js"></script>
 <script src="/map-clusters.js"></script>
 <script src="/export.js" defer></script>
 <script src="/map-mobile-sheet.js" defer></script>
@@ -1942,7 +1970,7 @@ window.SDL_CATEGORIES = {
 
   // State
   const state = {
-    filters: { tier: new Set(), maturity: new Set(), domain: new Set(), charact: new Set(), country: new Set() },
+    filters: { tier: new Set(), maturity: new Set(), domain: new Set(), charact: new Set(), country: new Set(), open: new Set() },
     hover: null,
   };
 
@@ -1952,10 +1980,14 @@ window.SDL_CATEGORIES = {
     for(const k of Object.keys(state.filters)){
       const s = state.filters[k];
       if(s.size === 0) continue;
-      if(!s.has(d[k])) return false;
+      if(!vals(d, k).some(v => s.has(v))) return false;
     }
     return true;
   }
+  // Claim & Connect: "open" is multi-valued (d.open.offers); every other
+  // group reads the single value d[group]. One helper so matching and the
+  // chip counts can never disagree.
+  function vals(d, group){ return window.SDL_CC ? window.SDL_CC.valuesOf(d, group) : [d[group]]; }
   function anyFilterActive(){
     return Object.values(state.filters).some(s => s.size>0);
   }
@@ -2035,6 +2067,8 @@ window.SDL_CATEGORIES = {
       <div class="chips" data-group="domain"></div>
       <div class="section-h">Characterisation in Loop</div>
       <div class="chips" data-group="charact"></div>
+      <div class="section-h cc-open-h" hidden>Open to</div>
+      <div class="chips" data-group="open" hidden></div>
     </aside>
 
     
@@ -2059,7 +2093,7 @@ window.SDL_CATEGORIES = {
     const host = app.querySelector('.chips[data-group="'+group+'"]');
     host.innerHTML = '';
     CATS[group].options.forEach(opt => {
-      const n = DATA.filter(d => d[group] === opt.id).length;
+      const n = DATA.filter(d => vals(d, group).includes(opt.id)).length;
       const b = document.createElement('button');
       b.className = 'chip';
       if(group === 'tier') b.dataset.tier = opt.id;
@@ -2076,6 +2110,14 @@ window.SDL_CATEGORIES = {
     });
   }
   Object.keys(CATS).forEach(renderChips);
+  // Claim & Connect: the "Open to" group appears only once an entry states
+  // what it offers, so the filters never show a row of zeros.
+  {
+    const anyOpen = DATA.some(d => vals(d, 'open').length > 0);
+    app.querySelectorAll('.cc-open-h, .chips[data-group="open"]').forEach(el => { el.hidden = !anyOpen; });
+    const h = app.querySelector('.cc-open-h');
+    if (h && CATS.open) h.textContent = CATS.open.label;
+  }
 
   document.getElementById('reset').onclick = () => {
     Object.values(state.filters).forEach(s => s.clear());
@@ -2635,13 +2677,13 @@ window.SDL_CATEGORIES = {
             const s = state.filters[gk];
             if(gk === group){
               if(s.size === 0){
-                if(d[gk] !== k) return false;
+                if(!vals(d, gk).includes(k)) return false;
               } else {
                 const sim = new Set(s); sim.add(k);
-                if(!sim.has(d[gk])) return false;
+                if(!vals(d, gk).some(v => sim.has(v))) return false;
               }
             } else {
-              if(s.size > 0 && !s.has(d[gk])) return false;
+              if(s.size > 0 && !vals(d, gk).some(v => s.has(v))) return false;
             }
           }
           return true;
@@ -4742,6 +4784,7 @@ function setupBottomSheet(){
       <div class="sheet-row" style="--i:4"><span class="k">AI</span><span class="v">${d.ai || '—'}</span></div>
       <div class="sheet-row" style="--i:5"><span class="k">Scale</span><span class="v">${d.scale || '—'}</span></div>
       <div class="sheet-row" style="--i:6"><span class="k">Investment</span><span class="v">${d.investLabel || '—'}</span></div>
+      ${window.SDL_CC ? window.SDL_CC.cardHtml(d) : ''}
       ${linksHtml}
     `;
     sheet.style.transform = '';   // clear any stuck inline transform from prior swipe
