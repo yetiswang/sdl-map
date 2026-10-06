@@ -1070,6 +1070,45 @@ body.interacting .land { opacity: 0.92; }
    Same label voice as .sheet-links; chips are quiet pills (no tier accents,
    no glass — DESIGN.md § Glass). */
 .chips[hidden], .section-h[hidden] { display: none !important; }
+
+/* First-visit tour (map-coach.js, 2026-10-06): one small tip at a time,
+   Vitrine glass like the other tips over the map, no backdrop. */
+.coach { position: fixed; top: 0; left: 0; z-index: 300; width: 300px; max-width: calc(100vw - 24px);
+  padding: 13px 15px 12px; border-radius: 10px; color: var(--ink);
+  background: var(--surface, var(--surface-overlay)); border: 1px solid var(--rule);
+  box-shadow: var(--glass-shadow); opacity: 0; pointer-events: auto; }
+.coach[hidden] { display: none; }
+.coach.in { opacity: 1; animation: coach-in var(--t-base, 200ms) var(--ease-enter, ease-out); }
+@keyframes coach-in { from { opacity: 0; margin-top: 4px; } to { opacity: 1; margin-top: 0; } }
+.coach-step { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+.coach-text { margin: 0 0 11px; font-size: 13.5px; line-height: 1.5; color: var(--ink); }
+.coach-acts { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.coach-btn { cursor: pointer; font: 600 12.5px var(--font-sans); color: var(--ink); background: var(--bg-2); border: 1px solid var(--ink-3); border-radius: 6px; padding: 6px 11px; }
+.coach-btn:hover { background: var(--surface-hover); }
+.coach-btn.ghost { background: none; border-color: transparent; color: var(--ink-3); font-weight: 500; padding: 6px 4px; margin-left: auto; }
+.coach-btn.ghost:hover { color: var(--ink); }
+.coach-btn:focus-visible { outline: 2px solid var(--ink-3); outline-offset: 2px; }
+.coach-arrow { position: absolute; width: 10px; height: 10px; transform: rotate(45deg); background: inherit; border: 1px solid var(--rule); display: none; }
+.coach[data-side="top"] .coach-arrow { display: block; top: -6px; margin-left: -5px; border-right: 0; border-bottom: 0; }
+.coach[data-side="bottom"] .coach-arrow { display: block; bottom: -6px; top: auto !important; margin-left: -5px; border-left: 0; border-top: 0; }
+.coach[data-side="left"] .coach-arrow { display: block; left: -6px; margin-top: -5px; border-right: 0; border-top: 0; }
+.coach[data-side="right"] .coach-arrow { display: block; right: -6px; margin-top: -5px; border-left: 0; border-bottom: 0; }
+body.coach-on:not(.coach-step3) #sdl-story-play { visibility: hidden; }
+.coach-spot { position: fixed; z-index: 299; pointer-events: none;
+  box-shadow: 0 0 0 200vmax oklch(0.10 0.01 240 / 0.55), inset 0 0 0 1px oklch(1 0 0 / 0.35);
+  transition: left var(--t-slow, 280ms) var(--ease-standard, ease), top var(--t-slow, 280ms) var(--ease-standard, ease),
+              width var(--t-slow, 280ms) var(--ease-standard, ease), height var(--t-slow, 280ms) var(--ease-standard, ease),
+              border-radius var(--t-slow, 280ms); }
+.coach-spot[hidden] { display: none; }
+/* Quick-tour button: same 36 px control as the top-left row; JS sets top/left after Play. */
+body #sdl-tour-btn.sdl-fab { position: fixed; z-index: 70; }
+@media (max-width: 900px) { body #sdl-tour-btn.sdl-fab { display: none !important; } }
+body.story-on #sdl-tour-btn, body.coach-on #sdl-tour-btn { opacity: 0.35; pointer-events: none !important; }
+@media (prefers-reduced-motion: reduce) { .coach-spot { transition: none; } }
+body.story-on .coach { display: none; }
+.wm-tour { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; color: var(--ink-2); border-bottom: 1px dotted var(--ink-3); }
+.wm-tour:hover { color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { .coach.in { animation: none; } }
 .sheet-open { margin-top: 14px; }
 .sheet-open .lbl { display: block; color: var(--ink-3); font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; margin: 10px 0 6px; }
 .sheet-open .lbl:first-child { margin-top: 0; }
@@ -1876,6 +1915,7 @@ window.SDL_CATEGORIES = {
 <script src="/export.js" defer></script>
 <script src="/map-mobile-sheet.js" defer></script>
 <script src="/map-story.js" defer></script>
+<script src="/map-coach.js" defer></script>
 
 <script>
 (async function(){
@@ -4201,6 +4241,7 @@ function redraw(){
     mode: () => (isFlat() ? 'flat' : 'globe'), setMode: (m) => setMapMode(m),
     spin,
     uiOpen: () => {
+      if (document.body.classList.contains('coach-on')) return true;   // first-visit tour running (map-coach.js)
       if (document.querySelector('.sheet.open, aside.open, .dpanel.is-open')) return true;
       const vis = (el) => { if (!el) return false; const cs = getComputedStyle(el); return cs.display !== 'none' && cs.visibility !== 'hidden' && cs.opacity !== '0'; };
       if (vis(document.getElementById('wmBackdrop'))) return true;
