@@ -26,6 +26,7 @@
   var key = lang === 'zh' ? ('zh-' + (window.SDL_ZH_SCRIPT || 'Hans')) : lang;
   var S = {
     en: {
+      tour: 'Quick tour',
       step: 'Step {i} of 5', skip: 'Skip tour', next: 'Next', done: 'Done', clear: 'Clear and continue', play: 'Play the story', replay: 'Take the quick tour',
       s1: 'Tap a lab to open its profile. Try {name}.',
       s1b: 'Run a lab on this map? Keep its entry current from here. Looking for a partner? Ask the curator for an introduction.',
@@ -38,6 +39,7 @@
       s4: 'Take the data: the full dataset as CSV, XLSX or TXT, plus a charts pack, from this button.'
     },
     'zh-Hans': {
+      tour: '快速引导',
       step: '第 {i} 步，共 5 步', skip: '跳过引导', next: '下一步', done: '完成', clear: '清除并继续', play: '播放图谱故事', replay: '快速引导',
       s1: '点击一个实验室，查看它的简介。试试 {name}。',
       s1b: '你在运营图上的某个实验室？可以在这里更新条目。在找合作伙伴？可以请策展人引荐。',
@@ -50,6 +52,7 @@
       s4: '带走数据：完整数据集（CSV、XLSX、TXT）以及图表包，都在这个按钮里。'
     },
     'zh-Hant': {
+      tour: '快速引導',
       step: '第 {i} 步，共 5 步', skip: '略過引導', next: '下一步', done: '完成', clear: '清除並繼續', play: '播放圖譜故事', replay: '快速引導',
       s1: '點擊一個實驗室，查看它的簡介。試試 {name}。',
       s1b: '你在經營圖上的某個實驗室？可以在這裡更新條目。在找合作夥伴？可以請策展人引薦。',
@@ -62,6 +65,7 @@
       s4: '帶走數據：完整數據集（CSV、XLSX、TXT）以及圖表包，都在這個按鈕裡。'
     },
     ja: {
+      tour: 'クイックツアー',
       step: 'ステップ {i} / 5', skip: 'ツアーをスキップ', next: '次へ', done: '完了', clear: 'クリアして次へ', play: 'ストーリーを再生', replay: 'クイックツアー',
       s1: 'ラボをタップしてプロフィールを開きます。{name} を試してください。',
       s1b: 'この地図のラボを運営していますか？ここから項目を更新できます。パートナーをお探しなら、キュレーターに紹介を依頼できます。',
@@ -74,6 +78,7 @@
       s4: 'データを持ち出す：データセット全体（CSV・XLSX・TXT）とチャート集は、このボタンから。'
     },
     ko: {
+      tour: '빠른 둘러보기',
       step: '{i} / 5 단계', skip: '투어 건너뛰기', next: '다음', done: '완료', clear: '지우고 계속', play: '스토리 재생', replay: '빠른 둘러보기',
       s1: '연구실을 눌러 프로필을 여세요. {name}을(를) 눌러 보세요.',
       s1b: '이 지도의 연구실을 운영하시나요? 여기서 항목을 최신으로 유지할 수 있습니다. 파트너를 찾으신다면 큐레이터에게 소개를 요청하세요.',
@@ -283,6 +288,42 @@
         setTimeout(start, 500);
       });
       foot.insertBefore(b, foot.lastElementChild);
+    })();
+
+    // ---- persistent "Quick tour" button (2026-10-06, Yuyang): replay any time.
+    // Desktop: a round control right after Play in the top-left row (follows
+    // Play's real width, which is a labelled pill on a first visit). Phone: a
+    // "Quick tour" action in the bottom sheet's action grid (no extra floating
+    // control, and the region chips keep their width).
+    var ICON_TOUR = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 0 1 4.8 1c0 1.7-2.4 2.2-2.4 3.7"/><path d="M12 17.2h.01"/></svg>';
+    var tb = document.createElement('button');
+    tb.type = 'button'; tb.id = 'sdl-tour-btn'; tb.className = 'sdl-fab glass';
+    tb.setAttribute('aria-label', tx('replay')); tb.title = tx('replay'); tb.innerHTML = ICON_TOUR;
+    tb.addEventListener('click', function (e) { e.stopPropagation(); if (!st.on) start(); });
+    document.body.appendChild(tb);
+    function placeTourBtn() {
+      var play = document.getElementById('sdl-story-play');
+      if (!play || isPhone()) { tb.style.display = 'none'; return; }
+      var r = play.getBoundingClientRect();
+      tb.style.display = '';
+      tb.style.top = Math.round(r.top) + 'px';
+      tb.style.left = Math.round(r.right + 8) + 'px';
+    }
+    placeTourBtn();
+    window.addEventListener('resize', placeTourBtn);
+    var playEl = document.getElementById('sdl-story-play');
+    if (playEl && window.ResizeObserver) new ResizeObserver(placeTourBtn).observe(playEl);
+    if (playEl) new MutationObserver(placeTourBtn).observe(playEl, { attributes: true, attributeFilter: ['class', 'style'] });
+    setTimeout(placeTourBtn, 600); setTimeout(placeTourBtn, 2000);
+    (function addSheetAction() {
+      var row = document.querySelector('#msheet .msheet-actions') || document.querySelector('.msheet-actions');
+      if (!row) { setTimeout(addSheetAction, 250); return; }
+      if (document.getElementById('msheet-tour')) return;
+      var b = document.createElement('button');
+      b.type = 'button'; b.id = 'msheet-tour'; b.className = 'msheet-action';
+      b.textContent = tx('tour');
+      b.addEventListener('click', function (e) { e.stopPropagation(); if (!st.on) start(); });
+      row.appendChild(b);
     })();
 
     // ---- trigger: first visit, after the welcome card closes and the arrival plays

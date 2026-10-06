@@ -1100,6 +1100,10 @@ body.coach-on:not(.coach-step3) #sdl-story-play { visibility: hidden; }
               width var(--t-slow, 280ms) var(--ease-standard, ease), height var(--t-slow, 280ms) var(--ease-standard, ease),
               border-radius var(--t-slow, 280ms); }
 .coach-spot[hidden] { display: none; }
+/* Quick-tour button: same 36 px control as the top-left row; JS sets top/left after Play. */
+body #sdl-tour-btn.sdl-fab { position: fixed; z-index: 70; }
+@media (max-width: 900px) { body #sdl-tour-btn.sdl-fab { display: none !important; } }
+body.story-on #sdl-tour-btn, body.coach-on #sdl-tour-btn { opacity: 0.35; pointer-events: none !important; }
 @media (prefers-reduced-motion: reduce) { .coach-spot { transition: none; } }
 body.story-on .coach { display: none; }
 .wm-tour { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; color: var(--ink-2); border-bottom: 1px dotted var(--ink-3); }
