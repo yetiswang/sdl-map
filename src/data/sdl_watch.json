@@ -1,5 +1,19 @@
 [
   {
+    "id": "danaher-autonomous-lab-2026",
+    "date": "2026-10-07",
+    "kind": "milestone",
+    "title": "Danaher announces its first AI-powered autonomous lab, for antibody and affinity-reagent discovery at Abcam",
+    "summary": "Danaher announced plans to launch its first AI-powered autonomous lab, based at Abcam (a Danaher company) and expected to operate at scale in early 2027. The lab uses AI to design new affinity reagents, including antibodies, then builds and tests each one and feeds every result back into the model in a continuous design-make-test-learn loop, with scientists making the key decisions. It combines technologies from several Danaher operating companies (Beckman Coulter Life Sciences, Cytiva, Genedata, Integrated DNA Technologies and Molecular Devices) in one connected workflow; device orchestration and robotic automation were developed with Automata. Danaher targets up to eight times faster progress from idea to validated reagent and up to a tenfold increase in annual reagent generation, from tens to hundreds per year. The company describes the lab as the first step of a broader programme to build smart instruments that are easier to control programmatically, produce AI-ready data and include agentic systems, connected into integrated workflows and autonomous labs.",
+    "related": "automata",
+    "sources": [
+      {
+        "label": "Danaher press release (7 Oct 2026)",
+        "url": "https://investors.danaher.com/2026-10-07-Danaher-Accelerates-Life-Sciences-Research-with-New-AI-powered-Autonomous-Lab"
+      }
+    ]
+  },
+  {
     "id": "eu-raise-asd-2026",
     "date": "2026-09-22",
     "kind": "funding",
