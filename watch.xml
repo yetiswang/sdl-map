@@ -17,6 +17,16 @@
 Sources — Danaher press release (7 Oct 2026): https://investors.danaher.com/2026-10-07-Danaher-Accelerates-Life-Sciences-Research-with-New-AI-powered-Autonomous-Lab</description>
     </item>
     <item>
+      <title>Roche outlines its move towards autonomous AI labs for drug R&amp;D, with Medra and Anthropic as collaborators</title>
+      <link>https://sdl-map.discoverylabs.nl/watch/#roche-autonomous-labs-2026</link>
+      <guid isPermaLink="true">https://sdl-map.discoverylabs.nl/watch/#roche-autonomous-labs-2026</guid>
+      <pubDate>Mon, 28 Sep 2026 12:00:00 GMT</pubDate>
+      <category>milestone</category>
+      <description>At its Pharma Day investor event on 28 September 2026, Roche outlined plans to move towards autonomous AI-driven labs to speed up drug discovery. Aviv Regev, head of Genentech Research and Early Development, said the company is committed to 'AI independence' in R&amp;D and has recently started building autonomous labs. An Autonomous Lab Accelerator is meant to strengthen Roche's lab-in-the-loop model, in which AI models make predictions, lab experiments test them and the results are fed back into the models. Roche presented a six-level scale for drug R&amp;D labs, from fully manual (L0) through automated instruments, connected workflows, AI-assisted workflows and domain autonomy to lab-wide autonomy (L5), with the human role shifting from operator through assistant and approver to auditor as autonomy rises. The deck names Medra (physical AI) and Anthropic, including its Model Hardware Standard, as autonomous-lab collaborators, next to NVIDIA for a hybrid-cloud AI factory of more than 3,500 Blackwell GPUs and Recursion for data generation. Roche reported that 40% of pipeline decisions from Q4 2025 to Q2 2026 had a tracked AI or computational contribution, and expects its Target Nexus AI tool to contribute to 80% of research portfolio decisions by the end of 2026.
+
+Sources — Reuters (28 Sep 2026): https://www.reuters.com/business/healthcare-pharmaceuticals/roche-outlines-plans-move-towards-autonomous-ai-labs-2026-09-28/ · Roche Pharma Day 2026 presentation (slides 71, 94, 100): https://assets.roche.com/f/176343/x/51deda2587/20260928_final_pharma-day-2026-publish-1.pdf · Roche Pharma Day 2026: https://www.roche.com/investors/events/roche-pharma-day-2026</description>
+    </item>
+    <item>
       <title>EU opens a €29M 'Automated Scientific Discovery' call: the first Horizon Europe topic dedicated to self-driving labs (RAISE pilot)</title>
       <link>https://sdl-map.discoverylabs.nl/watch/#eu-raise-asd-2026</link>
       <guid isPermaLink="true">https://sdl-map.discoverylabs.nl/watch/#eu-raise-asd-2026</guid>
