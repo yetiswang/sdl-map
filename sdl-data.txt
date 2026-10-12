@@ -1,5 +1,5 @@
 SDL LANDSCAPE — SELF-DRIVING LAB INITIATIVES WORLDWIDE
-118 initiatives · 16 countries · dataset of 2026-10-11
+118 initiatives · 16 countries · dataset of 2026-10-12
 https://sdl-map.discoverylabs.nl
 MIT — cite the map when reusing (github.com/yetiswang/sdl-map)
 
@@ -49,10 +49,10 @@ UK ARIA AI Scientists — ARIA
   ARIA programme funding 12 AI Scientist projects testing autonomous hypothesis-to-experiment systems across drugs, batteries, quantum dots, and biology.
   https://aria.org.uk/
 
-DiscoveryLabNL — NWO LSRI
+DiscoveryLabNL — TU/e
   Eindhoven, Netherlands
   domain: materials · maturity: concept · ai: planned · since: 2025 · investment: €30M (planned)
-  Dutch shared infrastructure linking DIFFER and three TU/e institutes for autonomous materials discovery, targeting NWO LSRI submission in 2027.
+  Dutch national infrastructure for AI-driven materials discovery, coordinated by TU/e and starting with energy materials.
   https://discoverylabs.nl/
 
 Big Chemistry — Radboud (lead) + TU/e, Groningen, AMOLF, Fontys
