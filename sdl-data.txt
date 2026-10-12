@@ -52,7 +52,7 @@ UK ARIA AI Scientists — ARIA
 DiscoveryLabNL — TU/e
   Eindhoven, Netherlands
   domain: materials · maturity: concept · ai: planned · since: 2025 · investment: €30M (planned)
-  Dutch national infrastructure for AI-driven materials discovery, coordinated by TU/e and starting with energy materials.
+  Dutch national infrastructure for AI-driven materials discovery, coordinated by TU/e, with energy materials as the first priority domain.
   https://discoverylabs.nl/
 
 Big Chemistry — Radboud (lead) + TU/e, Groningen, AMOLF, Fontys
