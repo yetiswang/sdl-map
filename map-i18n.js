@@ -725,42 +725,27 @@
   // Boost the wm-reopen pill so it doesn't look faded on mobile, sits above
   // the clear button in z-order, and gets a redundant direct tap handler in
   // case the document-level delegation loses the touch on iOS.
-  // === Welcome modal: mobile layout — give both intro and "how to use" room
-  // by making the intro scrollable too and reserving more height for howto. ===
+  // === Welcome modal: phones and short screens — the card's text scrolls as
+  // one block and the "Explore the map" button stays pinned at the bottom.
+  // Fixed-height regions (intro, a reserved "how to use") overflowed the band
+  // between the shell's bars on small phones and pushed the button out. ===
   function injectModalMobileStyles() {
     if (document.getElementById('sdl-modal-mobile-style')) return;
     var s = document.createElement('style');
     s.id = 'sdl-modal-mobile-style';
     s.textContent = [
-      '@media (max-width: 600px) {',
-      // Tighten outer padding so more content fits
-      '  .wm-card { padding: 0 !important; }',
+      '@media (max-width: 600px), (max-height: 600px) {',
+      '  .wm-card { padding: 0 !important; overflow-y: auto !important; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }',
+      '  .wm-hero, .wm-intro-fixed, .wm-howto { flex: 0 0 auto !important; max-height: none !important; overflow: visible !important; }',
       '  .wm-hero { padding: 20px 18px 0 !important; }',
-      '  .wm-intro-fixed {',
-      '    padding: 8px 18px 6px !important;',
-      // Make the intro scrollable too — both blocks read with some scroll
-      '    max-height: 28dvh !important;',
-      '    max-height: 28vh;',                       // fallback
-      '    overflow-y: auto !important;',
-      '    -webkit-overflow-scrolling: touch;',
-      '    flex: 0 1 auto !important;',
-      '  }',
-      // Slim scrollbar so the intro doesn\'t look like a textarea
-      '  .wm-intro-fixed::-webkit-scrollbar { width: 4px; }',
-      '  .wm-intro-fixed::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 4px; }',
-      '  .wm-howto {',
-      '    min-height: 36dvh !important;',           // reserve room so it isn\'t cramped
-      '    padding: 8px 18px 12px !important;',
-      '    flex: 1 1 auto !important;',
-      '  }',
-      '  .wm-actions { padding: 12px 18px 14px !important; }',
+      '  .wm-intro-fixed { padding: 8px 18px 6px !important; }',
+      '  .wm-howto { padding: 8px 18px 12px !important; }',
+      '  .wm-actions { position: sticky; bottom: 0; z-index: 1; padding: 12px 18px 14px !important; background: var(--surface-deep); border-top: 1px solid var(--rule); }',   // opaque: text scrolls under it
       '  .wm-title { font-size: 22px !important; line-height: 1.2 !important; }',
       '  .wm-intro { font-size: 13.5px !important; line-height: 1.55 !important; }',
       '}',
-      '@media (max-width: 380px) {',
-      '  .wm-intro-fixed { max-height: 24dvh !important; }',
-      '  .wm-howto { min-height: 40dvh !important; }',
-      '}',
+      // Landscape phones: the logo would take most of the band.
+      '@media (max-height: 600px) { .wm-logo { width: 48px !important; height: 48px !important; } }',
     ].join('\n');
     (document.head || document.documentElement).appendChild(s);
   }

@@ -1532,7 +1532,9 @@ aside.left, aside.right, .sheet, .sheet-body, .wm-howto {
   -webkit-backdrop-filter: blur(3px);
   display: none;
   align-items: center; justify-content: center;
-  padding: 20px;
+  /* The shell's glass bars lie over this frame (--shell-top / --shell-bottom,
+     map-mobile-sheet.js); the card centres in the band between them. */
+  padding: calc(12px + var(--shell-top, 0px)) 20px calc(12px + var(--shell-bottom, 0px));
   opacity: 0;
   /* GPU layer promotion so the blur + opacity composite on the compositor
      thread instead of rasterising every frame. translate3d forces a stacking
@@ -1574,7 +1576,7 @@ aside.left, aside.right, .sheet, .sheet-body, .wm-howto {
   width: 100%;
   /* dvh tracks the iOS Safari dynamic toolbar correctly; vh causes the card
      to be sized for full-toolbar-collapsed state and overflows when bars show. */
-  max-height: calc(100dvh - 32px);
+  max-height: calc(100dvh - 24px - var(--shell-top, 0px) - var(--shell-bottom, 0px));
   /* Flex column: scroll region grows, sticky CTA pinned at bottom. */
   display: flex; flex-direction: column;
   overflow: hidden;          /* outer card never scrolls; .wm-scroll does */

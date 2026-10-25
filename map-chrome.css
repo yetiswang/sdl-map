@@ -202,8 +202,10 @@ html body.embed-mode aside.left, html body.embed-mode aside.right { top: var(--s
   }
   .msheet.msheet.is-dragging { transition: none; }
   /* A grid row of 1fr still grows to its content unless the item may shrink;
-     without min-height:0 the list ran below the viewport and nothing scrolled. */
-  .msheet { overflow: hidden; }
+     without min-height:0 the list ran below the viewport and nothing scrolled.
+     The column has the same trap sideways: an auto column took the list's
+     widest content (339 px) and pushed the grip off a 320 px screen. */
+  .msheet { overflow: hidden; grid-template-columns: minmax(0, 1fr); }
   .msheet-body { min-height: 0; }
   .msheet-head { padding: 6px 14px 8px; touch-action: none; user-select: none; -webkit-user-select: none; }
   .msheet-bar { display: block; width: 40px; height: 4px; border-radius: 2px; background: var(--ink-3); opacity: .6; margin: 2px auto 8px; }

@@ -496,13 +496,14 @@
     var pos = embed
       ? ['#sdl-export-floating { top: 14px; left: 122px; }',
          '#sdl-data-floating   { top: 14px; left: 174px; }',
+         // Only these two: the story's Play button is an .sdl-fab too and has its own phone place below the shell header.
          '@media (max-width: 768px) {',
-         '  .sdl-fab { top: max(18px, env(safe-area-inset-top, 0px) + 12px) !important; width: 56px; height: 56px; }',
+         '  #sdl-export-floating, #sdl-data-floating { top: max(18px, env(safe-area-inset-top, 0px) + 12px) !important; width: 56px; height: 56px; }',
          '  #sdl-export-floating { left: 142px; }',
          '  #sdl-data-floating   { left: 206px; }',
          '}',
          '@media (max-width: 480px) {',
-         '  .sdl-fab { top: max(16px, env(safe-area-inset-top, 0px) + 10px) !important; width: 52px; height: 52px; }',
+         '  #sdl-export-floating, #sdl-data-floating { top: max(16px, env(safe-area-inset-top, 0px) + 10px) !important; width: 52px; height: 52px; }',
          '  #sdl-export-floating { left: 132px; }',
          '  #sdl-data-floating   { left: 192px; }',
          '}']
