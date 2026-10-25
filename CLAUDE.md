@@ -10,6 +10,7 @@ Visual canon: `DESIGN.md`. Read it before any UI change.
 - Unit tests: `npm test`
 - Map QA in Chrome: `node scripts/qa/map-audit.mjs --base http://127.0.0.1:4321 --label <name>` (dev server running;
   output in `scripts/qa/out/<label>/`)
+- Small-phone fit (welcome card and controls between the shell bars): `node scripts/qa/small-phones.mjs` (dev server running)
 - Build: `npm run build` (Astro, then Pagefind over `dist/`)
 - Analytics pack: `npm run analytics` (Python 3.13; writes `public/analytics/`)
 
