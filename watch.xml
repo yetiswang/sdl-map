@@ -5,7 +5,17 @@
     <link>https://sdl-map.discoverylabs.nl/watch/</link>
     <description>Noteworthy signals from the self-driving-lab and AI-for-materials landscape: talent moves, new labs, funding, and policy. Curated by DiscoveryLabNL.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 07 Oct 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 27 Oct 2026 12:00:00 GMT</lastBuildDate>
+    <item>
+      <title>Singapore launches MARVEL-AI: S$150M to pair AI models with self-driving labs for materials</title>
+      <link>https://sdl-map.discoverylabs.nl/watch/#sg-marvel-ai-2026</link>
+      <guid isPermaLink="true">https://sdl-map.discoverylabs.nl/watch/#sg-marvel-ai-2026</guid>
+      <pubDate>Tue, 27 Oct 2026 12:00:00 GMT</pubDate>
+      <category>funding</category>
+      <description>Singapore's Deputy Prime Minister Gan Kim Yong announced MARVEL-AI, the Materials Accelerator for Research and Venture Enterprise Launchpad, at the opening of SWITCH 2026 on 27 October 2026. Led by A*STAR and supported by the Ministry of Energy, Trade and Industry, Enterprise Singapore, the Economic Development Board and the National Research Foundation, it starts with a S$150 million government investment. The platform combines advanced AI models with self-driving laboratories: the models identify promising materials and design experiments, and the laboratories synthesise and test them. Enterprises, including start-ups and SMEs, get access to its expertise, infrastructure and validation capabilities. According to press coverage, the platform is anchored at A*STAR's Institute of Materials Research and Engineering under the RIE2030 plan, its executive director is Prof Loh Xian Jun, and it covers metal alloys, polymers and organics, ceramics and composites. The first industry partners are ST Engineering, Heraeus Electronics, Dura-Metal, Foxconn Industrial Internet and Suntar Research, with CuspAI and Google Cloud as technology partners. An existing alloy workflow already makes and tests up to 470 samples a day.
+
+Sources — METI (speech by DPM Gan Kim Yong, SWITCH 2026): https://www.meti.gov.sg/newsroom/delivered-speech-by-deputy-prime-minister-and-minister-for-energy--trade-and-industry--trade--gan-kim-yong-at-switch-2026-opening-ceremony/ · The Edge Singapore (via Yahoo Finance): https://sg.finance.yahoo.com/news/singapore-launches-ai-platform-develop-200824567.html · The Business Times: https://www.businesstimes.com.sg/singapore/singapore-invests-s150-million-ai-driven-materials-discovery-launches-support-business-ai-adoption · e27: https://e27.co/inside-singapores-ai-push-lighthouses-rice-importers-and-robot-labs-20261027/</description>
+    </item>
     <item>
       <title>Danaher announces its first AI-powered autonomous lab, for antibody and affinity-reagent discovery at Abcam</title>
       <link>https://sdl-map.discoverylabs.nl/watch/#danaher-autonomous-lab-2026</link>

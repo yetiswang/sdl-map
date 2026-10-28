@@ -1,10 +1,10 @@
 SDL LANDSCAPE — SELF-DRIVING LAB INITIATIVES WORLDWIDE
-118 initiatives · 16 countries · dataset of 2026-10-25
+119 initiatives · 16 countries · dataset of 2026-10-28
 https://sdl-map.discoverylabs.nl
 MIT — cite the map when reusing (github.com/yetiswang/sdl-map)
 
 ========================================================================
-NATIONAL / FLAGSHIP PROGRAMMES (26)
+NATIONAL / FLAGSHIP PROGRAMMES (27)
 ========================================================================
 
 Acceleration Consortium — University of Toronto
@@ -36,6 +36,12 @@ Korea 500 SDL Initiative — MOTIE AI+R&D Strategy
   domain: cross-domain · maturity: operational · ai: strong · since: 2024 · investment: $320M by 2035
   MOTIE's October 2024 AI+R&D Strategy commits Korea to 500 autonomous laboratories by 2030 across nanomaterials, catalysis, organic chemistry, and bioengineering.
   https://www.motie.go.kr/en/main.do
+
+MARVEL-AI — A*STAR IMRE · METI, EnterpriseSG, EDB, NRF
+  Singapore, Singapore
+  domain: materials · maturity: prototype · ai: strong · since: 2026 · investment: S$150M (initial government investment)
+  Singapore's national materials discovery platform, announced on 27 Oct 2026 with an initial S$150M government investment: AI models identify promising materials and design experiments, and self-driving laboratories synthesise and test them, for metal alloys, polymers and organics, ceramics and composites. Led by A*STAR and anchored at its Institute of Materials Research and Engineering, with access for companies including start-ups and SMEs.
+  https://www.meti.gov.sg/newsroom/delivered-speech-by-deputy-prime-minister-and-minister-for-energy--trade-and-industry--trade--gan-kim-yong-at-switch-2026-opening-ceremony/
 
 NUS AI4S · Materials Data Foundry — NRF Singapore · NUS I-FIM + U Toronto
   Singapore, Singapore
