@@ -49,7 +49,7 @@
 
 ## 🌍 국가 프로젝트 / 컨소시엄
 
-공공 부문이 주도하거나 여러 기관에 걸친 국가/지역 규모의 SDL 프로젝트. NSF PCL Test Bed, Acceleration Consortium, BIG-MAP / FULL-MAP, PEPR DIADEM, DiscoveryLabNL 등 26개 전체 항목은 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)를 참고하세요.
+공공 부문이 주도하거나 여러 기관에 걸친 국가/지역 규모의 SDL 프로젝트. NSF PCL Test Bed, Acceleration Consortium, BIG-MAP / FULL-MAP, PEPR DIADEM, DiscoveryLabNL 등 27개 전체 항목은 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)를 참고하세요.
 
 ## 🎓 학술 그룹
 

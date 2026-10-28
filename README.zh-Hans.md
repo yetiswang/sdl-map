@@ -49,7 +49,7 @@
 
 ## 🌍 国家计划与联盟
 
-由公共部门主导、跨机构合作的 SDL 国家级或区域级计划。完整 26 个条目（包括 NSF PCL Test Bed、Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL 等）见 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)。
+由公共部门主导、跨机构合作的 SDL 国家级或区域级计划。完整 27 个条目（包括 NSF PCL Test Bed、Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL 等）见 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)。
 
 ## 🎓 学术团队
 

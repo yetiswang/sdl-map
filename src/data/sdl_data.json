@@ -125,6 +125,33 @@
     "start": 2024
   },
   {
+    "id": "marvel_ai",
+    "name": "MARVEL-AI",
+    "org": "A*STAR IMRE · METI, EnterpriseSG, EDB, NRF",
+    "blurb": "Singapore's national materials discovery platform, announced on 27 Oct 2026 with an initial S$150M government investment: AI models identify promising materials and design experiments, and self-driving laboratories synthesise and test them, for metal alloys, polymers and organics, ceramics and composites. Led by A*STAR and anchored at its Institute of Materials Research and Engineering, with access for companies including start-ups and SMEs.",
+    "city": "Singapore",
+    "country": "Singapore",
+    "flag": "🇸🇬",
+    "lat": 1.2985,
+    "lon": 103.7887,
+    "tier": "national",
+    "domain": "materials",
+    "maturity": "prototype",
+    "charact": "multi-technique",
+    "ai": "strong",
+    "scale": "national platform · 4 material classes · alloy workflow up to 470 samples/day",
+    "invest": 111,
+    "investLabel": "S$150M (initial government investment)",
+    "url": "https://www.meti.gov.sg/newsroom/delivered-speech-by-deputy-prime-minister-and-minister-for-energy--trade-and-industry--trade--gan-kim-yong-at-switch-2026-opening-ceremony/",
+    "sources": [
+      "https://www.meti.gov.sg/newsroom/delivered-speech-by-deputy-prime-minister-and-minister-for-energy--trade-and-industry--trade--gan-kim-yong-at-switch-2026-opening-ceremony/",
+      "https://sg.finance.yahoo.com/news/singapore-launches-ai-platform-develop-200824567.html",
+      "https://www.businesstimes.com.sg/singapore/singapore-invests-s150-million-ai-driven-materials-discovery-launches-support-business-ai-adoption",
+      "https://e27.co/inside-singapores-ai-push-lighthouses-rice-importers-and-robot-labs-20261027/"
+    ],
+    "start": 2026
+  },
+  {
     "id": "nus_ai4s",
     "name": "NUS AI4S · Materials Data Foundry",
     "org": "NRF Singapore · NUS I-FIM + U Toronto",
@@ -140,7 +167,7 @@
     "charact": "multi-technique",
     "ai": "strong",
     "scale": "national · 4 of 8 NUS projects · NUS–Toronto joint lab",
-    "invest": 120,
+    "invest": 89,
     "investLabel": "S$120M (NRF AI4S, 8 projects)",
     "url": "https://news.nus.edu.sg/ai-for-science-nus-4-ai-based-projects/",
     "sources": [

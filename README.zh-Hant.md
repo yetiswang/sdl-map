@@ -49,7 +49,7 @@
 
 ## 🌍 國家計畫與聯盟
 
-由公共部門主導、跨機構合作的 SDL 國家級或區域級計畫。完整 26 個條目（包括 NSF PCL Test Bed、Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL 等）見 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)。
+由公共部門主導、跨機構合作的 SDL 國家級或區域級計畫。完整 27 個條目（包括 NSF PCL Test Bed、Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL 等）見 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)。
 
 ## 🎓 學術團隊
 

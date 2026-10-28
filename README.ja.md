@@ -49,7 +49,7 @@
 
 ## 🌍 国家プロジェクト・コンソーシアム
 
-公的セクター主導、複数機関にまたがる国家規模・地域規模の SDL プロジェクト。NSF PCL Test Bed、Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL ほか全 26 件は [English README → National Programmes & Consortia](README.md#-national-programmes--consortia) を参照。
+公的セクター主導、複数機関にまたがる国家規模・地域規模の SDL プロジェクト。NSF PCL Test Bed、Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL ほか全 27 件は [English README → National Programmes & Consortia](README.md#-national-programmes--consortia) を参照。
 
 ## 🎓 学術グループ
 
