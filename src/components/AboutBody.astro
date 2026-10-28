@@ -2,6 +2,7 @@
 import aboutAll from '../i18n/about.json';
 import uiAll from '../i18n/ui.json';
 import PageHead from './PageHead.astro';
+import DlnlMark from './DlnlMark.astro';
 interface Props { lang: string }
 const { lang } = Astro.props;
 const a = (aboutAll as any)[lang] || (aboutAll as any).en;
@@ -11,7 +12,7 @@ const prefix = lang === 'en' ? '/' : `/${lang}/`;
 <main class="about" data-pagefind-body>
   <PageHead title={a.title} desc={a.lead} />
   <p>{a.what}</p>
-  <p>{a.who} <a href="https://discoverylabs.nl" target="_blank" rel="noopener">{a.linkDlnl} ↗</a></p>
+  <p>{a.who} <a href="https://discoverylabs.nl" target="_blank" rel="noopener"><DlnlMark />{a.linkDlnl} ↗</a></p>
   <h2>{a.ruleHead}</h2>
   <ol>
     {a.rules.map((r: string) => <li>{r}</li>)}

@@ -4,6 +4,7 @@ import countries from '../i18n/countries.json';
 import chinaNames from '../i18n/china-names.json';
 import data from '../data/sdl_data.json';
 import { gitDate } from '../utils/dates';
+import DlnlMark from '../components/DlnlMark.astro';
 
 export interface Props {
   title: string;
@@ -328,6 +329,10 @@ a{ color:inherit; text-decoration:none; }
   .site-header .brand-h1 { font-size:15px !important; }
   .site-header .tue-logo img { height:24px !important; }
 }
+/* DiscoveryLabNL orbit mark beside the provenance line and on About */
+.dlnl-mark { width:1.3em; height:1.3em; vertical-align:-0.3em; margin-right:0.45em; display:inline-block; }
+.dlnl-mark-core { fill: var(--dlnl-red); }
+.site-footer .dlnl-mark { color: var(--ink-2); }
 /* Phone footer: one quiet line, not three. The dropped words are the ones a
    phone reader already knows from the header; every link survives. */
 @media (max-width: 640px) {
@@ -408,7 +413,7 @@ a{ color:inherit; text-decoration:none; }
   <!-- ===== FOOTER ===== -->
   <footer class="site-footer glass glass-mid" style="position:fixed;left:0;right:0;bottom:0;z-index:60;padding:14px 28px calc(14px + env(safe-area-inset-bottom, 0px));border-top-width:1px;border-top-style:solid;font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3);letter-spacing:0.12em;">
     <div class="site-footer-row" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;text-align:center;">
-      <span><span class="ft-opt">{ui.footerProjectPre}</span><a href="https://discoverylabs.nl" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">{ui.footerDlnl}</a><span class="ft-opt">{ui.footerProjectPost}</span></span>
+      <span><span class="ft-opt">{ui.footerProjectPre}</span><DlnlMark /><a href="https://discoverylabs.nl" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">{ui.footerDlnl}</a><span class="ft-opt">{ui.footerProjectPost}</span></span>
       <span style="opacity:0.5;">·</span>
       <span><span class="ft-opt">{ui.footerPart} </span><a href="https://tue-flagship-advanced-materials.nl" target="_blank" rel="noopener" style="color:var(--ink-2);border-bottom:1px dotted var(--ink-3);">{ui.footerFlagship}</a></span>
       <span style="opacity:0.5;">·</span>

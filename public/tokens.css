@@ -28,6 +28,9 @@
   --c-commercial: oklch(0.72 0.18 25);
   --c-labos:      oklch(0.78 0.14 300);
 
+  /* DiscoveryLabNL logo red (the core of the orbit mark in the footer and on About) */
+  --dlnl-red: #F0525A;
+
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
@@ -63,6 +66,7 @@
 }
 
 [data-theme="light"]{
+  --dlnl-red: #AE1C28;
   --bg:         oklch(0.985 0.003 85);
   --bg-2:       oklch(0.965 0.004 85);
   --bg-3:       oklch(0.93  0.005 85);
