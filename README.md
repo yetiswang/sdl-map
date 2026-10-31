@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/sdl_favicon.png" alt="SDL Landscape" width="120">
+  <img src="public/brand/sdl-landscape-icon.png" alt="SDL Landscape" width="120">
 
   <h1>The Global Self-Driving Lab Landscape</h1>
 

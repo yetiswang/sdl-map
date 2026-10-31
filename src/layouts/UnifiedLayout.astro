@@ -146,7 +146,10 @@ function altUrl(toLang: string, script?: string | null): string {
 {indexable && alternates.map(([hl, p]) => <link rel="alternate" hreflang={hl} href={siteUrl + p} />)}
 {indexable && <link rel="alternate" hreflang="x-default" href={siteUrl + basePath} />}
 <link rel="alternate" type="application/rss+xml" title={`${siteName} · Watch`} href="/watch.xml" />
-<link rel="icon" type="image/png" href="/sdl_favicon.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <meta property="og:site_name" content={siteName} />
 <meta property="og:locale" content={ogLocale} />
 <meta property="og:title" content={title} />

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <style>
   :root {
-    --red: #C8102E;
+    --red: #AE1C28;   /* the brand red (DESIGN.md § Identity) */
     --ink: #16161a;
     --muted: #6f6a61;
     --bg: #f5f2ec;
@@ -24,16 +24,17 @@
   .wrap { display: flex; height: 583px; }
 
   /* ---------- left column ---------- */
-  .left { width: 470px; padding: 52px 8px 0 48px; flex-shrink: 0; }
+  .left { width: 470px; padding: 30px 8px 0 48px; flex-shrink: 0; }
+  .mark { width: 56px; height: 56px; display: block; margin-bottom: 14px; }
   .eyebrow {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 13px; letter-spacing: 2.5px; color: var(--red);
     font-weight: 600; margin-bottom: 14px;
   }
-  h1 { font-size: 44px; line-height: 1.08; letter-spacing: -0.5px; margin-bottom: 26px; }
+  h1 { font-size: 44px; line-height: 1.08; letter-spacing: -0.5px; margin-bottom: 20px; }
   h1 .light { font-weight: 300; color: #57534a; }
 
-  .stats { display: flex; gap: 30px; margin-bottom: 30px; }
+  .stats { display: flex; gap: 30px; margin-bottom: 24px; }
   .stat .n { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 34px; font-weight: 700; }
   .stat .l {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -41,7 +42,7 @@
   }
   .stat:first-child .n { color: var(--red); }
 
-  .features { list-style: none; margin-bottom: 30px; }
+  .features { list-style: none; margin-bottom: 24px; }
   .features li {
     font-size: 16.5px; line-height: 1.35; padding: 7px 0 7px 26px; position: relative; color: #2b2822;
   }
@@ -113,7 +114,8 @@
 <body>
   <div class="wrap">
     <div class="left">
-      <div class="eyebrow">DISCOVERYLABNL &middot; LIVE TRACKER</div>
+      <svg class="mark" viewBox="6 6 88 88" aria-hidden="true"><path d="M89.39,43.05 A40.00,40.00 0 1 1 63.68,12.41" fill="none" stroke="#13263F" stroke-width="7.20" stroke-linecap="round"/><circle cx="80.64" cy="24.29" r="8.50" fill="#13263F"/><path d="M36.51,50.63 A15.50,15.50 0 1 1 63.49,50.63 L50.00,74.50 Z M44.50,43.00 a5.50,5.50 0 1 0 11.00,0 a5.50,5.50 0 1 0 -11.00,0 Z" fill="var(--red)" fill-rule="evenodd"/></svg>
+      <div class="eyebrow">AUTONOMOUS SCIENCE, MAPPED AND WATCHED</div>
       <h1>Global Self-Driving Lab <span class="light">Landscape</span></h1>
       <div class="stats">
         <div class="stat"><div class="n">{{N_ENTRIES}}</div><div class="l">Initiatives</div></div>

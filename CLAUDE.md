@@ -13,6 +13,8 @@ Visual canon: `DESIGN.md`. Read it before any UI change.
 - Small-phone fit (welcome card and controls between the shell bars): `node scripts/qa/small-phones.mjs` (dev server running)
 - Build: `npm run build` (Astro, then Pagefind over `dist/`)
 - Analytics pack: `npm run analytics` (Python 3.13; writes `public/analytics/`)
+- Brand kit (mark, lockups, favicon set): `python3 scripts/brand/make_logo.py` (macOS: Avenir Next, `hb-shape`,
+  `rsvg-convert`; writes `public/favicon.*`, the icon PNGs, `site.webmanifest` and `public/brand/`)
 
 ## Deploy is not automatic
 Pushing `main` does not change the live site. GitHub Pages serves the `gh-pages` branch.
