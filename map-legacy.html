@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
 <title>Global SDL Landscape · Map</title>
 <meta name="robots" content="noindex" />
-<link rel="icon" type="image/png" href="sdl_favicon.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 
 <link rel="stylesheet" href="/tokens.css">
 <link rel="stylesheet" href="/glass.css">
@@ -1673,9 +1676,10 @@ aside.left, aside.right, .sheet, .sheet-body, .wm-howto {
   gap: 14px; margin-bottom: 22px;
 }
 .wm-logo {
-  width: 110px; height: 110px; object-fit: contain;
-  /* frameless — no background tint, no border, no padding */
+  width: 110px; height: 110px; display: block; color: var(--ink);
+  /* inline SVG: the ring takes the text colour, the pin the DiscoveryLabNL red token; frameless */
 }
+.wm-logo-pin { fill: var(--dlnl-red); }
 .wm-eyebrow {
   font-family: var(--font-mono); font-size: 10px; color: var(--ink-3);
   letter-spacing: 0.22em; text-transform: uppercase; text-align: center;
@@ -5295,7 +5299,7 @@ function prewarmInteracting(){
           </button>
           <div class="wm-hero">
             <div class="wm-head">
-              <img class="wm-logo" src="sdl_favicon.png" alt="SDL Landscape icon" />
+              <svg class="wm-logo" viewBox="6 6 88 88" aria-hidden="true" focusable="false"><path d="M89.39,43.05 A40.00,40.00 0 1 1 63.68,12.41" fill="none" stroke="currentColor" stroke-width="7.20" stroke-linecap="round"/><circle cx="80.64" cy="24.29" r="8.50" fill="currentColor"/><path d="M36.51,50.63 A15.50,15.50 0 1 1 63.49,50.63 L50.00,74.50 Z M44.50,43.00 a5.50,5.50 0 1 0 11.00,0 a5.50,5.50 0 1 0 -11.00,0 Z" class="wm-logo-pin" fill-rule="evenodd"/></svg>
               <div class="wm-eyebrow">About this map</div>
               <h1 id="wmTitle" class="wm-title">The Global <span class="dim">Self-Driving Lab</span> Landscape</h1>
             </div>
