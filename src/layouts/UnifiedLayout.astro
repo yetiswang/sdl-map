@@ -4,6 +4,7 @@ import countries from '../i18n/countries.json';
 import chinaNames from '../i18n/china-names.json';
 import data from '../data/sdl_data.json';
 import { gitDate } from '../utils/dates';
+import SiteMark from '../components/SiteMark.astro';
 import DlnlMark from '../components/DlnlMark.astro';
 
 export interface Props {
@@ -271,6 +272,9 @@ a{ color:inherit; text-decoration:none; }
   .site-header .brand-h1 { font-size:18px !important; }
   .site-header .brand-h1-dim { display:none !important; }
   .site-header .tue-logo img { height:28px !important; }
+  .site-header .brand-lockup { gap:12px !important; }
+  .site-header .brand-divider { height:24px; }
+  .site-header .site-mark { width:28px; height:28px; }
   .site-header .nav-cluster { display:none; }
   .site-header .nav-cluster.open {
     display:flex; flex-direction:column; align-items:stretch; gap:10px;
@@ -329,9 +333,18 @@ a{ color:inherit; text-decoration:none; }
   .nav-hamburger { display:inline-flex; }
 }
 @media (max-width: 480px) {
-  .site-header .brand-h1 { font-size:15px !important; }
-  .site-header .tue-logo img { height:24px !important; }
+  .site-header .brand-h1 { font-size:14px !important; }
+  .site-header .tue-logo img { height:22px !important; }
+  /* the mark takes 32 px of a narrow bar: logo and title go one step smaller so the title stays on one line down to 360 px */
+  .site-header .brand-lockup { gap:10px !important; }
+  .site-header .brand-divider { display:none; }
+  .site-header .site-mark { width:22px; height:22px; }
 }
+/* The site mark beside the brand text, after a hairline from the TU/e logo (DESIGN.md § Identity) */
+.site-header .brand-divider { width:1px; height:34px; background:var(--rule); flex-shrink:0; }
+.site-header .site-mark-link { display:flex; align-items:center; flex-shrink:0; color:var(--ink); }
+.site-mark { width:42px; height:42px; display:block; }
+.site-mark-pin { fill: var(--dlnl-red); }
 /* DiscoveryLabNL orbit mark beside the provenance line and on About */
 .dlnl-mark { width:1.3em; height:1.3em; vertical-align:-0.3em; margin-right:0.45em; display:inline-block; }
 .dlnl-mark-core { fill: var(--dlnl-red); }
@@ -352,10 +365,12 @@ a{ color:inherit; text-decoration:none; }
 <body>
   <!-- ===== HEADER ===== -->
   <header class="site-header glass glass-mid glass-bar" style="position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:flex-end;justify-content:space-between;padding:18px 28px 14px;border-bottom-width:1px;border-bottom-style:solid;gap:40px;flex-wrap:wrap;">
-    <div style="display:flex;align-items:center;gap:20px;min-width:0;">
+    <div class="brand-lockup" style="display:flex;align-items:center;gap:20px;min-width:0;">
       <a href="https://www.tue.nl/" target="_blank" rel="noopener" aria-label="TU Eindhoven" class="tue-logo" style="display:flex;align-items:center;flex-shrink:0;">
         <img src="/img/tue-logo.png" alt="TU Eindhoven" style="height:36px;width:auto;display:block;">
       </a>
+      <span class="brand-divider" aria-hidden="true"></span>
+      <a href={prefix} class="site-mark-link" aria-label={`${ui.brandH1} ${ui.brandDim}`}><SiteMark /></a>
       <div style="min-width:0;">
         <div class="brand-eyebrow" style="font-family:var(--font-mono);font-size:10px;color:var(--ink-3);letter-spacing:0.22em;text-transform:uppercase;margin-bottom:4px;">{ui.brandEyebrow}</div>
         <BrandTag class="brand-h1" style="font-family:var(--font-sans);font-weight:600;font-size:24px;letter-spacing:-0.01em;margin:0;color:var(--ink);line-height:1.2;">
