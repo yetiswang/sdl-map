@@ -1,5 +1,59 @@
 [
   {
+    "id": "nanoforge-ai-seed-2026",
+    "date": "2026-10-30",
+    "kind": "funding",
+    "title": "NanoForge AI raises a KRW 14.6B seed round to pair atomic-level materials AI with a robotic self-driving lab",
+    "summary": "NanoForge AI (나노포지에이아이), a Seoul start-up founded in May 2025, announced a KRW 14.6 billion (about US$10 million) seed round on 30 October 2026, led by Mirae Asset Venture Investment, with existing investors FuturePlay and Mashup Ventures and new investors DSC Investment, Korea Development Bank and Ecopro Partners; cumulative funding passes KRW 15 billion. Its AI predicts material properties at the atomic and electronic level, interatomic forces and energies today and electronic structure in development, so that simulation-heavy screening keeps only candidates likely to meet a target, with the long-term goal of shrinking materials development from more than a decade to about a month. The money goes to the electronic-structure work and to a robotic autonomous laboratory that synthesises and analyses materials, feeding results back into the models in a closed loop, aimed at semiconductor and battery materials and at materials IP shared with partners; the company works with Ecopro BM and has collaborated with Samsung Electronics, and Ecopro Partners' entry turns that technical tie into a strategic one. MSIT's first vice-minister visited the company's automated inorganic-materials lab in December 2025. KAIST professors Yoo Seung-hwa (mechanical engineering, physics-based multiscale modelling) and Park Chan-young advise. The second Korean materials start-up on the map after the Korea 500 programme's public labs.",
+    "related": "nanoforge",
+    "sources": [
+      {
+        "label": "Wowtale, company announcement (30 Oct 2026, Korean)",
+        "url": "https://wowtale.net/2026/10/30/267209/"
+      },
+      {
+        "label": "Dealroom (30 Oct 2026)",
+        "url": "https://dealroom.co/news/168216-koreas-nanoforge-ai-raises-10-9m-seed-to-automate-materials-discovery/"
+      },
+      {
+        "label": "Newsis, vice-minister visit (24 Dec 2025, Korean)",
+        "url": "https://mobile.newsis.com/view/NISX20251224_0003453448"
+      }
+    ]
+  },
+  {
+    "id": "radical-ai-300-alloys-2026",
+    "date": "2026-10-30",
+    "kind": "milestone",
+    "title": "Radical AI reports 300 alloy compositions in 16 weeks from its Brooklyn Navy Yard self-driving lab",
+    "summary": "Radical AI told MINING.COM on 30 October 2026 that the self-driving laboratory at its Brooklyn Navy Yard facility produced 300 new alloy compositions in about 16 weeks, in a programme to design alloys for aerospace, defence and other industrial uses that need fewer supply-constrained metals such as hafnium, as the United States pushes to reduce its dependence on China for critical minerals. CEO Joseph Frause described a platform that uses AI and robotics to design, manufacture and test advanced materials and shortens the discovery process; the company is backed by RTX and Nvidia. In September 2026 Radical AI partnered with Sandia National Laboratories on metal–hydrogen interactions and on materials to separate hydrogen from waste-gas streams. Chief scientific officer Gerbrand Ceder built Berkeley Lab's A-Lab. The figures come from an interview, not a paper; the related pin is Radical AI.",
+    "related": "radical_ai",
+    "sources": [
+      {
+        "label": "MINING.COM (30 Oct 2026)",
+        "url": "https://mining.com/radical-ai-uses-autonomous-labs-to-accelerate-alloy-discovery"
+      }
+    ]
+  },
+  {
+    "id": "telescope-kpbma-sdl-training-2026",
+    "date": "2026-10-29",
+    "kind": "milestone",
+    "title": "Korea's first pharma self-driving lab, built by Telescope at KPBMA, starts training researchers; Telescope counts three deployments in FY2026",
+    "summary": "Telescope Innovations (CSE: TELI) joined senior Canadian government and diplomatic leaders, including Philip Jennings, Deputy Minister of Innovation, Science and Economic Development Canada, and the Embassy of Canada to Korea, on a 28 October 2026 visit to the self-driving lab it installed at the Korean Pharmaceutical and Biopharmaceutical Manufacturers Association (KPBMA) in Seoul, during BIOPLUS-INTERPHEX Korea 2026, where Canada was country of honour. Installed in December 2025, the system is South Korea's first SDL for pharmaceutical research, development and education. KPBMA, which represents about 300 domestic and multinational member companies, runs the facility as a national training and demonstration hub and launched a multi-week SDL training programme that week, giving researchers from Korean biopharma organisations hands-on experience with Telescope's platform, which automates chemistry experiments for speed, reliability, throughput and insight. Founder and CTO Jason Hein said the KPBMA lab was the first of three SDL deployments Telescope completed in fiscal 2026, followed by Pfizer in the United States and a major global pharmaceutical company in Europe. A vendor-built SDL serving as an industry association's training hub is a new pattern on the map; the related pin is the Hein Lab / Telescope entry.",
+    "related": "hein",
+    "sources": [
+      {
+        "label": "Telescope Innovations release (29 Oct 2026)",
+        "url": "https://telescopeinnovations.com/senior-canadian-officials-and-diplomatic-leaders-tour-the-self-driving-lab-provided-by-telescope-innovations-to-kpbma-in-south-korea/"
+      },
+      {
+        "label": "Telescope Innovations, installation release (Dec 2025)",
+        "url": "https://telescopeinnovations.com/telescope-innovations-installs-koreas-first-self-driving-lab-for-pharma-rd-and-education/"
+      }
+    ]
+  },
+  {
     "id": "sg-marvel-ai-2026",
     "date": "2026-10-27",
     "kind": "funding",
@@ -26,6 +80,24 @@
     ]
   },
   {
+    "id": "tamu-aggie-ai-foundry-2026",
+    "date": "2026-10-26",
+    "kind": "funding",
+    "title": "Texas A&M adds a $2M Aggie AI Foundry to its NSF-funded ARM-MIP self-driving lab for alloys",
+    "summary": "A $2 million grant from the WoodNext Foundation, the philanthropy of Roku founder Anthony Wood and Susan Wood, will create the Aggie AI Foundry in Texas A&M's Department of Materials Science and Engineering: a campus facility with a fully automated system that takes new metal alloys from idea generation through synthesis to testing with AI and robots, which the university says will cut alloy development from months to a week or less and handle processing temperatures up to 3,000 °C that existing self-driving labs, built for materials that are easier to synthesise and process, avoid. Texas A&M calls it the first lab of its kind in academia; it is led by department head Ibrahim Karaman and Raymundo Arróyave. The foundry sits beside the Autonomous Robotic Metallurgist Materials Innovation Platform (ARM-MIP), the six-year, $24.9 million NSF Materials Innovation Platform announced on 5 August 2026 and sited at the Texas A&M System's RELLIS campus in Bryan: a national user facility open to researchers across the United States, designed for more than 200 users a year, 50 alloys a month in its first year and more than 200 a month by year six. Both now appear on the map as the ARM-MIP entry, next to BioPACIFIC MIP, the other NSF platform on the map.",
+    "related": "arm_mip",
+    "sources": [
+      {
+        "label": "Texas A&M Stories, Aggie AI Foundry (26 Oct 2026)",
+        "url": "https://stories.tamu.edu/news/2026/10/26/texas-am-to-create-ai-powered-foundry-for-faster-alloy-discovery/"
+      },
+      {
+        "label": "Texas A&M Stories, ARM-MIP (5 Aug 2026)",
+        "url": "https://stories.tamu.edu/news/2026/08/05/texas-am-to-build-self-driving-laboratory-for-metals-open-to-researchers-nationwide/"
+      }
+    ]
+  },
+  {
     "id": "china-sdl-standards-roadmap-2026",
     "date": "2026-10-24",
     "kind": "milestone",
@@ -43,6 +115,111 @@
       {
         "label": "Instrument.com.cn (仪器信息网)",
         "url": "https://www.instrument.com.cn/news/20261026/1002098.shtml"
+      }
+    ]
+  },
+  {
+    "id": "qst-hydrogen-alloy-automation-2026",
+    "date": "2026-10-23",
+    "kind": "lab",
+    "title": "QST, Tohoku University and IMS automate hydrogen-storage-alloy discovery from fabrication to evaluation, with AI-driven autonomy as the next step",
+    "summary": "Japan's National Institutes for Quantum Science and Technology (QST), Tohoku University, the Institute for Molecular Science and two companies (株式会社アールデック and 株式会社エイブイシー) announced on 23 October 2026 what they call the world's first experimental system that automates the full development loop for hydrogen-storage alloys: alloy thin-film fabrication, hydrogen absorption treatment, composition analysis and hydrogen-desorption evaluation run as one continuous automated sequence. Work that took two to three days per sample now takes two to three hours, and up to ten compositions are evaluated in series, which the partners describe as a leap in exploration speed. AI-linked autonomous materials development, in which the results choose the next composition, is the stated next step, aimed at rare-metal-free, lightweight, high-performance hydrogen-storage alloys for a hydrogen economy. Automation today and autonomy planned, so it is logged as a lab item rather than pinned.",
+    "sources": [
+      {
+        "label": "QST press release (23 Oct 2026, Japanese)",
+        "url": "https://www.qst.go.jp/site/press/20261023.html"
+      }
+    ]
+  },
+  {
+    "id": "warp-sciences-launch-2026",
+    "date": "2026-10-22",
+    "kind": "funding",
+    "title": "Warp Sciences emerges from stealth with $215M to build robot-assisted chemistry labs in the United States",
+    "summary": "Warp Sciences emerged from stealth on 22 October 2026 with $215 million in funding led by Lightspeed, with Premji Invest, Mayfield, IVP, Lux, Conviction and Menlo Ventures among the participants; TechCrunch reports an $865 million valuation. Co-founder and CEO Kevin Weil was OpenAI's chief product officer and VP of science; the other founders are Sol Reisberg (chief scientific officer, from Terremoto Biosciences), Mano Paluri (CTO, from Meta Superintelligence Labs and FAIR) and DJ Patil (COO, former US Chief Data Scientist). The company is building a US-based chemistry contract research organisation in San Francisco, starting with lead-optimisation analog synthesis, in labs it describes as built for increasing automation: experienced chemists guide the experiments, TechCrunch reports they wear cameras and sensor gloves to train the robots, and AI models are trained on the data from the physical experiments so that, in Paluri's words, every experiment makes the next one smarter. Warp has no drug pipeline of its own and pitches reshoring chemistry work from overseas contractors, citing the BIOSECURE Act of December 2025. It is a robotic CRO on the way to autonomy rather than a closed-loop lab today, which is why its map entry carries maturity 'prototype'.",
+    "related": "warp",
+    "sources": [
+      {
+        "label": "Warp Sciences press release via Business Wire (22 Oct 2026)",
+        "url": "https://www.businesswire.com/news/home/20261022200104/en/Warp-Sciences-Emerges-From-Stealth-With-%24215-Million-to-Build-U.S.-Chemistry-Services-for-Drug-Research"
+      },
+      {
+        "label": "TechCrunch (22 Oct 2026)",
+        "url": "https://techcrunch.com/2026/10/22/former-openai-science-lead-launches-warp-science-to-automate-wet-labs-with-robots/"
+      },
+      {
+        "label": "Bloomberg (22 Oct 2026)",
+        "url": "https://www.bloomberg.com/news/articles/2026-10-22/ex-openai-science-head-kevin-weil-launches-startup-with-215-million"
+      }
+    ]
+  },
+  {
+    "id": "google-verid-autonomous-wet-labs-2026",
+    "date": "2026-10-16",
+    "kind": "milestone",
+    "title": "Google Research publishes VERID and two closed-loop molecular-design projects as building blocks for agent-run wet labs",
+    "summary": "Google Research published three projects on 16 October 2026 on bridging in-silico AI exploration and real wet-lab experimentation, under the title 'Grounding AI agents in biological reality'. The premise: frontier models still do not reason reliably about three-dimensional geometry and physical state, which blocks the automation of the liquid-handling robots that move reagents and run molecular-biology protocols, while wet-lab readouts have become the bottleneck for agentic hypothesis generation. VERID is a framework that grounds an agent in the physical state of a lab: it plans, simulates and then executes liquid-handling protocols on a robot, with synchronised multi-camera views and live state tracking, so proposed actions pass through simulation before hardware runs and every step is recorded for debugging; its case studies use dye and water rather than biology. An agentic aptamer sandbox runs closed-loop design-test-iterate cycles with automated experimental feedback, and a third project applies the loop to protein binders for the cancer target FAP, where Google reports single-digit nanomolar binders. Google frames the work as building blocks: the three efforts are not yet one autonomous laboratory, and the loops run under human scientific agency.",
+    "sources": [
+      {
+        "label": "Google Research blog (16 Oct 2026)",
+        "url": "https://research.google/blog/grounding-ai-agents-in-biological-reality-building-blocks-for-autonomous-wet-labs/"
+      }
+    ]
+  },
+  {
+    "id": "self-building-labs-arxiv-2026",
+    "date": "2026-10-16",
+    "kind": "milestone",
+    "title": "Self-Building Labs: Aspuru-Guzik's group shows a lab that designs, configures and operates its own setup from a scientific goal",
+    "summary": "Jiaru Bai, Yuchi Zhao, Han Hao, Miroslav Bogdanovic, Yang Cao, Varinia Bernales and Alán Aspuru-Guzik posted 'Self-Building Labs' on arXiv (2610.23826) on 16 October 2026. The argument: AI agents can increasingly propose new experiments, but an existing self-driving lab can only run the procedures it was built for, and adapting it to a new experiment still takes extensive manual engineering, so laboratory flexibility has become the bottleneck for scaling discovery. A self-building laboratory (SBL) designs, configures and operates its own laboratory setup from a high-level scientific goal. It starts from whatever already exists, an empty room or a working SDL, and builds the missing capabilities: the lab layout, its digital twin, robot skills and experimental workflows. The authors show the system working across different robots and setups, scaling from a single workstation to laboratories with several robots working together, and validate it end to end with a real-world quantum-dot synthesis experiment. The human role shifts from configuring and programming device automation to specifying scientific objectives. Aspuru-Guzik directs the Acceleration Consortium, the related pin.",
+    "related": "accel",
+    "sources": [
+      {
+        "label": "arXiv 2610.23826 (16 Oct 2026)",
+        "url": "https://arxiv.org/abs/2610.23826"
+      }
+    ]
+  },
+  {
+    "id": "doe-robotics-autonomy-testbeds-2026",
+    "date": "2026-10-08",
+    "kind": "funding",
+    "title": "DOE selects four national-lab-led robotics and autonomous-science testbeds, $30M over three years",
+    "summary": "The US Department of Energy's Office of Science selected four National Laboratory-led projects to build robotics and automation testbeds for autonomous scientific discovery, announced on 8 October 2026 at the Golden Age of Science Summit in Washington, D.C. MAESTRO (Argonne) builds modular, self-improving infrastructure for laboratory robotics with digital twins, reusable robot skills, agent-based orchestration and learning from operational experience. DART (Brookhaven) asks when robotic autonomy is reliable, transferable and scientifically valid, with adversarial digital counterparts, a verified failure atlas and transfer of task knowledge across robot platforms. TRACE (Oak Ridge) extends the INTERSECT automated-laboratory ecosystem with typed capability contracts, end-to-end provenance and rerunnable evaluations so autonomy solutions can be tested, reproduced and deployed across laboratories without rebuilding the software stack. SPIRE (SLAC, with Stanford, the University of Chicago, Argonne, Brookhaven and Berkeley Lab) targets source-to-discovery autonomy at photon- and electron-science facilities, integrating sample manipulation, intelligent detectors, accelerator and instrument controls, persistent experiment state and edge-to-HPC computing, with methods and benchmark tasks meant for other DOE user facilities. Total funding is $30 million, $2 million in fiscal 2026 with outyears subject to appropriations, under solicitation LAB 26-3601 of the Advanced Scientific Computing Research programme. Together with NSF's programmable cloud laboratories network it gives the United States two federal autonomous-lab infrastructure lines.",
+    "related": "doe",
+    "sources": [
+      {
+        "label": "DOE Office of Science (8 Oct 2026)",
+        "url": "https://www.energy.gov/science/articles/doe-announces-four-national-laboratory-led-selections-advance-robotics-and"
+      },
+      {
+        "label": "SLAC news on SPIRE (8 Oct 2026)",
+        "url": "https://www6.slac.stanford.edu/news/2026-10-08-slac-leads-new-project-build-self-driving-laboratory-future"
+      },
+      {
+        "label": "DOE fact sheet, Golden Age of American Science (25 Jul 2026)",
+        "url": "https://www.energy.gov/articles/fact-sheet-energy-department-ushering-golden-age-american-science"
+      }
+    ]
+  },
+  {
+    "id": "nature-synthesis-sdl-industry-focus-2026",
+    "date": "2026-10-08",
+    "kind": "milestone",
+    "title": "Nature Synthesis publishes a Focus issue on self-driving laboratories in industry",
+    "summary": "Nature Synthesis published a Focus issue, 'Self-driving laboratories in industry', on 8 October 2026, edited by Jet-Sing Lee and Peter Seavill. The editorial, 'The road to self-driving laboratories in industry', frames the move from academic proof of concept to industrial practice and highlights the viewpoint of industrial researchers at AbbVie, AstraZeneca, Bristol Myers Squibb, the Center for the Transformation of Chemistry, China Energy Investment Corporation, Eli Lilly and Company, eN-RAMPS, Genentech, NVIDIA, Samsung Advanced Institute of Technology, Takeda and Zoetis. The collection includes a Perspective by Meenesh Singh and co-workers with industrial researchers from biopharmaceutical companies, a Q&A with Youn-Suk Choi, Vice President of Technology at Samsung Advanced Institute of Technology, on SAIT's use of self-driving laboratories for chemical research, a Q&A on autonomous laboratories and digital chemistry in industry, and research articles on a flexible, affordable self-driving laboratory for automated reaction optimisation and on scale-aware self-driving laboratories for multiscale process development. It is the industrial counterpart to Chem's August 2026 debate on reasoning SDLs, and the source behind the new Samsung SAIT and AstraZeneca iLab entries on the map.",
+    "sources": [
+      {
+        "label": "Nature Synthesis Focus collection (8 Oct 2026)",
+        "url": "https://www.nature.com/collections/ihcbjecgff"
+      },
+      {
+        "label": "Editorial: The road to self-driving laboratories in industry",
+        "url": "https://www.nature.com/articles/s44160-026-01194-2"
+      },
+      {
+        "label": "Q&A with Youn-Suk Choi, SAIT (22 May 2026)",
+        "url": "https://www.nature.com/articles/s44160-026-01084-7"
       }
     ]
   },
@@ -79,6 +256,28 @@
       {
         "label": "Roche Pharma Day 2026",
         "url": "https://www.roche.com/investors/events/roche-pharma-day-2026"
+      }
+    ]
+  },
+  {
+    "id": "lila-green-hydrogen-catalysts-2026",
+    "date": "2026-09-25",
+    "kind": "milestone",
+    "title": "Lila Sciences reports its AI-run lab screened 2,942 green-hydrogen catalysts in three months and found six palladium-based families",
+    "summary": "Lila Sciences reported on 25 September 2026 that its AI-directed laboratory in Cambridge, Massachusetts, proposed, synthesised and screened 2,942 catalysts for green hydrogen in three months and identified six palladium-based material families for the reaction that has bottlenecked renewable hydrogen electrolysis for fifty years. The lead catalyst matched the performance of ruthenium, one of Earth's rarest metals, after more than 1,000 hours of acid testing, using far cheaper palladium; the AI-guided workflow screened catalysts 17 times faster than a standard lab and cut human hands-on time per sample by over 90%. C&EN (22 October 2026) reports it as what Lila calls the first publicly detailed study involving closed-loop physical sciences, aimed at reducing electrolytic hydrogen production's reliance on scarce iridium, and notes that whether the materials survive inside an industrial electrolyser is another matter. Lila, founded in 2023 inside Flagship Pioneering, emerged in March 2025 with $200 million in seed funding and had raised $550 million by October 2025; in July 2026 it joined DOE's Genesis Mission with Phase I awards for three projects with Caltech, Berkeley Lab, Northwestern, Argonne and NLR.",
+    "related": "lila",
+    "sources": [
+      {
+        "label": "Lila Sciences (25 Sep 2026)",
+        "url": "https://www.lila.ai/news/how-an-ai-run-lab-cracked-open-green-hydrogens-catalyst-problem"
+      },
+      {
+        "label": "C&EN (22 Oct 2026)",
+        "url": "https://cen.acs.org/business/start-ups/lila-ai-hydrogen-catalyst-electrolyzer/104/web/2026/10"
+      },
+      {
+        "label": "Lila Sciences news, Genesis Mission (22 Jul 2026)",
+        "url": "https://www.lila.ai/news/powering-american-science-lila-to-join-does-genesis-mission"
       }
     ]
   },
@@ -129,6 +328,41 @@
       {
         "label": "Science|Business",
         "url": "https://sciencebusiness.net/news/ai/horizon-calls-2026-27-lay-groundwork-new-ai-science-strategy"
+      }
+    ]
+  },
+  {
+    "id": "anthropic-wet-lab-2026",
+    "date": "2026-09-18",
+    "kind": "milestone",
+    "title": "Anthropic confirms it runs its own wet lab in the San Francisco Bay Area",
+    "summary": "Reuters reported on 18 September 2026 that Anthropic has set up a wet lab in the San Francisco Bay Area, confirmed by Eric Kauderer-Abrams, its head of life sciences. TechCrunch's same-day report adds that Anthropic bought the stealth AI biotech Coefficient Bio in April 2026, that the company declined to say what the lab works on beyond a main focus on fundamental biology rather than drug discovery, so as not to appear to compete with pharmaceutical customers and partners such as Novo Nordisk, and that it launched a Life Sciences Verification Program the same week to give vetted biology researchers access to its most capable models. Size, staffing, opening date and the experiments run there are undisclosed. Read it next to the Model Hardware Standard of 27 August, whose research preview included a Genentech proof of concept automating a protein assay across a liquid handler, robot arm and plate reader: the model developer now has a bench of its own.",
+    "sources": [
+      {
+        "label": "TechCrunch (18 Sep 2026)",
+        "url": "https://techcrunch.com/2026/09/18/anthropic-is-operating-a-lab-that-conducts-biology-experiments"
+      },
+      {
+        "label": "Reuters via Business Standard (18 Sep 2026)",
+        "url": "https://www.business-standard.com/world-news/anthropic-quietly-sets-up-biology-lab-as-it-ramps-ai-drug-program-126091801476_1.html"
+      }
+    ]
+  },
+  {
+    "id": "ewha-autonomous-lab-expansion-2026",
+    "date": "2026-09-15",
+    "kind": "lab",
+    "title": "Ewha announces Korea's largest university autonomous lab, about 1,650 m², with five material classes on one platform",
+    "summary": "Ewha Womans University announced on 15 September 2026 that it is building Korea's largest university autonomous laboratory, 500 pyeong (about 1,650 m²), in its industry-academia cooperation building. AI designs the experimental conditions, unmanned robots mix and synthesise the materials and pass them to analytical instruments, and the AI learns from the results at once and directs the next, improved experiment, so the loop runs around the clock without researchers present, for materials used in semiconductors, next-generation batteries and hydrogen. Five classes of advanced materials with very different properties will run on one integrated platform, which the university calls a world first, with facilities from synthesis through precision analysis to all-solid-state battery fabrication in a moisture-free dry room. The build is led by the Institute for Multiscale Materials and Systems (IMMS), selected under the MSIT and Ministry of Education National Research Laboratory 2.0 programme with KRW 100 billion of government funding over ten years. The Ewha IMMS pin, which listed the 330 m², ten-workstation lab, now carries the expansion.",
+    "related": "ewha_imms",
+    "sources": [
+      {
+        "label": "Financial News (15 Sep 2026, Korean)",
+        "url": "https://www.fnnews.com/news/202609151531500667"
+      },
+      {
+        "label": "Ewha IMMS news",
+        "url": "https://imms.ewha.ac.kr/en/news/83"
       }
     ]
   },
@@ -221,6 +455,24 @@
     "related": "korea500"
   },
   {
+    "id": "nsf-polaris-cloud-lab-2026",
+    "date": "2026-08-03",
+    "kind": "funding",
+    "title": "PoLARIS: NSF gives UChicago and Argonne $20M for a remote, robot-operated soft-materials cloud lab",
+    "summary": "A $20 million NSF award announced on 3 August 2026 creates PoLARIS, the Polymer Laboratory for AI, Robotics, Informatics and Standards: a remotely accessible, robot-operated laboratory run by the University of Chicago's Pritzker School of Molecular Engineering, the UChicago Department of Computer Science and Argonne National Laboratory, where researchers across the United States design and run experiments on soft materials (liquids, polymers, gels, colloids, foams and granular materials) without travelling. Co-principal investigator Jie Xu, who co-leads the Polybot Lab spanning UChicago PME and Argonne's Nanoscience and Technology Division, describes it as connecting AI, robotics, specialised instruments and data infrastructure into a cloud laboratory. Stations will run at five facilities: UChicago's High-throughput Polymer lab, Soft Matter Characterization Facility and Materials Preparation and Measurement Laboratory, and Argonne's Advanced Photon Source and Polybot; once fully operational it should run 100 to 300 experiments a day. PoLARIS is one of the 20 nodes of the NSF PCL Test Bed, next to UT Knoxville's ATHENA (already on the Watch) and Penn State's LATTICE. Backfilled three months late.",
+    "related": "nsf_pcl",
+    "sources": [
+      {
+        "label": "UChicago News (3 Aug 2026)",
+        "url": "https://news.uchicago.edu/story/ai-powered-robotic-labs-uchicago-argonne-receive-20-million-nsf-grant"
+      },
+      {
+        "label": "Argonne, Autonomous Discovery news",
+        "url": "https://www.anl.gov/autonomous-discovery/news"
+      }
+    ]
+  },
+  {
     "id": "nsf-pcl-test-bed-2026",
     "date": "2026-07-22",
     "kind": "funding",
@@ -309,6 +561,28 @@
       {
         "label": "MaterialsCommons",
         "url": "https://www.materialscommons.eu/"
+      }
+    ]
+  },
+  {
+    "id": "korea-ai-materials-platform-strategy-2026",
+    "date": "2026-04-30",
+    "kind": "policy",
+    "title": "Korea's AI Materials R&D Platform Strategy (2026–2030): in-house materials AI models and four autonomous experiment centres",
+    "summary": "Korea's Ministry of Science and ICT presented the AI Materials R&D Platform Strategy (2026–2030) at the 8th Science and Technology Ministers' Meeting on 30 April 2026, built on four pillars: materials AI models developed in Korea, dedicated AI-materials autonomous experiment centres, a national materials research data platform and converged talent. The models cover property prediction for the six property classes (mechanical, magnetic, electrical, chemical, thermal and optical), a multi-property model that designs across them, and specialised models for supply-chain and national-strategic materials, tied together as an 'AI materials research colleague' that lets a researcher drive the whole cycle from design to verification. The four autonomous experiment centres (provisional names) divide the work by field: secondary batteries (cathodes, liquid and solid electrolytes), hydrogen and energy (electro-, thermo- and photocatalysis), aerospace and mobility (aluminium, nickel alloys, titanium, magnesium, composites and ceramics) and organic semiconductors and displays. Robots and AI run design, synthesis, analysis and evaluation 24 hours a day with minimal researcher intervention, reachable through a cloud-based centre network. A national materials data integration centre is to be designated in the second half of 2026, with 10 million AI-ready datasets within five years and 50 million within ten, and the plan targets 300 master's and 75 doctoral 'AI materials' graduates. It is the policy frame behind the Korea 500 initiative, the August 2026 autonomous-laboratory consortium and Ewha's NRL 2.0 lab.",
+    "related": "korea500",
+    "sources": [
+      {
+        "label": "Dong-A Science via Daum (30 Apr 2026, Korean)",
+        "url": "https://v.daum.net/v/20260430101533808"
+      },
+      {
+        "label": "MSIT release as reposted by the University of Seoul (Korean)",
+        "url": "https://research.uos.ac.kr/node/8668"
+      },
+      {
+        "label": "Herald Economy (29 Apr 2026, Korean)",
+        "url": "https://www.heraldk.com/article/2026042918221956653"
       }
     ]
   }

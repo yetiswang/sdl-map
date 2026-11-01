@@ -792,7 +792,9 @@
     "url": "https://www.lila.ai/",
     "sources": [
       "https://www.flagshippioneering.com/news/press-release/flagship-pioneering-unveils-lila-sciences-to-build-superintelligence-in-science",
-      "https://www.lila.ai/about"
+      "https://www.lila.ai/about",
+      "https://www.lila.ai/news/how-an-ai-run-lab-cracked-open-green-hydrogens-catalyst-problem",
+      "https://cen.acs.org/business/start-ups/lila-ai-hydrogen-catalyst-electrolyzer/104/web/2026/10"
     ],
     "start": 2023
   },
@@ -800,7 +802,7 @@
     "id": "medra",
     "name": "Medra AI",
     "org": "Medra, Inc. (Michelle Lee)",
-    "blurb": "Physical AI scientists for life-science labs: vision-guided robot arms operating standard instruments end-to-end across gene editing, cell biology, and microbial discovery.",
+    "blurb": "Physical AI scientists for life-science labs: vision-guided robot arms operating standard instruments end-to-end across gene editing, cell biology, and microbial discovery; ML001, its 38,000 sq ft flagship lab, opened in Apr 2026, and the AI Experimentalist reasoning layer launched in Jun 2026 with a DARPA-funded project.",
     "city": "San Francisco",
     "country": "USA",
     "flag": "🇺🇸",
@@ -818,7 +820,8 @@
     "sources": [
       "https://www.medra.ai/about",
       "https://www.businesswire.com/news/home/20251211748411/en/Medra-Raises-$52-Million-Series-A-to-Build-Physical-AI-Scientists",
-      "https://www.medra.ai/medra-lab-001"
+      "https://www.medra.ai/medra-lab-001",
+      "https://www.medra.ai/darpa-collaboration"
     ],
     "start": 2024
   },
@@ -899,7 +902,7 @@
     "id": "deepp",
     "name": "Deep Principle 深度原理",
     "org": "Deep Principle",
-    "blurb": "Agentic AI for materials and chemistry. ECML framework orchestrates DFT, MD, ML, and wet-lab experiments; recently hired MIT's Heather Kulik as Chief Scientist.",
+    "blurb": "Agentic AI for materials and chemistry. ECML framework orchestrates DFT, MD, ML, and wet-lab experiments; recently hired MIT's Heather Kulik as Chief Scientist; its AI Materials Factory high-throughput lab, which the company rates L4, is driven by its Mira AI Scientist platform.",
     "city": "Hangzhou",
     "country": "China",
     "flag": "🇨🇳",
@@ -911,12 +914,13 @@
     "charact": "synthesis-only",
     "ai": "strong",
     "scale": "commercial",
-    "invest": 0,
-    "investLabel": "A2 round",
+    "invest": 137,
+    "investLabel": "A-series ~¥1B (A3 led by 孚腾资本, Jul 2026)",
     "url": "https://www.deepprinciple.com/",
     "sources": [
       "http://hjkgrp.mit.edu/post/26-03-31-heather-deep-principle/",
-      "https://www.weforum.org/organizations/deep-principle/"
+      "https://www.weforum.org/organizations/deep-principle/",
+      "https://news.pedaily.cn/202607/566266.shtml"
     ],
     "start": 2024
   },
@@ -1912,7 +1916,7 @@
     "id": "radical_ai",
     "name": "Radical AI",
     "org": "Radical AI (Gerbrand Ceder, CSO)",
-    "blurb": "AI agents coupled to a closed-loop robotic lab discovering inorganic materials, alloys, and electrolytes; CSO Gerbrand Ceder built LBNL's A-Lab.",
+    "blurb": "AI agents coupled to a closed-loop robotic lab discovering inorganic materials, alloys, and electrolytes; CSO Gerbrand Ceder built LBNL's A-Lab; its lab is at the Brooklyn Navy Yard.",
     "city": "New York",
     "country": "USA",
     "flag": "🇺🇸",
@@ -1923,12 +1927,13 @@
     "maturity": "operational",
     "charact": "multi-technique",
     "ai": "strong",
-    "scale": "startup · NY autonomous materials lab",
+    "scale": "startup · Brooklyn Navy Yard autonomous materials lab",
     "invest": 55,
     "investLabel": "$55M seed (2025, RTX + NVIDIA)",
     "url": "https://radical-ai.com",
     "sources": [
-      "https://www.governor.ny.gov/news/governor-hochul-celebrates-radical-ai-establishing-new-yorks-first-fully-autonomous-materials"
+      "https://www.governor.ny.gov/news/governor-hochul-celebrates-radical-ai-establishing-new-yorks-first-fully-autonomous-materials",
+      "https://mining.com/radical-ai-uses-autonomous-labs-to-accelerate-alloy-discovery"
     ],
     "start": 2024
   },
@@ -2436,7 +2441,7 @@
     "id": "ewha_imms",
     "name": "Ewha IMMS Self-Driving Lab",
     "org": "Ewha Womans University / IMMS (NRL 2.0)",
-    "blurb": "Korea's MSIT / NRL 2.0 national research laboratory at Ewha Womans University (director Hoi Ri Moon); a 330 m² self-driving lab with ten function-based workstations across five material classes, a Bayesian-optimisation and LLM-agent decision layer, moving to open-access user operation from 2028.",
+    "blurb": "Korea's MSIT / NRL 2.0 national research laboratory at Ewha Womans University (director Hoi Ri Moon); a 330 m² self-driving lab with ten function-based workstations across five material classes, a Bayesian-optimisation and LLM-agent decision layer, moving to open-access user operation from 2028; in Sep 2026 Ewha announced a 500-pyeong (about 1,650 m²) AI and robot autonomous lab in its industry-academia building, Korea's largest at a university, with a dry room for all-solid-state battery fabrication.",
     "city": "Seoul",
     "country": "Korea",
     "flag": "🇰🇷",
@@ -2447,13 +2452,14 @@
     "maturity": "operational",
     "charact": "multi-technique",
     "ai": "strong",
-    "scale": "330 m² · 10 workstations · 5 material classes",
+    "scale": "330 m² · 10 workstations · 5 material classes · 1,650 m² lab announced Sep 2026",
     "invest": 83,
     "investLabel": "KRW 114B (~$83M) / 10 yrs · MSIT+MOE+Ewha",
     "url": "https://imms.ewha.ac.kr/en/",
     "sources": [
       "https://imms.ewha.ac.kr/en/news/83",
-      "https://www.hankyung.com/article/2026072665561"
+      "https://www.hankyung.com/article/2026072665561",
+      "https://www.fnnews.com/news/202609151531500667"
     ],
     "start": 2025,
     "claimed": {
@@ -3002,5 +3008,135 @@
       "https://pmc.ncbi.nlm.nih.gov/articles/PMC10119534"
     ],
     "start": 2022
+  },
+  {
+    "id": "arm_mip",
+    "name": "ARM-MIP (Texas A&M)",
+    "org": "Texas A&M University · NSF Materials Innovation Platform",
+    "blurb": "NSF Materials Innovation Platform for alloy discovery at Texas A&M's RELLIS campus, a national user facility where robots and AI take on the repetitive work of making and testing alloys: a six-year, $24.9M award (Aug 2026) designed for more than 200 users a year, 50 alloys a month in year one rising to 200 by year six, directed by Raymundo Arróyave; joined in Oct 2026 by the $2M WoodNext-funded Aggie AI Foundry, a campus facility automating alloy design through testing at up to 3,000 °C.",
+    "city": "Bryan, Texas",
+    "country": "USA",
+    "flag": "🇺🇸",
+    "lat": 30.64,
+    "lon": -96.47,
+    "tier": "national",
+    "domain": "materials",
+    "maturity": "concept",
+    "charact": "multi-technique",
+    "ai": "strong",
+    "scale": "NSF MIP user facility · 50 → 200 alloys/month",
+    "invest": 27,
+    "investLabel": "$24.9M NSF MIP (6 yrs) + $2M WoodNext",
+    "url": "https://stories.tamu.edu/news/2026/08/05/texas-am-to-build-self-driving-laboratory-for-metals-open-to-researchers-nationwide/",
+    "sources": [
+      "https://stories.tamu.edu/news/2026/08/05/texas-am-to-build-self-driving-laboratory-for-metals-open-to-researchers-nationwide/",
+      "https://stories.tamu.edu/news/2026/10/26/texas-am-to-create-ai-powered-foundry-for-faster-alloy-discovery/",
+      "https://news.engineering.tamu.edu/news/2026/08/03/texas-am-to-build-first-national-self-driving-laboratory-for-metals-open-to-researchers-nationwide/"
+    ],
+    "start": 2026
+  },
+  {
+    "id": "warp",
+    "name": "Warp Sciences",
+    "org": "Warp Sciences (Kevin Weil, Sol Reisberg, Mano Paluri, DJ Patil)",
+    "blurb": "US chemistry CRO that emerged from stealth in Oct 2026 with $215M (Lightspeed lead) to make and test molecules for drug-discovery teams in labs built for increasing automation: chemists guide the experiments and train the robots, AI models learn from the physical results, and the first service is lead-optimisation analog synthesis; founded by Kevin Weil (ex-OpenAI), Sol Reisberg, Mano Paluri and DJ Patil.",
+    "city": "San Francisco",
+    "country": "USA",
+    "flag": "🇺🇸",
+    "lat": 37.78,
+    "lon": -122.42,
+    "tier": "commercial",
+    "domain": "drug-discovery",
+    "maturity": "prototype",
+    "charact": "synthesis-only",
+    "ai": "partial",
+    "scale": "chemistry CRO · robot-assisted labs",
+    "invest": 215,
+    "investLabel": "$215M (Oct 2026, Lightspeed lead)",
+    "url": "https://warp.xyz/",
+    "sources": [
+      "https://www.businesswire.com/news/home/20261022200104/en/Warp-Sciences-Emerges-From-Stealth-With-%24215-Million-to-Build-U.S.-Chemistry-Services-for-Drug-Research",
+      "https://techcrunch.com/2026/10/22/former-openai-science-lead-launches-warp-science-to-automate-wet-labs-with-robots/"
+    ],
+    "start": 2026
+  },
+  {
+    "id": "nanoforge",
+    "name": "NanoForge AI 나노포지에이아이",
+    "org": "NanoForge AI (CEO Kim Dong-hyun 김동현)",
+    "blurb": "Seoul start-up (founded May 2025) whose AI predicts material properties at the atomic and electronic level and whose robotic autonomous lab synthesises and analyses candidates in a closed loop, aimed at semiconductor and battery materials with partners such as Ecopro BM and Samsung Electronics; KRW 14.6B seed (Oct 2026) led by Mirae Asset Venture Investment.",
+    "city": "Seoul",
+    "country": "Korea",
+    "flag": "🇰🇷",
+    "lat": 37.57,
+    "lon": 126.98,
+    "tier": "commercial",
+    "domain": "materials",
+    "maturity": "prototype",
+    "charact": "—",
+    "ai": "strong",
+    "scale": "start-up · 14 staff (Sep 2026) · robotic lab in build-out",
+    "invest": 10,
+    "investLabel": "KRW 14.6B (~$10M) seed, Oct 2026",
+    "url": "http://nanoforgeai.com",
+    "sources": [
+      "https://wowtale.net/2026/10/30/267209/",
+      "https://thevc.kr/nanoforgeai",
+      "https://mobile.newsis.com/view/NISX20251224_0003453448"
+    ],
+    "start": 2025
+  },
+  {
+    "id": "sait",
+    "name": "Samsung SAIT",
+    "org": "Samsung Advanced Institute of Technology (Samsung Electronics)",
+    "blurb": "Samsung Electronics' corporate research institute in Suwon, which uses self-driving labs for chemical research: its Synbot AI-driven robotic chemist (Science Advances, Nov 2023) plans synthesis routes and reaction conditions and refines them from robot feedback across dispensing, reaction, sample-preparation and analysis modules; VP of Technology Youn-Suk Choi discussed SAIT's SDL use in Nature Synthesis (May 2026), a 2026 Global Research Outreach call seeks a multi-agent closed-loop task planner for SDLs, and SAIT told a Seoul symposium (Oct 2026) it aims to cut semiconductor materials development from five years to two with 80% fewer experiments.",
+    "city": "Suwon",
+    "country": "Korea",
+    "flag": "🇰🇷",
+    "lat": 37.26,
+    "lon": 127.05,
+    "tier": "commercial",
+    "domain": "chemistry",
+    "maturity": "operational",
+    "charact": "—",
+    "ai": "strong",
+    "scale": "corporate-internal · Synbot robotic chemist",
+    "invest": 0,
+    "investLabel": "Internal (Samsung Electronics)",
+    "url": "https://semiconductor.samsung.com/sait/",
+    "sources": [
+      "https://www.science.org/doi/10.1126/sciadv.adj0461",
+      "https://www.nature.com/articles/s44160-026-01084-7",
+      "https://semiconductor.samsung.com/sait/event/global-research-outreach/",
+      "https://www.g-enews.com/article/Industry/2026/10/202610261448557018139bf6e4b2_1"
+    ],
+    "start": 2023
+  },
+  {
+    "id": "az_ilab",
+    "name": "AstraZeneca iLab",
+    "org": "AstraZeneca R&D, Gothenburg",
+    "blurb": "AstraZeneca's prototype of a fully automated medicinal-chemistry laboratory in Gothenburg, integrated with its Molecular AI group to drive the design-make-test-analyse cycle: born at a 2017 DMTA hackweek whose prototype ran a full cycle in under two hours, it synthesises, purifies and tests compounds and feeds the data to AI that proposes the next ones; complete automation of the DMTA cycle has not yet been achieved and is the stated ambition.",
+    "city": "Gothenburg",
+    "country": "Sweden",
+    "flag": "🇸🇪",
+    "lat": 57.66,
+    "lon": 12.01,
+    "tier": "commercial",
+    "domain": "drug-discovery",
+    "maturity": "prototype",
+    "charact": "multi-technique",
+    "ai": "strong",
+    "scale": "pharma-internal · DMTA prototype",
+    "invest": 0,
+    "investLabel": "Internal (AstraZeneca)",
+    "url": "https://www.astrazeneca.com/r-d/our-technologies/ilab.html",
+    "sources": [
+      "https://www.astrazeneca.com/r-d/our-technologies/ilab.html",
+      "https://www.astrazeneca.com/content/dam/az/PDF/2018/Pages%2046-49.pdf",
+      "https://healthcare-digital.com/news/inside-astrazenecas-us-1bn-tech-integrated-r-d-centre"
+    ],
+    "start": 2017
   }
 ]

@@ -8,11 +8,9 @@ reproducible 2026-09-09.
 
 Usage:
     python3 scripts/readme-card/make_card.py          # fills template -> build/
-    # then screenshot build/feature-card@2x.html at viewport 2400x1254
-    # (the @2x variant zooms the page 2x; any Chromium screenshot tool works):
-    #   cd scripts/readme-card/build && python3 -m http.server 8899
-    #   npx -y playwright screenshot --viewport-size=2400,1254 \
-    #       http://localhost:8899/feature-card@2x.html ../../../public/sdl-landscape-card.png
+    node scripts/readme-card/shoot_card.mjs            # screenshots build/feature-card@2x.html
+                                                       # at 2400x1254 (the @2x variant zooms the
+                                                       # page 2x) into public/sdl-landscape-card.png
 
 Refreshing the shots/ (only needed when the site UI changes materially):
     All from https://sdl-map.discoverylabs.nl/ in LIGHT theme
