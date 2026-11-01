@@ -26,6 +26,27 @@
     ]
   },
   {
+    "id": "china-sdl-standards-roadmap-2026",
+    "date": "2026-10-24",
+    "kind": "milestone",
+    "title": "China's national standards institute sets out a framework and roadmap for self-driving-lab standards",
+    "summary": "The China National Institute of Standardization (CNIS, 中国标准化研究院) released a report that it says is the first to propose a forward-looking framework and a phased implementation roadmap for a standards system for self-driving labs (自主实验室标准体系 前瞻框架与实施路线报告, 2026). CNIS is working with universities, research institutes and companies on lab terminology, device interfaces and experiment data, so that instruments and software from different vendors can connect, experiment data can be shared and traced, and duplicated development and build costs come down. Neither report links a public copy; state broadcaster CCTV carried the announcement. It is a national-standards route to the interoperability problem that Anthropic's Model Hardware Standard tackles from the model side and that Korea's autonomous-lab consortium addresses by standardizing equipment, protocols and data formats.",
+    "sources": [
+      {
+        "label": "CCTV News via Sina Finance (Chinese)",
+        "url": "https://finance.sina.com.cn/stock/t/2026-10-24/doc-iniwicvs1344909.shtml"
+      },
+      {
+        "label": "Cailian Press (财联社)",
+        "url": "https://www.cls.cn/detail/2514192"
+      },
+      {
+        "label": "Instrument.com.cn (仪器信息网)",
+        "url": "https://www.instrument.com.cn/news/20261026/1002098.shtml"
+      }
+    ]
+  },
+  {
     "id": "danaher-autonomous-lab-2026",
     "date": "2026-10-07",
     "kind": "milestone",
