@@ -1,10 +1,10 @@
 SDL LANDSCAPE — SELF-DRIVING LAB INITIATIVES WORLDWIDE
-119 initiatives · 16 countries · dataset of 2026-11-01
+124 initiatives · 16 countries · dataset of 2026-11-09
 https://sdl-map.discoverylabs.nl
 MIT — cite the map when reusing (github.com/yetiswang/sdl-map)
 
 ========================================================================
-NATIONAL / FLAGSHIP PROGRAMMES (27)
+NATIONAL / FLAGSHIP PROGRAMMES (28)
 ========================================================================
 
 Acceleration Consortium — University of Toronto
@@ -136,7 +136,7 @@ NSF PCL Test Bed — NSF + Astera Institute
 Ewha IMMS Self-Driving Lab — Ewha Womans University / IMMS (NRL 2.0)
   Seoul, Korea
   domain: materials · maturity: operational · ai: strong · since: 2025 · investment: KRW 114B (~$83M) / 10 yrs · MSIT+MOE+Ewha
-  Korea's MSIT / NRL 2.0 national research laboratory at Ewha Womans University (director Hoi Ri Moon); a 330 m² self-driving lab with ten function-based workstations across five material classes, a Bayesian-optimisation and LLM-agent decision layer, moving to open-access user operation from 2028.
+  Korea's MSIT / NRL 2.0 national research laboratory at Ewha Womans University (director Hoi Ri Moon); a 330 m² self-driving lab with ten function-based workstations across five material classes, a Bayesian-optimisation and LLM-agent decision layer, moving to open-access user operation from 2028; in Sep 2026 Ewha announced a 500-pyeong (about 1,650 m²) AI and robot autonomous lab in its industry-academia building, Korea's largest at a university, with a dry room for all-solid-state battery fabrication.
   https://imms.ewha.ac.kr/en/
 
 ARES (AFRL) — US Air Force Research Laboratory (Maruyama)
@@ -168,6 +168,12 @@ BESSY III — Helmholtz-Zentrum Berlin (HZB)
   domain: materials · maturity: concept · ai: planned · since: 2022 · investment: ≈€900M construction (est., 2020 prices)
   HZB's 4th-generation soft-to-tender X-ray source for Berlin-Adlershof, planned from the ground up around intelligent autonomous experimentation, AI-supported sample synthesis and handling, and FAIR data, with synthesis and characterisation laboratories on the same integrated research campus; CDR due 2027, construction from 2032, operations mid-2030s.
   https://www.helmholtz-berlin.de/forschung/quellen/bessy3/index_en.html
+
+ARM-MIP (Texas A&M) — Texas A&M University · NSF Materials Innovation Platform
+  Bryan, Texas, USA
+  domain: materials · maturity: concept · ai: strong · since: 2026 · investment: $24.9M NSF MIP (6 yrs) + $2M WoodNext
+  NSF Materials Innovation Platform for alloy discovery at Texas A&M's RELLIS campus, a national user facility where robots and AI take on the repetitive work of making and testing alloys: a six-year, $24.9M award (Aug 2026) designed for more than 200 users a year, 50 alloys a month in year one rising to 200 by year six, directed by Raymundo Arróyave; joined in Oct 2026 by the $2M WoodNext-funded Aggie AI Foundry, a campus facility automating alloy design through testing at up to 3,000 °C.
+  https://stories.tamu.edu/news/2026/08/05/texas-am-to-build-self-driving-laboratory-for-metals-open-to-researchers-nationwide/
 
 ========================================================================
 ACADEMIC PLATFORMS (48)
@@ -462,7 +468,7 @@ CircuLab — Stockholm University · WISE Research Technology Platform
   https://wise-materials.org/platform/circulab
 
 ========================================================================
-COMMERCIAL PLATFORMS (33)
+COMMERCIAL PLATFORMS (37)
 ========================================================================
 
 Cusp AI (Cambridge HQ) — Cusp AI (M. Welling co-founder)
@@ -486,7 +492,7 @@ Lila Sciences — Lila.ai
 Medra AI — Medra, Inc. (Michelle Lee)
   San Francisco, USA
   domain: drug-discovery · maturity: operational · ai: strong · since: 2024 · investment: $63M total (Series A Dec 2025)
-  Physical AI scientists for life-science labs: vision-guided robot arms operating standard instruments end-to-end across gene editing, cell biology, and microbial discovery.
+  Physical AI scientists for life-science labs: vision-guided robot arms operating standard instruments end-to-end across gene editing, cell biology, and microbial discovery; ML001, its 38,000 sq ft flagship lab, opened in Apr 2026, and the AI Experimentalist reasoning layer launched in Jun 2026 with a DARPA-funded project.
   https://www.medra.ai
 
 Periodic Labs — Periodic Labs
@@ -509,8 +515,8 @@ LabGenius — LabGenius
 
 Deep Principle 深度原理 — Deep Principle
   Hangzhou, China
-  domain: drug-discovery · maturity: operational · ai: strong · since: 2024 · investment: A2 round
-  Agentic AI for materials and chemistry. ECML framework orchestrates DFT, MD, ML, and wet-lab experiments; recently hired MIT's Heather Kulik as Chief Scientist.
+  domain: drug-discovery · maturity: operational · ai: strong · since: 2024 · investment: A-series ~¥1B (A3 led by 孚腾资本, Jul 2026)
+  Agentic AI for materials and chemistry. ECML framework orchestrates DFT, MD, ML, and wet-lab experiments; recently hired MIT's Heather Kulik as Chief Scientist; its AI Materials Factory high-throughput lab, which the company rates L4, is driven by its Mira AI Scientist platform.
   https://www.deepprinciple.com/
 
 Qingkui 青葵智造 — Qingkui
@@ -624,7 +630,7 @@ Peak Analysis & Automation — PAA (Grenova)
 Radical AI — Radical AI (Gerbrand Ceder, CSO)
   New York, USA
   domain: materials · maturity: operational · ai: strong · since: 2024 · investment: $55M seed (2025, RTX + NVIDIA)
-  AI agents coupled to a closed-loop robotic lab discovering inorganic materials, alloys, and electrolytes; CSO Gerbrand Ceder built LBNL's A-Lab.
+  AI agents coupled to a closed-loop robotic lab discovering inorganic materials, alloys, and electrolytes; CSO Gerbrand Ceder built LBNL's A-Lab; its lab is at the Brooklyn Navy Yard.
   https://radical-ai.com
 
 Mattiq — Mattiq (ex-Northwestern, Mirkin)
@@ -662,6 +668,30 @@ SOLVE Chemistry — SOLVE Chemistry Ltd
   domain: chemistry · maturity: operational · ai: strong · since: 2024 · investment: £4M
   London SDL flow lab pairing online-UHPLC high-throughput experimentation with Bayesian optimisation for predictive process chemistry and right-first-time scale-up.
   https://www.solvechemistry.com/
+
+Warp Sciences — Warp Sciences (Kevin Weil, Sol Reisberg, Mano Paluri, DJ Patil)
+  San Francisco, USA
+  domain: drug-discovery · maturity: prototype · ai: partial · since: 2026 · investment: $215M (Oct 2026, Lightspeed lead)
+  US chemistry CRO that emerged from stealth in Oct 2026 with $215M (Lightspeed lead) to make and test molecules for drug-discovery teams in labs built for increasing automation: chemists guide the experiments and train the robots, AI models learn from the physical results, and the first service is lead-optimisation analog synthesis; founded by Kevin Weil (ex-OpenAI), Sol Reisberg, Mano Paluri and DJ Patil.
+  https://warp.xyz/
+
+NanoForge AI 나노포지에이아이 — NanoForge AI (CEO Kim Dong-hyun 김동현)
+  Seoul, Korea
+  domain: materials · maturity: prototype · ai: strong · since: 2025 · investment: KRW 14.6B (~$10M) seed, Oct 2026
+  Seoul start-up (founded May 2025) whose AI predicts material properties at the atomic and electronic level and whose robotic autonomous lab synthesises and analyses candidates in a closed loop, aimed at semiconductor and battery materials with partners such as Ecopro BM and Samsung Electronics; KRW 14.6B seed (Oct 2026) led by Mirae Asset Venture Investment.
+  http://nanoforgeai.com
+
+Samsung SAIT — Samsung Advanced Institute of Technology (Samsung Electronics)
+  Suwon, Korea
+  domain: chemistry · maturity: operational · ai: strong · since: 2023 · investment: Internal (Samsung Electronics)
+  Samsung Electronics' corporate research institute in Suwon, which uses self-driving labs for chemical research: its Synbot AI-driven robotic chemist (Science Advances, Nov 2023) plans synthesis routes and reaction conditions and refines them from robot feedback across dispensing, reaction, sample-preparation and analysis modules; VP of Technology Youn-Suk Choi discussed SAIT's SDL use in Nature Synthesis (May 2026), a 2026 Global Research Outreach call seeks a multi-agent closed-loop task planner for SDLs, and SAIT told a Seoul symposium (Oct 2026) it aims to cut semiconductor materials development from five years to two with 80% fewer experiments.
+  https://semiconductor.samsung.com/sait/
+
+AstraZeneca iLab — AstraZeneca R&D, Gothenburg
+  Gothenburg, Sweden
+  domain: drug-discovery · maturity: prototype · ai: strong · since: 2017 · investment: Internal (AstraZeneca)
+  AstraZeneca's prototype of a fully automated medicinal-chemistry laboratory in Gothenburg, integrated with its Molecular AI group to drive the design-make-test-analyse cycle: born at a 2017 DMTA hackweek whose prototype ran a full cycle in under two hours, it synthesises, purifies and tests compounds and feeds the data to AI that proposes the next ones; complete automation of the DMTA cycle has not yet been achieved and is the stated ambition.
+  https://www.astrazeneca.com/r-d/our-technologies/ilab.html
 
 ========================================================================
 LAB OS / ORCHESTRATION (11)
