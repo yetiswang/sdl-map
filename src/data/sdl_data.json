@@ -219,7 +219,9 @@
     "invest": 30,
     "investLabel": "€30M (planned)",
     "url": "https://discoverylabs.nl/",
-    "sources": [],
+    "sources": [
+      "https://discoverylabs.nl/"
+    ],
     "start": 2025
   },
   {
@@ -943,7 +945,9 @@
     "invest": 0,
     "investLabel": "Municipal+VC",
     "url": "https://www.quiktech.cn/",
-    "sources": [],
+    "sources": [
+      "https://www.quiktech.cn/"
+    ],
     "start": 2021
   },
   {
@@ -1015,7 +1019,9 @@
     "invest": 0,
     "investLabel": "Provincial",
     "url": "https://www.ikkem.com/",
-    "sources": [],
+    "sources": [
+      "https://www.ikkem.com/"
+    ],
     "start": 2019
   },
   {
