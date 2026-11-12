@@ -3144,5 +3144,31 @@
       "https://healthcare-digital.com/news/inside-astrazenecas-us-1bn-tech-integrated-r-d-centre"
     ],
     "start": 2017
+  },
+  {
+    "id": "sjtu-autodna",
+    "name": "AutoDNA (SJTU)",
+    "org": "Shanghai Jiao Tong University",
+    "blurb": "AI-native autonomous lab for biomolecular operations at SJTU's Zhangjiang Institute for Advanced Study, built by its IPADS systems institute and chemistry school: a multi-agent system runs more than 20 instrument types through nucleic acid synthesis, transcription, amplification and sequencing, with people only restocking reagents and labware.",
+    "city": "Shanghai",
+    "country": "China",
+    "flag": "🇨🇳",
+    "lat": 31.19,
+    "lon": 121.59,
+    "tier": "academic",
+    "domain": "biology",
+    "maturity": "prototype",
+    "charact": "multi-technique",
+    "ai": "strong",
+    "scale": "20+ instrument types",
+    "invest": 0,
+    "investLabel": "NSFC + Shanghai",
+    "url": "https://ipads.sjtu.edu.cn/autodna/",
+    "sources": [
+      "https://www.nature.com/articles/s41586-026-11228-6",
+      "https://zias.sjtu.edu.cn/info/1017/22778.htm",
+      "https://github.com/IPADS-X/AutoDNA"
+    ],
+    "start": 2025
   }
 ]

@@ -1,5 +1,27 @@
 [
   {
+    "id": "sjtu-autodna-nature-2026",
+    "date": "2026-11-04",
+    "kind": "milestone",
+    "title": "Shanghai Jiao Tong University's AutoDNA runs nucleic acid experiments end to end, published in Nature",
+    "summary": "Nature published AutoDNA on 4 November 2026: an AI-native autonomous laboratory for biomolecular operations, built at Shanghai Jiao Tong University's Zhangjiang Institute for Advanced Study by the IPADS systems institute (School of Computer Science) and the School of Chemistry and Chemical Engineering. Agents for literature, reagents, protocols, code, hardware and hypotheses work under a central planner and run more than 20 types of instruments through nucleic acid synthesis, transcription, amplification and sequencing; people restock reagents and labware. The paper reports four applications: enzymatic DNA synthesis yields matching expert optimisation, concurrent protocols run 3.2 times faster, a full DNA data-storage cycle with the original content recovered exactly, and identification of a clinically detected KRAS G13D mutation. The university reports 11,382 hardware operations for the storage cycle. The code is open source under Apache 2.0, and Nature ran a News & Views alongside the paper. The authors present the system as a blueprint for science as a service; no access for outside users has been announced. A preprint appeared on arXiv in July 2025. First Shanghai Jiao Tong University pin on the map.",
+    "related": "sjtu-autodna",
+    "sources": [
+      {
+        "label": "Nature (4 Nov 2026)",
+        "url": "https://www.nature.com/articles/s41586-026-11228-6"
+      },
+      {
+        "label": "SJTU Zhangjiang Institute for Advanced Study (6 Nov 2026, Chinese)",
+        "url": "https://zias.sjtu.edu.cn/info/1017/22778.htm"
+      },
+      {
+        "label": "AutoDNA code (GitHub)",
+        "url": "https://github.com/IPADS-X/AutoDNA"
+      }
+    ]
+  },
+  {
     "id": "nanoforge-ai-seed-2026",
     "date": "2026-10-30",
     "kind": "funding",

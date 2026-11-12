@@ -42,5 +42,9 @@
   "surff": {
     "zh-Hans": { "name": "SurFF / Uni-MOF（王笑楠团队）", "org": "清华大学" },
     "zh-Hant": { "name": "SurFF / Uni-MOF（王笑楠團隊）", "org": "清華大學" }
+  },
+  "sjtu-autodna": {
+    "zh-Hans": { "name": "AutoDNA AI原生科学实验室", "org": "上海交通大学张江高等研究院" },
+    "zh-Hant": { "name": "AutoDNA AI原生科學實驗室", "org": "上海交通大學張江高等研究院" }
   }
 }
