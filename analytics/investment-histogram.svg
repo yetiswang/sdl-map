@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-11-01T19:12:16.950761</dc:date>
+    <dc:date>2026-11-12T17:00:13.855408</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -95,7 +95,7 @@ z
      <g id="line2d_9">
       <path d="M 21.076563 249.435094 
 L 561.536562 249.435094 
-" clip-path="url(#p59734a2468)" style="fill: none; stroke: #e8eaed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#pb059742dbb)" style="fill: none; stroke: #e8eaed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_10"/>
      <g id="text_10">
@@ -106,7 +106,7 @@ L 561.536562 249.435094
      <g id="line2d_11">
       <path d="M 21.076563 211.156237 
 L 561.536562 211.156237 
-" clip-path="url(#p59734a2468)" style="fill: none; stroke: #e8eaed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#pb059742dbb)" style="fill: none; stroke: #e8eaed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_12"/>
      <g id="text_11">
@@ -117,7 +117,7 @@ L 561.536562 211.156237
      <g id="line2d_13">
       <path d="M 21.076563 172.877379 
 L 561.536562 172.877379 
-" clip-path="url(#p59734a2468)" style="fill: none; stroke: #e8eaed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#pb059742dbb)" style="fill: none; stroke: #e8eaed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_14"/>
      <g id="text_12">
@@ -128,7 +128,7 @@ L 561.536562 172.877379
      <g id="line2d_15">
       <path d="M 21.076563 134.598522 
 L 561.536562 134.598522 
-" clip-path="url(#p59734a2468)" style="fill: none; stroke: #e8eaed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#pb059742dbb)" style="fill: none; stroke: #e8eaed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_16"/>
      <g id="text_13">
@@ -139,7 +139,7 @@ L 561.536562 134.598522
      <g id="line2d_17">
       <path d="M 21.076563 96.319665 
 L 561.536562 96.319665 
-" clip-path="url(#p59734a2468)" style="fill: none; stroke: #e8eaed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#pb059742dbb)" style="fill: none; stroke: #e8eaed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_18"/>
      <g id="text_14">
@@ -150,7 +150,7 @@ L 561.536562 96.319665
      <g id="line2d_19">
       <path d="M 21.076563 58.040808 
 L 561.536562 58.040808 
-" clip-path="url(#p59734a2468)" style="fill: none; stroke: #e8eaed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#pb059742dbb)" style="fill: none; stroke: #e8eaed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_20"/>
      <g id="text_15">
@@ -164,7 +164,7 @@ L 85.619686 249.435094
 L 85.619686 192.016808 
 L 45.642926 192.016808 
 z
-" clip-path="url(#p59734a2468)" style="fill: #c9cdd3"/>
+" clip-path="url(#pb059742dbb)" style="fill: #c9cdd3"/>
    </g>
    <g id="patch_4">
     <path d="M 110.121571 249.435094 
@@ -172,7 +172,7 @@ L 150.098331 249.435094
 L 150.098331 192.016808 
 L 110.121571 192.016808 
 z
-" clip-path="url(#p59734a2468)" style="fill: #c9cdd3"/>
+" clip-path="url(#pb059742dbb)" style="fill: #c9cdd3"/>
    </g>
    <g id="patch_5">
     <path d="M 174.600216 249.435094 
@@ -180,7 +180,7 @@ L 214.576975 249.435094
 L 214.576975 153.737951 
 L 174.600216 153.737951 
 z
-" clip-path="url(#p59734a2468)" style="fill: #c9cdd3"/>
+" clip-path="url(#pb059742dbb)" style="fill: #c9cdd3"/>
    </g>
    <g id="patch_6">
     <path d="M 239.07886 249.435094 
@@ -188,7 +188,7 @@ L 279.05562 249.435094
 L 279.05562 58.040808 
 L 239.07886 58.040808 
 z
-" clip-path="url(#p59734a2468)" style="fill: #c9cdd3"/>
+" clip-path="url(#pb059742dbb)" style="fill: #c9cdd3"/>
    </g>
    <g id="patch_7">
     <path d="M 303.557505 249.435094 
@@ -196,7 +196,7 @@ L 343.534265 249.435094
 L 343.534265 58.040808 
 L 303.557505 58.040808 
 z
-" clip-path="url(#p59734a2468)" style="fill: #c9cdd3"/>
+" clip-path="url(#pb059742dbb)" style="fill: #c9cdd3"/>
    </g>
    <g id="patch_8">
     <path d="M 368.03615 249.435094 
@@ -204,7 +204,7 @@ L 408.012909 249.435094
 L 408.012909 134.598522 
 L 368.03615 134.598522 
 z
-" clip-path="url(#p59734a2468)" style="fill: #c9cdd3"/>
+" clip-path="url(#pb059742dbb)" style="fill: #c9cdd3"/>
    </g>
    <g id="patch_9">
     <path d="M 432.514794 249.435094 
@@ -212,7 +212,7 @@ L 472.491554 249.435094
 L 472.491554 115.459094 
 L 432.514794 115.459094 
 z
-" clip-path="url(#p59734a2468)" style="fill: #c9cdd3"/>
+" clip-path="url(#pb059742dbb)" style="fill: #c9cdd3"/>
    </g>
    <g id="patch_10">
     <path d="M 496.993439 249.435094 
@@ -220,21 +220,21 @@ L 536.970199 249.435094
 L 536.970199 192.016808 
 L 496.993439 192.016808 
 z
-" clip-path="url(#p59734a2468)" style="fill: #c9cdd3"/>
+" clip-path="url(#pb059742dbb)" style="fill: #c9cdd3"/>
    </g>
    <g id="text_16">
-    <text style="font-size: 8.5px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="21.076563" y="42.215745" transform="rotate(-0 21.076563 42.215745)">48 of 124 initiatives report a figure — treat as indicative, not audited</text>
+    <text style="font-size: 8.5px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="21.076563" y="42.215745" transform="rotate(-0 21.076563 42.215745)">48 of 125 initiatives report a figure — treat as indicative, not audited</text>
    </g>
    <g id="text_17">
     <text style="font-weight: 650; font-size: 15px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #16181d" x="21.076563" y="18.471094" transform="rotate(-0 21.076563 18.471094)">Reported investment</text>
    </g>
   </g>
   <g id="text_18">
-   <text style="font-size: 7.5px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end; fill: #8a8f96" x="566.576563" y="293.655094" transform="rotate(-0 566.576563 293.655094)">sdl-map.discoverylabs.nl · 124 initiatives · 2026-11-01</text>
+   <text style="font-size: 7.5px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end; fill: #8a8f96" x="566.576563" y="293.655094" transform="rotate(-0 566.576563 293.655094)">sdl-map.discoverylabs.nl · 125 initiatives · 2026-11-12</text>
   </g>
  </g>
  <defs>
-  <clipPath id="p59734a2468">
+  <clipPath id="pb059742dbb">
    <rect x="21.076563" y="48.471094" width="540.46" height="200.964"/>
   </clipPath>
  </defs>

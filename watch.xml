@@ -5,7 +5,17 @@
     <link>https://sdl-map.discoverylabs.nl/watch/</link>
     <description>Noteworthy signals from the self-driving-lab and AI-for-materials landscape: talent moves, new labs, funding, and policy. Curated by DiscoveryLabNL.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 30 Oct 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 04 Nov 2026 12:00:00 GMT</lastBuildDate>
+    <item>
+      <title>Shanghai Jiao Tong University's AutoDNA runs nucleic acid experiments end to end, published in Nature</title>
+      <link>https://sdl-map.discoverylabs.nl/watch/#sjtu-autodna-nature-2026</link>
+      <guid isPermaLink="true">https://sdl-map.discoverylabs.nl/watch/#sjtu-autodna-nature-2026</guid>
+      <pubDate>Wed, 04 Nov 2026 12:00:00 GMT</pubDate>
+      <category>milestone</category>
+      <description>Nature published AutoDNA on 4 November 2026: an AI-native autonomous laboratory for biomolecular operations, built at Shanghai Jiao Tong University's Zhangjiang Institute for Advanced Study by the IPADS systems institute (School of Computer Science) and the School of Chemistry and Chemical Engineering. Agents for literature, reagents, protocols, code, hardware and hypotheses work under a central planner and run more than 20 types of instruments through nucleic acid synthesis, transcription, amplification and sequencing; people restock reagents and labware. The paper reports four applications: enzymatic DNA synthesis yields matching expert optimisation, concurrent protocols run 3.2 times faster, a full DNA data-storage cycle with the original content recovered exactly, and identification of a clinically detected KRAS G13D mutation. The university reports 11,382 hardware operations for the storage cycle. The code is open source under Apache 2.0, and Nature ran a News &amp; Views alongside the paper. The authors present the system as a blueprint for science as a service; no access for outside users has been announced. A preprint appeared on arXiv in July 2025. First Shanghai Jiao Tong University pin on the map.
+
+Sources — Nature (4 Nov 2026): https://www.nature.com/articles/s41586-026-11228-6 · SJTU Zhangjiang Institute for Advanced Study (6 Nov 2026, Chinese): https://zias.sjtu.edu.cn/info/1017/22778.htm · AutoDNA code (GitHub): https://github.com/IPADS-X/AutoDNA</description>
+    </item>
     <item>
       <title>NanoForge AI raises a KRW 14.6B seed round to pair atomic-level materials AI with a robotic self-driving lab</title>
       <link>https://sdl-map.discoverylabs.nl/watch/#nanoforge-ai-seed-2026</link>

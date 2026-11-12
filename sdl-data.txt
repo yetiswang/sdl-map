@@ -1,5 +1,5 @@
 SDL LANDSCAPE — SELF-DRIVING LAB INITIATIVES WORLDWIDE
-124 initiatives · 16 countries · dataset of 2026-11-09
+125 initiatives · 16 countries · dataset of 2026-11-12
 https://sdl-map.discoverylabs.nl
 MIT — cite the map when reusing (github.com/yetiswang/sdl-map)
 
@@ -176,7 +176,7 @@ ARM-MIP (Texas A&M) — Texas A&M University · NSF Materials Innovation Platfor
   https://stories.tamu.edu/news/2026/08/05/texas-am-to-build-self-driving-laboratory-for-metals-open-to-researchers-nationwide/
 
 ========================================================================
-ACADEMIC PLATFORMS (48)
+ACADEMIC PLATFORMS (49)
 ========================================================================
 
 A-Lab — Berkeley / LBNL
@@ -466,6 +466,12 @@ CircuLab — Stockholm University · WISE Research Technology Platform
   domain: materials · maturity: operational · ai: strong · since: 2024 · investment: WISE + Stockholm University (part of SEK 136M over 4 platforms)
   WISE Research Technology Platform at Stockholm University for circular and sustainable materials: automated synthesis and processing, real-time monitoring of emissions, hazardous chemicals and physicochemical change, and ML plus Bayesian-optimisation decision making across four clusters and about 20 instruments; open to academia, start-ups, and industry.
   https://wise-materials.org/platform/circulab
+
+AutoDNA (SJTU) — Shanghai Jiao Tong University
+  Shanghai, China
+  domain: biology · maturity: prototype · ai: strong · since: 2025 · investment: NSFC + Shanghai
+  AI-native autonomous lab for biomolecular operations at SJTU's Zhangjiang Institute for Advanced Study, built by its IPADS systems institute and chemistry school: a multi-agent system runs more than 20 instrument types through nucleic acid synthesis, transcription, amplification and sequencing, with people only restocking reagents and labware.
+  https://ipads.sjtu.edu.cn/autodna/
 
 ========================================================================
 COMMERCIAL PLATFORMS (37)

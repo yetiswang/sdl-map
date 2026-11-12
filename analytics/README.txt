@@ -1,5 +1,5 @@
 SDL LANDSCAPE — ANALYTICS PACK
-124 initiatives · 16 countries · generated 2026-11-01
+125 initiatives · 16 countries · generated 2026-11-12
 https://sdl-map.discoverylabs.nl · data + charts MIT — cite the map when reusing
 
 Charts (each as .svg vector + .png raster):
