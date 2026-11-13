@@ -53,11 +53,11 @@
 
 ## 🎓 學術團隊
 
-由單一機構或 PI 主導，正在運行 SDL 的研究組。完整 49 個條目（包括 A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、江俊團隊 / ChemAgents + Robot Chemist、嘉庚創新實驗室等）見 [English README → Academic Groups](README.md#-academic-groups)。
+由單一機構或 PI 主導，正在運行 SDL 的研究組。完整 50 個條目（包括 A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、江俊團隊 / ChemAgents + Robot Chemist、嘉庚創新實驗室等）見 [English README → Academic Groups](README.md#-academic-groups)。
 
 ## 🏭 商業與工業
 
-營利型 SDL 公司、藥廠內部計畫，以及與 SDL 相關的硬體 / 儀器供應商。完整 37 個條目（包括 Lila Sciences、晶泰科技、Cusp AI、深勢科技 / Bohrium 等）見 [English README → Commercial & Industrial](README.md#-commercial--industrial)。
+營利型 SDL 公司、藥廠內部計畫，以及與 SDL 相關的硬體 / 儀器供應商。完整 38 個條目（包括 Lila Sciences、晶泰科技、Cusp AI、深勢科技 / Bohrium 等）見 [English README → Commercial & Industrial](README.md#-commercial--industrial)。
 
 ## 🛰 實驗室作業系統與編排
 

@@ -53,11 +53,11 @@
 
 ## 🎓 학술 그룹
 
-단일 기관 또는 PI가 주도해 실제로 SDL을 운영하는 연구 그룹. A-Lab, Matter Lab, ODACell, Cooper Group, Jensen Lab, Jun Jiang 그룹 / ChemAgents + Robot Chemist 등 49개 전체 항목은 [English README → Academic Groups](README.md#-academic-groups)를 참고하세요.
+단일 기관 또는 PI가 주도해 실제로 SDL을 운영하는 연구 그룹. A-Lab, Matter Lab, ODACell, Cooper Group, Jensen Lab, Jun Jiang 그룹 / ChemAgents + Robot Chemist 등 50개 전체 항목은 [English README → Academic Groups](README.md#-academic-groups)를 참고하세요.
 
 ## 🏭 상업 및 산업
 
-영리 SDL 회사, 제약사 사내 프로그램, SDL과 관련된 하드웨어 / 기기 벤더. Lila Sciences, XtalPi, Cusp AI, DP Technology / Bohrium 등 37개 전체 항목은 [English README → Commercial & Industrial](README.md#-commercial--industrial)를 참고하세요.
+영리 SDL 회사, 제약사 사내 프로그램, SDL과 관련된 하드웨어 / 기기 벤더. Lila Sciences, XtalPi, Cusp AI, DP Technology / Bohrium 등 38개 전체 항목은 [English README → Commercial & Industrial](README.md#-commercial--industrial)를 참고하세요.
 
 ## 🛰 랩 OS / 오케스트레이션
 

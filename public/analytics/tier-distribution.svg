@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-11-12T17:00:13.362966</dc:date>
+    <dc:date>2026-11-13T16:40:48.502264</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -66,11 +66,11 @@ z
    </g>
    <g id="patch_3">
     <path d="M 119.917188 55.262439 
-L 351.162273 55.262439 
-L 351.162273 78.525611 
+L 346.537371 55.262439 
+L 346.537371 78.525611 
 L 119.917188 78.525611 
 z
-" clip-path="url(#p4be7e8863a)" style="fill: #aa6d00"/>
+" clip-path="url(#p6cf5f66203)" style="fill: #aa6d00"/>
    </g>
    <g id="patch_4">
     <path d="M 119.917188 92.783685 
@@ -78,35 +78,35 @@ L 524.596087 92.783685
 L 524.596087 116.046857 
 L 119.917188 116.046857 
 z
-" clip-path="url(#p4be7e8863a)" style="fill: #0085b9"/>
+" clip-path="url(#p6cf5f66203)" style="fill: #0085b9"/>
    </g>
    <g id="patch_5">
     <path d="M 119.917188 130.30493 
-L 425.49105 130.30493 
-L 425.49105 153.568103 
+L 427.473151 130.30493 
+L 427.473151 153.568103 
 L 119.917188 153.568103 
 z
-" clip-path="url(#p4be7e8863a)" style="fill: #d40924"/>
+" clip-path="url(#p6cf5f66203)" style="fill: #d40924"/>
    </g>
    <g id="patch_6">
     <path d="M 119.917188 167.826176 
-L 210.763471 167.826176 
-L 210.763471 191.089348 
+L 208.946545 167.826176 
+L 208.946545 191.089348 
 L 119.917188 191.089348 
 z
-" clip-path="url(#p4be7e8863a)" style="fill: #8451c9"/>
+" clip-path="url(#p6cf5f66203)" style="fill: #8451c9"/>
    </g>
    <g id="text_5">
-    <text style="font-size: 9px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="357.232456" y="69.249494" transform="rotate(-0 357.232456 69.249494)">28</text>
+    <text style="font-size: 9px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="352.607554" y="69.249494" transform="rotate(-0 352.607554 69.249494)">28</text>
    </g>
    <g id="text_6">
-    <text style="font-size: 9px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="530.66627" y="106.77074" transform="rotate(-0 530.66627 106.77074)">49</text>
+    <text style="font-size: 9px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="530.66627" y="106.77074" transform="rotate(-0 530.66627 106.77074)">50</text>
    </g>
    <g id="text_7">
-    <text style="font-size: 9px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="431.561234" y="144.291985" transform="rotate(-0 431.561234 144.291985)">37</text>
+    <text style="font-size: 9px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="433.543334" y="144.291985" transform="rotate(-0 433.543334 144.291985)">38</text>
    </g>
    <g id="text_8">
-    <text style="font-size: 9px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="216.833654" y="181.813231" transform="rotate(-0 216.833654 181.813231)">11</text>
+    <text style="font-size: 9px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="215.016729" y="181.813231" transform="rotate(-0 215.016729 181.813231)">11</text>
    </g>
    <g id="text_9">
     <text style="font-size: 8.5px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #8a8f96" x="119.917188" y="43.449551" transform="rotate(-0 119.917188 43.449551)">Tier colours as on the map</text>
@@ -116,11 +116,11 @@ z
    </g>
   </g>
   <g id="text_11">
-   <text style="font-size: 7.5px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end; fill: #8a8f96" x="566.057188" y="214.224694" transform="rotate(-0 566.057188 214.224694)">sdl-map.discoverylabs.nl · 125 initiatives · 2026-11-12</text>
+   <text style="font-size: 7.5px; font-family: 'Inter', 'Helvetica Neue', 'Arial', 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end; fill: #8a8f96" x="566.057188" y="214.224694" transform="rotate(-0 566.057188 214.224694)">sdl-map.discoverylabs.nl · 127 initiatives · 2026-11-13</text>
   </g>
  </g>
  <defs>
-  <clipPath id="p4be7e8863a">
+  <clipPath id="p6cf5f66203">
    <rect x="119.917188" y="48.471094" width="441.1" height="149.4096"/>
   </clipPath>
  </defs>

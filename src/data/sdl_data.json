@@ -3170,5 +3170,57 @@
       "https://github.com/IPADS-X/AutoDNA"
     ],
     "start": 2025
+  },
+  {
+    "id": "geeps-exploramat",
+    "name": "GeePS / ExploraMat",
+    "org": "University Paris-Saclay, CNRS, PEPR DIADEM",
+    "blurb": "An SDL dedicated to the optimisation of functional oxides (films and powders) for energy applications: SOFCs, SOECs, photovoltaics, phosphors.",
+    "city": "Gif-sur-Yvette",
+    "country": "France",
+    "flag": "🇫🇷",
+    "lat": 48.71,
+    "lon": 2.17,
+    "tier": "academic",
+    "domain": "materials",
+    "maturity": "operational",
+    "charact": "multi-technique",
+    "ai": "planned",
+    "scale": "films + powders",
+    "invest": 2,
+    "investLabel": "PEPR DIADEM / €1.5M",
+    "url": "https://www.geeps.centralesupelec.fr/",
+    "sources": [
+      "https://www.pepr-diadem.fr/plateformes/plateformes-de-synthese/synthese-autonome-robotisee-poudres-et-couches-minces/"
+    ],
+    "start": 2026
+  },
+  {
+    "id": "vsparticle",
+    "name": "VSParticle",
+    "org": "VSParticle B.V. (TU Delft spin-off)",
+    "blurb": "Delft maker of spark-ablation nanoparticle generators and the VSP-P1 Nanoprinter, which prints nanoporous thin films from some 70 elements as an automated synthesis module for self-driving labs; its printer made the spark-ablation catalysts in Meta FAIR's Open Catalyst Experiments 2024 and is in use at DIFFER and UL Research Institutes.",
+    "city": "Delft",
+    "country": "Netherlands",
+    "flag": "🇳🇱",
+    "lat": 52.01,
+    "lon": 4.36,
+    "tier": "commercial",
+    "domain": "materials",
+    "maturity": "operational",
+    "charact": "—",
+    "ai": "partial",
+    "scale": "vendor (VSP-G1 generator, VSP-P1 Nanoprinter)",
+    "invest": 23,
+    "investLabel": "€21M raised (Series A + A2)",
+    "url": "https://vsparticle.com/",
+    "sources": [
+      "https://vsparticle.com/applications/materials-discovery",
+      "https://vsparticle.com/blog/self-driving-labs-transforming-material-research",
+      "https://arxiv.org/abs/2411.11783",
+      "https://vsparticle.com/about/media-blogs/vsparticle-creates-new-research-opportunities-for-energy-material-development-at-differ",
+      "https://vsparticle.com/about/media-blogs"
+    ],
+    "start": 2014
   }
 ]

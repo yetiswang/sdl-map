@@ -53,11 +53,11 @@
 
 ## 🎓 学術グループ
 
-単一機関または PI が主導し、実際に SDL を動かしている研究グループ。A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、Jun Jiang グループ / ChemAgents + Robot Chemist ほか全 49 件は [English README → Academic Groups](README.md#-academic-groups) を参照。
+単一機関または PI が主導し、実際に SDL を動かしている研究グループ。A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、Jun Jiang グループ / ChemAgents + Robot Chemist ほか全 50 件は [English README → Academic Groups](README.md#-academic-groups) を参照。
 
 ## 🏭 商業・産業
 
-営利の SDL 企業、製薬企業の社内プログラム、および SDL 関連のハードウェア / 計測機器ベンダー。Lila Sciences、XtalPi、Cusp AI、DP Technology / Bohrium ほか全 37 件は [English README → Commercial & Industrial](README.md#-commercial--industrial) を参照。
+営利の SDL 企業、製薬企業の社内プログラム、および SDL 関連のハードウェア / 計測機器ベンダー。Lila Sciences、XtalPi、Cusp AI、DP Technology / Bohrium ほか全 38 件は [English README → Commercial & Industrial](README.md#-commercial--industrial) を参照。
 
 ## 🛰 ラボ OS・オーケストレーション
 
