@@ -1,5 +1,5 @@
 SDL LANDSCAPE — SELF-DRIVING LAB INITIATIVES WORLDWIDE
-125 initiatives · 16 countries · dataset of 2026-11-12
+127 initiatives · 16 countries · dataset of 2026-11-13
 https://sdl-map.discoverylabs.nl
 MIT — cite the map when reusing (github.com/yetiswang/sdl-map)
 
@@ -176,7 +176,7 @@ ARM-MIP (Texas A&M) — Texas A&M University · NSF Materials Innovation Platfor
   https://stories.tamu.edu/news/2026/08/05/texas-am-to-build-self-driving-laboratory-for-metals-open-to-researchers-nationwide/
 
 ========================================================================
-ACADEMIC PLATFORMS (49)
+ACADEMIC PLATFORMS (50)
 ========================================================================
 
 A-Lab — Berkeley / LBNL
@@ -473,8 +473,14 @@ AutoDNA (SJTU) — Shanghai Jiao Tong University
   AI-native autonomous lab for biomolecular operations at SJTU's Zhangjiang Institute for Advanced Study, built by its IPADS systems institute and chemistry school: a multi-agent system runs more than 20 instrument types through nucleic acid synthesis, transcription, amplification and sequencing, with people only restocking reagents and labware.
   https://ipads.sjtu.edu.cn/autodna/
 
+GeePS / ExploraMat — University Paris-Saclay, CNRS, PEPR DIADEM
+  Gif-sur-Yvette, France
+  domain: materials · maturity: operational · ai: planned · since: 2026 · investment: PEPR DIADEM / €1.5M
+  An SDL dedicated to the optimisation of functional oxides (films and powders) for energy applications: SOFCs, SOECs, photovoltaics, phosphors.
+  https://www.geeps.centralesupelec.fr/
+
 ========================================================================
-COMMERCIAL PLATFORMS (37)
+COMMERCIAL PLATFORMS (38)
 ========================================================================
 
 Cusp AI (Cambridge HQ) — Cusp AI (M. Welling co-founder)
@@ -698,6 +704,12 @@ AstraZeneca iLab — AstraZeneca R&D, Gothenburg
   domain: drug-discovery · maturity: prototype · ai: strong · since: 2017 · investment: Internal (AstraZeneca)
   AstraZeneca's prototype of a fully automated medicinal-chemistry laboratory in Gothenburg, integrated with its Molecular AI group to drive the design-make-test-analyse cycle: born at a 2017 DMTA hackweek whose prototype ran a full cycle in under two hours, it synthesises, purifies and tests compounds and feeds the data to AI that proposes the next ones; complete automation of the DMTA cycle has not yet been achieved and is the stated ambition.
   https://www.astrazeneca.com/r-d/our-technologies/ilab.html
+
+VSParticle — VSParticle B.V. (TU Delft spin-off)
+  Delft, Netherlands
+  domain: materials · maturity: operational · ai: partial · since: 2014 · investment: €21M raised (Series A + A2)
+  Delft maker of spark-ablation nanoparticle generators and the VSP-P1 Nanoprinter, which prints nanoporous thin films from some 70 elements as an automated synthesis module for self-driving labs; its printer made the spark-ablation catalysts in Meta FAIR's Open Catalyst Experiments 2024 and is in use at DIFFER and UL Research Institutes.
+  https://vsparticle.com/
 
 ========================================================================
 LAB OS / ORCHESTRATION (11)
