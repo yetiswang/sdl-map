@@ -3222,5 +3222,32 @@
       "https://vsparticle.com/about/media-blogs"
     ],
     "start": 2014
+  },
+  {
+    "id": "helios",
+    "name": "HELIOS",
+    "org": "AMOLF (lead) + CWI, DIFFER",
+    "blurb": "AI-guided materials discovery facility for solar energy materials, funded by NWO-I and run by three Dutch research institutes: AMOLF brings the functional-materials research, CWI leads the AI, and DIFFER the systems engineering, machine learning and data management. The target is a halide perovskite solar cell of about twenty layers, designed as a learning system.",
+    "city": "Amsterdam",
+    "country": "Netherlands",
+    "flag": "🇳🇱",
+    "lat": 52.356,
+    "lon": 4.952,
+    "tier": "national",
+    "domain": "energy",
+    "maturity": "prototype",
+    "charact": "—",
+    "ai": "partial",
+    "scale": "3 NWO-I institutes · 5 years",
+    "invest": 4,
+    "investLabel": "€3.71M (NWO-I)",
+    "url": "https://amolf.nl/news/amolf-cwi-and-differ-launch-helios-project-with-nwo-i-funding",
+    "sources": [
+      "https://amolf.nl/news/amolf-cwi-and-differ-launch-helios-project-with-nwo-i-funding",
+      "https://www.differ.nl/news/helios-project",
+      "https://www.cwi.nl/en/news/cwi-joins-ai-driven-solar-energy-research-in-helios-project/",
+      "https://www.nanoge.org/proceedings/MATSUSFall26/6a424942c54f9b4adbb69211"
+    ],
+    "start": 2025
   }
 ]
