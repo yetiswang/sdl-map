@@ -3561,46 +3561,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://sdl-map.discoverylabs.nl/entry/celest_kit/"/>
   </url>
   <url>
-    <loc>https://sdl-map.discoverylabs.nl/entry/epfl_liac/</loc>
-    <lastmod>2026-11-15</lastmod>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://sdl-map.discoverylabs.nl/entry/epfl_liac/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://sdl-map.discoverylabs.nl/zh/entry/epfl_liac/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://sdl-map.discoverylabs.nl/ja/entry/epfl_liac/"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://sdl-map.discoverylabs.nl/ko/entry/epfl_liac/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://sdl-map.discoverylabs.nl/entry/epfl_liac/"/>
-  </url>
-  <url>
-    <loc>https://sdl-map.discoverylabs.nl/zh/entry/epfl_liac/</loc>
-    <lastmod>2026-11-15</lastmod>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://sdl-map.discoverylabs.nl/entry/epfl_liac/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://sdl-map.discoverylabs.nl/zh/entry/epfl_liac/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://sdl-map.discoverylabs.nl/ja/entry/epfl_liac/"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://sdl-map.discoverylabs.nl/ko/entry/epfl_liac/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://sdl-map.discoverylabs.nl/entry/epfl_liac/"/>
-  </url>
-  <url>
-    <loc>https://sdl-map.discoverylabs.nl/ja/entry/epfl_liac/</loc>
-    <lastmod>2026-11-15</lastmod>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://sdl-map.discoverylabs.nl/entry/epfl_liac/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://sdl-map.discoverylabs.nl/zh/entry/epfl_liac/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://sdl-map.discoverylabs.nl/ja/entry/epfl_liac/"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://sdl-map.discoverylabs.nl/ko/entry/epfl_liac/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://sdl-map.discoverylabs.nl/entry/epfl_liac/"/>
-  </url>
-  <url>
-    <loc>https://sdl-map.discoverylabs.nl/ko/entry/epfl_liac/</loc>
-    <lastmod>2026-11-15</lastmod>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://sdl-map.discoverylabs.nl/entry/epfl_liac/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://sdl-map.discoverylabs.nl/zh/entry/epfl_liac/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://sdl-map.discoverylabs.nl/ja/entry/epfl_liac/"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://sdl-map.discoverylabs.nl/ko/entry/epfl_liac/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://sdl-map.discoverylabs.nl/entry/epfl_liac/"/>
-  </url>
-  <url>
     <loc>https://sdl-map.discoverylabs.nl/entry/chemlex/</loc>
     <lastmod>2026-11-15</lastmod>
     <priority>0.6</priority>
@@ -5279,5 +5239,45 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://sdl-map.discoverylabs.nl/ja/entry/vsparticle/"/>
     <xhtml:link rel="alternate" hreflang="ko" href="https://sdl-map.discoverylabs.nl/ko/entry/vsparticle/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://sdl-map.discoverylabs.nl/entry/vsparticle/"/>
+  </url>
+  <url>
+    <loc>https://sdl-map.discoverylabs.nl/entry/helios/</loc>
+    <lastmod>2026-11-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sdl-map.discoverylabs.nl/entry/helios/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://sdl-map.discoverylabs.nl/zh/entry/helios/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://sdl-map.discoverylabs.nl/ja/entry/helios/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://sdl-map.discoverylabs.nl/ko/entry/helios/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sdl-map.discoverylabs.nl/entry/helios/"/>
+  </url>
+  <url>
+    <loc>https://sdl-map.discoverylabs.nl/zh/entry/helios/</loc>
+    <lastmod>2026-11-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sdl-map.discoverylabs.nl/entry/helios/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://sdl-map.discoverylabs.nl/zh/entry/helios/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://sdl-map.discoverylabs.nl/ja/entry/helios/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://sdl-map.discoverylabs.nl/ko/entry/helios/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sdl-map.discoverylabs.nl/entry/helios/"/>
+  </url>
+  <url>
+    <loc>https://sdl-map.discoverylabs.nl/ja/entry/helios/</loc>
+    <lastmod>2026-11-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sdl-map.discoverylabs.nl/entry/helios/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://sdl-map.discoverylabs.nl/zh/entry/helios/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://sdl-map.discoverylabs.nl/ja/entry/helios/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://sdl-map.discoverylabs.nl/ko/entry/helios/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sdl-map.discoverylabs.nl/entry/helios/"/>
+  </url>
+  <url>
+    <loc>https://sdl-map.discoverylabs.nl/ko/entry/helios/</loc>
+    <lastmod>2026-11-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sdl-map.discoverylabs.nl/entry/helios/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://sdl-map.discoverylabs.nl/zh/entry/helios/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://sdl-map.discoverylabs.nl/ja/entry/helios/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://sdl-map.discoverylabs.nl/ko/entry/helios/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sdl-map.discoverylabs.nl/entry/helios/"/>
   </url>
 </urlset>

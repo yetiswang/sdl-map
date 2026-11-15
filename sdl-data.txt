@@ -4,12 +4,12 @@ https://sdl-map.discoverylabs.nl
 MIT — cite the map when reusing (github.com/yetiswang/sdl-map)
 
 ========================================================================
-NATIONAL / FLAGSHIP PROGRAMMES (28)
+NATIONAL / FLAGSHIP PROGRAMMES (35)
 ========================================================================
 
 Acceleration Consortium — University of Toronto
   Toronto, Canada
-  domain: chemistry · maturity: operational · ai: partial · since: 2019 · investment: $500M (CFREF+matched)
+  domain: cross-domain · maturity: operational · ai: partial · since: 2021 · investment: C$500M (C$200M CFREF + matched)
   200-member global consortium anchoring 30+ self-driving labs for sustainable materials and molecules across health, energy, and electronics.
   https://acceleration.utoronto.ca/
 
@@ -25,21 +25,21 @@ BIG-MAP / FULL-MAP — Battery2030+ consortium
   Battery2030+ flagship Materials Acceleration Platform for battery interfaces. BIG-MAP closed Feb 2024; successor FULL-MAP runs 2025-2029.
   https://www.big-map.eu/
 
-US DOE National Labs — DOE (ARPA-E + CHIPS)
+US DOE National Labs — DOE (ARPA-E)
   Washington DC, USA
-  domain: materials · maturity: operational · ai: strong · since: 2024 · investment: $140M
-  US federal SDL funding through ARPA-E's $40M catalyst programme and CHIPS R&D's $100M semiconductor-materials programme for autonomous chemistry and electronics discovery.
+  domain: materials · maturity: operational · ai: strong · since: 2024 · investment: $34M (ARPA-E)
+  US federal SDL funding through ARPA-E's $34M programme pairing artificial intelligence with autonomous labs to accelerate catalyst development.
   https://arpa-e.energy.gov/
 
 Korea 500 SDL Initiative — MOTIE AI+R&D Strategy
   Seoul, Korea
-  domain: cross-domain · maturity: operational · ai: strong · since: 2024 · investment: $320M by 2035
+  domain: cross-domain · maturity: concept · ai: strong · since: 2024 · investment: —
   MOTIE's October 2024 AI+R&D Strategy commits Korea to 500 autonomous laboratories by 2030 across nanomaterials, catalysis, organic chemistry, and bioengineering.
   https://www.motie.go.kr/en/main.do
 
 MARVEL-AI — A*STAR IMRE · METI, EnterpriseSG, EDB, NRF
   Singapore, Singapore
-  domain: materials · maturity: prototype · ai: strong · since: 2026 · investment: S$150M (initial government investment)
+  domain: materials · maturity: concept · ai: strong · since: 2026 · investment: S$150M (initial government investment)
   Singapore's national materials discovery platform, announced on 27 Oct 2026 with an initial S$150M government investment: AI models identify promising materials and design experiments, and self-driving laboratories synthesise and test them, for metal alloys, polymers and organics, ceramics and composites. Led by A*STAR and anchored at its Institute of Materials Research and Engineering, with access for companies including start-ups and SMEs.
   https://www.meti.gov.sg/newsroom/delivered-speech-by-deputy-prime-minister-and-minister-for-energy--trade-and-industry--trade--gan-kim-yong-at-switch-2026-opening-ceremony/
 
@@ -57,7 +57,7 @@ UK ARIA AI Scientists — ARIA
 
 DiscoveryLabNL — TU/e
   Eindhoven, Netherlands
-  domain: materials · maturity: concept · ai: planned · since: 2025 · investment: —
+  domain: energy · maturity: concept · ai: planned · since: 2025 · investment: —
   Dutch national infrastructure for AI-driven materials discovery, coordinated by TU/e, with energy materials as the first priority domain.
   https://discoverylabs.nl/
 
@@ -80,10 +80,34 @@ HELMA (Helmholtz Acceleration Alliance) — Helmholtz Assn (KIT lead)
   https://www.helma.kit.edu/
 
 BioPACIFIC MIP — UCLA + UCSB (NSF MIP)
-  Los Angeles, USA
+  Santa Barbara, USA
   domain: biomaterials · maturity: operational · ai: strong · since: 2020 · investment: $43.5M (DMR-1933487 + DMR-2445868)
   NSF Materials Innovation Platform at UCSB and UCLA offering free peer-reviewed access to automated, AI-driven synthesis and characterisation of bio-derived materials.
   https://biopacificmip.org/
+
+Yongjiang Lab 甬江实验室 — Provincial (Ningbo)
+  Ningbo, China
+  domain: materials · maturity: operational · ai: strong · since: 2021 · investment: Government
+  Zhejiang provincial materials research institute running advanced functional, structural, and transformative materials platforms including a 6-inch micro-nano device line.
+  https://www.ylab.ac.cn/en/
+
+Jiageng Innovation Lab 嘉庚创新实验室 — Xiamen University / Fujian Province
+  Xiamen, China
+  domain: energy · maturity: operational · ai: strong · since: 2019 · investment: Provincial
+  Provincial mega-institute building China's first dedicated energy-storage research infrastructure, spanning low-carbon energy, displays, and graphene.
+  https://www.ikkem.com/
+
+Shanghai AI Laboratory — National AI Lab
+  Shanghai, China
+  domain: cross-domain · maturity: operational · ai: strong · since: 2020 · investment: Government
+  National AGI lab whose AGI4S programme builds Intern-S1 scientific foundation models and the Intern-Discovery agent-plus-instrument platform.
+  https://www.shlab.org.cn/
+
+MMLI / Burke Group — UIUC
+  Champaign, USA
+  domain: chemistry · maturity: operational · ai: strong · since: 2020 · investment: $35M (NSF, 2020 + 2025 renewal)
+  NSF-funded institute around Burke's iterative MIDA-boronate small-molecule synthesizer, closing the loop with AI agents like AlphaSynthesis.
+  https://moleculemaker.org/
 
 NSF AI Institute for Materials Innovation — Cornell-led (Princeton, CCNY, BU)
   Ithaca, USA
@@ -99,9 +123,15 @@ NRC BattMAP / BattPAP — National Research Council Canada
 
 AIChemy (UK AI for Chemistry Hub) — U Liverpool + Imperial (EPSRC)
   Liverpool, UK
-  domain: chemistry · maturity: operational · ai: strong · since: 2024 · investment: £12M EPSRC (+£19M partner)
+  domain: chemistry · maturity: operational · ai: strong · since: 2024 · investment: £12M EPSRC
   £12M EPSRC national hub (Liverpool + Imperial) developing AI-planned robotic and autonomous chemistry, including mobile robot scientists for exploratory synthesis.
   https://aichemy.ac.uk
+
+CELEST Autonomous Battery Lab — KIT + Ulm + HIU
+  Ulm, Germany
+  domain: batteries · maturity: operational · ai: strong · since: 2022 · investment: —
+  Fully automated, AI-planned battery-materials lab that autonomously synthesises, assembles, and cycles cells.
+  https://www.kit.edu/kit/english/pi_2022_011_battery-research-first-fully-automatic-laboratory-starts-operation.php
 
 RIKEN / IST Maholo SDL — RIKEN BDR + Inst. Science Tokyo (JST)
   Kobe, Japan
@@ -121,12 +151,6 @@ ASCEND — HZB + Fritz Haber Inst. (MPG)
   BMFTR-funded consortium led by Helmholtz-Zentrum Berlin and the Fritz Haber Institute (with BASF, Siemens Energy, Dunia Innovations, and TU Berlin/BasCat) running AI-guided self-driving labs, high-throughput characterisation, and digital twins to accelerate catalyst discovery for sustainable chemistry.
   https://ascend-project.berlin/
 
-AI-Assisted Materials Discovery Institute — Tsinghua University (Omar Yaghi)
-  Beijing, China
-  domain: materials · maturity: concept · ai: strong · since: 2026 · investment: —
-  Institute announced in 2026 at Tsinghua University, to be led by Nobel laureate Omar Yaghi, pairing AI with reticular chemistry for materials discovery; at concept stage, with no facility details public yet.
-  https://www.tsinghua.edu.cn/en/info/1244/14984.htm
-
 NSF PCL Test Bed — NSF + Astera Institute
   State College, PA, USA
   domain: cross-domain · maturity: concept · ai: strong · since: 2026 · investment: $400M
@@ -135,9 +159,15 @@ NSF PCL Test Bed — NSF + Astera Institute
 
 Ewha IMMS Self-Driving Lab — Ewha Womans University / IMMS (NRL 2.0)
   Seoul, Korea
-  domain: materials · maturity: operational · ai: strong · since: 2025 · investment: KRW 114B (~$83M) / 10 yrs · MSIT+MOE+Ewha
+  domain: materials · maturity: prototype · ai: strong · since: 2025 · investment: KRW 114B (~$83M) / 10 yrs · MSIT+MOE+Ewha
   Korea's MSIT / NRL 2.0 national research laboratory at Ewha Womans University (director Hoi Ri Moon); a 330 m² self-driving lab with ten function-based workstations across five material classes, a Bayesian-optimisation and LLM-agent decision layer, moving to open-access user operation from 2028; in Sep 2026 Ewha announced a 500-pyeong (about 1,650 m²) AI and robot autonomous lab in its industry-academia building, Korea's largest at a university, with a dry room for all-solid-state battery fabrication.
   https://imms.ewha.ac.kr/en/
+
+Swiss Cat+ — EPFL, ETHZ
+  Lausanne, Switzerland
+  domain: chemistry · maturity: operational · ai: strong · since: 2020 · investment: CHF 25M (ETH Domain)
+  ETH Domain-funded national catalysis infrastructure jointly operated by EPFL and ETH Zurich, combining robotic high-throughput experimentation, AI-guided experimental design, and automated workflows to enable self-driving laboratories for catalyst discovery and optimization across homogeneous and heterogeneous catalysis.
+  https://www.epfl.ch/research/facilities/swisscat/
 
 ARES (AFRL) — US Air Force Research Laboratory (Maruyama)
   Dayton, OH, USA
@@ -159,9 +189,15 @@ MINERVA (BAM) — BAM Berlin (Ruehle junior research group)
 
 Shenzhen Synthetic Biology Infrastructure — CAS SIAT
   Shenzhen, China
-  domain: biology · maturity: operational · ai: strong · since: 2023 · investment: National major RI
+  domain: biology · maturity: operational · ai: strong · since: 2023 · investment: CNY 700M+ equipment
   CAS SIAT-led national major science infrastructure at Guangming Science City: modular fully-automated workcells running the synthetic-biology design-build-test-learn loop at high throughput, open to academic and industrial users.
   https://infrasynbio.siat.ac.cn/en
+
+AI BioDesign (Allen Institute) — Allen Institute + UW + Fred Hutch · Fund for Science and Technology
+  Seattle, USA
+  domain: biology · maturity: concept · ai: partial · since: 2026 · investment: $95M (FFST)
+  Open-science accelerator with the University of Washington and Fred Hutch designing proteins and genes that do not exist in nature; bench teams run massively parallel library experiments while a machine-learning team chooses each next round, scored on how much the models improved. Scale comes from parallelising inside the test tube rather than from robotics.
+  https://alleninstitute.org/
 
 BESSY III — Helmholtz-Zentrum Berlin (HZB)
   Berlin, Germany
@@ -171,12 +207,18 @@ BESSY III — Helmholtz-Zentrum Berlin (HZB)
 
 ARM-MIP (Texas A&M) — Texas A&M University · NSF Materials Innovation Platform
   Bryan, Texas, USA
-  domain: materials · maturity: concept · ai: strong · since: 2026 · investment: $24.9M NSF MIP (6 yrs) + $2M WoodNext
+  domain: materials · maturity: concept · ai: planned · since: 2026 · investment: $24.9M NSF MIP (6 yrs) + $2M WoodNext
   NSF Materials Innovation Platform for alloy discovery at Texas A&M's RELLIS campus, a national user facility where robots and AI take on the repetitive work of making and testing alloys: a six-year, $24.9M award (Aug 2026) designed for more than 200 users a year, 50 alloys a month in year one rising to 200 by year six, directed by Raymundo Arróyave; joined in Oct 2026 by the $2M WoodNext-funded Aggie AI Foundry, a campus facility automating alloy design through testing at up to 3,000 °C.
   https://stories.tamu.edu/news/2026/08/05/texas-am-to-build-self-driving-laboratory-for-metals-open-to-researchers-nationwide/
 
+HELIOS — AMOLF (lead) + CWI, DIFFER
+  Amsterdam, Netherlands
+  domain: energy · maturity: prototype · ai: partial · since: 2025 · investment: €3.71M (NWO-I)
+  AI-guided materials discovery facility for solar energy materials, funded by NWO-I and run by three Dutch research institutes: AMOLF brings the functional-materials research, CWI leads the AI, and DIFFER the systems engineering, machine learning and data management. The target is a halide perovskite solar cell of about twenty layers, designed as a learning system.
+  https://amolf.nl/news/amolf-cwi-and-differ-launch-helios-project-with-nwo-i-funding
+
 ========================================================================
-ACADEMIC PLATFORMS (50)
+ACADEMIC PLATFORMS (46)
 ========================================================================
 
 A-Lab — Berkeley / LBNL
@@ -193,7 +235,7 @@ Polybot — Argonne (CNM)
 
 CMU Cloud Lab — Carnegie Mellon
   Pittsburgh, USA
-  domain: cross-domain · maturity: operational · ai: strong · since: 2021 · investment: —
+  domain: cross-domain · maturity: operational · ai: partial · since: 2021 · investment: $40M (CMU, cloud lab build)
   Remote-access 24/7 facility with 200+ instruments letting researchers anywhere design and run autonomous chemistry, biology, and materials experiments.
   https://cloudlab.cmu.edu/
 
@@ -205,13 +247,13 @@ Coscientist — CMU (Gomes Group)
 
 Abolhasani Lab — NC State
   Raleigh, USA
-  domain: chemistry · maturity: operational · ai: strong · since: 2020 · investment: —
+  domain: materials · maturity: operational · ai: strong · since: 2020 · investment: —
   Self-driving fluidic lab combining microreactor flow chemistry, robotics, and AI to accelerate perovskite quantum dots and energy-relevant materials.
   https://www.abolhasanilab.com/
 
 Genesis — Chalmers (King Group)
   Gothenburg, Sweden
-  domain: biology · maturity: prototype · ai: strong · since: 2020 · investment: £1M
+  domain: biology · maturity: prototype · ai: strong · since: 2020 · investment: $1M (NSF)
   Ross King's third-generation Robot Scientist programme pursuing fully automated hypothesis generation and testing across biology and chemistry.
   https://www.automationof.science/
 
@@ -223,13 +265,13 @@ Cooper Group / MIF Liverpool — U Liverpool (MIF, opened 2017; CMD forerunner 2
 
 AMADAP — FAU Erlangen
   Erlangen, Germany
-  domain: materials · maturity: prototype · ai: strong · since: 2021 · investment: —
+  domain: energy · maturity: prototype · ai: strong · since: 2021 · investment: —
   Brabec group platform spanning high-throughput synthesis, SPINBOT spin-coating, and the AMANDA device line to autonomously discover emerging photovoltaic materials.
   https://www.solar.fau.de/
 
 NIMS Autonomous AI Network — NIMS + Tsukuba
   Tsukuba, Japan
-  domain: materials · maturity: prototype · ai: strong · since: 2015 · investment: —
+  domain: materials · maturity: prototype · ai: strong · since: 2025 · investment: —
   NIMS-Tsukuba framework letting multiple autonomous AI labs spontaneously share data and coordinate searches across different material systems.
   https://www.nims.go.jp/group/autonomous/index_en.html
 
@@ -247,13 +289,13 @@ KAIST-POSCO Autonomous Lab — KAIST + POSCO
 
 KIST MARK System — KIST
   Seoul, Korea
-  domain: chemistry · maturity: prototype · ai: strong · since: 2024 · investment: —
+  domain: materials · maturity: prototype · ai: strong · since: 2024 · investment: —
   KIST's robotic synthesis + characterisation + ML workflow for accelerated discovery across battery and functional materials.
   https://www.kist.re.kr/eng/index.do
 
 SNU SDL Ecosystem — SNU / Jung Lab
   Seoul, Korea
-  domain: cross-domain · maturity: operational · ai: strong · since: 2026 · investment: —
+  domain: batteries · maturity: prototype · ai: strong · since: 2026 · investment: —
   Yousung Jung's group uses LLMs to predict material synthesisability, anchoring a wider SNU autonomous-lab cluster across batteries and catalysis.
   https://en.snu.ac.kr/research/highlights?md=v&bbsidx=153588
 
@@ -271,21 +313,9 @@ Noël Group — U Amsterdam
 
 DIFFER Autonomous Energy Materials Discovery (Süleyman Er) — DIFFER (NWO institute)
   Eindhoven, Netherlands
-  domain: energy · maturity: operational · ai: strong · since: 2017 · investment: —
+  domain: energy · maturity: operational · ai: partial · since: 2017 · investment: —
   Computational group screening energy materials (redox-flow electrolytes, electrocatalysts) via high-throughput DFT plus ML over public chemical databases.
   https://www.differ.nl/research/autonomous-energy-materials-discovery
-
-Jiageng Innovation Lab 嘉庚创新实验室 — Xiamen University / Fujian Province
-  Xiamen, China
-  domain: materials · maturity: operational · ai: strong · since: 2019 · investment: Provincial
-  Provincial mega-institute building China's first dedicated energy-storage research infrastructure, spanning low-carbon energy, displays, and graphene.
-  https://www.ikkem.com/
-
-Shanghai AI Laboratory — National AI Lab
-  Shanghai, China
-  domain: cross-domain · maturity: operational · ai: strong · since: 2020 · investment: Government
-  National AGI lab whose AGI4S programme builds Intern-S1 scientific foundation models and the Intern-Discovery agent-plus-instrument platform.
-  https://www.shlab.org.cn/
 
 DeepH (Duan Group) — Tsinghua University
   Beijing, China
@@ -298,6 +328,18 @@ SurFF / Uni-MOF (Wang Group) — Tsinghua University
   domain: materials · maturity: operational · ai: strong · since: 2024 · investment: —
   Xiaonan Wang's group building foundation models (SurFF, Uni-MOF) for catalyst surfaces and MOF gas adsorption at high-throughput screening scale.
   https://www.nature.com/articles/s43588-025-00839-0
+
+Fraunhofer MAPs — Fraunhofer ISC
+  Würzburg, Germany
+  domain: materials · maturity: operational · ai: strong · since: 2020 · investment: —
+  Fraunhofer ISC programme coupling robotic synthesis and characterisation with AI-driven design for glass, battery, and functional materials.
+  https://www.isc.fraunhofer.de/en/fields-of-activity/applications/digital-transformation/maps-materials-acceleration-platforms.html
+
+CMU AI Science Foundry — Carnegie Mellon
+  Pittsburgh, USA
+  domain: cross-domain · maturity: operational · ai: strong · since: 2024 · investment: Federal+Univ
+  Carnegie Mellon initiative running the ASAP autonomous platform for AI-guided experiments in hard materials, chemistry, and biology.
+  https://ai-science-foundry.cmu.edu/
 
 Jensen Lab — MIT
   Cambridge MA, USA
@@ -313,15 +355,9 @@ Cronin Group / Chemify — U Glasgow
 
 Grzybowski Group / IBS-CARS — UNIST + Polish Acad. Sci.
   Ulsan, Korea
-  domain: chemistry · maturity: operational · ai: strong · since: 2021 · investment: Chematica/Synthia
+  domain: chemistry · maturity: operational · ai: strong · since: 2024 · investment: Chematica/Synthia
   IBS Center for Algorithmic and Robotized Synthesis pairing AI retrosynthesis (Chematica/Synthia) with closed-loop chemical robotics.
   https://www.ibs.re.kr/eng/sub02_06_01.do
-
-MMLI / Burke Group — UIUC
-  Champaign, USA
-  domain: chemistry · maturity: operational · ai: strong · since: 2020 · investment: $20M+ (NSF)
-  NSF-funded institute around Burke's iterative MIDA-boronate small-molecule synthesizer, closing the loop with AI agents like AlphaSynthesis.
-  https://moleculemaker.org/
 
 Hein Lab / Telescope — UBC
   Vancouver, Canada
@@ -337,27 +373,15 @@ Ley Group — U Cambridge
 
 Doyle Group — UCLA
   Los Angeles, USA
-  domain: chemistry · maturity: operational · ai: strong · since: 2018 · investment: HTE + ML
+  domain: chemistry · maturity: operational · ai: partial · since: 2018 · investment: HTE + ML
   UCLA catalysis group fusing nickel cross-coupling, photocatalysis, and machine-learning reaction optimisation through founding roles in BioLEC and C-CAS centres.
   https://www.doylelab.com/
 
 AURORA (KTH) — KTH Royal Institute of Technology
   Stockholm, Sweden
-  domain: materials · maturity: operational · ai: strong · since: 2025 · investment: —
+  domain: energy · maturity: operational · ai: planned · since: 2025 · investment: —
   Modular robotic platform integrating automated synthesis, characterisation, and evaluation, demonstrated on metal-halide perovskites.
   https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12067375/
-
-CELEST Autonomous Battery Lab — KIT + Ulm + HIU
-  Ulm, Germany
-  domain: batteries · maturity: operational · ai: strong · since: 2022 · investment: —
-  Fully automated, AI-planned battery-materials lab that autonomously synthesises, assembles, and cycles cells.
-  https://www.kit.edu/kit/english/pi_2022_011_battery-research-first-fully-automatic-laboratory-starts-operation.php
-
-EPFL Self-Driving Lab (LIAC) — EPFL (ISIC / LIAC)
-  Lausanne, Switzerland
-  domain: materials · maturity: operational · ai: strong · since: 2022 · investment: —
-  Self-driving platform for nano- and advanced-materials synthesis with active-learning optimisation.
-  https://www.epfl.ch/labs/liac/
 
 KIMS Autonomous Alloy Lab — Korea Institute of Materials Science
   Changwon, Korea
@@ -367,9 +391,15 @@ KIMS Autonomous Alloy Lab — Korea Institute of Materials Science
 
 KIER Smart Laboratory — Korea Institute of Energy Research
   Daejeon, Korea
-  domain: energy · maturity: operational · ai: strong · since: 2026 · investment: —
+  domain: energy · maturity: operational · ai: strong · since: 2024 · investment: —
   24-hour autonomous synthesis, analysis, and XRD for safety-critical energy and catalyst materials.
   https://www.kier.re.kr/eng
+
+AI-Assisted Materials Discovery Institute — Tsinghua University (Omar Yaghi)
+  Beijing, China
+  domain: materials · maturity: concept · ai: strong · since: 2026 · investment: —
+  Institute announced in 2026 at Tsinghua University, to be led by Nobel laureate Omar Yaghi, pairing AI with reticular chemistry for materials discovery; at concept stage, with no facility details public yet.
+  https://www.tsinghua.edu.cn/en/info/1244/14984.htm
 
 Matter Lab — University of Toronto / Vector Institute
   Toronto, Canada
@@ -385,15 +415,9 @@ IMDEA Materials SDL — IMDEA Materials Institute
 
 IPRD — Institute of Process Research and Development
   Leeds, UK
-  domain: chemistry · maturity: operational · ai: strong · since: 2012 · investment: >£15M / 5 years
+  domain: chemistry · maturity: operational · ai: strong · since: 2009 · investment: £4.3M (ERDF + Yorkshire Forward, 2009)
   Institute of Process Research and Development, University of Leeds.
   https://eps.leeds.ac.uk/chemical-engineering-innovative-manufacturing-products/doc/research-spotlight-3
-
-Swiss Cat+ — EPFL, ETHZ
-  Lausanne, Switzerland
-  domain: chemistry · maturity: operational · ai: strong · since: 2020 · investment: —
-  ETH Domain-funded national catalysis infrastructure jointly operated by EPFL and ETH Zurich, combining robotic high-throughput experimentation, AI-guided experimental design, and automated workflows to enable self-driving laboratories for catalyst discovery and optimization across homogeneous and heterogeneous catalysis.
-  https://www.epfl.ch/research/facilities/swisscat/
 
 ODACell — Ångström Advanced Battery Centre (ÅABC) · Uppsala University
   Uppsala, Sweden
@@ -403,13 +427,13 @@ ODACell — Ångström Advanced Battery Centre (ÅABC) · Uppsala University
 
 Aurora (Empa) — Empa (Battaglia Lab, Materials for Energy Conversion)
   Duebendorf, Switzerland
-  domain: batteries · maturity: operational · ai: strong · since: 2022 · investment: —
+  domain: batteries · maturity: operational · ai: partial · since: 2022 · investment: —
   Battaglia Lab's autonomous robotic battery-materials platform automating electrolyte formulation, cell assembly, and cycling on >1200 cycler channels, with ontologized FAIR data management.
   https://www.empa.ch/econversion
 
 Ophelia (Empa) — Empa (Battaglia Lab, Materials for Energy Conversion)
   Duebendorf, Switzerland
-  domain: energy · maturity: operational · ai: strong · since: 2024 · investment: —
+  domain: energy · maturity: operational · ai: planned · since: 2024 · investment: —
   Battaglia Lab platform running 8 parallel CO₂-electrolysis reactors for gas-diffusion electrodes with automated online gas and liquid product analysis, published as an open blueprint.
   https://www.empa.ch/econversion
 
@@ -433,13 +457,13 @@ AI4Mat Initiative | Hip Lab — NTU Singapore (Kedar Hippalgaonkar)
 
 ChemTech Lab — University of Nottingham (Connor Taylor)
   Nottingham, UK
-  domain: cross-domain · maturity: operational · ai: strong · since: 2025 · investment: £2M (RAEng fellowship)
+  domain: chemistry · maturity: operational · ai: strong · since: 2024 · investment: £2M (RAEng fellowship)
   Connor Taylor's self-driving laboratory for drug discovery and chemical process development, funded through a £2M RAEng research fellowship.
   https://chemtech.dev/
 
 MAITENA (CIC energiGUNE) — CIC energiGUNE
   Vitoria-Gasteiz, Spain
-  domain: energy · maturity: operational · ai: partial · since: 2024 · investment: —
+  domain: batteries · maturity: operational · ai: partial · since: 2024 · investment: —
   Automation and AI platform for inorganic energy materials combining automated co-precipitation, solvothermal, and sol-gel synthesis with XRD and electrochemical characterisation and active-learning experiment design.
   https://cicenergigune.com/en
 
@@ -455,12 +479,6 @@ AITHYRA — Austrian Academy of Sciences (ÖAW) · Vienna BioCenter
   Austrian Academy of Sciences institute for biomedical AI under founding director Michael Bronstein, building a closed-loop AI-driven robotics lab: vision-enabled liquid handlers, self-teaching robotic arms, and sensor-rich work cells under an AI orchestration layer, with 100 m² in phase I at the Marxbox and 400 m² in the purpose-built Vienna BioCenter building.
   https://aithyra.at/
 
-AI BioDesign (Allen Institute) — Allen Institute + UW + Fred Hutch · Fund for Science and Technology
-  Seattle, USA
-  domain: biology · maturity: operational · ai: strong · since: 2026 · investment: $95M (FFST)
-  Open-science accelerator with the University of Washington and Fred Hutch designing proteins and genes that do not exist in nature; bench teams run massively parallel library experiments while a machine-learning team chooses each next round, scored on how much the models improved. Scale comes from parallelising inside the test tube rather than from robotics.
-  https://alleninstitute.org/
-
 CircuLab — Stockholm University · WISE Research Technology Platform
   Stockholm, Sweden
   domain: materials · maturity: operational · ai: strong · since: 2024 · investment: WISE + Stockholm University (part of SEK 136M over 4 platforms)
@@ -469,35 +487,35 @@ CircuLab — Stockholm University · WISE Research Technology Platform
 
 AutoDNA (SJTU) — Shanghai Jiao Tong University
   Shanghai, China
-  domain: biology · maturity: prototype · ai: strong · since: 2025 · investment: NSFC + Shanghai
+  domain: biology · maturity: operational · ai: strong · since: 2025 · investment: NSFC + Shanghai
   AI-native autonomous lab for biomolecular operations at SJTU's Zhangjiang Institute for Advanced Study, built by its IPADS systems institute and chemistry school: a multi-agent system runs more than 20 instrument types through nucleic acid synthesis, transcription, amplification and sequencing, with people only restocking reagents and labware.
   https://ipads.sjtu.edu.cn/autodna/
 
 GeePS / ExploraMat — University Paris-Saclay, CNRS, PEPR DIADEM
   Gif-sur-Yvette, France
-  domain: materials · maturity: operational · ai: planned · since: 2026 · investment: PEPR DIADEM / €1.5M
+  domain: energy · maturity: prototype · ai: planned · since: 2026 · investment: PEPR DIADEM / €1.5M
   An SDL dedicated to the optimisation of functional oxides (films and powders) for energy applications: SOFCs, SOECs, photovoltaics, phosphors.
   https://www.geeps.centralesupelec.fr/
 
 ========================================================================
-COMMERCIAL PLATFORMS (38)
+COMMERCIAL PLATFORMS (36)
 ========================================================================
 
 Cusp AI (Cambridge HQ) — Cusp AI (M. Welling co-founder)
   Cambridge, UK
-  domain: materials · maturity: operational · ai: strong · since: 2024 · investment: $100M+ Series A · $520M val
+  domain: materials · maturity: operational · ai: strong · since: 2024 · investment: $100M Series A
   AI-driven materials discovery startup (Max Welling co-founder) designing functional crystals on demand for carbon capture, batteries, PFAS removal, and semiconductors.
   https://www.cusp.ai/
 
 Cusp AI (Amsterdam node) — Cusp AI (Amsterdam Science Park)
   Amsterdam, Netherlands
-  domain: materials · maturity: operational · ai: strong · since: 2024 · investment: Part of $520M val
+  domain: materials · maturity: operational · ai: strong · since: 2024 · investment: —
   Amsterdam Science Park (Lab42) node of CuspAI running the Welling-led ML stack for generative inverse design of functional materials.
   https://www.cusp.ai/
 
 Lila Sciences — Lila.ai
   Cambridge MA, USA
-  domain: drug-discovery · maturity: operational · ai: strong · since: 2023 · investment: $550M
+  domain: cross-domain · maturity: operational · ai: strong · since: 2025 · investment: $550M
   Flagship Pioneering venture building Scientific Superintelligence: AI agents coupled to autonomous wet labs across therapeutics, materials, energy, and chemicals.
   https://www.lila.ai/
 
@@ -509,49 +527,43 @@ Medra AI — Medra, Inc. (Michelle Lee)
 
 Periodic Labs — Periodic Labs
   San Francisco, USA
-  domain: materials · maturity: operational · ai: strong · since: 2025 · investment: Undisclosed VC
+  domain: materials · maturity: prototype · ai: strong · since: 2025 · investment: $300M seed (2025)
   Stealth-emerged lab building AI scientists with paired autonomous laboratories, starting with materials physics: superconductors and semiconductor thermal materials.
   https://periodic.com/
 
 XtalPi 晶泰科技 — XtalPi (HKEX)
   Shenzhen, China
-  domain: drug-discovery · maturity: industrial · ai: strong · since: 2015 · investment: HK$47B pipeline
+  domain: drug-discovery · maturity: industrial · ai: strong · since: 2015 · investment: ≥$539M raised since its 2024 IPO (IPO $127M; placements Jan and Feb 2025)
   HKEX-listed AI + quantum-physics + robotics platform running autonomous drug-discovery and materials labs across Shenzhen, Shanghai, and Boston.
   https://en.xtalpi.com/
 
 LabGenius — LabGenius
   London, UK
-  domain: biology · maturity: operational · ai: strong · since: 2019 · investment: Undisclosed VC
+  domain: drug-discovery · maturity: operational · ai: strong · since: 2012 · investment: £58M raised (incl. £35M Series B, 2024)
   Bermondsey biotech whose EVA platform closed-loops ML design with automated wet-lab cycles to engineer selectivity-enhanced antibodies for solid tumours.
   https://labgeniustx.com/
 
 Deep Principle 深度原理 — Deep Principle
   Hangzhou, China
-  domain: drug-discovery · maturity: operational · ai: strong · since: 2024 · investment: A-series ~¥1B (A3 led by 孚腾资本, Jul 2026)
+  domain: materials · maturity: operational · ai: strong · since: 2024 · investment: A-series ~¥1B (A3 led by 孚腾资本, Jul 2026)
   Agentic AI for materials and chemistry. ECML framework orchestrates DFT, MD, ML, and wet-lab experiments; recently hired MIT's Heather Kulik as Chief Scientist; its AI Materials Factory high-throughput lab, which the company rates L4, is driven by its Mira AI Scientist platform.
   https://www.deepprinciple.com/
 
 Qingkui 青葵智造 — Qingkui
-  Yichang, China
-  domain: chemistry · maturity: industrial · ai: strong · since: 2021 · investment: Municipal+VC
+  Beijing, China
+  domain: chemistry · maturity: operational · ai: strong · since: 2021 · investment: Municipal+VC
   Beijing-registered robotics-plus-AI scale-up building chemistry workstations for pharma, energy, and advanced materials; planning a 100-robot AI cloud lab in Yichang.
   https://www.quiktech.cn/
 
-Yongjiang Lab 甬江实验室 — Provincial (Ningbo)
-  Ningbo, China
-  domain: chemistry · maturity: operational · ai: strong · since: 2021 · investment: Government
-  Zhejiang provincial materials research institute running advanced functional, structural, and transformative materials platforms including a 6-inch micro-nano device line.
-  https://www.ylab.ac.cn/en/
-
 DP Technology / Bohrium 深势科技 — DP Technology
   Beijing, China
-  domain: materials · maturity: operational · ai: strong · since: 2018 · investment: VC
+  domain: cross-domain · maturity: operational · ai: strong · since: 2018 · investment: ≈$256M raised (Series B 2021, 2023 round, Series C 2025)
   AI-for-Science company behind Bohrium, Hermite, Piloteye, and Uni-Lab, building foundation-model infrastructure for chemistry, biology, and batteries.
   https://www.dp.tech/en
 
 ByteDance Seed AI4S — ByteDance
   Beijing, China
-  domain: drug-discovery · maturity: operational · ai: strong · since: 2024 · investment: Corporate
+  domain: cross-domain · maturity: operational · ai: strong · since: 2024 · investment: Corporate
   ByteDance's foundation-model team applying AI to biological structure prediction (Protenix), quantum chemistry, and topological materials physics.
   https://seed.bytedance.com/en/direction/ai_for_science
 
@@ -563,38 +575,26 @@ Novartis MicroCycle — Novartis
 
 Chemspeed / SciY — Bruker
   Füllinsdorf, Switzerland
-  domain: cross-domain · maturity: operational · ai: strong · since: 1998 · investment: Public (BRKR)
+  domain: cross-domain · maturity: operational · ai: strong · since: 1997 · investment: Public (BRKR)
   Swiss lab-automation vendor selling modular robotic synthesis, formulation, and characterisation workflows for materials, pharma, and battery R&D.
   https://www.chemspeed.com/
 
-Fraunhofer MAPs — Fraunhofer ISC
-  Würzburg, Germany
-  domain: materials · maturity: operational · ai: strong · since: 2020 · investment: €20M
-  Fraunhofer ISC programme coupling robotic synthesis and characterisation with AI-driven design for glass, battery, and functional materials.
-  https://www.isc.fraunhofer.de/en/fields-of-activity/applications/digital-transformation/maps-materials-acceleration-platforms.html
-
 Emerald Cloud Lab — ECL
   South San Francisco, USA
-  domain: cross-domain · maturity: operational · ai: strong · since: 2015 · investment: Undisclosed VC
+  domain: cross-domain · maturity: operational · ai: none · since: 2014 · investment: Undisclosed VC
   Remote-controlled cloud laboratory letting scientists design and run wet-lab experiments on 200+ instrument models via a unified software interface.
   https://www.emeraldcloudlab.com/
 
 Ginkgo Bioworks — Ginkgo
   Boston, USA
-  domain: biology · maturity: operational · ai: strong · since: 2015 · investment: $786M raised
+  domain: biology · maturity: operational · ai: strong · since: 2008 · investment: $786M raised
   Synthetic-biology platform offering autonomous strain-engineering foundries and cloud-lab access for antibody, enzyme, and cell-line programmes.
   https://www.ginkgo.bio/
 
-CMU AI Science Foundry — Carnegie Mellon
-  Pittsburgh, USA
-  domain: cross-domain · maturity: operational · ai: strong · since: 2024 · investment: Federal+Univ
-  Carnegie Mellon initiative running the ASAP autonomous platform for AI-guided experiments in hard materials, chemistry, and biology.
-  https://ai-science-foundry.cmu.edu/
-
 Strateos — Strateos
   San Diego, USA
-  domain: drug-discovery · maturity: operational · ai: strong · since: 2013 · investment: VC
-  Cloud-lab-as-a-service operating robotic San Diego and Menlo Park facilities for remote small-molecule, biologics, and synthetic-biology workflows.
+  domain: drug-discovery · maturity: operational · ai: partial · since: 2013 · investment: $56M Series B (2021)
+  Cloud-lab software and services for remote small-molecule, biologics and synthetic-biology workflows; the robotic San Diego lab it ran for Lilly passed to Arctoris in 2024.
   https://strateos.com/
 
 Kebotix — Kebotix
@@ -611,25 +611,31 @@ Arctoris — Arctoris
 
 Culture Biosciences — Culture Bio
   South San Francisco, USA
-  domain: biology · maturity: operational · ai: strong · since: 2019 · investment: $107M
+  domain: biology · maturity: operational · ai: partial · since: 2016 · investment: $107M
   Cloud-connected 250 mL bioreactor service for outsourced upstream bioprocess development with remote monitoring and bioprocess software.
   https://www.culturebiosciences.com/
 
+ABB Robotics — ABB
+  Zürich, Switzerland
+  domain: cross-domain · maturity: operational · ai: none · since: 2019 · investment: Public
+  Industrial robotics arm supplying GoFa and YuMi collaborative arms plus AVR autonomous mobile robots for multi-vendor lab workcells.
+  https://new.abb.com/products/robotics
+
 Hamilton Company — Hamilton
   Reno, USA
-  domain: cross-domain · maturity: operational · ai: none · since: 1980 · investment: Private
+  domain: cross-domain · maturity: operational · ai: none · since: 1953 · investment: Private
   Reno-based manufacturer of Microlab liquid-handling robots, process sensors, and automated sample-storage systems used across pharma and clinical labs.
   https://www.hamiltoncompany.com/
 
 Opentrons — Opentrons Labworks
   Brooklyn, USA
-  domain: cross-domain · maturity: operational · ai: strong · since: 2014 · investment: $261M raised
+  domain: cross-domain · maturity: operational · ai: partial · since: 2014 · investment: $261M raised
   Open-source liquid-handling robots and the Flex workstation plus OpentronsAI natural-language protocol design for genomics and proteomics labs.
   https://opentrons.com/
 
 Tecan Group — Tecan (SIX: TECN)
   Männedorf, Switzerland
-  domain: cross-domain · maturity: operational · ai: partial · since: 1995 · investment: Public (SIX)
+  domain: cross-domain · maturity: operational · ai: partial · since: 1980 · investment: Public (SIX)
   Swiss-listed maker of Fluent and Freedom EVO liquid-handling platforms plus OEM components for diagnostics and life-science automation.
   https://www.tecan.com/
 
@@ -647,13 +653,13 @@ Radical AI — Radical AI (Gerbrand Ceder, CSO)
 
 Mattiq — Mattiq (ex-Northwestern, Mirkin)
   Chicago, USA
-  domain: materials · maturity: operational · ai: strong · since: 2023 · investment: ~$35M
+  domain: energy · maturity: operational · ai: strong · since: 2023 · investment: $15M seed (2023)
   Northwestern spinout running high-throughput combinatorial megalibrary synthesis of millions of nanomaterials per day to train AI for clean-energy catalysts.
   https://mattiq.com
 
 Dunia Innovations — Dunia (GigaLab, Berlin)
   Berlin, Germany
-  domain: energy · maturity: operational · ai: strong · since: 2022 · investment: €10.6M seed · €280M GigaLab
+  domain: energy · maturity: operational · ai: strong · since: 2022 · investment: €10.6M seed (2024); €280M GigaLab planned
   Self-driving labs running the full design-make-test-analyse loop for electrocatalyst, battery, and CO2-conversion materials, scaling to a €280M Berlin GigaLab.
   https://dunia.ai
 
@@ -665,19 +671,19 @@ ChemLex — ChemLex (Sean Lin)
 
 MegaRobo 镁伽科技 — MegaRobo Technologies
   Beijing, China
-  domain: cross-domain · maturity: industrial · ai: partial · since: 2019 · investment: ~$300M (Series C/D)
+  domain: cross-domain · maturity: industrial · ai: partial · since: 2016 · investment: ≈$426M raised (incl. $300M Series C, 2022)
   China's largest smart-lab robotics company, building autonomous agents that run real experiments across life sciences, chemistry, and energy materials.
   https://en.megarobo.com/
 
 FutureHouse / Edison Scientific — FutureHouse (nonprofit) + Edison
   San Francisco, USA
-  domain: biology · maturity: prototype · ai: strong · since: 2023 · investment: $70M (Edison, 2025, ~$250M val)
+  domain: biology · maturity: prototype · ai: partial · since: 2023 · investment: $70M (Edison, 2025, ~$250M val)
   AI-scientist agent stack (the Robin multi-agent discovery system) coupled to its own robotic wet lab; for-profit spinout Edison.
   https://www.futurehouse.org/
 
 SOLVE Chemistry — SOLVE Chemistry Ltd
   London, UK
-  domain: chemistry · maturity: operational · ai: strong · since: 2024 · investment: £4M
+  domain: chemistry · maturity: operational · ai: strong · since: 2024 · investment: £4M seed (2026)
   London SDL flow lab pairing online-UHPLC high-throughput experimentation with Bayesian optimisation for predictive process chemistry and right-first-time scale-up.
   https://www.solvechemistry.com/
 
@@ -707,53 +713,53 @@ AstraZeneca iLab — AstraZeneca R&D, Gothenburg
 
 VSParticle — VSParticle B.V. (TU Delft spin-off)
   Delft, Netherlands
-  domain: materials · maturity: operational · ai: partial · since: 2014 · investment: €21M raised (Series A + A2)
+  domain: materials · maturity: operational · ai: none · since: 2014 · investment: €21M raised (Series A + A2)
   Delft maker of spark-ablation nanoparticle generators and the VSP-P1 Nanoprinter, which prints nanoporous thin films from some 70 elements as an automated synthesis module for self-driving labs; its printer made the spark-ablation catalysts in Meta FAIR's Open Catalyst Experiments 2024 and is in use at DIFFER and UL Research Institutes.
   https://vsparticle.com/
 
 ========================================================================
-LAB OS / ORCHESTRATION (11)
+LAB OS / ORCHESTRATION (10)
 ========================================================================
 
 Automata (LINQ) — Automata
   London, UK
-  domain: orchestration · maturity: operational · ai: strong · since: 2023 · investment: $45M Series C
+  domain: orchestration · maturity: operational · ai: strong · since: 2023 · investment: ≈$142M raised (incl. $45M Series C, 2026)
   LINQ platform orchestrates modular benchtop robotics with a node-based workflow canvas and Python SDK for genomics and assay screening.
   https://www.automata.tech/
 
 Benchling — Benchling
   San Francisco, USA
-  domain: orchestration · maturity: operational · ai: strong · since: 2014 · investment: $412M · $6B val
+  domain: orchestration · maturity: operational · ai: partial · since: 2014 · investment: $412M · $6B val
   Cloud R&D platform combining ELN, registry, inventory, and workflow tools for biotech, used by most large biopharma.
   https://www.benchling.com/
 
 Artificial — Artificial
-  London, UK
-  domain: orchestration · maturity: operational · ai: strong · since: 2018 · investment: Undisclosed
+  Palo Alto, USA
+  domain: orchestration · maturity: operational · ai: strong · since: 2018 · investment: $21.5M Series A (2021)
   aLab Suite orchestrates instruments, robots, people, and data into closed-loop digital workflows for life-science labs (Palo Alto, USA · Microsoft M12-backed).
   https://www.artificial.com/
 
 Synthace — Synthace
   London, UK
-  domain: orchestration · maturity: operational · ai: strong · since: 2014 · investment: Undisclosed
+  domain: orchestration · maturity: operational · ai: partial · since: 2011 · investment: ≈$61M raised (Series B $25.6M 2018, Series C $35M 2021)
   Digital experiment platform for designing, simulating, and executing high-dimensional multivariate experiments on lab automation hardware.
   https://www.synthace.com/
 
 Unchained Labs (Stuntman) — Unchained Labs
   Pleasanton, USA
-  domain: orchestration · maturity: operational · ai: strong · since: 2016 · investment: Undisclosed
+  domain: orchestration · maturity: operational · ai: strong · since: 2015 · investment: Undisclosed
   Stuntman is a natural-language AI automation platform with flexible hardware for biologics, gene therapy, and reaction screening.
   https://www.unchainedlabs.com/
 
 UniteLabs — UniteLabs
   Munich, Germany
-  domain: orchestration · maturity: operational · ai: strong · since: 2025 · investment: Undisclosed
+  domain: orchestration · maturity: operational · ai: partial · since: 2022 · investment: Undisclosed
   Python-based lab automation OS connecting 175+ instruments through one API for code-defined, version-controlled workflows.
   https://unitelabs.io/
 
 Cenevo (Titian + Labguru) — Titian + Labguru merger
   London, UK
-  domain: orchestration · maturity: operational · ai: strong · since: 2025 · investment: Undisclosed
+  domain: orchestration · maturity: operational · ai: partial · since: 2025 · investment: Undisclosed
   Post-merger entity behind Mosaic sample tracking and Labguru ELN/LIMS, integrating 150+ instruments across biopharma R&D.
   https://www.cenevo.com/
 
@@ -768,12 +774,6 @@ Atinary — Atinary
   domain: orchestration · maturity: operational · ai: strong · since: 2019 · investment: Undisclosed
   SDLabs no-code platform pairing Bayesian and ML optimizers with robotic hardware for closed-loop chemistry and materials discovery.
   https://atinary.com/
-
-ABB Robotics — ABB
-  Zürich, Switzerland
-  domain: orchestration · maturity: operational · ai: strong · since: 2023 · investment: Public
-  Industrial robotics arm supplying GoFa and YuMi collaborative arms plus AVR autonomous mobile robots for multi-vendor lab workcells.
-  https://new.abb.com/products/robotics
 
 QPillars — QPillars GmbH
   Zurich, Switzerland
