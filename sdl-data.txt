@@ -1,5 +1,5 @@
 SDL LANDSCAPE — SELF-DRIVING LAB INITIATIVES WORLDWIDE
-127 initiatives · 16 countries · dataset of 2026-11-13
+127 initiatives · 15 countries and the EU · dataset of 2026-11-15
 https://sdl-map.discoverylabs.nl
 MIT — cite the map when reusing (github.com/yetiswang/sdl-map)
 
@@ -57,7 +57,7 @@ UK ARIA AI Scientists — ARIA
 
 DiscoveryLabNL — TU/e
   Eindhoven, Netherlands
-  domain: materials · maturity: concept · ai: planned · since: 2025 · investment: €30M (planned)
+  domain: materials · maturity: concept · ai: planned · since: 2025 · investment: —
   Dutch national infrastructure for AI-driven materials discovery, coordinated by TU/e, with energy materials as the first priority domain.
   https://discoverylabs.nl/
 
