@@ -216,8 +216,8 @@
     "charact": "advanced-multimodal",
     "ai": "planned",
     "scale": "national",
-    "invest": 30,
-    "investLabel": "€30M (planned)",
+    "invest": 0,
+    "investLabel": "—",
     "url": "https://discoverylabs.nl/",
     "sources": [
       "https://discoverylabs.nl/"

@@ -31,7 +31,7 @@ ROOT = os.path.normpath(os.path.join(HERE, '..', '..'))
 
 data = json.load(open(os.path.join(ROOT, 'src', 'data', 'sdl_data.json')))
 n_entries = len(data)
-n_countries = len(set(e['country'] for e in data))
+n_countries = len(set(e['country'] for e in data) - {'EU'})  # EU-wide entries are not a country
 
 template = open(os.path.join(HERE, 'feature-card.template.html')).read()
 filled = template.replace('{{N_ENTRIES}}', str(n_entries)).replace('{{N_COUNTRIES}}', str(n_countries))

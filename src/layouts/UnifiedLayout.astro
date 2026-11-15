@@ -29,7 +29,8 @@ const prefix = lang === 'en' ? '/' : `/${lang}/`;
 
 // Dynamic stats computed at build time from sdl_data.json.
 const statsTotal = (data as any[]).length;
-const statsCountries = new Set((data as any[]).map((d) => d.country)).size;
+// EU-wide programmes (country "EU") are not a country: the texts read "countries and the EU".
+const statsCountries = new Set((data as any[]).map((d) => d.country).filter((c) => c !== 'EU')).size;
 const statsOperational = (data as any[]).filter(
   (d) => d.maturity === 'operational' || d.maturity === 'industrial'
 ).length;
@@ -72,7 +73,7 @@ const websiteNode = {
 };
 const datasetNode = {
   '@type': 'Dataset', '@id': `${siteUrl}/#dataset`, name: `${siteName} dataset`,
-  description: `${statsTotal} self-driving lab initiatives in ${statsCountries} countries: national programmes, academic groups, commercial platforms and lab-OS vendors, each with location, tier, domain, maturity, first public year, investment where disclosed, a one-line summary and sources.`,
+  description: `${statsTotal} self-driving lab initiatives in ${statsCountries} countries and the EU: national programmes, academic groups, commercial platforms and lab-OS vendors, each with location, tier, domain, maturity, first public year, investment where disclosed, a one-line summary and sources.`,
   url: `${siteUrl}/list/`, sameAs: 'https://github.com/yetiswang/sdl-map',
   license: 'https://opensource.org/licenses/MIT', isAccessibleForFree: true,
   creator: { '@id': personNode['@id'] }, publisher: { '@id': orgNode['@id'] },

@@ -54,7 +54,7 @@ export function buildXLSX(): Uint8Array {
     ({ id: 14, name: 34, org: 34, city: 16, country: 14, url: 40, sources: 60, invest_label: 22, blurb: 80 } as Record<string, number>)[c] ?? 12);
   const aboutRows: (string | number)[][] = [
     [m.title],
-    [`${m.count} initiatives across ${m.countries} countries`],
+    [`${m.count} initiatives across ${m.countries} countries and the EU`],
     [`Dataset as of ${m.date}`],
     [m.site],
     [m.license],

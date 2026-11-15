@@ -206,9 +206,9 @@ finish(fig, ax, "investment-histogram", "Reported investment",
        f"{len(inv)} of {len(DATA)} initiatives report a figure — treat as indicative, not audited")
 
 # README + zip
-n_countries = len(count_by("country"))
+n_countries = len([c for c in count_by("country") if c != "EU"])  # EU-wide entries are not a country
 readme = f"""SDL LANDSCAPE — ANALYTICS PACK
-{len(DATA)} initiatives · {n_countries} countries · generated {TODAY}
+{len(DATA)} initiatives · {n_countries} countries and the EU · generated {TODAY}
 https://sdl-map.discoverylabs.nl · data + charts MIT — cite the map when reusing
 
 Charts (each as .svg vector + .png raster):

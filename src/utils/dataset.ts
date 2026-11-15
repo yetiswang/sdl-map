@@ -44,7 +44,7 @@ export function datasetMeta() {
     site: 'https://sdl-map.discoverylabs.nl',
     license: 'MIT — cite the map when reusing (github.com/yetiswang/sdl-map)',
     count: data.length,
-    countries: new Set(data.map(d => d.country)).size,
+    countries: new Set(data.map(d => d.country).filter(c => c !== 'EU')).size, // the EU-wide entries are not a country
     date: new Date().toISOString().slice(0, 10),
   };
 }
@@ -70,7 +70,7 @@ export function toTXT(): string {
   ];
   const out: string[] = [
     m.title.toUpperCase(),
-    `${m.count} initiatives · ${m.countries} countries · dataset of ${m.date}`,
+    `${m.count} initiatives · ${m.countries} countries and the EU · dataset of ${m.date}`,
     m.site,
     m.license,
     '',

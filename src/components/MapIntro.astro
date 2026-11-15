@@ -10,7 +10,7 @@ const { lang } = Astro.props;
 const ui = (uiAll as any)[lang] || (uiAll as any).en;
 const prefix = lang === 'en' ? '/' : `/${lang}/`;
 const n = (data as any[]).length;
-const c = new Set((data as any[]).map(d => d.country)).size;
+const c = new Set((data as any[]).map(d => d.country).filter(c => c !== 'EU')).size; // the EU-wide entries are not a country
 const text = String(ui.mapIntro).replace('{n}', String(n)).replace('{c}', String(c));
 ---
 <section class="map-intro" aria-label={ui.mapIntroHead}>
