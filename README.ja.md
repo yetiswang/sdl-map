@@ -49,19 +49,19 @@
 
 ## 🌍 国家プロジェクト・コンソーシアム
 
-公的セクター主導、複数機関にまたがる国家規模・地域規模の SDL プロジェクト。NSF PCL Test Bed、Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL ほか全 29 件は [English README → National Programmes & Consortia](README.md#-national-programmes--consortia) を参照。
+公的セクター主導、複数機関にまたがる国家規模・地域規模の SDL プロジェクト。NSF PCL Test Bed、Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL ほか全 35 件は [English README → National Programmes & Consortia](README.md#-national-programmes--consortia) を参照。
 
 ## 🎓 学術グループ
 
-単一機関または PI が主導し、実際に SDL を動かしている研究グループ。A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、Jun Jiang グループ / ChemAgents + Robot Chemist ほか全 50 件は [English README → Academic Groups](README.md#-academic-groups) を参照。
+単一機関または PI が主導し、実際に SDL を動かしている研究グループ。A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、Jun Jiang グループ / ChemAgents + Robot Chemist ほか全 46 件は [English README → Academic Groups](README.md#-academic-groups) を参照。
 
 ## 🏭 商業・産業
 
-営利の SDL 企業、製薬企業の社内プログラム、および SDL 関連のハードウェア / 計測機器ベンダー。Lila Sciences、XtalPi、Cusp AI、DP Technology / Bohrium ほか全 38 件は [English README → Commercial & Industrial](README.md#-commercial--industrial) を参照。
+営利の SDL 企業、製薬企業の社内プログラム、および SDL 関連のハードウェア / 計測機器ベンダー。Lila Sciences、XtalPi、Cusp AI、DP Technology / Bohrium ほか全 36 件は [English README → Commercial & Industrial](README.md#-commercial--industrial) を参照。
 
 ## 🛰 ラボ OS・オーケストレーション
 
-SDL を動かすためのソフトウェアプラットフォーム、スケジューリング層、装置接続標準。Automata LINQ、Benchling、Artificial、Atinary ほか全 11 件は [English README → Lab OS & Orchestration](README.md#-lab-os--orchestration) を参照。
+SDL を動かすためのソフトウェアプラットフォーム、スケジューリング層、装置接続標準。Automata LINQ、Benchling、Artificial、Atinary ほか全 10 件は [English README → Lab OS & Orchestration](README.md#-lab-os--orchestration) を参照。
 
 ---
 

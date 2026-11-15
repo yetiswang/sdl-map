@@ -49,19 +49,19 @@
 
 ## 🌍 국가 프로젝트 / 컨소시엄
 
-공공 부문이 주도하거나 여러 기관에 걸친 국가/지역 규모의 SDL 프로젝트. NSF PCL Test Bed, Acceleration Consortium, BIG-MAP / FULL-MAP, PEPR DIADEM, DiscoveryLabNL 등 29개 전체 항목은 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)를 참고하세요.
+공공 부문이 주도하거나 여러 기관에 걸친 국가/지역 규모의 SDL 프로젝트. NSF PCL Test Bed, Acceleration Consortium, BIG-MAP / FULL-MAP, PEPR DIADEM, DiscoveryLabNL 등 35개 전체 항목은 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)를 참고하세요.
 
 ## 🎓 학술 그룹
 
-단일 기관 또는 PI가 주도해 실제로 SDL을 운영하는 연구 그룹. A-Lab, Matter Lab, ODACell, Cooper Group, Jensen Lab, Jun Jiang 그룹 / ChemAgents + Robot Chemist 등 50개 전체 항목은 [English README → Academic Groups](README.md#-academic-groups)를 참고하세요.
+단일 기관 또는 PI가 주도해 실제로 SDL을 운영하는 연구 그룹. A-Lab, Matter Lab, ODACell, Cooper Group, Jensen Lab, Jun Jiang 그룹 / ChemAgents + Robot Chemist 등 46개 전체 항목은 [English README → Academic Groups](README.md#-academic-groups)를 참고하세요.
 
 ## 🏭 상업 및 산업
 
-영리 SDL 회사, 제약사 사내 프로그램, SDL과 관련된 하드웨어 / 기기 벤더. Lila Sciences, XtalPi, Cusp AI, DP Technology / Bohrium 등 38개 전체 항목은 [English README → Commercial & Industrial](README.md#-commercial--industrial)를 참고하세요.
+영리 SDL 회사, 제약사 사내 프로그램, SDL과 관련된 하드웨어 / 기기 벤더. Lila Sciences, XtalPi, Cusp AI, DP Technology / Bohrium 등 36개 전체 항목은 [English README → Commercial & Industrial](README.md#-commercial--industrial)를 참고하세요.
 
 ## 🛰 랩 OS / 오케스트레이션
 
-SDL을 돌리기 위한 소프트웨어 플랫폼, 스케줄링 계층, 장비 연결 표준. Automata LINQ, Benchling, Artificial, Atinary 등 11개 전체 항목은 [English README → Lab OS & Orchestration](README.md#-lab-os--orchestration)를 참고하세요.
+SDL을 돌리기 위한 소프트웨어 플랫폼, 스케줄링 계층, 장비 연결 표준. Automata LINQ, Benchling, Artificial, Atinary 등 10개 전체 항목은 [English README → Lab OS & Orchestration](README.md#-lab-os--orchestration)를 참고하세요.
 
 ---
 

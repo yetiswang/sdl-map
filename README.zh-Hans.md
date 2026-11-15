@@ -49,19 +49,19 @@
 
 ## 🌍 国家计划与联盟
 
-由公共部门主导、跨机构合作的 SDL 国家级或区域级计划。完整 29 个条目（包括 NSF PCL Test Bed、Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL 等）见 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)。
+由公共部门主导、跨机构合作的 SDL 国家级或区域级计划。完整 35 个条目（包括 NSF PCL Test Bed、Acceleration Consortium、BIG-MAP / FULL-MAP、PEPR DIADEM、DiscoveryLabNL 等）见 [English README → National Programmes & Consortia](README.md#-national-programmes--consortia)。
 
 ## 🎓 学术团队
 
-由单一机构或 PI 主导，正在运行 SDL 的研究组。完整 50 个条目（包括 A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、江俊团队 / ChemAgents + Robot Chemist、嘉庚创新实验室等）见 [English README → Academic Groups](README.md#-academic-groups)。
+由单一机构或 PI 主导，正在运行 SDL 的研究组。完整 46 个条目（包括 A-Lab、Matter Lab、ODACell、Cooper Group、Jensen Lab、江俊团队 / ChemAgents + Robot Chemist、嘉庚创新实验室等）见 [English README → Academic Groups](README.md#-academic-groups)。
 
 ## 🏭 商业与工业
 
-营利型 SDL 公司、药企内部计划，以及与 SDL 相关的硬件 / 仪器供应商。完整 38 个条目（包括 Lila Sciences、晶泰科技、Cusp AI、深势科技 / Bohrium 等）见 [English README → Commercial & Industrial](README.md#-commercial--industrial)。
+营利型 SDL 公司、药企内部计划，以及与 SDL 相关的硬件 / 仪器供应商。完整 36 个条目（包括 Lila Sciences、晶泰科技、Cusp AI、深势科技 / Bohrium 等）见 [English README → Commercial & Industrial](README.md#-commercial--industrial)。
 
 ## 🛰 实验室操作系统与编排
 
-让 SDL 跑起来的软件平台、调度层与仪器互联标准。完整 11 个条目（包括 Automata LINQ、Benchling、Artificial、Atinary 等）见 [English README → Lab OS & Orchestration](README.md#-lab-os--orchestration)。
+让 SDL 跑起来的软件平台、调度层与仪器互联标准。完整 10 个条目（包括 Automata LINQ、Benchling、Artificial、Atinary 等）见 [English README → Lab OS & Orchestration](README.md#-lab-os--orchestration)。
 
 ---
 
