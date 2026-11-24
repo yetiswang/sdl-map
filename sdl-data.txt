@@ -1,5 +1,5 @@
 SDL LANDSCAPE — SELF-DRIVING LAB INITIATIVES WORLDWIDE
-127 initiatives · 15 countries and the EU · dataset of 2026-11-15
+128 initiatives · 15 countries and the EU · dataset of 2026-11-24
 https://sdl-map.discoverylabs.nl
 MIT — cite the map when reusing (github.com/yetiswang/sdl-map)
 
@@ -498,7 +498,7 @@ GeePS / ExploraMat — University Paris-Saclay, CNRS, PEPR DIADEM
   https://www.geeps.centralesupelec.fr/
 
 ========================================================================
-COMMERCIAL PLATFORMS (36)
+COMMERCIAL PLATFORMS (37)
 ========================================================================
 
 Cusp AI (Cambridge HQ) — Cusp AI (M. Welling co-founder)
@@ -716,6 +716,12 @@ VSParticle — VSParticle B.V. (TU Delft spin-off)
   domain: materials · maturity: operational · ai: none · since: 2014 · investment: €21M raised (Series A + A2)
   Delft maker of spark-ablation nanoparticle generators and the VSP-P1 Nanoprinter, which prints nanoporous thin films from some 70 elements as an automated synthesis module for self-driving labs; its printer made the spark-ablation catalysts in Meta FAIR's Open Catalyst Experiments 2024 and is in use at DIFFER and UL Research Institutes.
   https://vsparticle.com/
+
+ExoMatter — ExoMatter GmbH (German Aerospace Center DLR spin-off)
+  Munich, Germany
+  domain: materials · maturity: operational · ai: partial · since: 2022 · investment: €1.7M pre-seed (2024)
+  DLR spin-off whose cloud platform screens, simulates and ranks inorganic materials by performance, cost and sustainability, giving industrial R&D teams a shortlist of candidates.
+  https://www.exomatter.ai/
 
 ========================================================================
 LAB OS / ORCHESTRATION (10)
