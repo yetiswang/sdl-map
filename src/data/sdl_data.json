@@ -3260,5 +3260,31 @@
       "https://www.nanoge.org/proceedings/MATSUSFall26/6a424942c54f9b4adbb69211"
     ],
     "start": 2025
+  },
+  {
+    "id": "exomatter",
+    "name": "ExoMatter",
+    "org": "ExoMatter GmbH (German Aerospace Center DLR spin-off)",
+    "blurb": "DLR spin-off whose cloud platform screens, simulates and ranks inorganic materials by performance, cost and sustainability, giving industrial R&D teams a shortlist of candidates.",
+    "city": "Munich",
+    "country": "Germany",
+    "flag": "🇩🇪",
+    "lat": 48.17,
+    "lon": 11.53,
+    "tier": "commercial",
+    "domain": "materials",
+    "maturity": "operational",
+    "charact": "—",
+    "ai": "partial",
+    "scale": "SaaS · materials screening",
+    "invest": 2,
+    "investLabel": "€1.7M pre-seed (2024)",
+    "url": "https://www.exomatter.ai/",
+    "sources": [
+      "https://www.dlr.de/en/ff/research-and-transfer/start-ups",
+      "https://www.exomatter.ai/success-story/cmblu-success-story/",
+      "https://www.eu-startups.com/2024/10/munich-based-exomatter-gets-e1-7-million-pre-seed-for-ai-based-materials-rd"
+    ],
+    "start": 2022
   }
 ]

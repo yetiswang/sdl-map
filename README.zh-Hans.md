@@ -57,7 +57,7 @@
 
 ## 🏭 商业与工业
 
-营利型 SDL 公司、药企内部计划，以及与 SDL 相关的硬件 / 仪器供应商。完整 36 个条目（包括 Lila Sciences、晶泰科技、Cusp AI、深势科技 / Bohrium 等）见 [English README → Commercial & Industrial](README.md#-commercial--industrial)。
+营利型 SDL 公司、药企内部计划，以及与 SDL 相关的硬件 / 仪器供应商。完整 37 个条目（包括 Lila Sciences、晶泰科技、Cusp AI、深势科技 / Bohrium 等）见 [English README → Commercial & Industrial](README.md#-commercial--industrial)。
 
 ## 🛰 实验室操作系统与编排
 

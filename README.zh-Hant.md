@@ -57,7 +57,7 @@
 
 ## 🏭 商業與工業
 
-營利型 SDL 公司、藥廠內部計畫，以及與 SDL 相關的硬體 / 儀器供應商。完整 36 個條目（包括 Lila Sciences、晶泰科技、Cusp AI、深勢科技 / Bohrium 等）見 [English README → Commercial & Industrial](README.md#-commercial--industrial)。
+營利型 SDL 公司、藥廠內部計畫，以及與 SDL 相關的硬體 / 儀器供應商。完整 37 個條目（包括 Lila Sciences、晶泰科技、Cusp AI、深勢科技 / Bohrium 等）見 [English README → Commercial & Industrial](README.md#-commercial--industrial)。
 
 ## 🛰 實驗室作業系統與編排
 

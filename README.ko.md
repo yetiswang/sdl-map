@@ -57,7 +57,7 @@
 
 ## 🏭 상업 및 산업
 
-영리 SDL 회사, 제약사 사내 프로그램, SDL과 관련된 하드웨어 / 기기 벤더. Lila Sciences, XtalPi, Cusp AI, DP Technology / Bohrium 등 36개 전체 항목은 [English README → Commercial & Industrial](README.md#-commercial--industrial)를 참고하세요.
+영리 SDL 회사, 제약사 사내 프로그램, SDL과 관련된 하드웨어 / 기기 벤더. Lila Sciences, XtalPi, Cusp AI, DP Technology / Bohrium 등 37개 전체 항목은 [English README → Commercial & Industrial](README.md#-commercial--industrial)를 참고하세요.
 
 ## 🛰 랩 OS / 오케스트레이션
 

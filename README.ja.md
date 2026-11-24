@@ -57,7 +57,7 @@
 
 ## 🏭 商業・産業
 
-営利の SDL 企業、製薬企業の社内プログラム、および SDL 関連のハードウェア / 計測機器ベンダー。Lila Sciences、XtalPi、Cusp AI、DP Technology / Bohrium ほか全 36 件は [English README → Commercial & Industrial](README.md#-commercial--industrial) を参照。
+営利の SDL 企業、製薬企業の社内プログラム、および SDL 関連のハードウェア / 計測機器ベンダー。Lila Sciences、XtalPi、Cusp AI、DP Technology / Bohrium ほか全 37 件は [English README → Commercial & Industrial](README.md#-commercial--industrial) を参照。
 
 ## 🛰 ラボ OS・オーケストレーション
 
