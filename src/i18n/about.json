@@ -7,7 +7,7 @@
     "ruleHead": "What gets in",
     "rules": [
       "A public, verifiable source: a paper, a programme page, a press release or a funding record. It is linked on every entry.",
-      "Closed-loop intent: the initiative plans, runs or analyses experiments with automation and AI in the loop, or builds the software and hardware that lets others do so.",
+      "Closed-loop intent: the initiative plans, runs or analyses experiments with automation and AI in the loop, or builds the software and hardware that lets others do so, including AI platforms that choose which materials to make and test.",
       "One entry per initiative, placed at its home campus or headquarters; consortia at their coordinating site.",
       "Institutions and programmes, not individuals, and no claims about performance beyond what the sources state."
     ],
@@ -25,7 +25,7 @@
     "ruleHead": "收录标准",
     "rules": [
       "公开、可核实的来源：论文、项目页面、新闻稿或资助记录，每个条目都附链接。",
-      "闭环意图：该项目以自动化与 AI 参与实验的规划、执行或分析，或为他人提供这样做的软件与硬件。",
+      "闭环意图：该项目以自动化与 AI 参与实验的规划、执行或分析，或为他人提供这样做的软件与硬件，包括用 AI 挑选应制备和测试哪些材料的平台。",
       "每个项目一个条目，定位于其主校区或总部；联盟定位于协调机构所在地。",
       "只收录机构与计划，不收录个人；不做超出来源所述的性能判断。"
     ],
@@ -43,7 +43,7 @@
     "ruleHead": "掲載基準",
     "rules": [
       "公開され検証可能な出典：論文、プログラムのページ、プレスリリース、または資金記録。各項目にリンクを付けています。",
-      "クローズドループの意図：自動化と AI を組み込んで実験を計画・実行・解析する、あるいはそれを可能にするソフトウェアやハードウェアを提供している。",
+      "クローズドループの意図：自動化と AI を組み込んで実験を計画・実行・解析する、あるいはそれを可能にするソフトウェアやハードウェアを提供している。作製・試験する材料を AI で選ぶプラットフォームも含む。",
       "1 イニシアチブにつき 1 項目。所在地は本拠キャンパスまたは本社、コンソーシアムは調整機関の所在地。",
       "対象は機関とプログラムであり個人ではない。性能について出典以上の主張はしない。"
     ],
@@ -61,7 +61,7 @@
     "ruleHead": "수록 기준",
     "rules": [
       "공개되고 검증 가능한 출처: 논문, 프로그램 페이지, 보도자료 또는 자금 기록. 모든 항목에 링크를 답니다.",
-      "폐루프 의도: 자동화와 AI를 실험의 계획·수행·분석에 결합하거나, 다른 이들이 그렇게 할 수 있는 소프트웨어와 하드웨어를 만드는 이니셔티브.",
+      "폐루프 의도: 자동화와 AI를 실험의 계획·수행·분석에 결합하거나, 다른 이들이 그렇게 할 수 있는 소프트웨어와 하드웨어를 만드는 이니셔티브. 제조하고 시험할 소재를 AI로 선택하는 플랫폼도 포함합니다.",
       "이니셔티브당 하나의 항목. 위치는 본거지 캠퍼스 또는 본사, 컨소시엄은 조정 기관 소재지.",
       "개인이 아닌 기관과 프로그램을 다루며, 출처가 밝힌 것 이상의 성능 주장은 하지 않습니다."
     ],
